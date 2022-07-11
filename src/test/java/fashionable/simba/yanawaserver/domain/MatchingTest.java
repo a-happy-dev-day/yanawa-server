@@ -124,6 +124,16 @@ public class MatchingTest {
     }
 
     @Test
+    @DisplayName("코트장 생성 테스트")
+    void 코트장_생성_테스트() {
+        //given
+        Court seoulTennisCourt = new Court(UUID.randomUUID(),"서울테니스장","서울");
+        //when
+        //then
+        Assertions.assertEquals("서울테니스장", seoulTennisCourt.getName());
+    }
+
+    @Test
     @DisplayName("코트장 이름을 작성하지 않을경우, InvaildCourtNameException이 발생한다.")
     void 코트장이름_테스트() {
         //given

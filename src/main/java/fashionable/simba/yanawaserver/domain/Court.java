@@ -10,7 +10,7 @@ public class Court {
     private final String location;
 
     public Court(UUID id, String name, String location) {
-        if (name.isEmpty() || name.length() > 15) {
+        if (name == null || name.isEmpty() || name.length() > 15) {
             throw new InvaildCourtNameException();
         }
         this.id = id;

@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Collection;
 import java.util.UUID;
 
 public class MatchingTest {
@@ -122,41 +123,7 @@ public class MatchingTest {
             );
         });
     }
-
-    @Test
-    @DisplayName("코트장 생성 테스트")
-    void 코트장_생성_테스트() {
-        //given
-        Court seoulTennisCourt = new Court(UUID.randomUUID(),"서울테니스장","서울");
-        //when
-        //then
-        Assertions.assertEquals("서울테니스장", seoulTennisCourt.getName());
-    }
-
-    @Test
-    @DisplayName("코트장 이름을 작성하지 않을경우, InvaildCourtNameException이 발생한다.")
-    void 코트장이름_테스트() {
-        //given
-        //then
-        Assertions.assertThrows(InvaildCourtNameException.class, () -> {
-            Matching matching = new Matching(
-                    UUID.randomUUID(),
-                    new Court(UUID.randomUUID(), "", "서울"),
-                    LocalDate.now(),
-                    LocalTime.now(),
-                    LocalTime.now().plusHours(1),
-                    AnnualType.TWO_YEARS_LESS,
-                    2.0,
-                    4.0,
-                    AgeGroupType.TWENTIES,
-                    GenderType.MALE,
-                    PreferenceType.MATCHING,
-                    5,
-                    4.0,
-                    "안녕하세요.",
-                    StatusType.ONGOING,
-                    UUID.randomUUID()
-            );
-        });
-    }
 }
+
+
+

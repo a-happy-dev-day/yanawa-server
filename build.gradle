@@ -21,21 +21,14 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-tasks.named('test') {
+test{
 	useJUnitPlatform()
-}
-
-test {
-	finalizedBy jacocoTestReport
-}
-
-jacocoTestReport {
-	dependsOn test
+	finalizedBy 'jacocoTestReport'
 }
 
 jacoco {
 	toolVersion = "0.8.7"
-	reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
+	reportsDirectory = layout.buildDirectory.dir('jacocoDir')
 }
 
 jacocoTestReport {
@@ -43,5 +36,32 @@ jacocoTestReport {
 		xml.required = false
 		csv.required = false
 		html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+	}
+	finalizedBy 'jacocoTestCoverageVerification'
+}
+
+jacocoTestCoverageVerification {
+	violationRules {
+		rule {
+			enabled = true
+			// 클래스 단위로 커버리지 체크
+			element = 'CLASS'
+
+			// 라인 커버리지 제한을 90%로 설정
+			limit {
+				counter = 'LINE'
+				value = 'COVEREDRATIO'
+				minimum = 0.90
+			}
+
+			// 브랜치 커버리지 제한을 90%로 설정
+			limit {
+				counter = 'BRANCH'
+				value = 'COVEREDRATIO'
+				minimum = 0.90
+			}
+
+			excludes = ["*.YanawaserverApplication"]
+		}
 	}
 }

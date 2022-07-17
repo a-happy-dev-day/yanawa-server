@@ -13,13 +13,12 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class MatchingTest {
     //
     UUID id = UUID.randomUUID();
-    Court court = new Court.CourtBuilder(UUID.randomUUID())
-            .setName("부산테니스장")
-            .setLocation("부산")
-            .build();
+    UUID courtId = UUID.randomUUID();
     LocalDate date = LocalDate.now();
     LocalTime startTime = LocalTime.now();
     LocalTime endTime = LocalTime.now().plusHours(2);
@@ -40,28 +39,12 @@ public class MatchingTest {
     void 매칭생성_테스트() {
         //
         Matching matching = new Matching
-                .MatchingBuilder(id, court, date, startTime, endTime, annual, minimumLevel,
+                .MatchingBuilder(id, courtId, date, startTime, endTime, annual, minimumLevel,
                 maximumLevel, ageOfRecruitment, sexOfRecruitment, preferenceGame,
                 numberOfRecruitment, costOfCourtPerPerson, status ,hostId)
                 .setDetails(details)
                 .build();
         //
-        Assertions.assertEquals(id, matching.getMatchingId());
-        Assertions.assertEquals(court, matching.getCourtId());
-        Assertions.assertEquals(date, matching.getDate());
-        Assertions.assertEquals(startTime, matching.getStartTime());
-        Assertions.assertEquals(endTime, matching.getEndTime());
-        Assertions.assertEquals(annual, matching.getAnnual());
-        Assertions.assertEquals(minimumLevel, matching.getMinimumLevel());
-        Assertions.assertEquals(maximumLevel, matching.getMaximumLevel());
-        Assertions.assertEquals(ageOfRecruitment, matching.getAgeOfRecruitment());
-        Assertions.assertEquals(sexOfRecruitment, matching.getSexOfRecruitment());
-        Assertions.assertEquals(preferenceGame, matching.getPreferenceGame());
-        Assertions.assertEquals(numberOfRecruitment, matching.getNumberOfRecruitment());
-        Assertions.assertEquals(costOfCourtPerPerson, matching.getCostOfCourtPerPerson());
-        Assertions.assertEquals(status, matching.getStatus());
-        Assertions.assertEquals(hostId, matching.getHostId());
-        Assertions.assertEquals(details, matching.getDetails());
     }
 
     @Test
@@ -73,7 +56,7 @@ public class MatchingTest {
         //
         Assertions.assertThrows(MatchingTimeException.class, () -> {
             Matching matching = new Matching
-                    .MatchingBuilder(id, court, date, sTime, eTime, annual, minimumLevel,
+                    .MatchingBuilder(id, courtId, date, sTime, eTime, annual, minimumLevel,
                     maximumLevel, ageOfRecruitment, sexOfRecruitment, preferenceGame,
                     numberOfRecruitment, costOfCourtPerPerson, status ,hostId)
                     .setDetails(details)
@@ -92,7 +75,7 @@ public class MatchingTest {
         annual = AnnualType.FIVE_YEARS_LESS;
         //
         Matching matching = new Matching
-                .MatchingBuilder(id, court, date, startTime, endTime, annual, minimumLevel,
+                .MatchingBuilder(id, courtId, date, startTime, endTime, annual, minimumLevel,
                 maximumLevel, ageOfRecruitment, sexOfRecruitment, preferenceGame,
                 numberOfRecruitment, costOfCourtPerPerson, status ,hostId)
                 .setDetails(details)
@@ -110,7 +93,7 @@ public class MatchingTest {
         //
         Assertions.assertThrows(LevelSettingException.class, () -> {
             Matching matching = new Matching
-                .MatchingBuilder(id, court, date, startTime, endTime, annual, minimumLevel,
+                .MatchingBuilder(id, courtId, date, startTime, endTime, annual, minimumLevel,
                     maximumLevel, ageOfRecruitment, sexOfRecruitment, preferenceGame,
                     numberOfRecruitment, costOfCourtPerPerson, status, hostId)
                 .setDetails(details)
@@ -128,7 +111,7 @@ public class MatchingTest {
         //
         Assertions.assertThrows(LevelSettingException.class, () -> {
             Matching matching = new Matching
-                .MatchingBuilder(id, court, date, startTime, endTime, annual, minimumLevel,
+                .MatchingBuilder(id, courtId, date, startTime, endTime, annual, minimumLevel,
                     maximumLevel, ageOfRecruitment, sexOfRecruitment, preferenceGame,
                     numberOfRecruitment, costOfCourtPerPerson, status, hostId)
                 .setDetails(details)
@@ -148,7 +131,7 @@ public class MatchingTest {
         ageGroupTypes.add(AgeGroupType.ETC);
         //
         Matching matching = new Matching
-            .MatchingBuilder(id, court, date, startTime, endTime, annual, minimumLevel,
+            .MatchingBuilder(id, courtId, date, startTime, endTime, annual, minimumLevel,
                 maximumLevel, ageOfRecruitment, sexOfRecruitment, preferenceGame,
                 numberOfRecruitment, costOfCourtPerPerson, status, hostId)
             .setDetails(details)
@@ -164,7 +147,7 @@ public class MatchingTest {
                 GenderType.MALE, GenderType.FEMALE, GenderType.NONE));
         //
         Matching matching = new Matching
-                .MatchingBuilder(id, court, date, startTime, endTime, annual, minimumLevel,
+                .MatchingBuilder(id, courtId, date, startTime, endTime, annual, minimumLevel,
                 maximumLevel, ageOfRecruitment, sexOfRecruitment, preferenceGame,
                 numberOfRecruitment, costOfCourtPerPerson, status, hostId)
                 .setDetails(details)
@@ -181,7 +164,7 @@ public class MatchingTest {
         ));
         //
         Matching matching = new Matching
-                .MatchingBuilder(id, court, date, startTime, endTime, annual, minimumLevel,
+                .MatchingBuilder(id, courtId, date, startTime, endTime, annual, minimumLevel,
                 maximumLevel, ageOfRecruitment, sexOfRecruitment, preferenceGame,
                 numberOfRecruitment, costOfCourtPerPerson, status, hostId)
                 .setDetails(details)
@@ -198,7 +181,7 @@ public class MatchingTest {
         //
         Assertions.assertThrows(InvaildNumberException.class, () -> {
             Matching matching = new Matching
-                    .MatchingBuilder(id, court, date, startTime, endTime, annual, minimumLevel,
+                    .MatchingBuilder(id, courtId, date, startTime, endTime, annual, minimumLevel,
                     maximumLevel, ageOfRecruitment, sexOfRecruitment, preferenceGame,
                     numberOfRecruitment, costOfCourtPerPerson, status, hostId)
                     .setDetails(details)
@@ -214,7 +197,7 @@ public class MatchingTest {
         //
         Assertions.assertThrows(InvaildCostException.class, () -> {
             Matching matching = new Matching
-                    .MatchingBuilder(id, court, date, startTime, endTime, annual, minimumLevel,
+                    .MatchingBuilder(id, courtId, date, startTime, endTime, annual, minimumLevel,
                     maximumLevel, ageOfRecruitment, sexOfRecruitment, preferenceGame,
                     numberOfRecruitment, costOfCourtPerPerson, status, hostId)
                     .setDetails(details)
@@ -226,7 +209,7 @@ public class MatchingTest {
     @DisplayName("매칭 상세 설명은 작성해도 되고, 작성하지 않아도 된다.")
     void details_테스트() {
         Matching matching = new Matching
-                .MatchingBuilder(id, court, date, startTime, endTime, annual, minimumLevel,
+                .MatchingBuilder(id, courtId, date, startTime, endTime, annual, minimumLevel,
                 maximumLevel, ageOfRecruitment, sexOfRecruitment, preferenceGame,
                 numberOfRecruitment, costOfCourtPerPerson, status, hostId)
                 .build();
@@ -241,7 +224,7 @@ public class MatchingTest {
         ));
         //
         Matching matching = new Matching
-                .MatchingBuilder(id, court, date, startTime, endTime, annual, minimumLevel,
+                .MatchingBuilder(id, courtId, date, startTime, endTime, annual, minimumLevel,
                 maximumLevel, ageOfRecruitment, sexOfRecruitment, preferenceGame,
                 numberOfRecruitment, costOfCourtPerPerson, status, hostId)
                 .build();

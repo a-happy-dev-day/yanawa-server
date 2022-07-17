@@ -16,7 +16,7 @@ import java.util.UUID;
 public class Matching {
     // required parameters
     private final UUID matchingId;
-    private final Court courtId;
+    private final UUID courtId;
     private final LocalDate date;
     private final LocalTime startTime;
     private final LocalTime endTime;
@@ -38,7 +38,7 @@ public class Matching {
         return matchingId;
     }
 
-    public Court getCourtId() {
+    public UUID getCourtId() {
         return courtId;
     }
 
@@ -136,7 +136,7 @@ public class Matching {
 
     public static class MatchingBuilder {
         private final UUID matchingId;
-        private final Court courtId;
+        private final UUID courtId;
         private final LocalDate date;
         private final LocalTime startTime;
         private final LocalTime endTime;
@@ -152,7 +152,7 @@ public class Matching {
         private final MatchingStatusType status;
         private final UUID hostId;
 
-        public MatchingBuilder(UUID matchingId, Court courtId, LocalDate date, LocalTime startTime, LocalTime endTime, AnnualType annual, Double minimumLevel, Double maximumLevel, AgeGroupType ageOfRecruitment, GenderType sexOfRecruitment, PreferenceType preferenceGame, Integer numberOfRecruitment, Double costOfCourtPerPerson, MatchingStatusType status, UUID hostId) {
+        public MatchingBuilder(UUID matchingId, UUID courtId, LocalDate date, LocalTime startTime, LocalTime endTime, AnnualType annual, Double minimumLevel, Double maximumLevel, AgeGroupType ageOfRecruitment, GenderType sexOfRecruitment, PreferenceType preferenceGame, Integer numberOfRecruitment, Double costOfCourtPerPerson, MatchingStatusType status, UUID hostId) {
             this.matchingId = matchingId;
             this.courtId = courtId;
             this.date = date;

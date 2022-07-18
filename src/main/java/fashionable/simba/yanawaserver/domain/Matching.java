@@ -1,38 +1,28 @@
 package fashionable.simba.yanawaserver.domain;
 
 import fashionable.simba.yanawaserver.constant.*;
-import fashionable.simba.yanawaserver.error.InvaildCostException;
-import fashionable.simba.yanawaserver.error.InvaildNumberException;
-import fashionable.simba.yanawaserver.error.LevelSettingException;
-import fashionable.simba.yanawaserver.error.MatchingTimeException;
+import fashionable.simba.yanawaserver.error.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 public class Matching {
-    // required parameters
-    private final UUID matchingId;
-    private final UUID courtId;
-    private final LocalDate date;
-    private final LocalTime startTime;
-    private final LocalTime endTime;
-    private final AnnualType annual;
-    private final Double minimumLevel;
-    private final Double maximumLevel;
-    private final AgeGroupType ageOfRecruitment;
-    private final GenderType sexOfRecruitment;
-    private final PreferenceType preferenceGame;
-    private final Integer numberOfRecruitment;
-    private final Double costOfCourtPerPerson;
-    private final MatchingStatusType status;
-    private final UUID hostId;
-    // optional parameters
-    private final String details;
-
+    private UUID matchingId;
+    private UUID courtId;
+    private LocalDate date;
+    private LocalTime startTime;
+    private LocalTime endTime;
+    private AnnualType annual;
+    private Level level;
+    private AgeGroupType ageOfRecruitment;
+    private GenderType sexOfRecruitment;
+    private PreferenceType preferenceGame;
+    private Integer numberOfRecruitment;
+    private Double costOfCourtPerPerson;
+    private String details;
+    private MatchingStatusType status;
+    private UUID hostId;
 
     public UUID getMatchingId() {
         return matchingId;
@@ -58,12 +48,8 @@ public class Matching {
         return annual;
     }
 
-    public Double getMinimumLevel() {
-        return minimumLevel;
-    }
-
-    public Double getMaximumLevel() {
-        return maximumLevel;
+    public Level getLevel() {
+        return level;
     }
 
     public AgeGroupType getAgeOfRecruitment() {
@@ -99,21 +85,20 @@ public class Matching {
     }
 
     public Matching(MatchingBuilder builder) {
+        if (builder.matchingId == null) {
+            throw new NoMatchingDataException();
+        }
+        if (builder.courtId == null) {
+            throw new NoCourtDataException();
+        }
         if (builder.startTime.isAfter(builder.endTime)) {
             throw new MatchingTimeException();
         }
-        Set<Double> levels = new HashSet<>(
-                Arrays.asList(0.0,0.5,1.0,1.5,2.0,2.5,3.0,3.5,4.0,4.5,5.0,5.5,6.0));
-        if (builder.minimumLevel > builder.maximumLevel
-                || !levels.contains(builder.minimumLevel)
-                || !levels.contains(builder.maximumLevel)) {
-            throw new LevelSettingException();
-        }
         if (builder.numberOfRecruitment < 1 || builder.numberOfRecruitment > 8) {
-            throw new InvaildNumberException();
+            throw new InvalidNumberException();
         }
         if (builder.costOfCourtPerPerson <= 0) {
-            throw new InvaildCostException();
+            throw new InvalidCostException();
         }
 
         this.matchingId           = builder.matchingId;
@@ -122,8 +107,7 @@ public class Matching {
         this.startTime            = builder.startTime;
         this.endTime              = builder.endTime;
         this.annual               = builder.annual;
-        this.minimumLevel         = builder.minimumLevel;
-        this.maximumLevel         = builder.maximumLevel;
+        this.level                = builder.level;
         this.ageOfRecruitment     = builder.ageOfRecruitment;
         this.sexOfRecruitment     = builder.sexOfRecruitment;
         this.preferenceGame       = builder.preferenceGame;
@@ -136,42 +120,92 @@ public class Matching {
 
     public static class MatchingBuilder {
         private final UUID matchingId;
-        private final UUID courtId;
-        private final LocalDate date;
-        private final LocalTime startTime;
-        private final LocalTime endTime;
-        private final AnnualType annual;
-        private final Double minimumLevel;
-        private final Double maximumLevel;
-        private final AgeGroupType ageOfRecruitment;
-        private final GenderType sexOfRecruitment;
-        private final PreferenceType preferenceGame;
-        private final Integer numberOfRecruitment;
-        private final Double costOfCourtPerPerson;
+        private UUID courtId;
+        private LocalDate date;
+        private LocalTime startTime;
+        private LocalTime endTime;
+        private AnnualType annual;
+        private Level level;
+        private AgeGroupType ageOfRecruitment;
+        private GenderType sexOfRecruitment;
+        private PreferenceType preferenceGame;
+        private Integer numberOfRecruitment;
+        private Double costOfCourtPerPerson;
         private String details;
-        private final MatchingStatusType status;
-        private final UUID hostId;
+        private MatchingStatusType status;
+        private UUID hostId;
 
-        public MatchingBuilder(UUID matchingId, UUID courtId, LocalDate date, LocalTime startTime, LocalTime endTime, AnnualType annual, Double minimumLevel, Double maximumLevel, AgeGroupType ageOfRecruitment, GenderType sexOfRecruitment, PreferenceType preferenceGame, Integer numberOfRecruitment, Double costOfCourtPerPerson, MatchingStatusType status, UUID hostId) {
+        public MatchingBuilder(UUID matchingId) {
             this.matchingId = matchingId;
+        }
+
+        public MatchingBuilder setCourtId(UUID courtId) {
             this.courtId = courtId;
+            return this;
+        }
+
+        public MatchingBuilder setDate(LocalDate date) {
             this.date = date;
+            return this;
+        }
+
+        public MatchingBuilder setStartTime(LocalTime startTime) {
             this.startTime = startTime;
+            return this;
+        }
+
+        public MatchingBuilder setEndTime(LocalTime endTime) {
             this.endTime = endTime;
+            return this;
+        }
+
+        public MatchingBuilder setAnnual(AnnualType annual) {
             this.annual = annual;
-            this.minimumLevel = minimumLevel;
-            this.maximumLevel = maximumLevel;
+            return this;
+        }
+
+        public MatchingBuilder setlevel(Level level) {
+            this.level = level;
+            return this;
+        }
+
+        public MatchingBuilder setAgeOfRecruitment(AgeGroupType ageOfRecruitment) {
             this.ageOfRecruitment = ageOfRecruitment;
+            return this;
+        }
+
+        public MatchingBuilder setSexOfRecruitment(GenderType sexOfRecruitment) {
             this.sexOfRecruitment = sexOfRecruitment;
+            return this;
+        }
+
+        public MatchingBuilder setPreferenceGame(PreferenceType preferenceGame) {
             this.preferenceGame = preferenceGame;
+            return this;
+        }
+
+        public MatchingBuilder setNumberOfRecruitment(Integer numberOfRecruitment) {
             this.numberOfRecruitment = numberOfRecruitment;
+            return this;
+        }
+
+        public MatchingBuilder setCostOfCourtPerPerson(Double costOfCourtPerPerson) {
             this.costOfCourtPerPerson = costOfCourtPerPerson;
-            this.status = status;
-            this.hostId = hostId;
+            return this;
         }
 
         public MatchingBuilder setDetails(String details) {
             this.details = details;
+            return this;
+        }
+
+        public MatchingBuilder setStatus(MatchingStatusType status) {
+            this.status = status;
+            return this;
+        }
+
+        public MatchingBuilder setHostId(UUID hostId) {
+            this.hostId = hostId;
             return this;
         }
 

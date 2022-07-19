@@ -1,5 +1,6 @@
 package fashionable.simba.yanawaserver.domain;
 
+import fashionable.simba.yanawaserver.error.NoPlayerDataException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,13 +15,22 @@ public class MatchingReviewTest {
         UUID partnerId = UUID.randomUUID();
         String details = "좋은 경기했습니다.";
         //
-        MatchingReview matchingReview = new MatchingReview.MatchingReviewBuilder(
-                writerId, partnerId)
-                .setDetails(details)
-                .build();
+        Assertions.assertDoesNotThrow(() ->
+                new MatchingReview.MatchingReviewBuilder(writerId, partnerId)
+                        .setDetails(details)
+                        .build()
+        );
+    }
+
+    @Test
+    @DisplayName("작성자나 파트너의 정보가 잘못 입력 되었을 경우, NoPlayerDataException이 발생한다.")
+    void 리뷰_실패_테스트() {
+        UUID writerId = null;
+        UUID partnerId = null;
         //
-        Assertions.assertEquals(writerId, matchingReview.getWriterId());
-        Assertions.assertEquals(partnerId, matchingReview.getPartnerId());
-        Assertions.assertEquals(details, matchingReview.getDetails());
+        Assertions.assertThrows(NoPlayerDataException.class, () ->
+                new MatchingReview.MatchingReviewBuilder(writerId, partnerId)
+                        .build()
+        );
     }
 }

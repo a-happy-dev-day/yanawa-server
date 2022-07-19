@@ -1,5 +1,7 @@
 package fashionable.simba.yanawaserver.domain;
 
+import fashionable.simba.yanawaserver.error.NoPlayerDataException;
+
 import java.util.UUID;
 
 public class MatchingReview {
@@ -31,6 +33,9 @@ public class MatchingReview {
         private String details;
 
         public MatchingReviewBuilder(UUID writerId, UUID partnerId) {
+            if (writerId == null || partnerId == null) {
+                throw new NoPlayerDataException();
+            }
             this.writerId = writerId;
             this.partnerId = partnerId;
         }

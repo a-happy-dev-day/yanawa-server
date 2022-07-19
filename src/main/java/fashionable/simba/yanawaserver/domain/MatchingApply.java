@@ -5,7 +5,7 @@ import fashionable.simba.yanawaserver.constant.RequestStatusType;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class MatchingRequest {
+public class MatchingApply {
     private final UUID userId;
     private final UUID hostId;
     private RequestStatusType status;
@@ -27,7 +27,7 @@ public class MatchingRequest {
         return requestDateTime;
     }
 
-    public MatchingRequest(MatchingRequestBuilder builder) {
+    public MatchingApply(MatchingRequestBuilder builder) {
         this.userId = builder.userId;
         this.hostId = builder.hostId;
         this.status = builder.status;
@@ -55,8 +55,8 @@ public class MatchingRequest {
             return this;
         }
 
-        public MatchingRequest build() {
-            return new MatchingRequest(this);
+        public MatchingApply build() {
+            return new MatchingApply(this);
         }
     }
 }

@@ -11,16 +11,16 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-public class MatchingRequestTest {
+public class MatchingApplyTest {
     @Test
-    @DisplayName("매칭요청 생성 테스트")
-    void 매칭요청_생성_Test() {
+    @DisplayName("매칭신청 생성 테스트")
+    void 매칭신청_생성_Test() {
         //
         UUID userId = UUID.randomUUID();
         UUID hostId = UUID.randomUUID();
 
         //
-        MatchingRequest matchingRequest = new MatchingRequest.MatchingRequestBuilder(
+        MatchingApply matchingRequest = new MatchingApply.MatchingRequestBuilder(
             userId, hostId)
         .setRequestDateTime(LocalDateTime.now())
         .setStatus(RequestStatusType.ACCEPTED)
@@ -34,13 +34,13 @@ public class MatchingRequestTest {
 
     @Test
     @DisplayName("매칭 요청 상태는 대기중, 수락, 거절, 만료 중 하나의 정보를 가진다")
-    void 매칭요청_상태_Test() {
+    void 매칭신청_상태_Test() {
         //
         Set<RequestStatusType> requestStatusTypes = new HashSet<>(Arrays.asList(
                 RequestStatusType.ACCEPTED, RequestStatusType.WAITING, RequestStatusType.REJECTED, RequestStatusType.EXPIRED
         ));
         //
-        MatchingRequest matchingRequest = new MatchingRequest.MatchingRequestBuilder(
+        MatchingApply matchingRequest = new MatchingApply.MatchingRequestBuilder(
                 UUID.randomUUID(), UUID.randomUUID())
                 .setRequestDateTime(LocalDateTime.now())
                 .setStatus(RequestStatusType.ACCEPTED)

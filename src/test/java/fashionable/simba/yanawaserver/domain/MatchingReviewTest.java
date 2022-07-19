@@ -33,4 +33,40 @@ public class MatchingReviewTest {
                         .build()
         );
     }
+
+    @Test
+    @DisplayName("리뷰 생성시 작성자 확인")
+    void 리뷰_성공_테스트() {
+        UUID writerId = UUID.randomUUID();
+        MatchingReview matchingReview = new MatchingReview
+                .MatchingReviewBuilder(writerId, UUID.randomUUID())
+                .setDetails("수고하셨습니다.")
+                .build();
+        //
+        Assertions.assertEquals(writerId, matchingReview.getWriterId());
+    }
+
+    @Test
+    @DisplayName("리뷰 생성시 파트너 확인")
+    void 리뷰_성공_테스트2() {
+        UUID partnerId = UUID.randomUUID();
+        MatchingReview matchingReview = new MatchingReview
+                .MatchingReviewBuilder(UUID.randomUUID(),partnerId)
+                .setDetails("수고하셨습니다.")
+                .build();
+        //
+        Assertions.assertEquals(partnerId, matchingReview.getPartnerId());
+    }
+
+    @Test
+    @DisplayName("리뷰 생성시 상세내용 테스트")
+    void 리뷰_성공_테스트3() {
+        UUID partnerId = UUID.randomUUID();
+        MatchingReview matchingReview = new MatchingReview
+                .MatchingReviewBuilder(UUID.randomUUID(),partnerId)
+                .setDetails("수고하셨습니다.")
+                .build();
+        //
+        Assertions.assertEquals("수고하셨습니다.", matchingReview.getDetails());
+    }
 }

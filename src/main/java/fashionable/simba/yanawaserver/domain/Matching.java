@@ -14,7 +14,8 @@ public class Matching {
     private LocalTime startTime;
     private LocalTime endTime;
     private AnnualType annual;
-    private Level level;
+    private Level maximumLevel;
+    private Level minimumLevel;
     private AgeGroupType ageOfRecruitment;
     private GenderType sexOfRecruitment;
     private PreferenceType preferenceGame;
@@ -48,8 +49,12 @@ public class Matching {
         return annual;
     }
 
-    public Level getLevel() {
-        return level;
+    public Level getMaximumLevel() {
+        return maximumLevel;
+    }
+
+    public Level getMinimumLevel() {
+        return minimumLevel;
     }
 
     public AgeGroupType getAgeOfRecruitment() {
@@ -101,13 +106,18 @@ public class Matching {
             throw new InvalidCostException();
         }
 
+        if (builder.maximumLevel.getLevel() < builder.minimumLevel.getLevel()) {
+            throw new IllegalArgumentException();
+        }
+
         this.matchingId           = builder.matchingId;
         this.courtId              = builder.courtId;
         this.date                 = builder.date;
         this.startTime            = builder.startTime;
         this.endTime              = builder.endTime;
         this.annual               = builder.annual;
-        this.level                = builder.level;
+        this.maximumLevel         = builder.maximumLevel;
+        this.minimumLevel         = builder.minimumLevel;
         this.ageOfRecruitment     = builder.ageOfRecruitment;
         this.sexOfRecruitment     = builder.sexOfRecruitment;
         this.preferenceGame       = builder.preferenceGame;
@@ -125,7 +135,8 @@ public class Matching {
         private LocalTime startTime;
         private LocalTime endTime;
         private AnnualType annual;
-        private Level level;
+        private Level maximumLevel;
+        private Level minimumLevel;
         private AgeGroupType ageOfRecruitment;
         private GenderType sexOfRecruitment;
         private PreferenceType preferenceGame;
@@ -164,8 +175,13 @@ public class Matching {
             return this;
         }
 
-        public MatchingBuilder setlevel(Level level) {
-            this.level = level;
+        public MatchingBuilder setMaximumLevel(Level maximumLevel) {
+            this.maximumLevel = maximumLevel;
+            return this;
+        }
+
+        public MatchingBuilder setMinimumLevel(Level minimumLevel) {
+            this.minimumLevel = minimumLevel;
             return this;
         }
 

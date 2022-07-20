@@ -25,11 +25,16 @@ public class MatchingReviewTest {
     @Test
     @DisplayName("작성자나 파트너의 정보가 잘못 입력 되었을 경우, NoPlayerDataException이 발생한다.")
     void 리뷰_실패_테스트() {
-        UUID writerId = null;
-        UUID partnerId = null;
-        //
         Assertions.assertThrows(NoPlayerDataException.class, () ->
-                new MatchingReview.MatchingReviewBuilder(writerId, partnerId)
+                new MatchingReview.MatchingReviewBuilder(UUID.randomUUID(), null)
+                        .build()
+        );
+        Assertions.assertThrows(NoPlayerDataException.class, () ->
+                new MatchingReview.MatchingReviewBuilder(null, UUID.randomUUID())
+                        .build()
+        );
+        Assertions.assertThrows(NoPlayerDataException.class, () ->
+                new MatchingReview.MatchingReviewBuilder(null, null)
                         .build()
         );
     }
@@ -49,6 +54,18 @@ public class MatchingReviewTest {
     @Test
     @DisplayName("리뷰 생성시 파트너 확인")
     void 리뷰_성공_테스트2() {
+        UUID partnerId = UUID.randomUUID();
+        MatchingReview matchingReview = new MatchingReview
+                .MatchingReviewBuilder(UUID.randomUUID(),partnerId)
+                .setDetails("수고하셨습니다.")
+                .build();
+        //
+        Assertions.assertEquals(partnerId, matchingReview.getPartnerId());
+    }
+
+    @Test
+    @DisplayName("리뷰 생성시, ")
+    void 리뷰_실패_테스트2() {
         UUID partnerId = UUID.randomUUID();
         MatchingReview matchingReview = new MatchingReview
                 .MatchingReviewBuilder(UUID.randomUUID(),partnerId)

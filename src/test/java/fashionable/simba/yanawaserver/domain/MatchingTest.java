@@ -4,6 +4,8 @@ import fashionable.simba.yanawaserver.constant.*;
 import fashionable.simba.yanawaserver.error.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -28,7 +30,8 @@ public class MatchingTest {
                 .setStartTime(START_TIME)
                 .setEndTime(END_TIME)
                 .setAnnual(AnnualType.TWO_YEARS_LESS)
-                .setlevel(LEVEL)
+                .setMaximumLevel(MAXIMUM_LEVEL)
+                .setMinimumLevel(MINIMUM_LEVEL)
                 .setAgeOfRecruitment(AgeGroupType.TWENTIES)
                 .setSexOfRecruitment(GenderType.MALE)
                 .setPreferenceGame(PreferenceType.MATCHING)
@@ -47,7 +50,8 @@ public class MatchingTest {
             () -> assertThat(matching.getStartTime()).isEqualTo(START_TIME),
             () -> assertThat(matching.getEndTime()).isEqualTo(END_TIME),
             () -> assertThat(matching.getAnnual()).isEqualTo(AnnualType.TWO_YEARS_LESS),
-            () -> assertThat(matching.getLevel()).isEqualTo(LEVEL),
+            () -> assertThat(matching.getMaximumLevel()).isEqualTo(MAXIMUM_LEVEL),
+            () -> assertThat(matching.getMinimumLevel()).isEqualTo(MINIMUM_LEVEL),
             () -> assertThat(matching.getSexOfRecruitment()).isEqualTo(GenderType.MALE),
             () -> assertThat(matching.getPreferenceGame()).isEqualTo(PreferenceType.MATCHING),
             () -> assertThat(matching.getNumberOfRecruitment()).isEqualTo(4),
@@ -69,7 +73,8 @@ public class MatchingTest {
                 .setStartTime(LocalTime.of(23, 0))
                 .setEndTime(LocalTime.of(21, 0))
                 .setAnnual(AnnualType.TWO_YEARS_LESS)
-                .setlevel(new Level(5.0, 2.5))
+                .setMaximumLevel(MAXIMUM_LEVEL)
+                .setMinimumLevel(MINIMUM_LEVEL)
                 .setAgeOfRecruitment(AgeGroupType.TWENTIES)
                 .setSexOfRecruitment(GenderType.MALE)
                 .setPreferenceGame(PreferenceType.MATCHING)
@@ -97,7 +102,8 @@ public class MatchingTest {
             .setStartTime(LocalTime.of(19, 0))
             .setEndTime(LocalTime.of(21, 0))
             .setAnnual(AnnualType.TWO_YEARS_LESS)
-            .setlevel(new Level(5.0, 2.5))
+            .setMaximumLevel(MAXIMUM_LEVEL)
+            .setMinimumLevel(MINIMUM_LEVEL)
             .setAgeOfRecruitment(AgeGroupType.TWENTIES)
             .setSexOfRecruitment(GenderType.MALE)
             .setPreferenceGame(PreferenceType.MATCHING)
@@ -121,7 +127,8 @@ public class MatchingTest {
                 .setStartTime(LocalTime.of(23, 0))
                 .setEndTime(LocalTime.of(21, 0))
                 .setAnnual(AnnualType.TWO_YEARS_LESS)
-                .setlevel(new Level(7.0, 2.5))
+                .setMaximumLevel(new Level(7.0))
+                .setMinimumLevel(MINIMUM_LEVEL)
                 .setAgeOfRecruitment(AgeGroupType.TWENTIES)
                 .setSexOfRecruitment(GenderType.MALE)
                 .setPreferenceGame(PreferenceType.MATCHING)
@@ -144,7 +151,8 @@ public class MatchingTest {
                 .setStartTime(LocalTime.of(23, 0))
                 .setEndTime(LocalTime.of(21, 0))
                 .setAnnual(AnnualType.TWO_YEARS_LESS)
-                .setlevel(new Level(3.2, 2.3))
+                .setMaximumLevel(new Level(4.2))
+                .setMinimumLevel(MINIMUM_LEVEL)
                 .setAgeOfRecruitment(AgeGroupType.TWENTIES)
                 .setSexOfRecruitment(GenderType.MALE)
                 .setPreferenceGame(PreferenceType.MATCHING)
@@ -158,16 +166,17 @@ public class MatchingTest {
     }
 
     @Test
-    @DisplayName("최소레벨이 최대레벨보다 클 경우, LevelSettingException이 발생한다.")
+    @DisplayName("최소레벨이 최대레벨보다 클 경우, IllegalArgumentException이 발생한다.")
     void 레벨_실패_테스트3() {
-        assertThrows(LevelSettingException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             new Matching.MatchingBuilder(UUID.randomUUID())
                 .setCourtId(UUID.randomUUID())
                 .setDate(LocalDate.of(2022, 7, 29))
-                .setStartTime(LocalTime.of(23, 0))
+                .setStartTime(LocalTime.of(19, 0))
                 .setEndTime(LocalTime.of(21, 0))
                 .setAnnual(AnnualType.TWO_YEARS_LESS)
-                .setlevel(new Level(2.0, 4.5))
+                .setMaximumLevel(new Level(2.0))
+                .setMinimumLevel(new Level(4.0))
                 .setAgeOfRecruitment(AgeGroupType.TWENTIES)
                 .setSexOfRecruitment(GenderType.MALE)
                 .setPreferenceGame(PreferenceType.MATCHING)
@@ -197,7 +206,8 @@ public class MatchingTest {
             .setStartTime(LocalTime.of(19, 0))
             .setEndTime(LocalTime.of(21, 0))
             .setAnnual(AnnualType.TWO_YEARS_LESS)
-            .setlevel(new Level(5.0, 2.5))
+            .setMaximumLevel(MAXIMUM_LEVEL)
+            .setMinimumLevel(MINIMUM_LEVEL)
             .setAgeOfRecruitment(AgeGroupType.TWENTIES)
             .setSexOfRecruitment(GenderType.MALE)
             .setPreferenceGame(PreferenceType.MATCHING)
@@ -223,7 +233,8 @@ public class MatchingTest {
             .setStartTime(LocalTime.of(19, 0))
             .setEndTime(LocalTime.of(21, 0))
             .setAnnual(AnnualType.TWO_YEARS_LESS)
-            .setlevel(new Level(5.0, 2.5))
+            .setMaximumLevel(MAXIMUM_LEVEL)
+            .setMinimumLevel(MINIMUM_LEVEL)
             .setAgeOfRecruitment(AgeGroupType.TWENTIES)
             .setSexOfRecruitment(GenderType.MALE)
             .setPreferenceGame(PreferenceType.MATCHING)
@@ -250,7 +261,8 @@ public class MatchingTest {
             .setStartTime(LocalTime.of(19, 0))
             .setEndTime(LocalTime.of(21, 0))
             .setAnnual(AnnualType.TWO_YEARS_LESS)
-            .setlevel(new Level(5.0, 2.5))
+            .setMaximumLevel(MAXIMUM_LEVEL)
+            .setMinimumLevel(MINIMUM_LEVEL)
             .setAgeOfRecruitment(AgeGroupType.TWENTIES)
             .setSexOfRecruitment(GenderType.MALE)
             .setPreferenceGame(PreferenceType.MATCHING)
@@ -264,12 +276,10 @@ public class MatchingTest {
         assertTrue(preferenceTypes.contains(matching.getPreferenceGame()));
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("모집 인원은 1명이상 8명이하가 아닐경우, InvalidNumberException이 발생한다.")
-    void 모집인원_실패_테스트() {
-        //
-        Integer numberOfRecruitment = 10;
-        //
+    @ValueSource(ints = {0, 9})
+    void 모집인원_실패_테스트(int numberOfRecruitment) {
         assertThrows(InvalidNumberException.class, () -> {
             new Matching.MatchingBuilder(UUID.randomUUID())
                 .setCourtId(UUID.randomUUID())
@@ -277,7 +287,8 @@ public class MatchingTest {
                 .setStartTime(LocalTime.of(19, 0))
                 .setEndTime(LocalTime.of(21, 0))
                 .setAnnual(AnnualType.TWO_YEARS_LESS)
-                .setlevel(new Level(5.0, 2.5))
+                .setMaximumLevel(MAXIMUM_LEVEL)
+                .setMinimumLevel(MINIMUM_LEVEL)
                 .setAgeOfRecruitment(AgeGroupType.TWENTIES)
                 .setSexOfRecruitment(GenderType.MALE)
                 .setPreferenceGame(PreferenceType.MATCHING)
@@ -303,7 +314,8 @@ public class MatchingTest {
                 .setStartTime(LocalTime.of(19, 0))
                 .setEndTime(LocalTime.of(21, 0))
                 .setAnnual(AnnualType.TWO_YEARS_LESS)
-                .setlevel(new Level(5.0, 2.5))
+                .setMaximumLevel(MAXIMUM_LEVEL)
+                .setMinimumLevel(MINIMUM_LEVEL)
                 .setAgeOfRecruitment(AgeGroupType.TWENTIES)
                 .setSexOfRecruitment(GenderType.MALE)
                 .setPreferenceGame(PreferenceType.MATCHING)
@@ -329,7 +341,8 @@ public class MatchingTest {
             .setStartTime(LocalTime.of(19, 0))
             .setEndTime(LocalTime.of(21, 0))
             .setAnnual(AnnualType.TWO_YEARS_LESS)
-            .setlevel(new Level(5.0, 2.5))
+            .setMaximumLevel(MAXIMUM_LEVEL)
+            .setMinimumLevel(MINIMUM_LEVEL)
             .setAgeOfRecruitment(AgeGroupType.TWENTIES)
             .setSexOfRecruitment(GenderType.MALE)
             .setPreferenceGame(PreferenceType.MATCHING)
@@ -353,7 +366,8 @@ public class MatchingTest {
                 .setStartTime(LocalTime.of(19, 0))
                 .setEndTime(LocalTime.of(21, 0))
                 .setAnnual(AnnualType.TWO_YEARS_LESS)
-                .setlevel(new Level(5.0, 2.5))
+                .setMaximumLevel(MAXIMUM_LEVEL)
+                .setMinimumLevel(MINIMUM_LEVEL)
                 .setAgeOfRecruitment(AgeGroupType.TWENTIES)
                 .setSexOfRecruitment(GenderType.MALE)
                 .setPreferenceGame(PreferenceType.MATCHING)
@@ -379,7 +393,8 @@ public class MatchingTest {
                     .setStartTime(LocalTime.of(19, 0))
                     .setEndTime(LocalTime.of(21, 0))
                     .setAnnual(AnnualType.TWO_YEARS_LESS)
-                    .setlevel(new Level(5.0, 2.5))
+                    .setMaximumLevel(MAXIMUM_LEVEL)
+                    .setMinimumLevel(MINIMUM_LEVEL)
                     .setAgeOfRecruitment(AgeGroupType.TWENTIES)
                     .setSexOfRecruitment(GenderType.MALE)
                     .setPreferenceGame(PreferenceType.MATCHING)
@@ -405,7 +420,8 @@ public class MatchingTest {
                 .setStartTime(LocalTime.of(19, 0))
                 .setEndTime(LocalTime.of(21, 0))
                 .setAnnual(AnnualType.TWO_YEARS_LESS)
-                .setlevel(new Level(5.0, 2.5))
+                .setMaximumLevel(MAXIMUM_LEVEL)
+                .setMinimumLevel(MINIMUM_LEVEL)
                 .setAgeOfRecruitment(AgeGroupType.TWENTIES)
                 .setSexOfRecruitment(GenderType.MALE)
                 .setPreferenceGame(PreferenceType.MATCHING)

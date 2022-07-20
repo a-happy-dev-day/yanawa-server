@@ -1,30 +1,36 @@
-# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
-
-name: CI - Branch develop
-
+name: Build with sonar cloud
 on:
   push:
-    branches: [ "develop" ]
+    branches:
+      - develop
   pull_request:
-    branches: [ "develop" ]
-
-permissions:
-  contents: read
-
+    types: [opened, synchronize, reopened]
 jobs:
   build:
-
+    name: Build
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: Set up JDK 11
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v1
         with:
-          java-version: '11'
-          distribution: 'temurin'
-      - name: Build with Gradle
-        uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+          java-version: 11
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v1
         with:
-          arguments: build
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache Gradle packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: ${{ runner.os }}-gradle
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: ./gradlew build sonarqube --info

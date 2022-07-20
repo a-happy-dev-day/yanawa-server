@@ -18,17 +18,18 @@ public class MatchingApplyTest {
         //
         UUID userId = UUID.randomUUID();
         UUID hostId = UUID.randomUUID();
+        LocalDateTime now = LocalDateTime.now();
 
         //
         MatchingApply matchingRequest = new MatchingApply.MatchingRequestBuilder(
             userId, hostId)
-        .setRequestDateTime(LocalDateTime.now())
+        .setRequestDateTime(now)
         .setStatus(RequestStatusType.ACCEPTED)
         .build();
         //
         Assertions.assertEquals(userId,matchingRequest.getUserId());
         Assertions.assertEquals(hostId,matchingRequest.getHostId());
-        Assertions.assertEquals(LocalDateTime.now(),matchingRequest.getRequestDateTime());
+        Assertions.assertEquals(now,matchingRequest.getRequestDateTime());
         Assertions.assertEquals(RequestStatusType.ACCEPTED,matchingRequest.getStatus());
     }
 

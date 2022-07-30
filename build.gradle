@@ -29,6 +29,7 @@ sonarqube {
 		property "sonar.projectKey", "a-happy-dev-day_yanawa-server"
 		property "sonar.organization", "a-happy-dev-day"
 		property "sonar.host.url", "https://sonarcloud.io"
+		property "sonar.login", "1cdf83a1d595f0da8a94af808e508e6e6d18de88"
 	}
 }
 

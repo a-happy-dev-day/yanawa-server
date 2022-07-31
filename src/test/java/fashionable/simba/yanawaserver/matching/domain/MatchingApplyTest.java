@@ -23,14 +23,14 @@ public class MatchingApplyTest {
         //
         MatchingApply matchingRequest = new MatchingApply.MatchingRequestBuilder(
             userId, hostId)
-        .setRequestDateTime(now)
-        .setStatus(RequestStatusType.ACCEPTED)
-        .build();
+            .setRequestDateTime(now)
+            .setStatus(RequestStatusType.ACCEPTED)
+            .build();
         //
-        Assertions.assertEquals(userId,matchingRequest.getUserId());
-        Assertions.assertEquals(hostId,matchingRequest.getHostId());
-        Assertions.assertEquals(now,matchingRequest.getRequestDateTime());
-        Assertions.assertEquals(RequestStatusType.ACCEPTED,matchingRequest.getStatus());
+        Assertions.assertEquals(userId, matchingRequest.getUserId());
+        Assertions.assertEquals(hostId, matchingRequest.getHostId());
+        Assertions.assertEquals(now, matchingRequest.getRequestDateTime());
+        Assertions.assertEquals(RequestStatusType.ACCEPTED, matchingRequest.getStatus());
     }
 
     @Test
@@ -38,14 +38,14 @@ public class MatchingApplyTest {
     void 매칭신청_상태_Test() {
         //
         Set<RequestStatusType> requestStatusTypes = new HashSet<>(Arrays.asList(
-                RequestStatusType.ACCEPTED, RequestStatusType.WAITING, RequestStatusType.REJECTED, RequestStatusType.EXPIRED
+            RequestStatusType.ACCEPTED, RequestStatusType.WAITING, RequestStatusType.REJECTED, RequestStatusType.EXPIRED
         ));
         //
         MatchingApply matchingRequest = new MatchingApply.MatchingRequestBuilder(
-                UUID.randomUUID(), UUID.randomUUID())
-                .setRequestDateTime(LocalDateTime.now())
-                .setStatus(RequestStatusType.ACCEPTED)
-                .build();
+            UUID.randomUUID(), UUID.randomUUID())
+            .setRequestDateTime(LocalDateTime.now())
+            .setStatus(RequestStatusType.ACCEPTED)
+            .build();
         //
         Assertions.assertTrue(requestStatusTypes.contains(matchingRequest.getStatus()));
     }

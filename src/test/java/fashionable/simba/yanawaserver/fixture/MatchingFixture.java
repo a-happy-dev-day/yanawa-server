@@ -1,6 +1,6 @@
 package fashionable.simba.yanawaserver.fixture;
 
-import fashionable.simba.yanawaserver.domain.Level;
+import fashionable.simba.yanawaserver.matching.domain.Level;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

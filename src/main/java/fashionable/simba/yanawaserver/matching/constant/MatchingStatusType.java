@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.constant;
+package fashionable.simba.yanawaserver.matching.constant;
 
 public enum MatchingStatusType {
     OPENING, CLOSING, ONGOING, FINISH

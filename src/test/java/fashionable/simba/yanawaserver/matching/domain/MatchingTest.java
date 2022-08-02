@@ -1,7 +1,16 @@
-package fashionable.simba.yanawaserver.domain;
+package fashionable.simba.yanawaserver.matching.domain;
 
-import fashionable.simba.yanawaserver.constant.*;
-import fashionable.simba.yanawaserver.error.*;
+import fashionable.simba.yanawaserver.matching.constant.AgeGroupType;
+import fashionable.simba.yanawaserver.matching.constant.AnnualType;
+import fashionable.simba.yanawaserver.matching.constant.GenderType;
+import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
+import fashionable.simba.yanawaserver.matching.constant.PreferenceType;
+import fashionable.simba.yanawaserver.matching.error.InvalidCostException;
+import fashionable.simba.yanawaserver.matching.error.InvalidNumberException;
+import fashionable.simba.yanawaserver.matching.error.LevelSettingException;
+import fashionable.simba.yanawaserver.matching.error.MatchingTimeException;
+import fashionable.simba.yanawaserver.matching.error.NoCourtDataException;
+import fashionable.simba.yanawaserver.matching.error.NoMatchingDataException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,9 +23,20 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import static fashionable.simba.yanawaserver.fixture.MatchingFixture.*;
+import static fashionable.simba.yanawaserver.fixture.MatchingFixture.COURT_ID;
+import static fashionable.simba.yanawaserver.fixture.MatchingFixture.DATE;
+import static fashionable.simba.yanawaserver.fixture.MatchingFixture.DETAILS;
+import static fashionable.simba.yanawaserver.fixture.MatchingFixture.END_TIME;
+import static fashionable.simba.yanawaserver.fixture.MatchingFixture.HOST_ID;
+import static fashionable.simba.yanawaserver.fixture.MatchingFixture.MATCHING_ID;
+import static fashionable.simba.yanawaserver.fixture.MatchingFixture.MAXIMUM_LEVEL;
+import static fashionable.simba.yanawaserver.fixture.MatchingFixture.MINIMUM_LEVEL;
+import static fashionable.simba.yanawaserver.fixture.MatchingFixture.START_TIME;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MatchingTest {
 

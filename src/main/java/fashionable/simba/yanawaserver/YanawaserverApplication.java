@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class YanawaserverApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(YanawaserverApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(YanawaserverApplication.class, args);
+    }
 
 }

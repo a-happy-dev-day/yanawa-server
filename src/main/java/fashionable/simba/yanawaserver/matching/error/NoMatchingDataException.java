@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.error;
+package fashionable.simba.yanawaserver.matching.error;
 
 public class NoMatchingDataException extends RuntimeException {
 }

@@ -1,7 +1,15 @@
-package fashionable.simba.yanawaserver.domain;
+package fashionable.simba.yanawaserver.matching.domain;
 
-import fashionable.simba.yanawaserver.constant.*;
-import fashionable.simba.yanawaserver.error.*;
+import fashionable.simba.yanawaserver.matching.constant.AgeGroupType;
+import fashionable.simba.yanawaserver.matching.constant.AnnualType;
+import fashionable.simba.yanawaserver.matching.constant.GenderType;
+import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
+import fashionable.simba.yanawaserver.matching.constant.PreferenceType;
+import fashionable.simba.yanawaserver.matching.error.InvalidCostException;
+import fashionable.simba.yanawaserver.matching.error.InvalidNumberException;
+import fashionable.simba.yanawaserver.matching.error.MatchingTimeException;
+import fashionable.simba.yanawaserver.matching.error.NoCourtDataException;
+import fashionable.simba.yanawaserver.matching.error.NoMatchingDataException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -110,22 +118,22 @@ public class Matching {
             throw new IllegalArgumentException();
         }
 
-        this.matchingId           = builder.matchingId;
-        this.courtId              = builder.courtId;
-        this.date                 = builder.date;
-        this.startTime            = builder.startTime;
-        this.endTime              = builder.endTime;
-        this.annual               = builder.annual;
-        this.maximumLevel         = builder.maximumLevel;
-        this.minimumLevel         = builder.minimumLevel;
-        this.ageOfRecruitment     = builder.ageOfRecruitment;
-        this.sexOfRecruitment     = builder.sexOfRecruitment;
-        this.preferenceGame       = builder.preferenceGame;
-        this.numberOfRecruitment  = builder.numberOfRecruitment;
+        this.matchingId = builder.matchingId;
+        this.courtId = builder.courtId;
+        this.date = builder.date;
+        this.startTime = builder.startTime;
+        this.endTime = builder.endTime;
+        this.annual = builder.annual;
+        this.maximumLevel = builder.maximumLevel;
+        this.minimumLevel = builder.minimumLevel;
+        this.ageOfRecruitment = builder.ageOfRecruitment;
+        this.sexOfRecruitment = builder.sexOfRecruitment;
+        this.preferenceGame = builder.preferenceGame;
+        this.numberOfRecruitment = builder.numberOfRecruitment;
         this.costOfCourtPerPerson = builder.costOfCourtPerPerson;
-        this.details              = builder.details;
-        this.status               = builder.status;
-        this.hostId               = builder.hostId;
+        this.details = builder.details;
+        this.status = builder.status;
+        this.hostId = builder.hostId;
     }
 
     public static class MatchingBuilder {
@@ -225,7 +233,7 @@ public class Matching {
             return this;
         }
 
-        public Matching build(){
+        public Matching build() {
             return new Matching(this);
         }
     }

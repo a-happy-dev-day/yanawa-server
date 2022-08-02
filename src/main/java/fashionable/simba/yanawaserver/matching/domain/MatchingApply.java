@@ -1,6 +1,6 @@
-package fashionable.simba.yanawaserver.domain;
+package fashionable.simba.yanawaserver.matching.domain;
 
-import fashionable.simba.yanawaserver.constant.RequestStatusType;
+import fashionable.simba.yanawaserver.matching.constant.RequestStatusType;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

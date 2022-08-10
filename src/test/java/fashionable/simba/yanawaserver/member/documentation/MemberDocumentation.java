@@ -1,11 +1,21 @@
 package fashionable.simba.yanawaserver.member.documentation;
 
 import fashionable.simba.yanawaserver.members.domain.AccessToken;
+import fashionable.simba.yanawaserver.members.domain.Member;
+import fashionable.simba.yanawaserver.members.domain.RoleType;
 import fashionable.simba.yanawaserver.members.service.MemberService;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
@@ -18,29 +28,42 @@ public class MemberDocumentation extends Documentation {
     @MockBean
     MemberService memberService;
 
-    private String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGhpcy1pcy1zcGVhciIsImV" +
-        "tYWlsIjoicmpzY2tkZDEyQGdtYWlsLmNvbSJ9.S6wLnfUOvhU0Wx4kmNMiCAYS4rIdUyVI4FpGAjydfMM";
+    @Test
+    void members_me() {
+        when(memberService.findMemberByUserName(any()))
+            .thenReturn(Optional.of(new Member("member@email.com", List.of(RoleType.ROLE_MEMBER.name()))));
+
+        givenOauth()
+            .filter(document("member/me",
+                preprocessRequest(prettyPrint()),
+                preprocessResponse(prettyPrint())))
+            .when().get("/members/me")
+            .then().log().all()
+            .extract();
+
+    }
 
     @Test
     void login() {
-        when(memberService.login()).thenReturn(new AccessToken(token));
+        Map<String, String> params = new HashMap<>();
+        params.put("username", "user@email.com");
 
-        RestAssured
-            .given(spec).log().all()
+        givenNotOauth()
             .filter(document("member/login",
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint())))
-            .when().get("/login")
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .body(params)
+            .when().post("/login/token")
             .then().log().all()
-            .extract();
+            .statusCode(HttpStatus.OK.value()).extract();
     }
 
     @Test
     void logout() {
         doNothing().when(memberService).logout();
 
-        RestAssured
-            .given(spec).log().all()
+        givenOauth()
             .filter(document("member/logout",
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint())))

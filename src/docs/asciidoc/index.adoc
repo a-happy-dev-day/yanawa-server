@@ -16,3 +16,7 @@ operation::member/login[snippets='http-request,http-response']
 === 로그아웃
 
 operation::member/logout[snippets='http-request,http-response']
+
+=== 회원 정보 조회
+
+operation::member/me[snippets='http-request,http-response']

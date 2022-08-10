@@ -12,6 +12,7 @@ import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.test.context.ActiveProfiles;
 
+import static fashionable.simba.yanawaserver.member.acceptance.MemberSteps.로그인_되어_있음;
 import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.documentationConfiguration;
 
 
@@ -19,14 +20,26 @@ import static org.springframework.restdocs.restassured3.RestAssuredRestDocumenta
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(RestDocumentationExtension.class)
 public class Documentation {
+    public static final String EMAIL = "admin@email.com";
     @LocalServerPort
     int port;
+    protected String accessToken;
 
     protected RequestSpecification spec;
+
+    protected RequestSpecification givenOauth() {
+        return RestAssured.given(spec).log().all().auth().oauth2(accessToken);
+    }
+
+    protected RequestSpecification givenNotOauth() {
+        return RestAssured.given(spec).log().all();
+    }
 
     @BeforeEach
     public void setUp(RestDocumentationContextProvider restDocumentation) {
         RestAssured.port = port;
+
+        accessToken = 로그인_되어_있음(EMAIL);
 
         this.spec = new RequestSpecBuilder()
             .addFilter(documentationConfiguration(restDocumentation))

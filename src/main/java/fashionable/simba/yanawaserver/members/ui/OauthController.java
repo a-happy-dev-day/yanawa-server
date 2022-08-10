@@ -15,11 +15,6 @@ public class OauthController {
         this.memberService = memberService;
     }
 
-    @GetMapping("/login")
-    public ResponseEntity<AccessToken> login() {
-        return ResponseEntity.ok(memberService.login());
-    }
-
     @GetMapping("/logout")
     public ResponseEntity<Void> logout() {
         memberService.logout();

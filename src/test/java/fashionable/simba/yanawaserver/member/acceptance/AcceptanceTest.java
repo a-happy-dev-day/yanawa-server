@@ -1,7 +1,7 @@
-package fashionable.simba.member.acceptance;
+package fashionable.simba.yanawaserver.member.acceptance;
 
 
-import fashionable.simba.utils.DatabaseCleanup;
+import fashionable.simba.yanawaserver.utils.DatabaseCleanup;
 import fashionable.simba.yanawaserver.members.DataLoader;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;

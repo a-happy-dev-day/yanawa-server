@@ -30,7 +30,7 @@ public class MemberDocumentation extends Documentation {
             .filter(document("member/login",
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint())))
-            .when().get("/login/kakao")
+            .when().get("/login")
             .then().log().all()
             .extract();
     }

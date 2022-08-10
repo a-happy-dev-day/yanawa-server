@@ -8,7 +8,7 @@ import static fashionable.simba.yanawaserver.member.acceptance.MemberSteps.로�
 import static fashionable.simba.yanawaserver.member.acceptance.MemberSteps.정보_조회_요청;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AuthAcceptanceTest {
+public class AuthAcceptanceTest extends AcceptanceTest{
 
     /**
      * Given 사용자가 로그인하면
@@ -25,7 +25,6 @@ public class AuthAcceptanceTest {
         ExtractableResponse<Response> 정보_조회 = 정보_조회_요청(token);
 
         // then
-        assertThat(정보_조회.jsonPath().getString("id")).isNotNull();
         assertThat(정보_조회.jsonPath().getString("email")).isEqualTo(email);
     }
 

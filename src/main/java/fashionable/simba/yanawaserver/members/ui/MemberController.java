@@ -1,7 +1,10 @@
 package fashionable.simba.yanawaserver.members.ui;
 
+import fashionable.simba.yanawaserver.auth.authorization.AuthenticationPrincipal;
+import fashionable.simba.yanawaserver.auth.authorization.secured.Secured;
+import fashionable.simba.yanawaserver.auth.userdetails.User;
+import fashionable.simba.yanawaserver.members.domain.Member;
 import fashionable.simba.yanawaserver.members.service.MemberService;
-import fashionable.simba.yanawaserver.members.userdetails.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,9 +21,10 @@ public class MemberController {
     }
 
     @GetMapping("me")
-    public ResponseEntity<MemberResponse> membersMe(User user) {
-        User member = memberService.findMemberByUserName(user.getUsername());
-        MemberResponse response = new MemberResponse(member.getUsername());
+    @Secured(value = {"ROLE_ADMIN", "ROLE_MEMBER"})
+    public ResponseEntity<MemberResponse> membersMe(@AuthenticationPrincipal User user) {
+        Member member = memberService.findMemberByUserName(user.getUsername()).orElseThrow(IllegalArgumentException::new);
+        MemberResponse response = new MemberResponse(member.getEmail());
         return ResponseEntity.ok(response);
     }
 }

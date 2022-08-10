@@ -1,0 +1,18 @@
+= Subway Application API Document
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+[[member]]
+== 회원
+
+=== 로그인
+
+operation::member/login[snippets='http-request,http-response']
+
+=== 로그아웃
+
+operation::member/logout[snippets='http-request,http-response']

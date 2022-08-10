@@ -3,7 +3,7 @@ package fashionable.simba.yanawaserver.auth.context;
 import java.util.List;
 
 public class Authentication {
-    private Object principal;
+    private final Object principal;
     private List<String> authorities;
 
     public Authentication(Object principal) {

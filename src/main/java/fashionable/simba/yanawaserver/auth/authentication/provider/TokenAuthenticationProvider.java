@@ -8,7 +8,7 @@ import fashionable.simba.yanawaserver.auth.token.JwtTokenProvider;
 import java.util.List;
 
 public class TokenAuthenticationProvider implements AuthenticationManager {
-    private JwtTokenProvider jwtTokenProvider;
+    private final JwtTokenProvider jwtTokenProvider;
 
     public TokenAuthenticationProvider(JwtTokenProvider jwtTokenProvider) {
         this.jwtTokenProvider = jwtTokenProvider;

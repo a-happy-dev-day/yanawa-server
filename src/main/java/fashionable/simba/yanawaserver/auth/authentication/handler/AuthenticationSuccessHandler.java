@@ -1,6 +1,5 @@
 package fashionable.simba.yanawaserver.auth.authentication.handler;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import fashionable.simba.yanawaserver.auth.context.Authentication;
 
 import javax.servlet.http.HttpServletRequest;

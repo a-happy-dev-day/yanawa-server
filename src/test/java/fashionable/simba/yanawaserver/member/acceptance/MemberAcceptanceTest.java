@@ -10,7 +10,7 @@ import static fashionable.simba.yanawaserver.member.acceptance.MemberSteps.로�
 import static fashionable.simba.yanawaserver.member.acceptance.MemberSteps.로그인_되어_있음;
 import static fashionable.simba.yanawaserver.member.acceptance.MemberSteps.로그인_요청;
 
-public class MemberAcceptanceTest extends AcceptanceTest{
+public class MemberAcceptanceTest extends AcceptanceTest {
 
     /**
      * Given : 처음 사용하는 사용자가 로그인하면

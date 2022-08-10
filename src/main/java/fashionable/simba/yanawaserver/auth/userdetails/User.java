@@ -3,8 +3,8 @@ package fashionable.simba.yanawaserver.auth.userdetails;
 import java.util.List;
 
 public class User implements UserDetails {
-    private String username;
-    private List<String> authorities;
+    private final String username;
+    private final List<String> authorities;
 
     public User(String username, List<String> authorities) {
         this.username = username;

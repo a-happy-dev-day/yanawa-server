@@ -1,9 +1,9 @@
 package fashionable.simba.yanawaserver.auth.authentication.filter;
 
+import fashionable.simba.yanawaserver.auth.authentication.AuthenticationToken;
 import fashionable.simba.yanawaserver.auth.authentication.handler.AuthenticationFailureHandler;
 import fashionable.simba.yanawaserver.auth.authentication.handler.AuthenticationSuccessHandler;
 import fashionable.simba.yanawaserver.auth.authentication.provider.AuthenticationManager;
-import fashionable.simba.yanawaserver.auth.authentication.AuthenticationToken;
 import fashionable.simba.yanawaserver.auth.context.Authentication;
 import fashionable.simba.yanawaserver.auth.context.SecurityContextHolder;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -50,6 +50,7 @@ public abstract class AbstractAuthenticationFilter implements HandlerInterceptor
         AuthenticationToken token = convert(request);
         return authenticationManager.authenticate(token);
     }
+
     protected abstract AuthenticationToken convert(HttpServletRequest request) throws IOException;
 
     protected boolean getContinueChainBeforeSuccessfulAuthentication() {

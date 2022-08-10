@@ -1,8 +1,8 @@
 package fashionable.simba.yanawaserver.member.acceptance;
 
 
-import fashionable.simba.yanawaserver.utils.DatabaseCleanup;
 import fashionable.simba.yanawaserver.members.DataLoader;
+import fashionable.simba.yanawaserver.utils.DatabaseCleanup;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;

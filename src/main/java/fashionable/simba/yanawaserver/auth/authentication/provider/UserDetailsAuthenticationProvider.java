@@ -7,7 +7,7 @@ import fashionable.simba.yanawaserver.auth.userdetails.UserDetails;
 import fashionable.simba.yanawaserver.auth.userdetails.UserDetailsService;
 
 public class UserDetailsAuthenticationProvider implements AuthenticationManager {
-    private UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
 
     public UserDetailsAuthenticationProvider(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;

@@ -6,10 +6,6 @@ public class Authentication {
     private final Object principal;
     private List<String> authorities;
 
-    public Authentication(Object principal) {
-        this.principal = principal;
-    }
-
     public Authentication(Object principal, List<String> authorities) {
         this.principal = principal;
         this.authorities = authorities;

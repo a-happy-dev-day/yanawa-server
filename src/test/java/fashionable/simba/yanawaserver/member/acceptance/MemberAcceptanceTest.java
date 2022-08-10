@@ -19,7 +19,7 @@ public class MemberAcceptanceTest extends AcceptanceTest {
      */
     @Test
     void join_and_login() {
-        String 새로운_사용자 = "";
+        String 새로운_사용자 = "new@email.com";
 
         ExtractableResponse<Response> 로그인 = 로그인_요청(새로운_사용자);
 
@@ -33,7 +33,7 @@ public class MemberAcceptanceTest extends AcceptanceTest {
      */
     @Test
     void login() {
-        String 기존_사용자 = "";
+        String 기존_사용자 = "admin@email.com";
 
         ExtractableResponse<Response> 로그인 = 로그인_요청(기존_사용자);
 
@@ -47,7 +47,7 @@ public class MemberAcceptanceTest extends AcceptanceTest {
      */
     @Test
     void logout() {
-        String 기존_사용자 = "";
+        String 기존_사용자 = "admin@email.com";
 
         String accessToken = 로그인_되어_있음(기존_사용자);
 

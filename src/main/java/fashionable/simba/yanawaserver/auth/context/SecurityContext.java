@@ -8,10 +8,6 @@ public class SecurityContext implements Serializable {
     public SecurityContext() {
     }
 
-    public SecurityContext(Authentication authentication) {
-        this.authentication = authentication;
-    }
-
     public void setAuthentication(Authentication authentication) {
         this.authentication = authentication;
     }

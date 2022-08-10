@@ -1,9 +1,10 @@
 plugins {
-	id 'org.springframework.boot' version '2.6.9'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
-	id 'jacoco'
-	id "org.sonarqube" version "3.4.0.2513"
+    id 'org.springframework.boot' version '2.6.9'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'org.asciidoctor.convert' version '1.5.8'
+    id 'java'
+    id 'jacoco'
+    id "org.sonarqube" version "3.4.0.2513"
 }
 
 group = 'fashionable.simba'
@@ -11,68 +12,88 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 repositories {
-	mavenCentral()
+    mavenCentral()
+}
+
+ext {
+    set('snippetsDir', file("build/generated-snippets"))
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	runtimeOnly 'com.h2database:h2'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 
+    // rest docs
+//	asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor:2.0.5.RELEASE'
+//	testImplementation 'org.springframework.restdocs:spring-restdocs-restassured:2.0.5.RELEASE'
+
+    runtimeOnly 'com.h2database:h2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.rest-assured:rest-assured:4.2.0'
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+}
 
 
 sonarqube {
-	properties {
-		property "sonar.projectKey", "a-happy-dev-day_yanawa-server"
-		property "sonar.organization", "a-happy-dev-day"
-		property "sonar.host.url", "https://sonarcloud.io"
-	}
+    properties {
+        property "sonar.projectKey", "a-happy-dev-day_yanawa-server"
+        property "sonar.organization", "a-happy-dev-day"
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
 }
 
-test{
-	useJUnitPlatform()
-	finalizedBy 'jacocoTestReport'
+test {
+    useJUnitPlatform()
+    finalizedBy 'jacocoTestReport'
 }
 
 jacoco {
-	toolVersion = "0.8.7"
-	reportsDirectory = layout.buildDirectory.dir('jacocoDir')
+    toolVersion = "0.8.7"
+    reportsDirectory = layout.buildDirectory.dir('jacocoDir')
 }
 
 jacocoTestReport {
-	reports {
-		xml.required = true
-		csv.required = false
-		html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
-	}
-	finalizedBy 'jacocoTestCoverageVerification'
+    reports {
+        xml.required = true
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+    }
+    finalizedBy 'jacocoTestCoverageVerification'
 }
 
 jacocoTestCoverageVerification {
-	violationRules {
-		rule {
-			enabled = true
-			// 클래스 단위로 커버리지 체크
-			element = 'CLASS'
+    violationRules {
+        rule {
+            enabled = true
+            // 클래스 단위로 커버리지 체크
+            element = 'CLASS'
 
-			// 라인 커버리지 제한을 90%로 설정
-			limit {
-				counter = 'LINE'
-				value = 'COVEREDRATIO'
-				minimum = 0.90
-			}
+            // 라인 커버리지 제한을 90%로 설정
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.90
+            }
 
-			// 브랜치 커버리지 제한을 90%로 설정
-			limit {
-				counter = 'BRANCH'
-				value = 'COVEREDRATIO'
-				minimum = 0.90
-			}
+            // 브랜치 커버리지 제한을 90%로 설정
+            limit {
+                counter = 'BRANCH'
+                value = 'COVEREDRATIO'
+                minimum = 0.90
+            }
 
-			excludes = ["*.YanawaserverApplication"]
-		}
-	}
+            excludes = ["*.YanawaserverApplication"]
+        }
+    }
+
+    tasks.named('test') {
+        outputs.dir snippetsDir
+        useJUnitPlatform()
+    }
+
+    tasks.named('asciidoctor') {
+        inputs.dir snippetsDir
+        dependsOn test
+    }
 }

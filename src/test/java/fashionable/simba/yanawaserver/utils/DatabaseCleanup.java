@@ -1,4 +1,4 @@
-package fashionable.simba.utils;
+package fashionable.simba.yanawaserver.utils;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -17,18 +17,18 @@ public class MatchingApplyTest {
     void 매칭신청_생성_Test() {
         //
         UUID userId = UUID.randomUUID();
-        UUID hostId = UUID.randomUUID();
+        UUID matchingId = UUID.randomUUID();
         LocalDateTime now = LocalDateTime.now();
 
         //
         MatchingApply matchingRequest = new MatchingApply.MatchingRequestBuilder(
-            userId, hostId)
+            userId, matchingId)
             .setRequestDateTime(now)
             .setStatus(RequestStatusType.ACCEPTED)
             .build();
         //
         Assertions.assertEquals(userId, matchingRequest.getUserId());
-        Assertions.assertEquals(hostId, matchingRequest.getHostId());
+        Assertions.assertEquals(matchingId, matchingRequest.getMatchingId());
         Assertions.assertEquals(now, matchingRequest.getRequestDateTime());
         Assertions.assertEquals(RequestStatusType.ACCEPTED, matchingRequest.getStatus());
     }

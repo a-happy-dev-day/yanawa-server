@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public class MatchingApply {
     private final UUID userId;
-    private final UUID hostId;
+    private final UUID matchingId;
     private RequestStatusType status;
     private LocalDateTime requestDateTime;
 
@@ -15,8 +15,8 @@ public class MatchingApply {
         return userId;
     }
 
-    public UUID getHostId() {
-        return hostId;
+    public UUID getMatchingId() {
+        return matchingId;
     }
 
     public RequestStatusType getStatus() {
@@ -29,20 +29,20 @@ public class MatchingApply {
 
     public MatchingApply(MatchingRequestBuilder builder) {
         this.userId = builder.userId;
-        this.hostId = builder.hostId;
+        this.matchingId = builder.matchingId;
         this.status = builder.status;
         this.requestDateTime = builder.requestDateTime;
     }
 
     public static class MatchingRequestBuilder {
         private final UUID userId;
-        private final UUID hostId;
+        private final UUID matchingId;
         private RequestStatusType status;
         private LocalDateTime requestDateTime;
 
-        public MatchingRequestBuilder(UUID userId, UUID hostId) {
+        public MatchingRequestBuilder(UUID userId, UUID matchingId) {
             this.userId = userId;
-            this.hostId = hostId;
+            this.matchingId = matchingId;
         }
 
         public MatchingRequestBuilder setStatus(RequestStatusType status) {

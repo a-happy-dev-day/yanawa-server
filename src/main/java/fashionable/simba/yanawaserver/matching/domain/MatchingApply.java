@@ -3,19 +3,18 @@ package fashionable.simba.yanawaserver.matching.domain;
 import fashionable.simba.yanawaserver.matching.domain.constant.RequestStatusType;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 public class MatchingApply {
-    private final UUID userId;
-    private final UUID matchingId;
+    private Long userId;
+    private Long matchingId;
     private RequestStatusType status;
     private LocalDateTime requestDateTime;
 
-    public UUID getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public UUID getMatchingId() {
+    public Long getMatchingId() {
         return matchingId;
     }
 
@@ -35,12 +34,12 @@ public class MatchingApply {
     }
 
     public static class MatchingRequestBuilder {
-        private final UUID userId;
-        private final UUID matchingId;
+        private Long userId;
+        private Long matchingId;
         private RequestStatusType status;
         private LocalDateTime requestDateTime;
 
-        public MatchingRequestBuilder(UUID userId, UUID matchingId) {
+        public MatchingRequestBuilder(Long userId, Long matchingId) {
             this.userId = userId;
             this.matchingId = matchingId;
         }

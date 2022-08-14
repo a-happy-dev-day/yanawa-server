@@ -16,8 +16,8 @@ public class MatchingApplyTest {
     @DisplayName("매칭신청 생성 테스트")
     void 매칭신청_생성_Test() {
         //
-        UUID userId = UUID.randomUUID();
-        UUID matchingId = UUID.randomUUID();
+        Long userId = 1L;
+        Long matchingId = 1L;
         LocalDateTime now = LocalDateTime.now();
 
         //
@@ -42,7 +42,7 @@ public class MatchingApplyTest {
         ));
         //
         MatchingApply matchingRequest = new MatchingApply.MatchingRequestBuilder(
-            UUID.randomUUID(), UUID.randomUUID())
+            1L, 1L)
             .setRequestDateTime(LocalDateTime.now())
             .setStatus(RequestStatusType.ACCEPTED)
             .build();

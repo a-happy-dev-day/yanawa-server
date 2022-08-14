@@ -13,14 +13,16 @@ import fashionable.simba.yanawaserver.matching.domain.error.NoMatchingDataExcept
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.UUID;
 
 public class Matching {
-    private UUID matchingId;
-    private UUID courtId;
+    private Long matchingId;
+    private Long courtId;
+    private Long hostId;
+
     private LocalDate date;
     private LocalTime startTime;
     private LocalTime endTime;
+
     private AnnualType annual;
     private Level maximumLevel;
     private Level minimumLevel;
@@ -30,15 +32,19 @@ public class Matching {
     private Integer numberOfRecruitment;
     private Double costOfCourtPerPerson;
     private String details;
-    private MatchingStatusType status;
-    private UUID hostId;
 
-    public UUID getMatchingId() {
+    private MatchingStatusType status;
+
+    public Long getMatchingId() {
         return matchingId;
     }
 
-    public UUID getCourtId() {
+    public Long getCourtId() {
         return courtId;
+    }
+
+    public Long getHostId() {
+        return hostId;
     }
 
     public LocalDate getDate() {
@@ -93,9 +99,6 @@ public class Matching {
         return status;
     }
 
-    public UUID getHostId() {
-        return hostId;
-    }
 
     public Matching(MatchingBuilder builder) {
         if (builder.matchingId == null) {
@@ -113,13 +116,13 @@ public class Matching {
         if (builder.costOfCourtPerPerson <= 0) {
             throw new InvalidCostException();
         }
-
         if (builder.maximumLevel.getLevel() < builder.minimumLevel.getLevel()) {
             throw new IllegalArgumentException();
         }
 
         this.matchingId = builder.matchingId;
         this.courtId = builder.courtId;
+        this.hostId = builder.hostId;
         this.date = builder.date;
         this.startTime = builder.startTime;
         this.endTime = builder.endTime;
@@ -133,12 +136,12 @@ public class Matching {
         this.costOfCourtPerPerson = builder.costOfCourtPerPerson;
         this.details = builder.details;
         this.status = builder.status;
-        this.hostId = builder.hostId;
     }
 
     public static class MatchingBuilder {
-        private final UUID matchingId;
-        private UUID courtId;
+        private Long matchingId;
+        private Long courtId;
+        private Long hostId;
         private LocalDate date;
         private LocalTime startTime;
         private LocalTime endTime;
@@ -152,14 +155,18 @@ public class Matching {
         private Double costOfCourtPerPerson;
         private String details;
         private MatchingStatusType status;
-        private UUID hostId;
 
-        public MatchingBuilder(UUID matchingId) {
+        public MatchingBuilder(Long matchingId) {
             this.matchingId = matchingId;
         }
 
-        public MatchingBuilder setCourtId(UUID courtId) {
+        public MatchingBuilder setCourtId(Long courtId) {
             this.courtId = courtId;
+            return this;
+        }
+
+        public MatchingBuilder setHostId(Long hostId) {
+            this.hostId = hostId;
             return this;
         }
 
@@ -225,11 +232,6 @@ public class Matching {
 
         public MatchingBuilder setStatus(MatchingStatusType status) {
             this.status = status;
-            return this;
-        }
-
-        public MatchingBuilder setHostId(UUID hostId) {
-            this.hostId = hostId;
             return this;
         }
 

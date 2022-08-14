@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.matching.error;
+package fashionable.simba.yanawaserver.matching.domain.error;
 
 public class LevelSettingException extends RuntimeException {
 }

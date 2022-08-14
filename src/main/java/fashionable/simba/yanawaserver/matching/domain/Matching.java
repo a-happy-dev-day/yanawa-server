@@ -1,15 +1,15 @@
 package fashionable.simba.yanawaserver.matching.domain;
 
-import fashionable.simba.yanawaserver.matching.constant.AgeGroupType;
-import fashionable.simba.yanawaserver.matching.constant.AnnualType;
-import fashionable.simba.yanawaserver.matching.constant.GenderType;
-import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
-import fashionable.simba.yanawaserver.matching.constant.PreferenceType;
-import fashionable.simba.yanawaserver.matching.error.InvalidCostException;
-import fashionable.simba.yanawaserver.matching.error.InvalidNumberException;
-import fashionable.simba.yanawaserver.matching.error.MatchingTimeException;
-import fashionable.simba.yanawaserver.matching.error.NoCourtDataException;
-import fashionable.simba.yanawaserver.matching.error.NoMatchingDataException;
+import fashionable.simba.yanawaserver.matching.domain.constant.AgeGroupType;
+import fashionable.simba.yanawaserver.matching.domain.constant.AnnualType;
+import fashionable.simba.yanawaserver.matching.domain.constant.GenderType;
+import fashionable.simba.yanawaserver.matching.domain.constant.MatchingStatusType;
+import fashionable.simba.yanawaserver.matching.domain.constant.PreferenceType;
+import fashionable.simba.yanawaserver.matching.domain.error.InvalidCostException;
+import fashionable.simba.yanawaserver.matching.domain.error.InvalidNumberException;
+import fashionable.simba.yanawaserver.matching.domain.error.MatchingTimeException;
+import fashionable.simba.yanawaserver.matching.domain.error.NoCourtDataException;
+import fashionable.simba.yanawaserver.matching.domain.error.NoMatchingDataException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

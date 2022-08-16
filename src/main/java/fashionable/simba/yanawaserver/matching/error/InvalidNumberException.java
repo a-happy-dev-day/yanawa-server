@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.matching.domain.error;
+package fashionable.simba.yanawaserver.matching.error;
 
 public class InvalidNumberException extends RuntimeException {
 }

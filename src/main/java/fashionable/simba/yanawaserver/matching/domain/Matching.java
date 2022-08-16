@@ -1,15 +1,15 @@
 package fashionable.simba.yanawaserver.matching.domain;
 
-import fashionable.simba.yanawaserver.matching.domain.constant.AgeGroupType;
-import fashionable.simba.yanawaserver.matching.domain.constant.AnnualType;
-import fashionable.simba.yanawaserver.matching.domain.constant.GenderType;
-import fashionable.simba.yanawaserver.matching.domain.constant.MatchingStatusType;
-import fashionable.simba.yanawaserver.matching.domain.constant.PreferenceType;
-import fashionable.simba.yanawaserver.matching.domain.error.InvalidCostException;
-import fashionable.simba.yanawaserver.matching.domain.error.InvalidNumberException;
-import fashionable.simba.yanawaserver.matching.domain.error.MatchingTimeException;
-import fashionable.simba.yanawaserver.matching.domain.error.NoCourtDataException;
-import fashionable.simba.yanawaserver.matching.domain.error.NoMatchingDataException;
+import fashionable.simba.yanawaserver.matching.constant.AgeGroupType;
+import fashionable.simba.yanawaserver.matching.constant.AnnualType;
+import fashionable.simba.yanawaserver.matching.constant.GenderType;
+import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
+import fashionable.simba.yanawaserver.matching.constant.PreferenceType;
+import fashionable.simba.yanawaserver.matching.error.InvalidCostException;
+import fashionable.simba.yanawaserver.matching.error.InvalidNumberException;
+import fashionable.simba.yanawaserver.matching.error.MatchingTimeException;
+import fashionable.simba.yanawaserver.matching.error.NoCourtDataException;
+import fashionable.simba.yanawaserver.matching.error.NoMatchingDataException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -18,11 +18,9 @@ public class Matching {
     private Long matchingId;
     private Long courtId;
     private Long hostId;
-
     private LocalDate date;
     private LocalTime startTime;
     private LocalTime endTime;
-
     private AnnualType annual;
     private Level maximumLevel;
     private Level minimumLevel;
@@ -32,7 +30,6 @@ public class Matching {
     private Integer numberOfRecruitment;
     private Double costOfCourtPerPerson;
     private String details;
-
     private MatchingStatusType status;
 
     public Long getMatchingId() {
@@ -99,6 +96,61 @@ public class Matching {
         return status;
     }
 
+    public void setCourtId(Long courtId) {
+        this.courtId = courtId;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setAnnual(AnnualType annual) {
+        this.annual = annual;
+    }
+
+    public void setMaximumLevel(Level maximumLevel) {
+        this.maximumLevel = maximumLevel;
+    }
+
+    public void setMinimumLevel(Level minimumLevel) {
+        this.minimumLevel = minimumLevel;
+    }
+
+    public void setAgeOfRecruitment(AgeGroupType ageOfRecruitment) {
+        this.ageOfRecruitment = ageOfRecruitment;
+    }
+
+    public void setSexOfRecruitment(GenderType sexOfRecruitment) {
+        this.sexOfRecruitment = sexOfRecruitment;
+    }
+
+    public void setPreferenceGame(PreferenceType preferenceGame) {
+        this.preferenceGame = preferenceGame;
+    }
+
+    public void setNumberOfRecruitment(Integer numberOfRecruitment) {
+        this.numberOfRecruitment = numberOfRecruitment;
+    }
+
+    public void setCostOfCourtPerPerson(Double costOfCourtPerPerson) {
+        this.costOfCourtPerPerson = costOfCourtPerPerson;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
+    public void setStatus(MatchingStatusType status) {
+        this.status = status;
+    }
 
     public Matching(MatchingBuilder builder) {
         if (builder.matchingId == null) {
@@ -156,8 +208,12 @@ public class Matching {
         private String details;
         private MatchingStatusType status;
 
-        public MatchingBuilder(Long matchingId) {
+        public MatchingBuilder() {
+        }
+
+        public MatchingBuilder setMatchingId(Long matchingId) {
             this.matchingId = matchingId;
+            return this;
         }
 
         public MatchingBuilder setCourtId(Long courtId) {

@@ -1,7 +1,9 @@
 package fashionable.simba.yanawaserver.matching.domain;
 
+import fashionable.simba.yanawaserver.matching.constant.*;
 import fashionable.simba.yanawaserver.matching.domain.constant.*;
 import fashionable.simba.yanawaserver.matching.domain.error.*;
+import fashionable.simba.yanawaserver.matching.error.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -26,41 +28,42 @@ public class MatchingTest {
     @DisplayName("요구사항에 맞는 값이 들어가면 매칭이 생성된다.")
     void 매칭생성_성공테스트() {
         Matching matching = assertDoesNotThrow(() ->
-            new Matching.MatchingBuilder(FIXTURE_MATCHING_ID)
-                .setCourtId(FIXTURE_COURT_ID)
-                .setHostId(FIXTURE_HOST_ID)
-                .setDate(FIXTURE_DATE)
-                .setStartTime(FIXTURE_START_TIME)
-                .setEndTime(FIXTURE_END_TIME)
-                .setAnnual(FIXTURE_ANNUAL_TYPE)
-                .setMaximumLevel(FIXTURE_MAXIMUM_LEVEL)
-                .setMinimumLevel(FIXTURE_MINIMUM_LEVEL)
-                .setAgeOfRecruitment(FIXTURE_AGE_GROUP_TYPE)
-                .setSexOfRecruitment(FIXTURE_GENDER_TYPE)
-                .setPreferenceGame(FIXTURE_PREFERENCE_TYPE)
-                .setNumberOfRecruitment(FIXTURE_NUMBER_OF_RECRUITMENT)
-                .setCostOfCourtPerPerson(FIXTURE_COST_OF_COURT_PER_PERSON)
-                .setDetails(FIXTURE_DETAILS)
-                .setStatus(FIXTURE_MATCHING_STATUS_TYPE)
-                .build()
+                new Matching.MatchingBuilder()
+                        .setMatchingId(FIXTURE_MATCHING_ID)
+                        .setCourtId(FIXTURE_COURT_ID)
+                        .setHostId(FIXTURE_HOST_ID)
+                        .setDate(FIXTURE_DATE)
+                        .setStartTime(FIXTURE_START_TIME)
+                        .setEndTime(FIXTURE_END_TIME)
+                        .setAnnual(FIXTURE_ANNUAL_TYPE)
+                        .setMaximumLevel(FIXTURE_MAXIMUM_LEVEL)
+                        .setMinimumLevel(FIXTURE_MINIMUM_LEVEL)
+                        .setAgeOfRecruitment(FIXTURE_AGE_GROUP_TYPE)
+                        .setSexOfRecruitment(FIXTURE_GENDER_TYPE)
+                        .setPreferenceGame(FIXTURE_PREFERENCE_TYPE)
+                        .setNumberOfRecruitment(FIXTURE_NUMBER_OF_RECRUITMENT)
+                        .setCostOfCourtPerPerson(FIXTURE_COST_OF_COURT_PER_PERSON)
+                        .setDetails(FIXTURE_DETAILS)
+                        .setStatus(FIXTURE_MATCHING_STATUS_TYPE)
+                        .build()
         );
 
         assertAll(
-            () -> assertThat(matching.getMatchingId()).isEqualTo(FIXTURE_MATCHING_ID),
-            () -> assertThat(matching.getCourtId()).isEqualTo(FIXTURE_COURT_ID),
-            () -> assertThat(matching.getHostId()).isEqualTo(FIXTURE_HOST_ID),
-            () -> assertThat(matching.getDate()).isEqualTo(FIXTURE_DATE),
-            () -> assertThat(matching.getStartTime()).isEqualTo(FIXTURE_START_TIME),
-            () -> assertThat(matching.getEndTime()).isEqualTo(FIXTURE_END_TIME),
-            () -> assertThat(matching.getAnnual()).isEqualTo(FIXTURE_ANNUAL_TYPE),
-            () -> assertThat(matching.getMaximumLevel()).isEqualTo(FIXTURE_MAXIMUM_LEVEL),
-            () -> assertThat(matching.getMinimumLevel()).isEqualTo(FIXTURE_MINIMUM_LEVEL),
-            () -> assertThat(matching.getSexOfRecruitment()).isEqualTo(FIXTURE_GENDER_TYPE),
-            () -> assertThat(matching.getPreferenceGame()).isEqualTo(FIXTURE_PREFERENCE_TYPE),
-            () -> assertThat(matching.getNumberOfRecruitment()).isEqualTo(FIXTURE_NUMBER_OF_RECRUITMENT),
-            () -> assertThat(matching.getCostOfCourtPerPerson()).isEqualTo(FIXTURE_COST_OF_COURT_PER_PERSON),
-            () -> assertThat(matching.getStatus()).isEqualTo(FIXTURE_MATCHING_STATUS_TYPE),
-            () -> assertThat(matching.getDetails()).isEqualTo(FIXTURE_DETAILS)
+                () -> assertThat(matching.getMatchingId()).isEqualTo(FIXTURE_MATCHING_ID),
+                () -> assertThat(matching.getCourtId()).isEqualTo(FIXTURE_COURT_ID),
+                () -> assertThat(matching.getHostId()).isEqualTo(FIXTURE_HOST_ID),
+                () -> assertThat(matching.getDate()).isEqualTo(FIXTURE_DATE),
+                () -> assertThat(matching.getStartTime()).isEqualTo(FIXTURE_START_TIME),
+                () -> assertThat(matching.getEndTime()).isEqualTo(FIXTURE_END_TIME),
+                () -> assertThat(matching.getAnnual()).isEqualTo(FIXTURE_ANNUAL_TYPE),
+                () -> assertThat(matching.getMaximumLevel()).isEqualTo(FIXTURE_MAXIMUM_LEVEL),
+                () -> assertThat(matching.getMinimumLevel()).isEqualTo(FIXTURE_MINIMUM_LEVEL),
+                () -> assertThat(matching.getSexOfRecruitment()).isEqualTo(FIXTURE_GENDER_TYPE),
+                () -> assertThat(matching.getPreferenceGame()).isEqualTo(FIXTURE_PREFERENCE_TYPE),
+                () -> assertThat(matching.getNumberOfRecruitment()).isEqualTo(FIXTURE_NUMBER_OF_RECRUITMENT),
+                () -> assertThat(matching.getCostOfCourtPerPerson()).isEqualTo(FIXTURE_COST_OF_COURT_PER_PERSON),
+                () -> assertThat(matching.getStatus()).isEqualTo(FIXTURE_MATCHING_STATUS_TYPE),
+                () -> assertThat(matching.getDetails()).isEqualTo(FIXTURE_DETAILS)
         );
     }
 
@@ -69,23 +72,23 @@ public class MatchingTest {
     void timeTest() {
         //
         assertThrows(MatchingTimeException.class, () -> {
-                    new Matching.MatchingBuilder(FIXTURE_MATCHING_ID)
-                            .setCourtId(FIXTURE_COURT_ID)
-                            .setHostId(FIXTURE_HOST_ID)
-                            .setDate(FIXTURE_DATE)
-                            .setStartTime(LocalTime.of(23, 0))
-                            .setEndTime(LocalTime.of(21, 0))
-                            .setAnnual(FIXTURE_ANNUAL_TYPE)
-                            .setMaximumLevel(FIXTURE_MAXIMUM_LEVEL)
-                            .setMinimumLevel(FIXTURE_MINIMUM_LEVEL)
-                            .setAgeOfRecruitment(FIXTURE_AGE_GROUP_TYPE)
-                            .setSexOfRecruitment(FIXTURE_GENDER_TYPE)
-                            .setPreferenceGame(FIXTURE_PREFERENCE_TYPE)
-                            .setNumberOfRecruitment(FIXTURE_NUMBER_OF_RECRUITMENT)
-                            .setCostOfCourtPerPerson(FIXTURE_COST_OF_COURT_PER_PERSON)
-                            .setDetails(FIXTURE_DETAILS)
-                            .setStatus(FIXTURE_MATCHING_STATUS_TYPE)
-                            .build();
+            new Matching.MatchingBuilder()
+                    .setCourtId(FIXTURE_COURT_ID)
+                    .setHostId(FIXTURE_HOST_ID)
+                    .setDate(FIXTURE_DATE)
+                    .setStartTime(LocalTime.of(23, 0))
+                    .setEndTime(LocalTime.of(21, 0))
+                    .setAnnual(FIXTURE_ANNUAL_TYPE)
+                    .setMaximumLevel(FIXTURE_MAXIMUM_LEVEL)
+                    .setMinimumLevel(FIXTURE_MINIMUM_LEVEL)
+                    .setAgeOfRecruitment(FIXTURE_AGE_GROUP_TYPE)
+                    .setSexOfRecruitment(FIXTURE_GENDER_TYPE)
+                    .setPreferenceGame(FIXTURE_PREFERENCE_TYPE)
+                    .setNumberOfRecruitment(FIXTURE_NUMBER_OF_RECRUITMENT)
+                    .setCostOfCourtPerPerson(FIXTURE_COST_OF_COURT_PER_PERSON)
+                    .setDetails(FIXTURE_DETAILS)
+                    .setStatus(FIXTURE_MATCHING_STATUS_TYPE)
+                    .build();
         });
     }
 
@@ -99,7 +102,7 @@ public class MatchingTest {
         annualTypes.add(AnnualType.FIVE_YEARS_MORE);
         //
         Matching matching = assertDoesNotThrow(() ->
-                new Matching.MatchingBuilder(FIXTURE_MATCHING_ID)
+                new Matching.MatchingBuilder()
                         .setCourtId(FIXTURE_COURT_ID)
                         .setHostId(FIXTURE_HOST_ID)
                         .setDate(FIXTURE_DATE)
@@ -125,23 +128,23 @@ public class MatchingTest {
     @DisplayName("레벨이 0 ~ 6 범위를 벗어나면, LevelSettingException이 발생한다.")
     void 레벨_실패_테스트1() {
         assertThrows(LevelSettingException.class, () -> {
-                    new Matching.MatchingBuilder(FIXTURE_MATCHING_ID)
-                            .setCourtId(FIXTURE_COURT_ID)
-                            .setHostId(FIXTURE_HOST_ID)
-                            .setDate(FIXTURE_DATE)
-                            .setStartTime(FIXTURE_START_TIME)
-                            .setEndTime(FIXTURE_END_TIME)
-                            .setAnnual(FIXTURE_ANNUAL_TYPE)
-                            .setMaximumLevel(FIXTURE_MAXIMUM_LEVEL)
-                            .setMinimumLevel(new Level(8.0))
-                            .setAgeOfRecruitment(FIXTURE_AGE_GROUP_TYPE)
-                            .setSexOfRecruitment(FIXTURE_GENDER_TYPE)
-                            .setPreferenceGame(FIXTURE_PREFERENCE_TYPE)
-                            .setNumberOfRecruitment(FIXTURE_NUMBER_OF_RECRUITMENT)
-                            .setCostOfCourtPerPerson(FIXTURE_COST_OF_COURT_PER_PERSON)
-                            .setDetails(FIXTURE_DETAILS)
-                            .setStatus(FIXTURE_MATCHING_STATUS_TYPE)
-                            .build();
+            new Matching.MatchingBuilder()
+                    .setCourtId(FIXTURE_COURT_ID)
+                    .setHostId(FIXTURE_HOST_ID)
+                    .setDate(FIXTURE_DATE)
+                    .setStartTime(FIXTURE_START_TIME)
+                    .setEndTime(FIXTURE_END_TIME)
+                    .setAnnual(FIXTURE_ANNUAL_TYPE)
+                    .setMaximumLevel(FIXTURE_MAXIMUM_LEVEL)
+                    .setMinimumLevel(new Level(8.0))
+                    .setAgeOfRecruitment(FIXTURE_AGE_GROUP_TYPE)
+                    .setSexOfRecruitment(FIXTURE_GENDER_TYPE)
+                    .setPreferenceGame(FIXTURE_PREFERENCE_TYPE)
+                    .setNumberOfRecruitment(FIXTURE_NUMBER_OF_RECRUITMENT)
+                    .setCostOfCourtPerPerson(FIXTURE_COST_OF_COURT_PER_PERSON)
+                    .setDetails(FIXTURE_DETAILS)
+                    .setStatus(FIXTURE_MATCHING_STATUS_TYPE)
+                    .build();
         });
     }
 
@@ -149,7 +152,7 @@ public class MatchingTest {
     @DisplayName("레벨이 0.5단위가 아닐경우, LevelSettingException이 발생한다.")
     void 레벨_실패_테스트2() {
         assertThrows(LevelSettingException.class, () -> {
-            new Matching.MatchingBuilder(FIXTURE_MATCHING_ID)
+            new Matching.MatchingBuilder()
                     .setCourtId(FIXTURE_COURT_ID)
                     .setHostId(FIXTURE_HOST_ID)
                     .setDate(FIXTURE_DATE)
@@ -173,7 +176,7 @@ public class MatchingTest {
     @DisplayName("최소레벨이 최대레벨보다 클 경우, IllegalArgumentException이 발생한다.")
     void 레벨_실패_테스트3() {
         assertThrows(IllegalArgumentException.class, () -> {
-            new Matching.MatchingBuilder(FIXTURE_MATCHING_ID)
+            new Matching.MatchingBuilder()
                     .setCourtId(FIXTURE_COURT_ID)
                     .setHostId(FIXTURE_HOST_ID)
                     .setDate(FIXTURE_DATE)
@@ -205,7 +208,7 @@ public class MatchingTest {
         ageGroupTypes.add(AgeGroupType.ETC);
         //
         Matching matching = assertDoesNotThrow(() ->
-                new Matching.MatchingBuilder(FIXTURE_MATCHING_ID)
+                new Matching.MatchingBuilder()
                         .setCourtId(FIXTURE_COURT_ID)
                         .setHostId(FIXTURE_HOST_ID)
                         .setDate(FIXTURE_DATE)
@@ -231,10 +234,10 @@ public class MatchingTest {
     @DisplayName("모집 성별은 남자만, 여자만, 상관없음 중 하나의 정보를 가진다.")
     void 성별_성공_테스트() {
         Set<GenderType> genderTypes = new HashSet<>(Arrays.asList(
-            GenderType.MALE, GenderType.FEMALE, GenderType.NONE));
+                GenderType.MALE, GenderType.FEMALE, GenderType.NONE));
         //
         Matching matching = assertDoesNotThrow(() ->
-                new Matching.MatchingBuilder(FIXTURE_MATCHING_ID)
+                new Matching.MatchingBuilder()
                         .setCourtId(FIXTURE_COURT_ID)
                         .setHostId(FIXTURE_HOST_ID)
                         .setDate(FIXTURE_DATE)
@@ -260,11 +263,11 @@ public class MatchingTest {
     @DisplayName("선호게임은 매칭과 렐리중 하나의 정보를 가진다.")
     void 선호게임_성공_테스트() {
         Set<PreferenceType> preferenceTypes = new HashSet<>(Arrays.asList(
-            PreferenceType.MATCHING, PreferenceType.RALLY
+                PreferenceType.MATCHING, PreferenceType.RALLY
         ));
         //
         Matching matching = assertDoesNotThrow(() ->
-                new Matching.MatchingBuilder(FIXTURE_MATCHING_ID)
+                new Matching.MatchingBuilder()
                         .setCourtId(FIXTURE_COURT_ID)
                         .setHostId(FIXTURE_HOST_ID)
                         .setDate(FIXTURE_DATE)
@@ -291,7 +294,7 @@ public class MatchingTest {
     @ValueSource(ints = {0, 9})
     void 모집인원_실패_테스트(int numberOfRecruitment) {
         assertThrows(InvalidNumberException.class, () -> {
-            new Matching.MatchingBuilder(FIXTURE_MATCHING_ID)
+            new Matching.MatchingBuilder()
                     .setCourtId(FIXTURE_COURT_ID)
                     .setHostId(FIXTURE_HOST_ID)
                     .setDate(FIXTURE_DATE)
@@ -318,7 +321,7 @@ public class MatchingTest {
         Double costOfCourtPerPerson = -3.0;
         //
         assertThrows(InvalidCostException.class, () -> {
-            new Matching.MatchingBuilder(FIXTURE_MATCHING_ID)
+            new Matching.MatchingBuilder()
                     .setCourtId(FIXTURE_COURT_ID)
                     .setHostId(FIXTURE_HOST_ID)
                     .setDate(FIXTURE_DATE)
@@ -342,11 +345,11 @@ public class MatchingTest {
     @DisplayName("매칭의 상태는 모집중, 모집 완료, 진행중, 종료 중 하나의 정보를 가진다.")
     void 매칭상태_성공_테스트() {
         Set<MatchingStatusType> statusTypes = new HashSet<>(Arrays.asList(
-            MatchingStatusType.ONGOING, MatchingStatusType.OPENING, MatchingStatusType.CLOSING, MatchingStatusType.FINISH
+                MatchingStatusType.ONGOING, MatchingStatusType.OPENING, MatchingStatusType.CLOSING, MatchingStatusType.FINISH
         ));
         //
         Matching matching = assertDoesNotThrow(() ->
-                new Matching.MatchingBuilder(FIXTURE_MATCHING_ID)
+                new Matching.MatchingBuilder()
                         .setCourtId(FIXTURE_COURT_ID)
                         .setHostId(FIXTURE_HOST_ID)
                         .setDate(FIXTURE_DATE)
@@ -375,7 +378,8 @@ public class MatchingTest {
         Long id = null;
         //
         assertThrows(NoMatchingDataException.class, () -> {
-            new Matching.MatchingBuilder(id)
+            new Matching.MatchingBuilder()
+                    .setMatchingId(id)
                     .setCourtId(FIXTURE_COURT_ID)
                     .setHostId(FIXTURE_HOST_ID)
                     .setDate(FIXTURE_DATE)
@@ -401,7 +405,7 @@ public class MatchingTest {
         Long id = null;
         //
         assertThrows(NoCourtDataException.class, () ->
-                new Matching.MatchingBuilder(FIXTURE_MATCHING_ID)
+                new Matching.MatchingBuilder()
                         .setCourtId(id)
                         .setHostId(FIXTURE_HOST_ID)
                         .setDate(FIXTURE_DATE)

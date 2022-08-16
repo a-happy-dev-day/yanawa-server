@@ -1,6 +1,6 @@
 package fashionable.simba.yanawaserver.matching.domain;
 
-import fashionable.simba.yanawaserver.matching.domain.error.NoPlayerDataException;
+import fashionable.simba.yanawaserver.matching.error.NoPlayerDataException;
 
 import java.util.UUID;
 

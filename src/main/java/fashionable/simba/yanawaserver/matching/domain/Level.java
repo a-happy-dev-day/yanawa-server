@@ -1,6 +1,6 @@
 package fashionable.simba.yanawaserver.matching.domain;
 
-import fashionable.simba.yanawaserver.matching.domain.error.LevelSettingException;
+import fashionable.simba.yanawaserver.matching.error.LevelSettingException;
 
 import java.util.Arrays;
 import java.util.HashSet;

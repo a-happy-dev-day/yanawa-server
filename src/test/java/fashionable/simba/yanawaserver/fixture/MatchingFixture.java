@@ -1,11 +1,12 @@
 package fashionable.simba.yanawaserver.fixture;
 
+import fashionable.simba.yanawaserver.matching.constant.*;
 import fashionable.simba.yanawaserver.matching.domain.Level;
+import fashionable.simba.yanawaserver.matching.domain.Matching;
 import fashionable.simba.yanawaserver.matching.domain.constant.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.UUID;
 
 public class MatchingFixture {
     public static final Long FIXTURE_COURT_ID = 1L;
@@ -27,4 +28,22 @@ public class MatchingFixture {
     public static final Level FIXTURE_MINIMUM_LEVEL = new Level(2.5);
     public static final String FIXTURE_DETAILS = "안녕하세요 부산테니스장에서 매치하실분 4명 구합니다.";
 
+    public static final Matching fixtureMatching = new Matching.MatchingBuilder()
+            .setMatchingId(FIXTURE_MATCHING_ID)
+            .setCourtId(FIXTURE_COURT_ID)
+            .setHostId(FIXTURE_HOST_ID)
+            .setDate(FIXTURE_DATE)
+            .setStartTime(FIXTURE_START_TIME)
+            .setEndTime(FIXTURE_END_TIME)
+            .setAnnual(FIXTURE_ANNUAL_TYPE)
+            .setMaximumLevel(FIXTURE_MAXIMUM_LEVEL)
+            .setMinimumLevel(FIXTURE_MINIMUM_LEVEL)
+            .setAgeOfRecruitment(FIXTURE_AGE_GROUP_TYPE)
+            .setSexOfRecruitment(FIXTURE_GENDER_TYPE)
+            .setPreferenceGame(FIXTURE_PREFERENCE_TYPE)
+            .setNumberOfRecruitment(FIXTURE_NUMBER_OF_RECRUITMENT)
+            .setCostOfCourtPerPerson(FIXTURE_COST_OF_COURT_PER_PERSON)
+            .setDetails(FIXTURE_DETAILS)
+            .setStatus(FIXTURE_MATCHING_STATUS_TYPE)
+            .build();
 }

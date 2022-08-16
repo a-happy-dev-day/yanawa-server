@@ -13,7 +13,6 @@ public class MatchingService {
         this.matchingRepository = matchingRepository;
     }
 
-
     public void changeStatus(Long id, MatchingStatusType status) {
         Matching matching = matchingRepository.findMatchingById(id);
         matching.setStatus(status);

@@ -1,8 +1,6 @@
 package fashionable.simba.yanawaserver.matching.domain;
 
 import fashionable.simba.yanawaserver.matching.constant.*;
-import fashionable.simba.yanawaserver.matching.domain.constant.*;
-import fashionable.simba.yanawaserver.matching.domain.error.*;
 import fashionable.simba.yanawaserver.matching.error.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,12 +13,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static fashionable.simba.yanawaserver.fixture.MatchingFixture.*;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MatchingTest {
 
@@ -406,6 +400,7 @@ public class MatchingTest {
         //
         assertThrows(NoCourtDataException.class, () ->
                 new Matching.MatchingBuilder()
+                        .setMatchingId(FIXTURE_MATCHING_ID)
                         .setCourtId(id)
                         .setHostId(FIXTURE_HOST_ID)
                         .setDate(FIXTURE_DATE)

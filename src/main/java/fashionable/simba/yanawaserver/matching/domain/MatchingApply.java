@@ -5,6 +5,7 @@ import fashionable.simba.yanawaserver.matching.constant.RequestStatusType;
 import java.time.LocalDateTime;
 
 public class MatchingApply {
+    private Long id;
     private Long userId;
     private Long matchingId;
     private RequestStatusType status;

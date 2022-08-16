@@ -1,16 +1,16 @@
 package fashionable.simba.yanawaserver.matching.service;
 
-import fashionable.simba.yanawaserver.matching.domain.MatchingApply;
 import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
 import fashionable.simba.yanawaserver.matching.constant.RequestStatusType;
+import fashionable.simba.yanawaserver.matching.domain.MatchingApply;
 import fashionable.simba.yanawaserver.matching.repository.MemoryMatchingRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-import static fashionable.simba.yanawaserver.fixture.MatchingFixture.*;
-
+import static fashionable.simba.yanawaserver.fixture.MatchingFixture.FIXTURE_MATCHING_ID;
+import static fashionable.simba.yanawaserver.fixture.MatchingFixture.fixtureMatching;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MatchingServiceTest {
@@ -20,9 +20,10 @@ public class MatchingServiceTest {
     void matching_finish_by_host() {
         //given
         MemoryMatchingRepository repository = new MemoryMatchingRepository();
+        MatchingService matchingService = new MatchingService(repository);
         repository.save(fixtureMatching);
         //when
-        MatchingService.changeStatus(FIXTURE_MATCHING_ID, MatchingStatusType.FINISH);
+        matchingService.changeStatus(FIXTURE_MATCHING_ID, MatchingStatusType.FINISH);
         //then
         assertThat(MatchingStatusType.FINISH).isEqualTo(MatchingStatusType.FINISH);
     }

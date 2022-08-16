@@ -3,7 +3,6 @@ package fashionable.simba.yanawaserver.fixture;
 import fashionable.simba.yanawaserver.matching.constant.*;
 import fashionable.simba.yanawaserver.matching.domain.Level;
 import fashionable.simba.yanawaserver.matching.domain.Matching;
-import fashionable.simba.yanawaserver.matching.domain.constant.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

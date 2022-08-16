@@ -21,10 +21,10 @@ public class MatchingApplyTest {
 
         //
         MatchingApply matchingRequest = new MatchingApply.MatchingRequestBuilder(
-            userId, matchingId)
-            .setRequestDateTime(now)
-            .setStatus(RequestStatusType.ACCEPTED)
-            .build();
+                userId, matchingId)
+                .setRequestDateTime(now)
+                .setStatus(RequestStatusType.ACCEPTED)
+                .build();
         //
         Assertions.assertEquals(userId, matchingRequest.getUserId());
         Assertions.assertEquals(matchingId, matchingRequest.getMatchingId());
@@ -37,14 +37,14 @@ public class MatchingApplyTest {
     void 매칭신청_상태_Test() {
         //
         Set<RequestStatusType> requestStatusTypes = new HashSet<>(Arrays.asList(
-            RequestStatusType.ACCEPTED, RequestStatusType.WAITING, RequestStatusType.REJECTED, RequestStatusType.EXPIRED
+                RequestStatusType.ACCEPTED, RequestStatusType.WAITING, RequestStatusType.REJECTED, RequestStatusType.EXPIRED
         ));
         //
         MatchingApply matchingRequest = new MatchingApply.MatchingRequestBuilder(
-            1L, 1L)
-            .setRequestDateTime(LocalDateTime.now())
-            .setStatus(RequestStatusType.ACCEPTED)
-            .build();
+                1L, 1L)
+                .setRequestDateTime(LocalDateTime.now())
+                .setStatus(RequestStatusType.ACCEPTED)
+                .build();
         //
         Assertions.assertTrue(requestStatusTypes.contains(matchingRequest.getStatus()));
     }

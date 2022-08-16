@@ -67,6 +67,7 @@ public class MatchingTest {
         //
         assertThrows(MatchingTimeException.class, () -> {
             new Matching.MatchingBuilder()
+                    .setMatchingId(FIXTURE_MATCHING_ID)
                     .setCourtId(FIXTURE_COURT_ID)
                     .setHostId(FIXTURE_HOST_ID)
                     .setDate(FIXTURE_DATE)
@@ -97,6 +98,7 @@ public class MatchingTest {
         //
         Matching matching = assertDoesNotThrow(() ->
                 new Matching.MatchingBuilder()
+                        .setMatchingId(FIXTURE_MATCHING_ID)
                         .setCourtId(FIXTURE_COURT_ID)
                         .setHostId(FIXTURE_HOST_ID)
                         .setDate(FIXTURE_DATE)
@@ -123,6 +125,7 @@ public class MatchingTest {
     void 레벨_실패_테스트1() {
         assertThrows(LevelSettingException.class, () -> {
             new Matching.MatchingBuilder()
+                    .setMatchingId(FIXTURE_MATCHING_ID)
                     .setCourtId(FIXTURE_COURT_ID)
                     .setHostId(FIXTURE_HOST_ID)
                     .setDate(FIXTURE_DATE)
@@ -147,6 +150,7 @@ public class MatchingTest {
     void 레벨_실패_테스트2() {
         assertThrows(LevelSettingException.class, () -> {
             new Matching.MatchingBuilder()
+                    .setMatchingId(FIXTURE_MATCHING_ID)
                     .setCourtId(FIXTURE_COURT_ID)
                     .setHostId(FIXTURE_HOST_ID)
                     .setDate(FIXTURE_DATE)
@@ -171,6 +175,7 @@ public class MatchingTest {
     void 레벨_실패_테스트3() {
         assertThrows(IllegalArgumentException.class, () -> {
             new Matching.MatchingBuilder()
+                    .setMatchingId(FIXTURE_MATCHING_ID)
                     .setCourtId(FIXTURE_COURT_ID)
                     .setHostId(FIXTURE_HOST_ID)
                     .setDate(FIXTURE_DATE)
@@ -203,6 +208,7 @@ public class MatchingTest {
         //
         Matching matching = assertDoesNotThrow(() ->
                 new Matching.MatchingBuilder()
+                        .setMatchingId(FIXTURE_MATCHING_ID)
                         .setCourtId(FIXTURE_COURT_ID)
                         .setHostId(FIXTURE_HOST_ID)
                         .setDate(FIXTURE_DATE)
@@ -232,6 +238,7 @@ public class MatchingTest {
         //
         Matching matching = assertDoesNotThrow(() ->
                 new Matching.MatchingBuilder()
+                        .setMatchingId(FIXTURE_MATCHING_ID)
                         .setCourtId(FIXTURE_COURT_ID)
                         .setHostId(FIXTURE_HOST_ID)
                         .setDate(FIXTURE_DATE)
@@ -262,6 +269,7 @@ public class MatchingTest {
         //
         Matching matching = assertDoesNotThrow(() ->
                 new Matching.MatchingBuilder()
+                        .setMatchingId(FIXTURE_MATCHING_ID)
                         .setCourtId(FIXTURE_COURT_ID)
                         .setHostId(FIXTURE_HOST_ID)
                         .setDate(FIXTURE_DATE)
@@ -289,6 +297,7 @@ public class MatchingTest {
     void 모집인원_실패_테스트(int numberOfRecruitment) {
         assertThrows(InvalidNumberException.class, () -> {
             new Matching.MatchingBuilder()
+                    .setMatchingId(FIXTURE_MATCHING_ID)
                     .setCourtId(FIXTURE_COURT_ID)
                     .setHostId(FIXTURE_HOST_ID)
                     .setDate(FIXTURE_DATE)
@@ -316,6 +325,7 @@ public class MatchingTest {
         //
         assertThrows(InvalidCostException.class, () -> {
             new Matching.MatchingBuilder()
+                    .setMatchingId(FIXTURE_MATCHING_ID)
                     .setCourtId(FIXTURE_COURT_ID)
                     .setHostId(FIXTURE_HOST_ID)
                     .setDate(FIXTURE_DATE)
@@ -344,6 +354,7 @@ public class MatchingTest {
         //
         Matching matching = assertDoesNotThrow(() ->
                 new Matching.MatchingBuilder()
+                        .setMatchingId(FIXTURE_MATCHING_ID)
                         .setCourtId(FIXTURE_COURT_ID)
                         .setHostId(FIXTURE_HOST_ID)
                         .setDate(FIXTURE_DATE)

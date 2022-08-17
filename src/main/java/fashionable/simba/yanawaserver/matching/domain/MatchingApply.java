@@ -11,6 +11,10 @@ public class MatchingApply {
     private RequestStatusType status;
     private LocalDateTime requestDateTime;
 
+    public Long getId() {
+        return id;
+    }
+
     public Long getUserId() {
         return userId;
     }
@@ -28,6 +32,7 @@ public class MatchingApply {
     }
 
     public MatchingApply(MatchingRequestBuilder builder) {
+        this.id = builder.id;
         this.userId = builder.userId;
         this.matchingId = builder.matchingId;
         this.status = builder.status;
@@ -35,12 +40,14 @@ public class MatchingApply {
     }
 
     public static class MatchingRequestBuilder {
+        private Long id;
         private Long userId;
         private Long matchingId;
         private RequestStatusType status;
         private LocalDateTime requestDateTime;
 
-        public MatchingRequestBuilder(Long userId, Long matchingId) {
+        public MatchingRequestBuilder(Long id, Long userId, Long matchingId) {
+            this.id = id;
             this.userId = userId;
             this.matchingId = matchingId;
         }

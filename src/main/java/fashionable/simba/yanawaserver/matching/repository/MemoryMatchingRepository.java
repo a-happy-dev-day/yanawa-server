@@ -11,10 +11,12 @@ import java.util.Map;
 public class MemoryMatchingRepository implements MatchingRepository {
     public static final Map<Long, Matching> matchings = new HashMap<>();
 
+    @Override
     public void save(Matching matching) {
         matchings.put(matching.getMatchingId(), matching);
     }
 
+    @Override
     public Matching findMatchingById(Long matchingId) {
         return matchings.get(matchingId);
     }

@@ -15,13 +15,14 @@ public class MatchingApplyTest {
     @DisplayName("매칭신청 생성 테스트")
     void 매칭신청_생성_Test() {
         //
+        Long id = 1L;
         Long userId = 1L;
         Long matchingId = 1L;
         LocalDateTime now = LocalDateTime.now();
 
         //
         MatchingApply matchingRequest = new MatchingApply.MatchingRequestBuilder(
-                userId, matchingId)
+                id, userId, matchingId)
                 .setRequestDateTime(now)
                 .setStatus(RequestStatusType.ACCEPTED)
                 .build();
@@ -41,7 +42,7 @@ public class MatchingApplyTest {
         ));
         //
         MatchingApply matchingRequest = new MatchingApply.MatchingRequestBuilder(
-                1L, 1L)
+                1L, 1L, 1L)
                 .setRequestDateTime(LocalDateTime.now())
                 .setStatus(RequestStatusType.ACCEPTED)
                 .build();

@@ -88,58 +88,6 @@ public class Matching {
         return status;
     }
 
-    public void setCourtId(Long courtId) {
-        this.courtId = courtId;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public void setEndTime(LocalTime endTime) {
-        this.endTime = endTime;
-    }
-
-    public void setAnnual(AnnualType annual) {
-        this.annual = annual;
-    }
-
-    public void setMaximumLevel(Level maximumLevel) {
-        this.maximumLevel = maximumLevel;
-    }
-
-    public void setMinimumLevel(Level minimumLevel) {
-        this.minimumLevel = minimumLevel;
-    }
-
-    public void setAgeOfRecruitment(AgeGroupType ageOfRecruitment) {
-        this.ageOfRecruitment = ageOfRecruitment;
-    }
-
-    public void setSexOfRecruitment(GenderType sexOfRecruitment) {
-        this.sexOfRecruitment = sexOfRecruitment;
-    }
-
-    public void setPreferenceGame(PreferenceType preferenceGame) {
-        this.preferenceGame = preferenceGame;
-    }
-
-    public void setNumberOfRecruitment(Integer numberOfRecruitment) {
-        this.numberOfRecruitment = numberOfRecruitment;
-    }
-
-    public void setCostOfCourtPerPerson(Double costOfCourtPerPerson) {
-        this.costOfCourtPerPerson = costOfCourtPerPerson;
-    }
-
-    public void setDetails(String details) {
-        this.details = details;
-    }
-
     public void setStatus(MatchingStatusType status) {
         this.status = status;
     }

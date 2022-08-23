@@ -31,6 +31,10 @@ public class MatchingApply {
         return requestDateTime;
     }
 
+    public void setStatus(RequestStatusType status) {
+        this.status = status;
+    }
+
     public MatchingApply(MatchingRequestBuilder builder) {
         this.id = builder.id;
         this.userId = builder.userId;

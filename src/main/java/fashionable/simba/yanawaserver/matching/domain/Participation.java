@@ -4,7 +4,7 @@ import fashionable.simba.yanawaserver.matching.constant.RequestStatusType;
 
 import java.time.LocalDateTime;
 
-public class MatchingApply {
+public class Participation {
     private Long id;
     private Long userId;
     private Long matchingId;
@@ -35,7 +35,7 @@ public class MatchingApply {
         this.status = status;
     }
 
-    public MatchingApply(MatchingRequestBuilder builder) {
+    public Participation(MatchingRequestBuilder builder) {
         this.id = builder.id;
         this.userId = builder.userId;
         this.matchingId = builder.matchingId;
@@ -66,8 +66,8 @@ public class MatchingApply {
             return this;
         }
 
-        public MatchingApply build() {
-            return new MatchingApply(this);
+        public Participation build() {
+            return new Participation(this);
         }
     }
 }

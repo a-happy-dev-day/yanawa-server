@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MatchingApplyTest {
+public class ParticipationTest {
     @Test
     @DisplayName("매칭신청 생성 테스트")
     void 매칭신청_생성_Test() {
@@ -21,7 +21,7 @@ public class MatchingApplyTest {
         LocalDateTime now = LocalDateTime.now();
 
         //
-        MatchingApply matchingRequest = new MatchingApply.MatchingRequestBuilder(
+        Participation matchingRequest = new Participation.MatchingRequestBuilder(
                 id, userId, matchingId)
                 .setRequestDateTime(now)
                 .setStatus(RequestStatusType.ACCEPTED)
@@ -41,7 +41,7 @@ public class MatchingApplyTest {
                 RequestStatusType.ACCEPTED, RequestStatusType.WAITING, RequestStatusType.REJECTED, RequestStatusType.EXPIRED
         ));
         //
-        MatchingApply matchingRequest = new MatchingApply.MatchingRequestBuilder(
+        Participation matchingRequest = new Participation.MatchingRequestBuilder(
                 1L, 1L, 1L)
                 .setRequestDateTime(LocalDateTime.now())
                 .setStatus(RequestStatusType.ACCEPTED)

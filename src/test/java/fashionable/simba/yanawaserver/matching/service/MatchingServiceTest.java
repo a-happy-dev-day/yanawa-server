@@ -3,9 +3,9 @@ package fashionable.simba.yanawaserver.matching.service;
 import fashionable.simba.yanawaserver.matching.constant.*;
 import fashionable.simba.yanawaserver.matching.domain.Level;
 import fashionable.simba.yanawaserver.matching.domain.Matching;
-import fashionable.simba.yanawaserver.matching.domain.MatchingApply;
-import fashionable.simba.yanawaserver.matching.repository.MemoryMatchingApplyRepository;
+import fashionable.simba.yanawaserver.matching.domain.Participation;
 import fashionable.simba.yanawaserver.matching.repository.MemoryMatchingRepository;
+import fashionable.simba.yanawaserver.matching.repository.MemoryParticipationRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -38,8 +38,8 @@ public class MatchingServiceTest {
         //given
         MemoryMatchingRepository matchingRepository = new MemoryMatchingRepository();
         MatchingService matchingService = new MatchingService(matchingRepository);
-        MemoryMatchingApplyRepository applyRepository = new MemoryMatchingApplyRepository();
-        MatchingApplyService applyService = new MatchingApplyService(applyRepository);
+        MemoryParticipationRepository applyRepository = new MemoryParticipationRepository();
+        ParticipationService applyService = new ParticipationService(applyRepository);
 
         Matching matching = new Matching.MatchingBuilder()
                 .setMatchingId(1L).setCourtId(1L)
@@ -47,19 +47,19 @@ public class MatchingServiceTest {
                 .setAnnual(AnnualType.FIVE_YEARS_LESS).setMinimumLevel(new Level(1.0)).setMaximumLevel(new Level(2.0))
                 .setAgeOfRecruitment(AgeGroupType.FORTIES).setSexOfRecruitment(GenderType.NONE).setPreferenceGame(PreferenceType.MATCHING)
                 .setNumberOfRecruitment(4).setCostOfCourtPerPerson(1.5).setStatus(MatchingStatusType.OPENING).build();
-        MatchingApply matchingApply1 = new MatchingApply.MatchingRequestBuilder(1L, 1L, 1L)
+        Participation matchingApply1 = new Participation.MatchingRequestBuilder(1L, 1L, 1L)
                 .setRequestDateTime(LocalDateTime.now())
                 .setStatus(RequestStatusType.WAITING)
                 .build();
-        MatchingApply matchingApply2 = new MatchingApply.MatchingRequestBuilder(2L, 2L, 1L)
+        Participation matchingApply2 = new Participation.MatchingRequestBuilder(2L, 2L, 1L)
                 .setRequestDateTime(LocalDateTime.now())
                 .setStatus(RequestStatusType.WAITING)
                 .build();
-        MatchingApply matchingApply3 = new MatchingApply.MatchingRequestBuilder(3L, 3L, 1L)
+        Participation matchingApply3 = new Participation.MatchingRequestBuilder(3L, 3L, 1L)
                 .setRequestDateTime(LocalDateTime.now())
                 .setStatus(RequestStatusType.WAITING)
                 .build();
-        MatchingApply matchingApply4 = new MatchingApply.MatchingRequestBuilder(4L, 4L, 1L)
+        Participation matchingApply4 = new Participation.MatchingRequestBuilder(4L, 4L, 1L)
                 .setRequestDateTime(LocalDateTime.now())
                 .setStatus(RequestStatusType.WAITING)
                 .build();
@@ -72,7 +72,7 @@ public class MatchingServiceTest {
         Integer numberOfRecruitment = matchingRepository.findMatchingById(1L).getNumberOfRecruitment();
         Integer numberOfApplies = applyRepository.countAppliesdById(1L);
         //then
-        if (!applyService.checkAvailableApply(numberOfRecruitment, numberOfApplies)) {
+        if (!applyService.checkAvailableParticipation(numberOfRecruitment, numberOfApplies)) {
             matchingRepository.findMatchingById(1L).setStatus(MatchingStatusType.FINISH);
         }
 

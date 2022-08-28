@@ -1,22 +1,22 @@
 package fashionable.simba.yanawaserver.matching.repository;
 
-import fashionable.simba.yanawaserver.matching.domain.MatchingApply;
-import fashionable.simba.yanawaserver.matching.domain.MatchingApplyRepository;
+import fashionable.simba.yanawaserver.matching.domain.Participation;
+import fashionable.simba.yanawaserver.matching.domain.ParticipationRepository;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class MemoryMatchingApplyRepository implements MatchingApplyRepository {
-    public static Map<Long, MatchingApply> applies = new HashMap<>();
+public class MemoryParticipationRepository implements ParticipationRepository {
+    public static Map<Long, Participation> applies = new HashMap<>();
 
     @Override
-    public void save(MatchingApply apply) {
+    public void save(Participation apply) {
         applies.put(apply.getId(), apply);
     }
 
     @Override
-    public Optional<MatchingApply> findMatchingApplyById(Long id) {
+    public Optional<Participation> findParticipationById(Long id) {
         return Optional.ofNullable(applies.get(id));
     }
 

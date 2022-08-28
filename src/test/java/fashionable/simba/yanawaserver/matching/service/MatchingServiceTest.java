@@ -29,11 +29,11 @@ public class MatchingServiceTest {
         //when
         matchingService.changeStatus(FIXTURE_MATCHING_ID, MatchingStatusType.CLOSING);
         //then
-        assertThat(MatchingStatusType.FINISH).isEqualTo(MatchingStatusType.CLOSING);
+        assertThat(repository.findMatchingById(fixtureMatching.getMatchingId()).getStatus()).isEqualTo(MatchingStatusType.CLOSING);
     }
 
     @Test
-    @DisplayName("인원이 차면 매칭 모집을 완료(Finish)한다.")
+    @DisplayName("모집이 완료되지 않은 상태에서, 인원이 차면 매칭 모집을 완료(Finish)한다.")
     void 요청인원_완료_상태변화() {
         //given
         MemoryMatchingRepository matchingRepository = new MemoryMatchingRepository();
@@ -64,11 +64,18 @@ public class MatchingServiceTest {
                 .setStatus(RequestStatusType.WAITING)
                 .build();
         matchingRepository.save(matching);
+        applyRepository.save(matchingApply1);
+        applyRepository.save(matchingApply2);
+        applyRepository.save(matchingApply3);
+        applyRepository.save(matchingApply4);
         //when
-        applyService.checkAvailableApply(matchingApply1);
-        applyService.checkAvailableApply(matchingApply2);
-        applyService.checkAvailableApply(matchingApply3);
-        applyService.checkAvailableApply(matchingApply4);
-        System.out.println(matchingRepository.findMatchingById(matching.getMatchingId()).getStatus());
+        Integer numberOfRecruitment = matchingRepository.findMatchingById(1L).getNumberOfRecruitment();
+        Integer numberOfApplies = applyRepository.countAppliesdById(1L);
+        //then
+        if (!applyService.checkAvailableApply(numberOfRecruitment, numberOfApplies)) {
+            matchingRepository.findMatchingById(1L).setStatus(MatchingStatusType.FINISH);
+        }
+
+        assertThat(matchingRepository.findMatchingById(1L).getStatus()).isEqualTo(MatchingStatusType.FINISH);
     }
 }

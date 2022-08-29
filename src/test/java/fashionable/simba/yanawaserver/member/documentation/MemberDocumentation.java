@@ -1,10 +1,8 @@
 package fashionable.simba.yanawaserver.member.documentation;
 
-import fashionable.simba.yanawaserver.members.domain.AccessToken;
 import fashionable.simba.yanawaserver.members.domain.Member;
 import fashionable.simba.yanawaserver.members.domain.RoleType;
 import fashionable.simba.yanawaserver.members.service.MemberService;
-import io.restassured.RestAssured;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;

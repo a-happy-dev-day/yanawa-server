@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 
 import static fashionable.simba.yanawaserver.member.acceptance.MemberSteps.로그인_되어_있음;
 import static fashionable.simba.yanawaserver.member.acceptance.MemberSteps.정보_조회_요청;
+import static fashionable.simba.yanawaserver.member.acceptance.MemberSteps.회원_목록_조회_요청;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AuthAcceptanceTest extends AcceptanceTest {
@@ -29,6 +30,43 @@ public class AuthAcceptanceTest extends AcceptanceTest {
 
         // then
         assertThat(정보_조회.jsonPath().getString("email")).isEqualTo(email);
+    }
+
+
+    /**
+     * Given 관리자가 로그인해서
+     * When 사용자 목록을 조회하면
+     * Then 목록을 조회할 수 있습니다.
+     */
+    @Test
+    void get_members() {
+        // given
+        String email = "admin@email.com";
+
+        // when
+        String token = 로그인_되어_있음(email);
+        ExtractableResponse<Response> 회원_목록_조회 = 회원_목록_조회_요청(token);
+
+        // then
+        assertThat(회원_목록_조회.statusCode()).isEqualTo(HttpStatus.OK.value());
+    }
+
+    /**
+     * Given 일반 사용자가 로그인해서
+     * When 사용자 목록을 조회하면
+     * Then 권한이 맞지 않아 401 예외가 발생합니다.
+     */
+    @Test
+    void get_members_invalid_authorization() {
+        // given
+        String email = "user@email.com";
+
+        // when
+        String token = 로그인_되어_있음(email);
+        ExtractableResponse<Response> 회원_목록_조회 = 회원_목록_조회_요청(token);
+
+        // then
+        assertThat(회원_목록_조회.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
     }
 
     /**

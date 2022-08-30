@@ -28,6 +28,15 @@ public class MemberSteps {
         return response.jsonPath().getString("accessToken");
     }
 
+    public static ExtractableResponse<Response> 회원_목록_조회_요청(String accessToken) {
+        return RestAssured.given().log().all()
+            .auth().oauth2(accessToken)
+            .accept(MediaType.APPLICATION_JSON_VALUE)
+            .when().get("/members")
+            .then().log().all()
+            .extract();
+    }
+
     public static ExtractableResponse<Response> 정보_조회_요청(String accessToken) {
         return RestAssured.given().log().all()
             .auth().oauth2(accessToken)

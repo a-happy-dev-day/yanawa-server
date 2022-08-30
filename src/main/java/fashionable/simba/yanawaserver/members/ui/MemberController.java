@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("members")
 public class MemberController {
@@ -26,5 +28,11 @@ public class MemberController {
         Member member = memberService.findMemberByUserName(user.getUsername()).orElseThrow(IllegalArgumentException::new);
         MemberResponse response = new MemberResponse(member.getEmail());
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping
+    @Secured(value = "ROLE_ADMIN")
+    public ResponseEntity<List<MemberResponse>> findAll() {
+        return ResponseEntity.ok(memberService.findAll());
     }
 }

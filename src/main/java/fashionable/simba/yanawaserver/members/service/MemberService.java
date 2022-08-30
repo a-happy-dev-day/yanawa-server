@@ -2,9 +2,12 @@ package fashionable.simba.yanawaserver.members.service;
 
 import fashionable.simba.yanawaserver.members.domain.Member;
 import fashionable.simba.yanawaserver.members.domain.MemberRepository;
+import fashionable.simba.yanawaserver.members.ui.MemberResponse;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class MemberService {
@@ -17,5 +20,12 @@ public class MemberService {
 
     public Optional<Member> findMemberByUserName(String username) {
         return memberRepository.findByEmail(username);
+    }
+
+    public List<MemberResponse> findAll() {
+        return memberRepository.findAll()
+            .stream()
+            .map(member -> new MemberResponse(member.getEmail()))
+            .collect(Collectors.toList());
     }
 }

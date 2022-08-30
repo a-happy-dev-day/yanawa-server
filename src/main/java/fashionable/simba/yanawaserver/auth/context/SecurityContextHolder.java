@@ -8,6 +8,10 @@ public class SecurityContextHolder {
         contextHolder = new ThreadLocal<>();
     }
 
+    private SecurityContextHolder() {
+        throw new IllegalStateException("SecurityContextHolder는 유틸 클래스입니다.");
+    }
+
     public static void clearContext() {
         contextHolder.remove();
     }
@@ -24,9 +28,10 @@ public class SecurityContextHolder {
     }
 
     public static void setContext(SecurityContext context) {
-        if (context != null) {
-            contextHolder.set(context);
+        if (context == null) {
+            throw new IllegalStateException("context가 null일 수 없습니다.");
         }
+        contextHolder.set(context);
     }
 
     static SecurityContext createEmptyContext() {

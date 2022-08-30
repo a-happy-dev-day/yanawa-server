@@ -22,10 +22,6 @@ public class AuthorizationExtractor {
             if ((value.toLowerCase().startsWith(typeToLowerCase))) {
                 String authHeaderValue = value.substring(typeLength).trim();
                 request.setAttribute(ACCESS_TOKEN_TYPE, value.substring(0, typeLength).trim());
-                int commaIndex = authHeaderValue.indexOf(',');
-                if (commaIndex > 0) {
-                    authHeaderValue = authHeaderValue.substring(0, commaIndex);
-                }
                 return authHeaderValue;
             }
         }

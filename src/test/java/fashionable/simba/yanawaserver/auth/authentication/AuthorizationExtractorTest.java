@@ -28,14 +28,4 @@ class AuthorizationExtractorTest {
         String actual = AuthorizationExtractor.extract(request, AuthorizationType.BEARER);
         assertThat(actual).isEmpty();
     }
-
-    @Test
-    @DisplayName("인증 정보가 많다면 그 중 앞 부분만 잘라서 사용한다.")
-    void extract() {
-        Map<String, String> headers = new HashMap<>();
-        request.addHeader(AUTHORIZATION, "bearer auth,isAuth");
-
-        String actual = AuthorizationExtractor.extract(request, AuthorizationType.BEARER);
-        assertThat(actual).isEqualTo("auth");
-    }
 }

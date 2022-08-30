@@ -10,14 +10,14 @@ public class SecurityContextPersistenceFilter implements HandlerInterceptor {
     public static final String SPRING_SECURITY_CONTEXT_KEY = "SPRING_SECURITY_CONTEXT";
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         SecurityContext securityContext = loadContext(request);
         SecurityContextHolder.setContext(securityContext);
         return true;
     }
 
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
         SecurityContext contextAfterChainExecution = SecurityContextHolder.getContext();
         SecurityContextHolder.clearContext();
         saveContext(contextAfterChainExecution, request);

@@ -59,6 +59,7 @@ public class MemberDocumentation extends Documentation {
     }
 
     @Test
+    @Disabled
     void logout() {
         givenOauth()
             .filter(document("member/logout",

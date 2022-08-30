@@ -56,12 +56,12 @@ public class Participation {
             this.matchingId = matchingId;
         }
 
-        public Builder setStatus(RequestStatusType status) {
+        public Builder status(RequestStatusType status) {
             this.status = status;
             return this;
         }
 
-        public Builder setRequestDateTime(LocalDateTime requestDateTime) {
+        public Builder requestDateTime(LocalDateTime requestDateTime) {
             this.requestDateTime = requestDateTime;
             return this;
         }

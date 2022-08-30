@@ -151,82 +151,82 @@ public class Matching {
         public Builder() {
         }
 
-        public Builder setMatchingId(Long matchingId) {
+        public Builder matchingId(Long matchingId) {
             this.matchingId = matchingId;
             return this;
         }
 
-        public Builder setCourtId(Long courtId) {
+        public Builder courtId(Long courtId) {
             this.courtId = courtId;
             return this;
         }
 
-        public Builder setHostId(Long hostId) {
+        public Builder hostId(Long hostId) {
             this.hostId = hostId;
             return this;
         }
 
-        public Builder setDate(LocalDate date) {
+        public Builder date(LocalDate date) {
             this.date = date;
             return this;
         }
 
-        public Builder setStartTime(LocalTime startTime) {
+        public Builder startTime(LocalTime startTime) {
             this.startTime = startTime;
             return this;
         }
 
-        public Builder setEndTime(LocalTime endTime) {
+        public Builder endTime(LocalTime endTime) {
             this.endTime = endTime;
             return this;
         }
 
-        public Builder setAnnual(AnnualType annual) {
+        public Builder annual(AnnualType annual) {
             this.annual = annual;
             return this;
         }
 
-        public Builder setMaximumLevel(Level maximumLevel) {
+        public Builder maximumLevel(Level maximumLevel) {
             this.maximumLevel = maximumLevel;
             return this;
         }
 
-        public Builder setMinimumLevel(Level minimumLevel) {
+        public Builder minimumLevel(Level minimumLevel) {
             this.minimumLevel = minimumLevel;
             return this;
         }
 
-        public Builder setAgeOfRecruitment(AgeGroupType ageOfRecruitment) {
+        public Builder ageOfRecruitment(AgeGroupType ageOfRecruitment) {
             this.ageOfRecruitment = ageOfRecruitment;
             return this;
         }
 
-        public Builder setSexOfRecruitment(GenderType sexOfRecruitment) {
+        public Builder sexOfRecruitment(GenderType sexOfRecruitment) {
             this.sexOfRecruitment = sexOfRecruitment;
             return this;
         }
 
-        public Builder setPreferenceGame(PreferenceType preferenceGame) {
+        public Builder preferenceGame(PreferenceType preferenceGame) {
             this.preferenceGame = preferenceGame;
             return this;
         }
 
-        public Builder setNumberOfRecruitment(Integer numberOfRecruitment) {
+        public Builder numberOfRecruitment(Integer numberOfRecruitment) {
             this.numberOfRecruitment = numberOfRecruitment;
             return this;
         }
 
-        public Builder setCostOfCourtPerPerson(Double costOfCourtPerPerson) {
+        public Builder costOfCourtPerPerson(Double costOfCourtPerPerson) {
             this.costOfCourtPerPerson = costOfCourtPerPerson;
             return this;
         }
 
-        public Builder setDetails(String details) {
+        public Builder details(String details) {
             this.details = details;
             return this;
         }
 
-        public Builder setStatus(MatchingStatusType status) {
+        public Builder status(MatchingStatusType status) {
             this.status = status;
             return this;
         }

@@ -40,7 +40,7 @@ public class MatchingReview {
             this.partnerId = partnerId;
         }
 
-        public Builder setDetails(String details) {
+        public Builder details(String details) {
             this.details = details;
             return this;
         }

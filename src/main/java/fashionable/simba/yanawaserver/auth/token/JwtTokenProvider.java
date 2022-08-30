@@ -37,14 +37,14 @@ public class JwtTokenProvider {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
 
-    public List getRoles(String token) {
+    public List<String> getRoles(String token) {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().get(ROLES, List.class);
     }
 
     public boolean validateToken(String token) {
         try {
-            Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
-            return !claims.getBody().getExpiration().before(new Date());
+            Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
+            return true;
         } catch (JwtException | IllegalArgumentException exception) {
             return false;
         }

@@ -3,6 +3,7 @@ package fashionable.simba.yanawaserver.member.acceptance;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
@@ -46,6 +47,7 @@ public class MemberAcceptanceTest extends AcceptanceTest {
      * Then : 로그아웃이 완료되고 토큰이 만료됩니다.
      */
     @Test
+    @Disabled
     void logout() {
         String 기존_사용자 = "admin@email.com";
 

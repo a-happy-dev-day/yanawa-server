@@ -1,6 +1,5 @@
 package fashionable.simba.yanawaserver.auth.authorization;
 
-import fashionable.simba.yanawaserver.auth.authentication.provider.AuthenticationException;
 import fashionable.simba.yanawaserver.auth.context.Authentication;
 import fashionable.simba.yanawaserver.auth.context.SecurityContextHolder;
 import fashionable.simba.yanawaserver.auth.userdetails.User;

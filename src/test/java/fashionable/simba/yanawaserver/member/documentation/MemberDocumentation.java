@@ -3,6 +3,7 @@ package fashionable.simba.yanawaserver.member.documentation;
 import fashionable.simba.yanawaserver.members.domain.Member;
 import fashionable.simba.yanawaserver.members.domain.RoleType;
 import fashionable.simba.yanawaserver.members.service.MemberService;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
@@ -59,8 +60,6 @@ public class MemberDocumentation extends Documentation {
 
     @Test
     void logout() {
-        doNothing().when(memberService).logout();
-
         givenOauth()
             .filter(document("member/logout",
                 preprocessRequest(prettyPrint()),

@@ -7,5 +7,5 @@ public interface ParticipationRepository {
 
     Optional<Participation> findParticipationById(Long id);
 
-    Integer countAppliesdById(Long id);
+    Integer countParticipationsById(Long id);
 }

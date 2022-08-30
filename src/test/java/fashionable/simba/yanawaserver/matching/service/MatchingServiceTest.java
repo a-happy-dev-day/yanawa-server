@@ -39,7 +39,7 @@ public class MatchingServiceTest {
         MemoryMatchingRepository matchingRepository = new MemoryMatchingRepository();
         MatchingService matchingService = new MatchingService(matchingRepository);
         MemoryParticipationRepository applyRepository = new MemoryParticipationRepository();
-        ParticipationService applyService = new ParticipationService(applyRepository);
+        ParticipationService applyService = new ParticipationService(applyRepository, matchingRepository);
 
         Matching matching = new Matching.MatchingBuilder()
                 .setMatchingId(1L).setCourtId(1L)
@@ -72,6 +72,8 @@ public class MatchingServiceTest {
         Integer numberOfRecruitment = matchingRepository.findMatchingById(1L).getNumberOfRecruitment();
         Integer numberOfApplies = applyRepository.countAppliesdById(1L);
         //then
+
+
         if (!applyService.checkAvailableParticipation(numberOfRecruitment, numberOfApplies)) {
             matchingRepository.findMatchingById(1L).setStatus(MatchingStatusType.FINISH);
         }

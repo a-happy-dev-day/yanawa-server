@@ -21,18 +21,18 @@ public class MatchingReview {
         return details;
     }
 
-    public MatchingReview(MatchingReviewBuilder builder) {
+    public MatchingReview(Builder builder) {
         this.writerId = builder.writerId;
         this.partnerId = builder.partnerId;
         this.details = builder.details;
     }
 
-    public static class MatchingReviewBuilder {
+    public static class Builder {
         private final UUID writerId;
         private final UUID partnerId;
         private String details;
 
-        public MatchingReviewBuilder(UUID writerId, UUID partnerId) {
+        public Builder(UUID writerId, UUID partnerId) {
             if (writerId == null || partnerId == null) {
                 throw new NoPlayerDataException();
             }
@@ -40,7 +40,7 @@ public class MatchingReview {
             this.partnerId = partnerId;
         }
 
-        public MatchingReviewBuilder setDetails(String details) {
+        public Builder setDetails(String details) {
             this.details = details;
             return this;
         }

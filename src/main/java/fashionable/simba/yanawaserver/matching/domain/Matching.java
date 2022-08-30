@@ -92,7 +92,7 @@ public class Matching {
         this.status = status;
     }
 
-    public Matching(MatchingBuilder builder) {
+    public Matching(Builder builder) {
         if (builder.matchingId == null) {
             throw new NoMatchingDataException();
         }
@@ -130,7 +130,7 @@ public class Matching {
         this.status = builder.status;
     }
 
-    public static class MatchingBuilder {
+    public static class Builder {
         private Long matchingId;
         private Long courtId;
         private Long hostId;
@@ -148,85 +148,85 @@ public class Matching {
         private String details;
         private MatchingStatusType status;
 
-        public MatchingBuilder() {
+        public Builder() {
         }
 
-        public MatchingBuilder setMatchingId(Long matchingId) {
+        public Builder setMatchingId(Long matchingId) {
             this.matchingId = matchingId;
             return this;
         }
 
-        public MatchingBuilder setCourtId(Long courtId) {
+        public Builder setCourtId(Long courtId) {
             this.courtId = courtId;
             return this;
         }
 
-        public MatchingBuilder setHostId(Long hostId) {
+        public Builder setHostId(Long hostId) {
             this.hostId = hostId;
             return this;
         }
 
-        public MatchingBuilder setDate(LocalDate date) {
+        public Builder setDate(LocalDate date) {
             this.date = date;
             return this;
         }
 
-        public MatchingBuilder setStartTime(LocalTime startTime) {
+        public Builder setStartTime(LocalTime startTime) {
             this.startTime = startTime;
             return this;
         }
 
-        public MatchingBuilder setEndTime(LocalTime endTime) {
+        public Builder setEndTime(LocalTime endTime) {
             this.endTime = endTime;
             return this;
         }
 
-        public MatchingBuilder setAnnual(AnnualType annual) {
+        public Builder setAnnual(AnnualType annual) {
             this.annual = annual;
             return this;
         }
 
-        public MatchingBuilder setMaximumLevel(Level maximumLevel) {
+        public Builder setMaximumLevel(Level maximumLevel) {
             this.maximumLevel = maximumLevel;
             return this;
         }
 
-        public MatchingBuilder setMinimumLevel(Level minimumLevel) {
+        public Builder setMinimumLevel(Level minimumLevel) {
             this.minimumLevel = minimumLevel;
             return this;
         }
 
-        public MatchingBuilder setAgeOfRecruitment(AgeGroupType ageOfRecruitment) {
+        public Builder setAgeOfRecruitment(AgeGroupType ageOfRecruitment) {
             this.ageOfRecruitment = ageOfRecruitment;
             return this;
         }
 
-        public MatchingBuilder setSexOfRecruitment(GenderType sexOfRecruitment) {
+        public Builder setSexOfRecruitment(GenderType sexOfRecruitment) {
             this.sexOfRecruitment = sexOfRecruitment;
             return this;
         }
 
-        public MatchingBuilder setPreferenceGame(PreferenceType preferenceGame) {
+        public Builder setPreferenceGame(PreferenceType preferenceGame) {
             this.preferenceGame = preferenceGame;
             return this;
         }
 
-        public MatchingBuilder setNumberOfRecruitment(Integer numberOfRecruitment) {
+        public Builder setNumberOfRecruitment(Integer numberOfRecruitment) {
             this.numberOfRecruitment = numberOfRecruitment;
             return this;
         }
 
-        public MatchingBuilder setCostOfCourtPerPerson(Double costOfCourtPerPerson) {
+        public Builder setCostOfCourtPerPerson(Double costOfCourtPerPerson) {
             this.costOfCourtPerPerson = costOfCourtPerPerson;
             return this;
         }
 
-        public MatchingBuilder setDetails(String details) {
+        public Builder setDetails(String details) {
             this.details = details;
             return this;
         }
 
-        public MatchingBuilder setStatus(MatchingStatusType status) {
+        public Builder setStatus(MatchingStatusType status) {
             this.status = status;
             return this;
         }

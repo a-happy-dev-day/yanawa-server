@@ -41,25 +41,25 @@ public class MatchingServiceTest {
         MemoryParticipationRepository applyRepository = new MemoryParticipationRepository();
         ParticipationService applyService = new ParticipationService(applyRepository, matchingRepository);
 
-        Matching matching = new Matching.MatchingBuilder()
+        Matching matching = new Matching.Builder()
                 .setMatchingId(1L).setCourtId(1L)
                 .setDate(LocalDate.now()).setStartTime(LocalTime.now()).setEndTime(LocalTime.now().plusMinutes(1))
                 .setAnnual(AnnualType.FIVE_YEARS_LESS).setMinimumLevel(new Level(1.0)).setMaximumLevel(new Level(2.0))
                 .setAgeOfRecruitment(AgeGroupType.FORTIES).setSexOfRecruitment(GenderType.NONE).setPreferenceGame(PreferenceType.MATCHING)
                 .setNumberOfRecruitment(4).setCostOfCourtPerPerson(1.5).setStatus(MatchingStatusType.OPENING).build();
-        Participation matchingApply1 = new Participation.MatchingRequestBuilder(1L, 1L, 1L)
+        Participation matchingApply1 = new Participation.Builder(1L, 1L, 1L)
                 .setRequestDateTime(LocalDateTime.now())
                 .setStatus(RequestStatusType.WAITING)
                 .build();
-        Participation matchingApply2 = new Participation.MatchingRequestBuilder(2L, 2L, 1L)
+        Participation matchingApply2 = new Participation.Builder(2L, 2L, 1L)
                 .setRequestDateTime(LocalDateTime.now())
                 .setStatus(RequestStatusType.WAITING)
                 .build();
-        Participation matchingApply3 = new Participation.MatchingRequestBuilder(3L, 3L, 1L)
+        Participation matchingApply3 = new Participation.Builder(3L, 3L, 1L)
                 .setRequestDateTime(LocalDateTime.now())
                 .setStatus(RequestStatusType.WAITING)
                 .build();
-        Participation matchingApply4 = new Participation.MatchingRequestBuilder(4L, 4L, 1L)
+        Participation matchingApply4 = new Participation.Builder(4L, 4L, 1L)
                 .setRequestDateTime(LocalDateTime.now())
                 .setStatus(RequestStatusType.WAITING)
                 .build();

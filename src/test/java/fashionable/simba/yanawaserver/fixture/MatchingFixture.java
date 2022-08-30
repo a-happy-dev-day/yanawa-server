@@ -27,7 +27,7 @@ public class MatchingFixture {
     public static final Level FIXTURE_MINIMUM_LEVEL = new Level(2.5);
     public static final String FIXTURE_DETAILS = "안녕하세요 부산테니스장에서 매치하실분 4명 구합니다.";
 
-    public static final Matching fixtureMatching = new Matching.MatchingBuilder()
+    public static final Matching fixtureMatching = new Matching.Builder()
             .setMatchingId(FIXTURE_MATCHING_ID)
             .setCourtId(FIXTURE_COURT_ID)
             .setHostId(FIXTURE_HOST_ID)

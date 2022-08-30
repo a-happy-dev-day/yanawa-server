@@ -22,7 +22,7 @@ public class MatchingTest {
     @DisplayName("요구사항에 맞는 값이 들어가면 매칭이 생성된다.")
     void 매칭생성_성공테스트() {
         Matching matching = assertDoesNotThrow(() ->
-                new Matching.MatchingBuilder()
+                new Matching.Builder()
                         .setMatchingId(FIXTURE_MATCHING_ID)
                         .setCourtId(FIXTURE_COURT_ID)
                         .setHostId(FIXTURE_HOST_ID)
@@ -66,7 +66,7 @@ public class MatchingTest {
     void timeTest() {
         //
         assertThrows(MatchingTimeException.class, () -> {
-            new Matching.MatchingBuilder()
+            new Matching.Builder()
                     .setMatchingId(FIXTURE_MATCHING_ID)
                     .setCourtId(FIXTURE_COURT_ID)
                     .setHostId(FIXTURE_HOST_ID)
@@ -97,7 +97,7 @@ public class MatchingTest {
         annualTypes.add(AnnualType.FIVE_YEARS_MORE);
         //
         Matching matching = assertDoesNotThrow(() ->
-                new Matching.MatchingBuilder()
+                new Matching.Builder()
                         .setMatchingId(FIXTURE_MATCHING_ID)
                         .setCourtId(FIXTURE_COURT_ID)
                         .setHostId(FIXTURE_HOST_ID)
@@ -124,7 +124,7 @@ public class MatchingTest {
     @DisplayName("레벨이 0 ~ 6 범위를 벗어나면, LevelSettingException이 발생한다.")
     void 레벨_실패_테스트1() {
         assertThrows(LevelSettingException.class, () -> {
-            new Matching.MatchingBuilder()
+            new Matching.Builder()
                     .setMatchingId(FIXTURE_MATCHING_ID)
                     .setCourtId(FIXTURE_COURT_ID)
                     .setHostId(FIXTURE_HOST_ID)
@@ -149,7 +149,7 @@ public class MatchingTest {
     @DisplayName("레벨이 0.5단위가 아닐경우, LevelSettingException이 발생한다.")
     void 레벨_실패_테스트2() {
         assertThrows(LevelSettingException.class, () -> {
-            new Matching.MatchingBuilder()
+            new Matching.Builder()
                     .setMatchingId(FIXTURE_MATCHING_ID)
                     .setCourtId(FIXTURE_COURT_ID)
                     .setHostId(FIXTURE_HOST_ID)
@@ -174,7 +174,7 @@ public class MatchingTest {
     @DisplayName("최소레벨이 최대레벨보다 클 경우, IllegalArgumentException이 발생한다.")
     void 레벨_실패_테스트3() {
         assertThrows(IllegalArgumentException.class, () -> {
-            new Matching.MatchingBuilder()
+            new Matching.Builder()
                     .setMatchingId(FIXTURE_MATCHING_ID)
                     .setCourtId(FIXTURE_COURT_ID)
                     .setHostId(FIXTURE_HOST_ID)
@@ -207,7 +207,7 @@ public class MatchingTest {
         ageGroupTypes.add(AgeGroupType.ETC);
         //
         Matching matching = assertDoesNotThrow(() ->
-                new Matching.MatchingBuilder()
+                new Matching.Builder()
                         .setMatchingId(FIXTURE_MATCHING_ID)
                         .setCourtId(FIXTURE_COURT_ID)
                         .setHostId(FIXTURE_HOST_ID)
@@ -237,7 +237,7 @@ public class MatchingTest {
                 GenderType.MALE, GenderType.FEMALE, GenderType.NONE));
         //
         Matching matching = assertDoesNotThrow(() ->
-                new Matching.MatchingBuilder()
+                new Matching.Builder()
                         .setMatchingId(FIXTURE_MATCHING_ID)
                         .setCourtId(FIXTURE_COURT_ID)
                         .setHostId(FIXTURE_HOST_ID)
@@ -268,7 +268,7 @@ public class MatchingTest {
         ));
         //
         Matching matching = assertDoesNotThrow(() ->
-                new Matching.MatchingBuilder()
+                new Matching.Builder()
                         .setMatchingId(FIXTURE_MATCHING_ID)
                         .setCourtId(FIXTURE_COURT_ID)
                         .setHostId(FIXTURE_HOST_ID)
@@ -296,7 +296,7 @@ public class MatchingTest {
     @ValueSource(ints = {0, 9})
     void 모집인원_실패_테스트(int numberOfRecruitment) {
         assertThrows(InvalidNumberException.class, () -> {
-            new Matching.MatchingBuilder()
+            new Matching.Builder()
                     .setMatchingId(FIXTURE_MATCHING_ID)
                     .setCourtId(FIXTURE_COURT_ID)
                     .setHostId(FIXTURE_HOST_ID)
@@ -324,7 +324,7 @@ public class MatchingTest {
         Double costOfCourtPerPerson = -3.0;
         //
         assertThrows(InvalidCostException.class, () -> {
-            new Matching.MatchingBuilder()
+            new Matching.Builder()
                     .setMatchingId(FIXTURE_MATCHING_ID)
                     .setCourtId(FIXTURE_COURT_ID)
                     .setHostId(FIXTURE_HOST_ID)
@@ -353,7 +353,7 @@ public class MatchingTest {
         ));
         //
         Matching matching = assertDoesNotThrow(() ->
-                new Matching.MatchingBuilder()
+                new Matching.Builder()
                         .setMatchingId(FIXTURE_MATCHING_ID)
                         .setCourtId(FIXTURE_COURT_ID)
                         .setHostId(FIXTURE_HOST_ID)
@@ -383,7 +383,7 @@ public class MatchingTest {
         Long id = null;
         //
         assertThrows(NoMatchingDataException.class, () -> {
-            new Matching.MatchingBuilder()
+            new Matching.Builder()
                     .setMatchingId(id)
                     .setCourtId(FIXTURE_COURT_ID)
                     .setHostId(FIXTURE_HOST_ID)
@@ -410,7 +410,7 @@ public class MatchingTest {
         Long id = null;
         //
         assertThrows(NoCourtDataException.class, () ->
-                new Matching.MatchingBuilder()
+                new Matching.Builder()
                         .setMatchingId(FIXTURE_MATCHING_ID)
                         .setCourtId(id)
                         .setHostId(FIXTURE_HOST_ID)

@@ -21,7 +21,7 @@ public class ParticipationTest {
         LocalDateTime now = LocalDateTime.now();
 
         //
-        Participation matchingRequest = new Participation.MatchingRequestBuilder(
+        Participation matchingRequest = new Participation.Builder(
                 id, userId, matchingId)
                 .setRequestDateTime(now)
                 .setStatus(RequestStatusType.ACCEPTED)
@@ -41,7 +41,7 @@ public class ParticipationTest {
                 RequestStatusType.ACCEPTED, RequestStatusType.WAITING, RequestStatusType.REJECTED, RequestStatusType.EXPIRED
         ));
         //
-        Participation matchingRequest = new Participation.MatchingRequestBuilder(
+        Participation matchingRequest = new Participation.Builder(
                 1L, 1L, 1L)
                 .setRequestDateTime(LocalDateTime.now())
                 .setStatus(RequestStatusType.ACCEPTED)

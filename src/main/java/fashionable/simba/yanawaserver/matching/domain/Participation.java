@@ -35,7 +35,7 @@ public class Participation {
         this.status = status;
     }
 
-    public Participation(MatchingRequestBuilder builder) {
+    public Participation(Builder builder) {
         this.id = builder.id;
         this.userId = builder.userId;
         this.matchingId = builder.matchingId;
@@ -43,25 +43,25 @@ public class Participation {
         this.requestDateTime = builder.requestDateTime;
     }
 
-    public static class MatchingRequestBuilder {
+    public static class Builder {
         private Long id;
         private Long userId;
         private Long matchingId;
         private RequestStatusType status;
         private LocalDateTime requestDateTime;
 
-        public MatchingRequestBuilder(Long id, Long userId, Long matchingId) {
+        public Builder(Long id, Long userId, Long matchingId) {
             this.id = id;
             this.userId = userId;
             this.matchingId = matchingId;
         }
 
-        public MatchingRequestBuilder setStatus(RequestStatusType status) {
+        public Builder setStatus(RequestStatusType status) {
             this.status = status;
             return this;
         }
 
-        public MatchingRequestBuilder setRequestDateTime(LocalDateTime requestDateTime) {
+        public Builder setRequestDateTime(LocalDateTime requestDateTime) {
             this.requestDateTime = requestDateTime;
             return this;
         }

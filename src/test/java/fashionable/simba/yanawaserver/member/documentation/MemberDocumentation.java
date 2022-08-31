@@ -15,14 +15,13 @@ import java.util.Map;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.document;
 
-public class MemberDocumentation extends Documentation {
+class MemberDocumentation extends Documentation {
 
     @MockBean
     MemberService memberService;

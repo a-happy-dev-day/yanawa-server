@@ -11,7 +11,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 class JwtTokenProviderTest {
-    JwtTokenProvider provider = new JwtTokenProvider("yanawa-secret-key", 1000);
+    private static final String SECRET_KEY = "yanawa-secret-key";
+    private final JwtTokenProvider provider = new JwtTokenProvider(SECRET_KEY, 1000);
 
     @Test
     @Order(1)
@@ -37,12 +38,10 @@ class JwtTokenProviderTest {
     @Test
     @Order(3)
     @DisplayName("토큰의 유효시간이 만료되면 false를 리턴한다.")
-    void validToken_expiration() throws InterruptedException {
+    void validToken_expiration() {
         // given
-        String token = provider.createToken("user@email.com", List.of(RoleType.ROLE_ADMIN.name()));
-
-        // when
-        Thread.sleep(1000);
+        JwtTokenProvider expiredProvider = new JwtTokenProvider(SECRET_KEY, 0);
+        String token = expiredProvider.createToken("user@email.com", List.of(RoleType.ROLE_ADMIN.name()));
 
         // then
         boolean actual = provider.validateToken(token);

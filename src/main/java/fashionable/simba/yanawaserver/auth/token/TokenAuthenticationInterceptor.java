@@ -23,6 +23,14 @@ public class TokenAuthenticationInterceptor extends AbstractAuthenticationFilter
 
         String principal = tokenRequest.getUsername();
 
+        // 카카오톡에서 토큰을 발급받았다!
+        // 카카오톡 토큰이 유효한지 검사한다.
+        // 카카오톡에서 데이터를 가져왔다!
+        // 데이터에서 이메일을 가져와 기존 사용자인지 확인한다.
+        // 아니면 회원가입을 한다.
+        // 회원가입을 하면서 카카오톡의 토큰과 리프레시 토큰을 저장한다.
+        // 우리 서버의 토큰을 발급한다.
+
         return new AuthenticationToken(principal);
     }
 

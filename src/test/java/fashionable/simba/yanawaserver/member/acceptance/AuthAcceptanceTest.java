@@ -12,7 +12,7 @@ import static fashionable.simba.yanawaserver.member.acceptance.MemberSteps.정�
 import static fashionable.simba.yanawaserver.member.acceptance.MemberSteps.회원_목록_조회_요청;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AuthAcceptanceTest extends AcceptanceTest {
+class AuthAcceptanceTest extends AcceptanceTest {
 
     /**
      * Given 사용자가 로그인하면

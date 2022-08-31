@@ -16,12 +16,11 @@ public class UserDetailsAuthenticationProvider implements AuthenticationManager 
     public Authentication authenticate(AuthenticationToken authenticationToken) {
         String principal = authenticationToken.getPrincipal();
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal);
-        checkAuthentication(userDetails, authenticationToken);
-
+        checkAuthentication(userDetails);
         return new Authentication(userDetails.getUsername(), userDetails.getAuthorities());
     }
 
-    private void checkAuthentication(UserDetails userDetails, AuthenticationToken token) {
+    private void checkAuthentication(UserDetails userDetails) {
         if (userDetails == null) {
             throw new AuthenticationException();
         }

@@ -5,9 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 class AuthorizationExtractorTest {

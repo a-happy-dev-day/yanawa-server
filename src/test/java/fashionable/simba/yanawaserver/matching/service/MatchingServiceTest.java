@@ -29,7 +29,7 @@ public class MatchingServiceTest {
         //when
         matchingService.changeStatus(FIXTURE_MATCHING_ID, MatchingStatusType.CLOSING);
         //then
-        assertThat(repository.findMatchingById(fixtureMatching.getId()).getStatus()).isEqualTo(MatchingStatusType.CLOSING);
+        assertThat(repository.findMatchingById(fixtureMatching.getId()).orElseThrow().getStatus()).isEqualTo(MatchingStatusType.CLOSING);
     }
 
     @Test
@@ -69,15 +69,15 @@ public class MatchingServiceTest {
         applyRepository.save(matchingApply3);
         applyRepository.save(matchingApply4);
         //when
-        Integer numberOfRecruitment = matchingRepository.findMatchingById(1L).getNumberOfRecruitment();
+        Integer numberOfRecruitment = matchingRepository.findMatchingById(1L).orElseThrow().getNumberOfRecruitment();
         Integer numberOfApplies = applyRepository.countParticipationsById(1L);
         //then
 
 
         if (!applyService.checkAvailableParticipation(numberOfRecruitment, numberOfApplies)) {
-            matchingRepository.findMatchingById(1L).setStatus(MatchingStatusType.FINISH);
+            matchingRepository.findMatchingById(1L).orElseThrow().setStatus(MatchingStatusType.FINISH);
         }
 
-        assertThat(matchingRepository.findMatchingById(1L).getStatus()).isEqualTo(MatchingStatusType.FINISH);
+        assertThat(matchingRepository.findMatchingById(1L).orElseThrow().getStatus()).isEqualTo(MatchingStatusType.FINISH);
     }
 }

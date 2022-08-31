@@ -14,7 +14,7 @@ public class MatchingService {
     }
 
     public void changeStatus(Long id, MatchingStatusType status) {
-        Matching matching = matchingRepository.findMatchingById(id);
+        Matching matching = matchingRepository.findMatchingById(id).orElseThrow();
         matching.setStatus(status);
         matchingRepository.save(matching);
     }

@@ -1,9 +1,11 @@
 package fashionable.simba.yanawaserver.matching.domain;
 
+import java.util.Optional;
+
 public interface MatchingRepository {
     void save(Matching matching);
 
-    Matching findMatchingById(Long matchingId);
+    Optional<Matching> findMatchingById(Long matchingId);
 
 
 }

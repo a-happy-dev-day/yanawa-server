@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Repository
 public class MemoryMatchingRepository implements MatchingRepository {
@@ -17,8 +18,8 @@ public class MemoryMatchingRepository implements MatchingRepository {
     }
 
     @Override
-    public Matching findMatchingById(Long matchingId) {
-        return matchings.get(matchingId);
+    public Optional<Matching> findMatchingById(Long matchingId) {
+        return Optional.ofNullable(matchings.get(matchingId));
     }
 
 }

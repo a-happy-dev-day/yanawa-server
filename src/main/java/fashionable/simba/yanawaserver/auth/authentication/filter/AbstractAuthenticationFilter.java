@@ -27,7 +27,7 @@ public abstract class AbstractAuthenticationFilter implements HandlerInterceptor
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         try {
-            Authentication authentication = attemptAuthentication(request, response);
+            Authentication authentication = attemptAuthentication(request);
             successfulAuthentication(request, response, authentication);
             return getContinueChainBeforeSuccessfulAuthentication();
         } catch (Exception e) {
@@ -46,7 +46,7 @@ public abstract class AbstractAuthenticationFilter implements HandlerInterceptor
     }
 
 
-    private Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private Authentication attemptAuthentication(HttpServletRequest request) throws IOException {
         AuthenticationToken token = convert(request);
         return authenticationManager.authenticate(token);
     }

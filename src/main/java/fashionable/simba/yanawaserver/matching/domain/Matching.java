@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Matching {
-    private Long matchingId;
+    private Long id;
     private Long courtId;
     private Long hostId;
     private LocalDate date;
@@ -24,8 +24,8 @@ public class Matching {
     private String details;
     private MatchingStatusType status;
 
-    public Long getMatchingId() {
-        return matchingId;
+    public Long getId() {
+        return id;
     }
 
     public Long getCourtId() {
@@ -93,7 +93,7 @@ public class Matching {
     }
 
     public Matching(Builder builder) {
-        if (builder.matchingId == null) {
+        if (builder.id == null) {
             throw new NoMatchingDataException();
         }
         if (builder.courtId == null) {
@@ -112,7 +112,7 @@ public class Matching {
             throw new IllegalArgumentException();
         }
 
-        this.matchingId = builder.matchingId;
+        this.id = builder.id;
         this.courtId = builder.courtId;
         this.hostId = builder.hostId;
         this.date = builder.date;
@@ -131,7 +131,7 @@ public class Matching {
     }
 
     public static class Builder {
-        private Long matchingId;
+        private Long id;
         private Long courtId;
         private Long hostId;
         private LocalDate date;
@@ -151,8 +151,8 @@ public class Matching {
         public Builder() {
         }
 
-        public Builder matchingId(Long matchingId) {
-            this.matchingId = matchingId;
+        public Builder id(Long id) {
+            this.id = id;
             return this;
         }
 

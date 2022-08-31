@@ -13,7 +13,7 @@ public class MemoryMatchingRepository implements MatchingRepository {
 
     @Override
     public void save(Matching matching) {
-        matchings.put(matching.getMatchingId(), matching);
+        matchings.put(matching.getId(), matching);
     }
 
     @Override

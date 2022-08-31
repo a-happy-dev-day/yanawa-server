@@ -29,7 +29,7 @@ public class MatchingServiceTest {
         //when
         matchingService.changeStatus(FIXTURE_MATCHING_ID, MatchingStatusType.CLOSING);
         //then
-        assertThat(repository.findMatchingById(fixtureMatching.getMatchingId()).getStatus()).isEqualTo(MatchingStatusType.CLOSING);
+        assertThat(repository.findMatchingById(fixtureMatching.getId()).getStatus()).isEqualTo(MatchingStatusType.CLOSING);
     }
 
     @Test

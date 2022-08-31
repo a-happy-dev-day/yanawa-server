@@ -42,26 +42,26 @@ public class MatchingServiceTest {
         ParticipationService applyService = new ParticipationService(applyRepository, matchingRepository);
 
         Matching matching = new Matching.Builder()
-                .setMatchingId(1L).setCourtId(1L)
-                .setDate(LocalDate.now()).setStartTime(LocalTime.now()).setEndTime(LocalTime.now().plusMinutes(1))
-                .setAnnual(AnnualType.FIVE_YEARS_LESS).setMinimumLevel(new Level(1.0)).setMaximumLevel(new Level(2.0))
-                .setAgeOfRecruitment(AgeGroupType.FORTIES).setSexOfRecruitment(GenderType.NONE).setPreferenceGame(PreferenceType.MATCHING)
-                .setNumberOfRecruitment(4).setCostOfCourtPerPerson(1.5).setStatus(MatchingStatusType.OPENING).build();
+                .id(1L).courtId(1L)
+                .date(LocalDate.now()).startTime(LocalTime.now()).endTime(LocalTime.now().plusMinutes(1))
+                .annual(AnnualType.FIVE_YEARS_LESS).minimumLevel(new Level(1.0)).maximumLevel(new Level(2.0))
+                .ageOfRecruitment(AgeGroupType.FORTIES).sexOfRecruitment(GenderType.NONE).preferenceGame(PreferenceType.MATCHING)
+                .numberOfRecruitment(4).costOfCourtPerPerson(1.5).status(MatchingStatusType.OPENING).build();
         Participation matchingApply1 = new Participation.Builder(1L, 1L, 1L)
-                .setRequestDateTime(LocalDateTime.now())
-                .setStatus(RequestStatusType.WAITING)
+                .requestDateTime(LocalDateTime.now())
+                .status(RequestStatusType.WAITING)
                 .build();
         Participation matchingApply2 = new Participation.Builder(2L, 2L, 1L)
-                .setRequestDateTime(LocalDateTime.now())
-                .setStatus(RequestStatusType.WAITING)
+                .requestDateTime(LocalDateTime.now())
+                .status(RequestStatusType.WAITING)
                 .build();
         Participation matchingApply3 = new Participation.Builder(3L, 3L, 1L)
-                .setRequestDateTime(LocalDateTime.now())
-                .setStatus(RequestStatusType.WAITING)
+                .requestDateTime(LocalDateTime.now())
+                .status(RequestStatusType.WAITING)
                 .build();
         Participation matchingApply4 = new Participation.Builder(4L, 4L, 1L)
-                .setRequestDateTime(LocalDateTime.now())
-                .setStatus(RequestStatusType.WAITING)
+                .requestDateTime(LocalDateTime.now())
+                .status(RequestStatusType.WAITING)
                 .build();
         matchingRepository.save(matching);
         applyRepository.save(matchingApply1);
@@ -70,7 +70,7 @@ public class MatchingServiceTest {
         applyRepository.save(matchingApply4);
         //when
         Integer numberOfRecruitment = matchingRepository.findMatchingById(1L).getNumberOfRecruitment();
-        Integer numberOfApplies = applyRepository.countAppliesdById(1L);
+        Integer numberOfApplies = applyRepository.countParticipationsById(1L);
         //then
 
 

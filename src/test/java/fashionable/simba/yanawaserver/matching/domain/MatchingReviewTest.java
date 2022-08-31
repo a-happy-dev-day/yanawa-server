@@ -17,7 +17,7 @@ public class MatchingReviewTest {
         //
         Assertions.assertDoesNotThrow(() ->
                 new MatchingReview.Builder(writerId, partnerId)
-                        .setDetails(details)
+                        .details(details)
                         .build()
         );
     }
@@ -44,7 +44,7 @@ public class MatchingReviewTest {
     void 리뷰_성공_테스트() {
         UUID writerId = UUID.randomUUID();
         MatchingReview matchingReview = new MatchingReview.Builder(writerId, UUID.randomUUID())
-                .setDetails("수고하셨습니다.")
+                .details("수고하셨습니다.")
                 .build();
         //
         Assertions.assertEquals(writerId, matchingReview.getWriterId());
@@ -55,7 +55,7 @@ public class MatchingReviewTest {
     void 리뷰_성공_테스트2() {
         UUID partnerId = UUID.randomUUID();
         MatchingReview matchingReview = new MatchingReview.Builder(UUID.randomUUID(), partnerId)
-                .setDetails("수고하셨습니다.")
+                .details("수고하셨습니다.")
                 .build();
         //
         Assertions.assertEquals(partnerId, matchingReview.getPartnerId());
@@ -66,7 +66,7 @@ public class MatchingReviewTest {
     void 리뷰_실패_테스트2() {
         UUID partnerId = UUID.randomUUID();
         MatchingReview matchingReview = new MatchingReview.Builder(UUID.randomUUID(), partnerId)
-                .setDetails("수고하셨습니다.")
+                .details("수고하셨습니다.")
                 .build();
         //
         Assertions.assertEquals(partnerId, matchingReview.getPartnerId());
@@ -77,7 +77,7 @@ public class MatchingReviewTest {
     void 리뷰_성공_테스트3() {
         UUID partnerId = UUID.randomUUID();
         MatchingReview matchingReview = new MatchingReview.Builder(UUID.randomUUID(), partnerId)
-                .setDetails("수고하셨습니다.")
+                .details("수고하셨습니다.")
                 .build();
         //
         Assertions.assertEquals("수고하셨습니다.", matchingReview.getDetails());

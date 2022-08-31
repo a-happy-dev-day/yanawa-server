@@ -23,8 +23,8 @@ public class ParticipationTest {
         //
         Participation matchingRequest = new Participation.Builder(
                 id, userId, matchingId)
-                .setRequestDateTime(now)
-                .setStatus(RequestStatusType.ACCEPTED)
+                .requestDateTime(now)
+                .status(RequestStatusType.ACCEPTED)
                 .build();
         //
         Assertions.assertEquals(userId, matchingRequest.getUserId());
@@ -43,8 +43,8 @@ public class ParticipationTest {
         //
         Participation matchingRequest = new Participation.Builder(
                 1L, 1L, 1L)
-                .setRequestDateTime(LocalDateTime.now())
-                .setStatus(RequestStatusType.ACCEPTED)
+                .requestDateTime(LocalDateTime.now())
+                .status(RequestStatusType.ACCEPTED)
                 .build();
         //
         Assertions.assertTrue(requestStatusTypes.contains(matchingRequest.getStatus()));

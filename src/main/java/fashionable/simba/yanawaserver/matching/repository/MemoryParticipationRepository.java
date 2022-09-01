@@ -23,7 +23,7 @@ public class MemoryParticipationRepository implements ParticipationRepository {
     }
 
     @Override
-    public Integer countParticipationsById(Long id) {
-        return (int) participations.values().stream().filter(x -> x.getMatchingId().equals(id)).count();
+    public Integer countParticipationsByMatchingId(Long Matchingid) {
+        return (int) participations.values().stream().filter(x -> x.getMatchingId().equals(Matchingid)).count();
     }
 }

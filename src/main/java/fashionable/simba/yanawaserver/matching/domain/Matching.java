@@ -1,39 +1,33 @@
 package fashionable.simba.yanawaserver.matching.domain;
 
-import fashionable.simba.yanawaserver.matching.constant.*;
-import fashionable.simba.yanawaserver.matching.error.*;
+
+import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
+import fashionable.simba.yanawaserver.matching.error.MatchingTimeException;
+import fashionable.simba.yanawaserver.matching.error.NoCourtDataException;
+import fashionable.simba.yanawaserver.matching.error.NoMatchingDataException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Matching {
     private Long id;
-    private Long courtId;
     private Long hostId;
+    private Long courtId;
     private LocalDate date;
     private LocalTime startTime;
     private LocalTime endTime;
-    private AnnualType annual;
-    private Level maximumLevel;
-    private Level minimumLevel;
-    private AgeGroupType ageOfRecruitment;
-    private GenderType sexOfRecruitment;
-    private PreferenceType preferenceGame;
-    private Integer numberOfRecruitment;
-    private Double costOfCourtPerPerson;
-    private String details;
     private MatchingStatusType status;
 
     public Long getId() {
         return id;
     }
 
-    public Long getCourtId() {
-        return courtId;
-    }
-
     public Long getHostId() {
         return hostId;
+    }
+
+    public Long getCourtId() {
+        return courtId;
     }
 
     public LocalDate getDate() {
@@ -48,48 +42,8 @@ public class Matching {
         return endTime;
     }
 
-    public AnnualType getAnnual() {
-        return annual;
-    }
-
-    public Level getMaximumLevel() {
-        return maximumLevel;
-    }
-
-    public Level getMinimumLevel() {
-        return minimumLevel;
-    }
-
-    public AgeGroupType getAgeOfRecruitment() {
-        return ageOfRecruitment;
-    }
-
-    public GenderType getSexOfRecruitment() {
-        return sexOfRecruitment;
-    }
-
-    public PreferenceType getPreferenceGame() {
-        return preferenceGame;
-    }
-
-    public Integer getNumberOfRecruitment() {
-        return numberOfRecruitment;
-    }
-
-    public Double getCostOfCourtPerPerson() {
-        return costOfCourtPerPerson;
-    }
-
-    public String getDetails() {
-        return details;
-    }
-
     public MatchingStatusType getStatus() {
         return status;
-    }
-
-    public void setStatus(MatchingStatusType status) {
-        this.status = status;
     }
 
     public Matching(Builder builder) {
@@ -102,15 +56,6 @@ public class Matching {
         if (builder.startTime.isAfter(builder.endTime)) {
             throw new MatchingTimeException();
         }
-        if (builder.numberOfRecruitment < 1 || builder.numberOfRecruitment > 8) {
-            throw new InvalidNumberException();
-        }
-        if (builder.costOfCourtPerPerson <= 0) {
-            throw new InvalidCostException();
-        }
-        if (builder.maximumLevel.getLevel() < builder.minimumLevel.getLevel()) {
-            throw new IllegalArgumentException();
-        }
 
         this.id = builder.id;
         this.courtId = builder.courtId;
@@ -118,15 +63,6 @@ public class Matching {
         this.date = builder.date;
         this.startTime = builder.startTime;
         this.endTime = builder.endTime;
-        this.annual = builder.annual;
-        this.maximumLevel = builder.maximumLevel;
-        this.minimumLevel = builder.minimumLevel;
-        this.ageOfRecruitment = builder.ageOfRecruitment;
-        this.sexOfRecruitment = builder.sexOfRecruitment;
-        this.preferenceGame = builder.preferenceGame;
-        this.numberOfRecruitment = builder.numberOfRecruitment;
-        this.costOfCourtPerPerson = builder.costOfCourtPerPerson;
-        this.details = builder.details;
         this.status = builder.status;
     }
 
@@ -137,15 +73,6 @@ public class Matching {
         private LocalDate date;
         private LocalTime startTime;
         private LocalTime endTime;
-        private AnnualType annual;
-        private Level maximumLevel;
-        private Level minimumLevel;
-        private AgeGroupType ageOfRecruitment;
-        private GenderType sexOfRecruitment;
-        private PreferenceType preferenceGame;
-        private Integer numberOfRecruitment;
-        private Double costOfCourtPerPerson;
-        private String details;
         private MatchingStatusType status;
 
         public Builder() {
@@ -178,51 +105,6 @@ public class Matching {
 
         public Builder endTime(LocalTime endTime) {
             this.endTime = endTime;
-            return this;
-        }
-
-        public Builder annual(AnnualType annual) {
-            this.annual = annual;
-            return this;
-        }
-
-        public Builder maximumLevel(Level maximumLevel) {
-            this.maximumLevel = maximumLevel;
-            return this;
-        }
-
-        public Builder minimumLevel(Level minimumLevel) {
-            this.minimumLevel = minimumLevel;
-            return this;
-        }
-
-        public Builder ageOfRecruitment(AgeGroupType ageOfRecruitment) {
-            this.ageOfRecruitment = ageOfRecruitment;
-            return this;
-        }
-
-        public Builder sexOfRecruitment(GenderType sexOfRecruitment) {
-            this.sexOfRecruitment = sexOfRecruitment;
-            return this;
-        }
-
-        public Builder preferenceGame(PreferenceType preferenceGame) {
-            this.preferenceGame = preferenceGame;
-            return this;
-        }
-
-        public Builder numberOfRecruitment(Integer numberOfRecruitment) {
-            this.numberOfRecruitment = numberOfRecruitment;
-            return this;
-        }
-
-        public Builder costOfCourtPerPerson(Double costOfCourtPerPerson) {
-            this.costOfCourtPerPerson = costOfCourtPerPerson;
-            return this;
-        }
-
-        public Builder details(String details) {
-            this.details = details;
             return this;
         }
 

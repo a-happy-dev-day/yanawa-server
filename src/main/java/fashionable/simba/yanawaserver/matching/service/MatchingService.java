@@ -17,6 +17,10 @@ public class MatchingService {
         this.participationRepository = participationRepository;
     }
 
+    public Matching startMatching(Matching matching) {
+        return matchingRepository.save(matching);
+    }
+
     public void closeMatchingStatus(Long id) {
         Matching matching = matchingRepository.findMatchingById(id).orElseThrow();
         Integer numberOfParticipation = participationRepository.countParticipationsByMatchingId(matching.getId());
@@ -27,10 +31,9 @@ public class MatchingService {
         matchingRepository.save(matching);
     }
 
-    public void fullMemberMatching(Long id) {
+    public void finishMatching(Long id) {
         Matching matching = matchingRepository.findMatchingById(id).orElseThrow();
         Integer numberOfParticipation = participationRepository.countParticipationsByMatchingId(matching.getId());
-        System.out.println(matching.getStatus());
         if (matching.getStatus() != MatchingStatusType.OPENING) {
             throw new IllegalStateException("현재 모집중인 매칭이 아닙니다.");
         }

@@ -46,7 +46,7 @@ public class MatchingServiceTest {
         participationRepository.save(fixtureParticipation2);
         participationRepository.save(fixtureParticipation3);
         //when
-        matchingService.fullMemberMatching(모집중인_매칭.getId());
+        matchingService.finishMatching(모집중인_매칭.getId());
         //then
         assertThat(matchingRepository.findMatchingById(모집중인_매칭.getId()).orElseThrow().getStatus()).isEqualTo(MatchingStatusType.FINISH);
     }

@@ -1,6 +1,7 @@
 package fashionable.simba.yanawaserver.matching.domain;
 
 import fashionable.simba.yanawaserver.matching.constant.RequestStatusType;
+import fashionable.simba.yanawaserver.matching.error.NoMatchingDataException;
 
 import java.time.LocalDateTime;
 
@@ -36,6 +37,10 @@ public class Participation {
     }
 
     public Participation(Builder builder) {
+        if (builder.matchingId == null) {
+            throw new NoMatchingDataException();
+        }
+
         this.id = builder.id;
         this.userId = builder.userId;
         this.matchingId = builder.matchingId;
@@ -50,10 +55,22 @@ public class Participation {
         private RequestStatusType status;
         private LocalDateTime requestDateTime;
 
-        public Builder(Long id, Long userId, Long matchingId) {
+        public Builder() {
+        }
+
+        public Builder id(Long id) {
             this.id = id;
+            return this;
+        }
+
+        public Builder userId(Long userId) {
             this.userId = userId;
+            return this;
+        }
+
+        public Builder matchingId(Long matchingId) {
             this.matchingId = matchingId;
+            return this;
         }
 
         public Builder status(RequestStatusType status) {

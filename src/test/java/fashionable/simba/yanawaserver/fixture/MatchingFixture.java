@@ -21,11 +21,11 @@ public class MatchingFixture {
     public static final PreferenceType FIXTURE_PREFERENCE_TYPE = PreferenceType.MATCHING;
     public static final Integer FIXTURE_NUMBER_OF_RECRUITMENT = 4;
     public static final Double FIXTURE_COST_OF_COURT_PER_PERSON = 2.5;
-    public static final MatchingStatusType FIXTURE_MATCHING_STATUS_TYPE = MatchingStatusType.ONGOING;
+    public static final MatchingStatusType FIXTURE_MATCHING_STATUS_TYPE = MatchingStatusType.OPENING;
 
     public static final Level FIXTURE_MAXIMUM_LEVEL = new Level(5.0);
     public static final Level FIXTURE_MINIMUM_LEVEL = new Level(2.5);
-    public static final String FIXTURE_DETAILS = "안녕하세요 부산테니스장에서 매치하실분 4명 구합니다.";
+    public static final String FIXTURE_DETAILS = "안녕하세요 부산테니스장에서 매치하실분 3명 구합니다.";
 
     public static final Matching fixtureMatching = new Matching.Builder()
             .id(FIXTURE_MATCHING_ID)

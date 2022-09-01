@@ -20,8 +20,8 @@ import static fashionable.simba.yanawaserver.fixture.MatchingFixture.fixtureMatc
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MatchingServiceTest {
-    MemoryMatchingRepository repository = new MemoryMatchingRepository();
-    MatchingService matchingService = new MatchingService(repository);
+    MemoryMatchingRepository matchingRepository = new MemoryMatchingRepository();
+    MatchingService matchingService = new MatchingService(matchingRepository);
     MemoryParticipationRepository ParticipationRepository = new MemoryParticipationRepository();
 
     @BeforeEach
@@ -32,15 +32,47 @@ public class MatchingServiceTest {
 
     @Test
     @DisplayName("호스트가 모집을 완료하면, 매칭 모집상태를 완료(closing)로 변경한다.")
-    void matching_finish_by_host() {
+    void close_matching_by_host() {
         //given
-        repository.save(fixtureMatching);
+        matchingRepository.save(fixtureMatching);
         //when
-        matchingService.changeStatus(FIXTURE_MATCHING_ID, MatchingStatusType.CLOSING);
+        matchingService.closeMatchingStatus(fixtureMatching.getId());
         //then
-        assertThat(repository.findMatchingById(fixtureMatching.getId()).orElseThrow().getStatus()).isEqualTo(MatchingStatusType.CLOSING);
+        assertThat(matchingRepository.findMatchingById(fixtureMatching.getId()).orElseThrow().getStatus()).isEqualTo(MatchingStatusType.CLOSING);
     }
 
+    @Test
+    @DisplayName("인원이 차면 매칭 모집을 완료(finish)로 변경한다.")
+    void full_member_matching_recruitment() {
+        //given
+        matchingRepository.save(fixtureMatching);
+        //when
+        matchingService.finishMatchingStatus(fixtureMatching.getId());
+        //then
+        assertThat(matchingRepository.findMatchingById(fixtureMatching.getId()).orElseThrow().getStatus()).isEqualTo(MatchingStatusType.FINISH);
+    }
 
+    @Test
+    @DisplayName("모집이 완료된 매칭이 매칭 시작 시간이 되면 매칭을 진행한다")
+    void start_matching_time() {
+        //given
+        matchingRepository.save(fixtureMatching);
+        //when
+        matchingService.ongoingMatchingStatus(fixtureMatching.getId());
+        //then
+        assertThat(matchingRepository.findMatchingById(fixtureMatching.getId()).orElseThrow().getStatus()).isEqualTo(MatchingStatusType.ONGOING);
+    }
 
+    @Test
+    @DisplayName("진행중인 매칭이 종료 시간이 되면 매칭을 종료한다.")
+    void end_matching_time() {
+        //given
+        matchingRepository.save(fixtureMatching);
+        //when
+        matchingService.closeMatchingStatus(fixtureMatching.getId());
+        //then
+        assertThat(matchingRepository.findMatchingById(fixtureMatching.getId()).orElseThrow().getStatus()).isEqualTo(MatchingStatusType.ONGOING);
+    }
+
+    
 }

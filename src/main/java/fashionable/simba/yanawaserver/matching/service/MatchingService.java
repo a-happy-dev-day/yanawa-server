@@ -20,4 +20,21 @@ public class MatchingService {
     }
 
 
+    public void closeMatchingStatus(Long id) {
+        Matching matching = matchingRepository.findMatchingById(id).orElseThrow();
+        matching.setStatus(MatchingStatusType.CLOSING);
+        matchingRepository.save(matching);
+    }
+
+    public void finishMatchingStatus(Long id) {
+        Matching matching = matchingRepository.findMatchingById(id).orElseThrow();
+        matching.setStatus(MatchingStatusType.FINISH);
+        matchingRepository.save(matching);
+    }
+
+    public void ongoingMatchingStatus(Long id) {
+        Matching matching = matchingRepository.findMatchingById(id).orElseThrow();
+        matching.setStatus(MatchingStatusType.ONGOING);
+        matchingRepository.save(matching);
+    }
 }

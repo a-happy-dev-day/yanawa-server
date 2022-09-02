@@ -73,6 +73,21 @@ public class RecruitmentTest {
                     .details("4명이서 랠리해요~")
                     .build();
         });
+        assertThrows(InvalidNumberException.class, () -> {
+            new Recruitment.Builder()
+                    .id(1L)
+                    .matchingId(1L)
+                    .maximumLevel(new Level(4.0))
+                    .minimumLevel(new Level(1.5))
+                    .ageOfRecruitment(AgeGroupType.TWENTIES)
+                    .sexOfRecruitment(GenderType.NONE)
+                    .preferenceGame(PreferenceType.RALLY)
+                    .numberOfRecruitment(0)
+                    .costOfCourtPerPerson(2.0)
+                    .annual(AnnualType.FIVE_YEARS_LESS)
+                    .details("4명이서 랠리해요~")
+                    .build();
+        });
     }
 
     @Test
@@ -113,6 +128,7 @@ public class RecruitmentTest {
                     .details("4명이서 랠리해요~")
                     .build();
         });
+
     }
 
     @Test

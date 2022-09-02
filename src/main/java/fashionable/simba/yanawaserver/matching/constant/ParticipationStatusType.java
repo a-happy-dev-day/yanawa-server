@@ -1,5 +1,5 @@
 package fashionable.simba.yanawaserver.matching.constant;
 
-public enum RequestStatusType {
+public enum ParticipationStatusType {
     WAITING, ACCEPTED, REJECTED, EXPIRED
 }

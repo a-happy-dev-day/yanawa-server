@@ -10,6 +10,7 @@ import fashionable.simba.yanawaserver.matching.error.LevelSettingException;
 
 public class Recruitment {
     private Long id;
+    private Long matchingId;
     private Level maximumLevel;
     private Level minimumLevel;
     private AgeGroupType ageOfRecruitment;
@@ -22,6 +23,10 @@ public class Recruitment {
 
     public Long getId() {
         return id;
+    }
+
+    public Long getMatchingId() {
+        return matchingId;
     }
 
     public Level getMaximumLevel() {
@@ -72,6 +77,7 @@ public class Recruitment {
         }
 
         this.id = builder.id;
+        this.matchingId = builder.matchingId;
         this.maximumLevel = builder.maximumLevel;
         this.minimumLevel = builder.minimumLevel;
         this.ageOfRecruitment = builder.ageOfRecruitment;
@@ -85,6 +91,7 @@ public class Recruitment {
 
     public static class Builder {
         private Long id;
+        private Long matchingId;
         private Level maximumLevel;
         private Level minimumLevel;
         private AgeGroupType ageOfRecruitment;
@@ -100,6 +107,11 @@ public class Recruitment {
 
         public Builder id(Long id) {
             this.id = id;
+            return this;
+        }
+
+        public Builder matchingId(Long matchingId) {
+            this.matchingId = matchingId;
             return this;
         }
 
@@ -138,14 +150,18 @@ public class Recruitment {
             return this;
         }
 
-        public Builder setAnnual(AnnualType annual) {
+        public Builder annual(AnnualType annual) {
             this.annual = annual;
             return this;
         }
 
-        public Builder setDetails(String details) {
+        public Builder details(String details) {
             this.details = details;
             return this;
+        }
+
+        public Recruitment build() {
+            return new Recruitment(this);
         }
     }
 }

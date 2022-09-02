@@ -1,6 +1,6 @@
 package fashionable.simba.yanawaserver.matching.domain;
 
-import fashionable.simba.yanawaserver.matching.constant.RequestStatusType;
+import fashionable.simba.yanawaserver.matching.constant.ParticipationStatusType;
 import fashionable.simba.yanawaserver.matching.error.NoMatchingDataException;
 
 import java.time.LocalDateTime;
@@ -9,7 +9,7 @@ public class Participation {
     private Long id;
     private Long userId;
     private Long matchingId;
-    private RequestStatusType status;
+    private ParticipationStatusType status;
     private LocalDateTime requestDateTime;
 
     public Long getId() {
@@ -24,7 +24,7 @@ public class Participation {
         return matchingId;
     }
 
-    public RequestStatusType getStatus() {
+    public ParticipationStatusType getStatus() {
         return status;
     }
 
@@ -32,7 +32,7 @@ public class Participation {
         return requestDateTime;
     }
 
-    public void setStatus(RequestStatusType status) {
+    public void setStatus(ParticipationStatusType status) {
         this.status = status;
     }
 
@@ -52,7 +52,7 @@ public class Participation {
         private Long id;
         private Long userId;
         private Long matchingId;
-        private RequestStatusType status;
+        private ParticipationStatusType status;
         private LocalDateTime requestDateTime;
 
         public Builder() {
@@ -73,7 +73,7 @@ public class Participation {
             return this;
         }
 
-        public Builder status(RequestStatusType status) {
+        public Builder status(ParticipationStatusType status) {
             this.status = status;
             return this;
         }

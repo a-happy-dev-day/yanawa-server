@@ -46,13 +46,11 @@ public class Matching {
         return status;
     }
 
+    public void setStatus(MatchingStatusType status) {
+        this.status = status;
+    }
+
     public Matching(Builder builder) {
-        if (builder.id == null) {
-            throw new NoMatchingDataException("매칭 정보를 찾을 수 없습니다.");
-        }
-        if (builder.courtId == null) {
-            throw new NoCourtDataException("코트 정보를 찾을 수 없습니다.");
-        }
         if (builder.startTime.isAfter(builder.endTime)) {
             throw new MatchingTimeException("시작시간이 종료시간보다 늦을 수 없습니다.");
         }

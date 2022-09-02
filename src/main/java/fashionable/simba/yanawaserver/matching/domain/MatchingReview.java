@@ -34,7 +34,7 @@ public class MatchingReview {
 
         public Builder(UUID writerId, UUID partnerId) {
             if (writerId == null || partnerId == null) {
-                throw new NoPlayerDataException();
+                throw new NoPlayerDataException("");
             }
             this.writerId = writerId;
             this.partnerId = partnerId;

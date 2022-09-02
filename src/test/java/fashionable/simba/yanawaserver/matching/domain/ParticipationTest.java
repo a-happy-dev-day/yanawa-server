@@ -1,52 +1,66 @@
 package fashionable.simba.yanawaserver.matching.domain;
 
-import fashionable.simba.yanawaserver.matching.constant.RequestStatusType;
-import org.junit.jupiter.api.Assertions;
+import fashionable.simba.yanawaserver.matching.constant.ParticipationStatusType;
+import fashionable.simba.yanawaserver.matching.error.NoMatchingDataException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 public class ParticipationTest {
     @Test
-    @DisplayName("매칭신청 생성 테스트")
+    @DisplayName("참가 생성 테스트")
     void 매칭신청_생성_Test() {
-        //
-        Long id = 1L;
-        Long userId = 1L;
-        Long matchingId = 1L;
-        LocalDateTime now = LocalDateTime.now();
-
-        //
-        Participation matchingRequest = new Participation.Builder(
-                id, userId, matchingId)
-                .requestDateTime(now)
-                .status(RequestStatusType.ACCEPTED)
+        Participation participation = new Participation.Builder()
+                .id(1L)
+                .userId(1L)
+                .matchingId(1L)
+                .requestDateTime(LocalDateTime.of(2022, 8, 22, 19, 30))
+                .status(ParticipationStatusType.WAITING)
                 .build();
         //
-        Assertions.assertEquals(userId, matchingRequest.getUserId());
-        Assertions.assertEquals(matchingId, matchingRequest.getMatchingId());
-        Assertions.assertEquals(now, matchingRequest.getRequestDateTime());
-        Assertions.assertEquals(RequestStatusType.ACCEPTED, matchingRequest.getStatus());
+        assertAll(
+                () -> assertThat(participation.getId()).isEqualTo(1L),
+                () -> assertThat(participation.getUserId()).isEqualTo(1L),
+                () -> assertThat(participation.getMatchingId()).isEqualTo(1L),
+                () -> assertThat(participation.getRequestDateTime()).isEqualTo(LocalDateTime.of(2022, 8, 22, 19, 30)),
+                () -> assertThat(participation.getStatus()).isEqualTo(ParticipationStatusType.WAITING)
+        );
     }
 
     @Test
-    @DisplayName("매칭 요청 상태는 대기중, 수락, 거절, 만료 중 하나의 정보를 가진다")
-    void 매칭신청_상태_Test() {
-        //
-        Set<RequestStatusType> requestStatusTypes = new HashSet<>(Arrays.asList(
-                RequestStatusType.ACCEPTED, RequestStatusType.WAITING, RequestStatusType.REJECTED, RequestStatusType.EXPIRED
-        ));
-        //
-        Participation matchingRequest = new Participation.Builder(
-                1L, 1L, 1L)
-                .requestDateTime(LocalDateTime.now())
-                .status(RequestStatusType.ACCEPTED)
+    @DisplayName("참가 상태를 변경한다.")
+    void 참가상태_변경_테스트() {
+        //given
+        Participation participation = new Participation.Builder()
+                .id(1L)
+                .userId(1L)
+                .matchingId(1L)
+                .requestDateTime(LocalDateTime.of(2022, 8, 22, 19, 30))
+                .status(ParticipationStatusType.WAITING)
                 .build();
-        //
-        Assertions.assertTrue(requestStatusTypes.contains(matchingRequest.getStatus()));
+        //when
+        participation.setStatus(ParticipationStatusType.ACCEPTED);
+        //then
+        assertThat(participation.getStatus()).isEqualTo(ParticipationStatusType.ACCEPTED);
+    }
+
+    @Test
+    @DisplayName("매칭 정보가 입력되지 않으면 NoMatchingExceoption이 발생한다.")
+    void 매칭_아이디_실패_테스트() {
+        assertThrows(NoMatchingDataException.class, () -> {
+            new Participation.Builder()
+                    .id(1L)
+                    .userId(1L)
+                    .matchingId(null)
+                    .requestDateTime(LocalDateTime.of(2022, 8, 22, 19, 30))
+                    .status(ParticipationStatusType.WAITING)
+                    .build();
+        });
     }
 }

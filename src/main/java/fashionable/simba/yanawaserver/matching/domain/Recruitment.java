@@ -6,6 +6,7 @@ import fashionable.simba.yanawaserver.matching.constant.GenderType;
 import fashionable.simba.yanawaserver.matching.constant.PreferenceType;
 import fashionable.simba.yanawaserver.matching.error.InvalidCostException;
 import fashionable.simba.yanawaserver.matching.error.InvalidNumberException;
+import fashionable.simba.yanawaserver.matching.error.LevelSettingException;
 
 public class Recruitment {
     private Long id;
@@ -61,13 +62,13 @@ public class Recruitment {
 
     public Recruitment(Builder builder) {
         if (builder.numberOfRecruitment < 1 || builder.numberOfRecruitment > 8) {
-            throw new InvalidNumberException();
+            throw new InvalidNumberException("인원은 1명이상 8명이하여야 합니다.");
         }
         if (builder.costOfCourtPerPerson <= 0) {
-            throw new InvalidCostException();
+            throw new InvalidCostException("비용은 0원 이상이여야 합니다.");
         }
         if (builder.maximumLevel.getLevel() < builder.minimumLevel.getLevel()) {
-            throw new IllegalArgumentException();
+            throw new LevelSettingException("최소레벨이 최대레벨보다 클 수 없습니다.");
         }
 
         this.id = builder.id;

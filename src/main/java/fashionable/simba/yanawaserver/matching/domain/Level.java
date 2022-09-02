@@ -14,7 +14,7 @@ public class Level {
 
     public Level(double level) {
         if (!levels.contains(level)) {
-            throw new LevelSettingException();
+            throw new LevelSettingException("레벨은 0.0 ~ 6.0 사이의 0.5값 단위로 입력되어야 합니다.");
         }
         this.level = level;
     }

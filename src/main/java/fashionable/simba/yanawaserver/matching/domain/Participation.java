@@ -38,7 +38,7 @@ public class Participation {
 
     public Participation(Builder builder) {
         if (builder.matchingId == null) {
-            throw new NoMatchingDataException();
+            throw new NoMatchingDataException("매칭 정보를 찾을 수 없습니다.");
         }
 
         this.id = builder.id;

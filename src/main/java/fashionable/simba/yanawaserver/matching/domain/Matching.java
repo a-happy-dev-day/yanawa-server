@@ -48,13 +48,13 @@ public class Matching {
 
     public Matching(Builder builder) {
         if (builder.id == null) {
-            throw new NoMatchingDataException();
+            throw new NoMatchingDataException("매칭 정보를 찾을 수 없습니다.");
         }
         if (builder.courtId == null) {
-            throw new NoCourtDataException();
+            throw new NoCourtDataException("코트 정보를 찾을 수 없습니다.");
         }
         if (builder.startTime.isAfter(builder.endTime)) {
-            throw new MatchingTimeException();
+            throw new MatchingTimeException("시작시간이 종료시간보다 늦을 수 없습니다.");
         }
 
         this.id = builder.id;

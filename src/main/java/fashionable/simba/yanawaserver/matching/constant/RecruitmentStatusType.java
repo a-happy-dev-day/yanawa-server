@@ -1,5 +1,5 @@
 package fashionable.simba.yanawaserver.matching.constant;
 
 public enum RecruitmentStatusType {
-    OPENING, CLOSING
+    WAITING, OPENING, CLOSING
 }

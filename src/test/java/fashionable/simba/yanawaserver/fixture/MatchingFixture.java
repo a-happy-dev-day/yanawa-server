@@ -13,7 +13,7 @@ public class MatchingFixture {
 
 
 
-    public static final Matching 모집중인_매칭 = new Matching.Builder()
+    public static final Matching 진행중인매칭 = new Matching.Builder()
             .id(1L)
             .courtId(1L)
             .hostId(1L)
@@ -23,7 +23,7 @@ public class MatchingFixture {
             .status(MatchingStatusType.ONGOING)
             .build();
 
-    public static final Matching 모집완료_매칭 = new Matching.Builder()
+    public static final Matching 끝난매칭 = new Matching.Builder()
             .id(2L)
             .courtId(2L)
             .hostId(2L)

@@ -43,8 +43,8 @@ public class MatchingTest {
     }
 
     @Test
-    @DisplayName("매칭 상태를 변경 할 수 있다.")
-    void 매칭상태_변경_테스트() {
+    @DisplayName("매칭 상태 진행중으로 바꾸기")
+    void 매칭상태_진행중_변경_테스트() {
         //given
         Matching matching = assertDoesNotThrow(() ->
                 new Matching.Builder()
@@ -54,11 +54,32 @@ public class MatchingTest {
                         .date(LocalDate.of(2022, 7, 29))
                         .startTime(LocalTime.of(19, 0))
                         .endTime(LocalTime.of(21, 0))
-                        .status(MatchingStatusType.ONGOING)
+                        .status(MatchingStatusType.WAITING)
                         .build()
         );
         //when
-        matching.setStatus(MatchingStatusType.FINISHED);
+        matching.changeOngoing();
+        //then
+        assertThat(matching.getStatus()).isEqualTo(MatchingStatusType.ONGOING);
+    }
+
+    @Test
+    @DisplayName("매칭 상태 완료로 바꾸기")
+    void 매칭상태_완료_변경_테스트() {
+        //given
+        Matching matching = assertDoesNotThrow(() ->
+                new Matching.Builder()
+                        .id(1L)
+                        .courtId(1L)
+                        .hostId(1L)
+                        .date(LocalDate.of(2022, 7, 29))
+                        .startTime(LocalTime.of(19, 0))
+                        .endTime(LocalTime.of(21, 0))
+                        .status(MatchingStatusType.WAITING)
+                        .build()
+        );
+        //when
+        matching.changeFinished();
         //then
         assertThat(matching.getStatus()).isEqualTo(MatchingStatusType.FINISHED);
     }

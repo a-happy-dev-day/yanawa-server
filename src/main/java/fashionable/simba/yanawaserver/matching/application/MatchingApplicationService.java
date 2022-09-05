@@ -12,13 +12,30 @@ public class MatchingApplicationService {
     RecruitmentRepository recruitmentRepository;
 
     public MatchingResponse createRecruitment(MatchingRequsest requsest) {
-        Recruitment recruitment = recruitmentRepository.save(requsest);
+        Matching matching = new Matching.Builder()
+                .hostId(requsest.getHostId())
+                .courtId(requsest.getCourtId())
+                .date(requsest.getDate())
+                .startTime(requsest.getStartTime())
+                .endTime(requsest.getEndTime())
+                .status(MatchingStatusType.WAITING)
+                .build();
+        Matching savedMatching = matchingRepository.save(matching);
 
-        Matching matching = matchingRepository.save(requsest);
-        matching.setStatus(MatchingStatusType.WAITING);
-
-        recruitment.setMatchingId(matching.getId());
-        recruitment.setStatus(RecruitmentStatusType.OPENING);
+        Recruitment recruitment = new Recruitment.Builder()
+                .matchingId(savedMatching.getId())
+                .maximumLevel(requsest.getMaximumLevel())
+                .minimumLevel(requsest.getMinimumLevel())
+                .ageOfRecruitment(requsest.getAgeOfRecruitment())
+                .sexOfRecruitment(requsest.getSexOfRecruitment())
+                .preferenceGame(requsest.getPreferenceGame())
+                .numberOfRecruitment(requsest.getNumberOfRecruitment())
+                .costOfCourtPerPerson(requsest.getCostOfCourtPerPerson())
+                .annual(requsest.getAnnual())
+                .details(requsest.getDetails())
+                .status(RecruitmentStatusType.OPENING)
+                .build();
+        Recruitment savedRecruitment = recruitmentRepository.save(recruitment);
 
         MatchingResponse response = new MatchingResponse.Builder()
                 .recruitmentId(recruitment.getId())

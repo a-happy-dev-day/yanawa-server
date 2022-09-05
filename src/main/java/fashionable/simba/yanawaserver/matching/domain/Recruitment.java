@@ -67,8 +67,11 @@ public class Recruitment {
         return details;
     }
 
-    public void setMatchingId(Long matchingId) {
-        this.matchingId = matchingId;
+    public void changeClosed() {
+        if (!this.status.equals(RecruitmentStatusType.OPENING)) {
+            throw new IllegalArgumentException();
+        }
+        this.status = RecruitmentStatusType.CLOSED;
     }
 
     public void setStatus(RecruitmentStatusType status) {

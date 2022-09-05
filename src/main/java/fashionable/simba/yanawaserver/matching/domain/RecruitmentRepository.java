@@ -5,7 +5,7 @@ import fashionable.simba.yanawaserver.matching.application.MatchingRequsest;
 import java.util.Optional;
 
 public interface RecruitmentRepository {
-    Recruitment save(MatchingRequsest request);
+    Recruitment save(Recruitment recruitment);
 
     Optional<Recruitment> findRecruitmentById(Long id);
 }

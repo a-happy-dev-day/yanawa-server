@@ -3,8 +3,6 @@ package fashionable.simba.yanawaserver.matching.domain;
 
 import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
 import fashionable.simba.yanawaserver.matching.error.MatchingTimeException;
-import fashionable.simba.yanawaserver.matching.error.NoCourtDataException;
-import fashionable.simba.yanawaserver.matching.error.NoMatchingDataException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -46,8 +44,18 @@ public class Matching {
         return status;
     }
 
-    public void setStatus(MatchingStatusType status) {
-        this.status = status;
+    public void changeOngoing() {
+        if(!this.status.equals(MatchingStatusType.WAITING)) {
+            throw new IllegalArgumentException();
+        }
+        this.status = MatchingStatusType.ONGOING;
+    }
+
+    public void changeFinished() {
+        if(!this.status.equals(MatchingStatusType.WAITING)) {
+            throw new IllegalArgumentException();
+        }
+        this.status = MatchingStatusType.FINISHED;
     }
 
     public Matching(Builder builder) {

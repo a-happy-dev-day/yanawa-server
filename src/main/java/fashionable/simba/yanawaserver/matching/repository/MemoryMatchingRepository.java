@@ -18,7 +18,8 @@ public class MemoryMatchingRepository implements MatchingRepository {
     @Override
     public Matching save(Matching matching) {
         Long id = getId();
-        Matching save = new Matching.Builder().id(id)
+        Matching save = new Matching.Builder()
+                .id(id)
                 .date(matching.getDate())
                 .startTime(matching.getStartTime())
                 .endTime(matching.getEndTime())

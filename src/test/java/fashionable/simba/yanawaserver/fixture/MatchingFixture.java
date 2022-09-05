@@ -20,7 +20,7 @@ public class MatchingFixture {
             .date(FIXTURE_DATE)
             .startTime(FIXTURE_START_TIME)
             .endTime(FIXTURE_END_TIME)
-            .status(MatchingStatusType.ONGOING)
+            .status(MatchingStatusType.WAITING)
             .build();
 
     public static final Matching 끝난매칭 = new Matching.Builder()
@@ -30,6 +30,6 @@ public class MatchingFixture {
             .date(FIXTURE_DATE)
             .startTime(FIXTURE_START_TIME)
             .endTime(FIXTURE_END_TIME)
-            .status(MatchingStatusType.FINISH)
+            .status(MatchingStatusType.FINISHED)
             .build();
 }

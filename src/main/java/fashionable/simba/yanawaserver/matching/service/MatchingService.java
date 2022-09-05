@@ -1,6 +1,5 @@
 package fashionable.simba.yanawaserver.matching.service;
 
-import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
 import fashionable.simba.yanawaserver.matching.domain.Matching;
 import fashionable.simba.yanawaserver.matching.domain.MatchingRepository;
 import fashionable.simba.yanawaserver.matching.domain.ParticipationRepository;
@@ -16,7 +15,7 @@ public class MatchingService {
         this.participationRepository = participationRepository;
     }
 
-    public Matching startMatching(Matching matching) {
+    public Matching createMatching(Matching matching) {
         return matchingRepository.save(matching);
     }
 

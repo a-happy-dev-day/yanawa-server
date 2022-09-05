@@ -4,6 +4,7 @@ import fashionable.simba.yanawaserver.matching.constant.AgeGroupType;
 import fashionable.simba.yanawaserver.matching.constant.AnnualType;
 import fashionable.simba.yanawaserver.matching.constant.GenderType;
 import fashionable.simba.yanawaserver.matching.constant.PreferenceType;
+import fashionable.simba.yanawaserver.matching.constant.RecruitmentStatusType;
 import fashionable.simba.yanawaserver.matching.error.InvalidCostException;
 import fashionable.simba.yanawaserver.matching.error.InvalidNumberException;
 import fashionable.simba.yanawaserver.matching.error.LevelSettingException;
@@ -20,6 +21,7 @@ public class Recruitment {
     private Double costOfCourtPerPerson;
     private AnnualType annual;
     private String details;
+    private RecruitmentStatusType status;
 
     public Long getId() {
         return id;
@@ -65,6 +67,10 @@ public class Recruitment {
         return details;
     }
 
+    public RecruitmentStatusType getStatus() {
+        return status;
+    }
+
     public Recruitment(Builder builder) {
         if (builder.numberOfRecruitment < 1 || builder.numberOfRecruitment > 8) {
             throw new InvalidNumberException("인원은 1명이상 8명이하여야 합니다.");
@@ -87,6 +93,7 @@ public class Recruitment {
         this.costOfCourtPerPerson = builder.costOfCourtPerPerson;
         this.annual = builder.annual;
         this.details = builder.details;
+        this.status = builder.status;
     }
 
     public static class Builder {
@@ -101,6 +108,7 @@ public class Recruitment {
         private Double costOfCourtPerPerson;
         private AnnualType annual;
         private String details;
+        private RecruitmentStatusType status;
 
         public Builder() {
         }
@@ -157,6 +165,11 @@ public class Recruitment {
 
         public Builder details(String details) {
             this.details = details;
+            return this;
+        }
+
+        public Builder status(RecruitmentStatusType status) {
+            this.status = status;
             return this;
         }
 

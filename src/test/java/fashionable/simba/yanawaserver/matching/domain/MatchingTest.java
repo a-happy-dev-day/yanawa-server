@@ -58,9 +58,9 @@ public class MatchingTest {
                         .build()
         );
         //when
-        matching.setStatus(MatchingStatusType.FINISH);
+        matching.setStatus(MatchingStatusType.FINISHED);
         //then
-        assertThat(matching.getStatus()).isEqualTo(MatchingStatusType.FINISH);
+        assertThat(matching.getStatus()).isEqualTo(MatchingStatusType.FINISHED);
     }
 
     @Test

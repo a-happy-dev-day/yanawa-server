@@ -1,5 +1,6 @@
 package fashionable.simba.yanawaserver.matching.repository;
 
+import fashionable.simba.yanawaserver.matching.application.MatchingRequsest;
 import fashionable.simba.yanawaserver.matching.domain.Recruitment;
 import fashionable.simba.yanawaserver.matching.domain.RecruitmentRepository;
 
@@ -12,21 +13,20 @@ public class MemoryRecruitmentRepository implements RecruitmentRepository {
     private Long sequence = 0L;
 
     @Override
-    public Recruitment save(Recruitment recruitment) {
+    public Recruitment save(MatchingRequsest request) {
         Long id = getId();
         Recruitment save = new Recruitment.Builder()
                 .id(id)
-                .matchingId(recruitment.getMatchingId())
-                .maximumLevel(recruitment.getMaximumLevel())
-                .minimumLevel(recruitment.getMinimumLevel())
-                .ageOfRecruitment(recruitment.getAgeOfRecruitment())
-                .sexOfRecruitment(recruitment.getSexOfRecruitment())
-                .preferenceGame(recruitment.getPreferenceGame())
-                .numberOfRecruitment(recruitment.getNumberOfRecruitment())
-                .costOfCourtPerPerson(recruitment.getCostOfCourtPerPerson())
-                .annual(recruitment.getAnnual())
-                .details(recruitment.getDetails())
-                .status(recruitment.getStatus())
+                .maximumLevel(request.getMaximumLevel())
+                .minimumLevel(request.getMinimumLevel())
+                .ageOfRecruitment(request.getAgeOfRecruitment())
+                .sexOfRecruitment(request.getSexOfRecruitment())
+                .preferenceGame(request.getPreferenceGame())
+                .numberOfRecruitment(request.getNumberOfRecruitment())
+                .costOfCourtPerPerson(request.getCostOfCourtPerPerson())
+                .annual(request.getAnnual())
+                .details(request.getDetails())
+                .status(request.getRecruitmentStatus())
                 .build();
         recruitments.put(id, save);
         return save;

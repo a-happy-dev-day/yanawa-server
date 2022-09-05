@@ -1,17 +1,25 @@
-package fashionable.simba.yanawaserver.matching.domain;
+package fashionable.simba.yanawaserver.matching.application;
 
 import fashionable.simba.yanawaserver.matching.constant.AgeGroupType;
 import fashionable.simba.yanawaserver.matching.constant.AnnualType;
 import fashionable.simba.yanawaserver.matching.constant.GenderType;
+import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
 import fashionable.simba.yanawaserver.matching.constant.PreferenceType;
 import fashionable.simba.yanawaserver.matching.constant.RecruitmentStatusType;
-import fashionable.simba.yanawaserver.matching.error.InvalidCostException;
-import fashionable.simba.yanawaserver.matching.error.InvalidNumberException;
-import fashionable.simba.yanawaserver.matching.error.LevelSettingException;
+import fashionable.simba.yanawaserver.matching.domain.Level;
 
-public class Recruitment {
-    private Long id;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+public class MatchingResponse {
+    private Long recruitmentId;
     private Long matchingId;
+    private Long courtId;
+    private Long hostId;
+    private LocalDate date;
+    private LocalTime startTime;
+    private LocalTime endTime;
+    private MatchingStatusType matchingStatus;
     private Level maximumLevel;
     private Level minimumLevel;
     private AgeGroupType ageOfRecruitment;
@@ -21,77 +29,17 @@ public class Recruitment {
     private Double costOfCourtPerPerson;
     private AnnualType annual;
     private String details;
-    private RecruitmentStatusType status;
+    private RecruitmentStatusType recruitmentStatus;
 
-    public Long getId() {
-        return id;
-    }
-
-    public Long getMatchingId() {
-        return matchingId;
-    }
-
-    public Level getMaximumLevel() {
-        return maximumLevel;
-    }
-
-    public Level getMinimumLevel() {
-        return minimumLevel;
-    }
-
-    public AgeGroupType getAgeOfRecruitment() {
-        return ageOfRecruitment;
-    }
-
-    public GenderType getSexOfRecruitment() {
-        return sexOfRecruitment;
-    }
-
-    public PreferenceType getPreferenceGame() {
-        return preferenceGame;
-    }
-
-    public Integer getNumberOfRecruitment() {
-        return numberOfRecruitment;
-    }
-
-    public Double getCostOfCourtPerPerson() {
-        return costOfCourtPerPerson;
-    }
-
-    public AnnualType getAnnual() {
-        return annual;
-    }
-
-    public String getDetails() {
-        return details;
-    }
-
-    public void setMatchingId(Long matchingId) {
-        this.matchingId = matchingId;
-    }
-
-    public void setStatus(RecruitmentStatusType status) {
-        this.status = status;
-    }
-
-    public RecruitmentStatusType getStatus() {
-        return status;
-    }
-
-    public Recruitment(Builder builder) {
-        if (builder.numberOfRecruitment < 1 || builder.numberOfRecruitment > 8) {
-            throw new InvalidNumberException("인원은 1명이상 8명이하여야 합니다.");
-        }
-        if (builder.costOfCourtPerPerson <= 0) {
-            throw new InvalidCostException("비용은 0원 이상이여야 합니다.");
-        }
-        if (builder.maximumLevel.getLevel() < builder.minimumLevel.getLevel()) {
-            throw new LevelSettingException("최소레벨이 최대레벨보다 클 수 없습니다.");
-        }
-
-        this.id = builder.id;
+    public MatchingResponse(Builder builder) {
+        this.recruitmentId = builder.recruitmentId;
         this.matchingId = builder.matchingId;
+        this.courtId = builder.courtId;
+        this.hostId = builder.hostId;
+        this.date = builder.date;
+        this.startTime = builder.startTime;
+        this.endTime = builder.endTime;
+        this.matchingStatus = builder.matchingStatus;
         this.maximumLevel = builder.maximumLevel;
         this.minimumLevel = builder.minimumLevel;
         this.ageOfRecruitment = builder.ageOfRecruitment;
@@ -101,12 +49,18 @@ public class Recruitment {
         this.costOfCourtPerPerson = builder.costOfCourtPerPerson;
         this.annual = builder.annual;
         this.details = builder.details;
-        this.status = builder.status;
+        this.recruitmentStatus = builder.recruitmentStatus;
     }
 
     public static class Builder {
-        private Long id;
+        private Long recruitmentId;
         private Long matchingId;
+        private Long courtId;
+        private Long hostId;
+        private LocalDate date;
+        private LocalTime startTime;
+        private LocalTime endTime;
+        private MatchingStatusType matchingStatus;
         private Level maximumLevel;
         private Level minimumLevel;
         private AgeGroupType ageOfRecruitment;
@@ -116,18 +70,48 @@ public class Recruitment {
         private Double costOfCourtPerPerson;
         private AnnualType annual;
         private String details;
-        private RecruitmentStatusType status;
+        private RecruitmentStatusType recruitmentStatus;
 
         public Builder() {
         }
 
-        public Builder id(Long id) {
-            this.id = id;
+        public Builder recruitmentId(Long recruitmentId) {
+            this.recruitmentId = recruitmentId;
             return this;
         }
 
         public Builder matchingId(Long matchingId) {
             this.matchingId = matchingId;
+            return this;
+        }
+
+        public Builder courtId(Long courtId) {
+            this.courtId = courtId;
+            return this;
+        }
+
+        public Builder hostId(Long hostId) {
+            this.hostId = hostId;
+            return this;
+        }
+
+        public Builder date(LocalDate date) {
+            this.date = date;
+            return this;
+        }
+
+        public Builder startTime(LocalTime startTime) {
+            this.startTime = startTime;
+            return this;
+        }
+
+        public Builder endTime(LocalTime endTime) {
+            this.endTime = endTime;
+            return this;
+        }
+
+        public Builder matchingStatus(MatchingStatusType matchingStatus) {
+            this.matchingStatus = matchingStatus;
             return this;
         }
 
@@ -161,7 +145,7 @@ public class Recruitment {
             return this;
         }
 
-        public Builder costOfCourtPerPerson(Double costOfCourtPerPerson) {
+        public Builder setCostOfCourtPerPerson(Double costOfCourtPerPerson) {
             this.costOfCourtPerPerson = costOfCourtPerPerson;
             return this;
         }
@@ -176,13 +160,12 @@ public class Recruitment {
             return this;
         }
 
-        public Builder status(RecruitmentStatusType status) {
-            this.status = status;
+        public Builder recruitmentStatus(RecruitmentStatusType recruitmentStatus) {
+            this.recruitmentStatus = recruitmentStatus;
             return this;
         }
-
-        public Recruitment build() {
-            return new Recruitment(this);
+        public MatchingResponse build() {
+            return new MatchingResponse(this);
         }
     }
 }

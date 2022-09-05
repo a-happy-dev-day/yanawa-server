@@ -33,8 +33,8 @@ public class MemoryMatchingRepository implements MatchingRepository {
     }
 
     @Override
-    public Optional<Matching> findMatchingById(Long matchingId) {
-        return Optional.ofNullable(matchings.get(matchingId));
+    public Optional<Matching> findMatchingById(Long id) {
+        return Optional.ofNullable(matchings.get(id));
     }
 
 }

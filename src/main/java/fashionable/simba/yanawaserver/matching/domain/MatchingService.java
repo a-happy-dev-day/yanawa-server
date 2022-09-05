@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.matching.service;
+package fashionable.simba.yanawaserver.matching.domain;
 
 import fashionable.simba.yanawaserver.matching.domain.Matching;
 import fashionable.simba.yanawaserver.matching.domain.MatchingRepository;
@@ -8,11 +8,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class MatchingService {
     private final MatchingRepository matchingRepository;
-    private final ParticipationRepository participationRepository;
 
-    public MatchingService(MatchingRepository matchingRepository, ParticipationRepository participationRepository) {
+    public MatchingService(MatchingRepository matchingRepository) {
         this.matchingRepository = matchingRepository;
-        this.participationRepository = participationRepository;
     }
 
     public Matching createMatching(Matching matching) {

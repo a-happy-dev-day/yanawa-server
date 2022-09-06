@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
-public class TokenAuthenticationFilter extends AbstractAuthenticationFilter {
-    public TokenAuthenticationFilter(AuthenticationSuccessHandler successHandler, AuthenticationFailureHandler failureHandler, AuthenticationManager authenticationManager) {
+public class KakaoTokenAuthenticationFilter extends AbstractAuthenticationFilter {
+    public KakaoTokenAuthenticationFilter(AuthenticationSuccessHandler successHandler, AuthenticationFailureHandler failureHandler, AuthenticationManager authenticationManager) {
         super(successHandler, failureHandler, authenticationManager);
     }
 
@@ -26,8 +26,8 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationFilter {
      * 유효시간은 카카오 API 토큰의 유효시간을 따른다.*
      * 헤더에 토큰을 추가해 응답한다.*
      *
-     * @param request
-     * @return
+     * @param request  current HTTP request
+     * @return AuthenticationToken
      * @throws IOException
      */
     @Override

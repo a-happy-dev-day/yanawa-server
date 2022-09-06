@@ -10,9 +10,9 @@ import fashionable.simba.yanawaserver.auth.provider.AuthorizationType;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class BearerTokenAuthenticationFilter extends AbstractAuthenticationFilter {
+public class KakaoTokenAuthorizationFilter extends AbstractAuthenticationFilter {
 
-    public BearerTokenAuthenticationFilter(AuthenticationSuccessHandler successHandler, AuthenticationFailureHandler failureHandler, AuthenticationManager authenticationManager) {
+    public KakaoTokenAuthorizationFilter(AuthenticationSuccessHandler successHandler, AuthenticationFailureHandler failureHandler, AuthenticationManager authenticationManager) {
         super(successHandler, failureHandler, authenticationManager);
     }
 
@@ -24,9 +24,7 @@ public class BearerTokenAuthenticationFilter extends AbstractAuthenticationFilte
      * 토큰의 만료시간을 확인해 10 분 미만이면 토큰을 재발급해서 새로운 토큰을 발급한다.*
      *
      * @param request  current HTTP request
-     * @param response current HTTP response
-     * @param handler  chosen handler to execute, for type and/or instance evaluation
-     * @return true
+     * @return AuthenticationToken
      */
     @Override
     protected AuthenticationToken convert(HttpServletRequest request) {

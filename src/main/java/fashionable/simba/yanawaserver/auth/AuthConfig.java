@@ -3,8 +3,8 @@ package fashionable.simba.yanawaserver.auth;
 import fashionable.simba.yanawaserver.auth.authorization.AuthenticationPrincipalArgumentResolver;
 import fashionable.simba.yanawaserver.auth.authorization.secured.SecuredAnnotationChecker;
 import fashionable.simba.yanawaserver.auth.context.SecurityContextPersistenceFilter;
-import fashionable.simba.yanawaserver.auth.filter.BearerTokenAuthenticationFilter;
-import fashionable.simba.yanawaserver.auth.filter.TokenAuthenticationFilter;
+import fashionable.simba.yanawaserver.auth.filter.KakaoTokenAuthorizationFilter;
+import fashionable.simba.yanawaserver.auth.filter.KakaoTokenAuthenticationFilter;
 import fashionable.simba.yanawaserver.auth.handler.AuthenticationFailureHandler;
 import fashionable.simba.yanawaserver.auth.handler.AuthenticationSuccessHandler;
 import fashionable.simba.yanawaserver.auth.handler.DefaultAuthenticationFailureHandler;
@@ -39,8 +39,8 @@ public class AuthConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new SecurityContextPersistenceFilter());
-        registry.addInterceptor(new TokenAuthenticationFilter(tokenAuthenticationSuccessHandler(), loginFailureHandler(), userDetailsAuthenticationProvider())).addPathPatterns("/login/token");
-        registry.addInterceptor(new BearerTokenAuthenticationFilter(successHandler(), failureHandler(), tokenAuthenticationProvider()));
+        registry.addInterceptor(new KakaoTokenAuthenticationFilter(tokenAuthenticationSuccessHandler(), loginFailureHandler(), userDetailsAuthenticationProvider())).addPathPatterns("/login/token");
+        registry.addInterceptor(new KakaoTokenAuthorizationFilter(successHandler(), failureHandler(), tokenAuthenticationProvider()));
     }
 
     @Override

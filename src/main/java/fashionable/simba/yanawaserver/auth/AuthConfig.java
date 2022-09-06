@@ -1,10 +1,11 @@
 package fashionable.simba.yanawaserver.auth;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fashionable.simba.yanawaserver.auth.authorization.AuthenticationPrincipalArgumentResolver;
 import fashionable.simba.yanawaserver.auth.authorization.secured.SecuredAnnotationChecker;
 import fashionable.simba.yanawaserver.auth.context.SecurityContextPersistenceFilter;
-import fashionable.simba.yanawaserver.auth.filter.KakaoTokenAuthorizationFilter;
 import fashionable.simba.yanawaserver.auth.filter.KakaoTokenAuthenticationFilter;
+import fashionable.simba.yanawaserver.auth.filter.KakaoTokenAuthorizationFilter;
 import fashionable.simba.yanawaserver.auth.handler.AuthenticationFailureHandler;
 import fashionable.simba.yanawaserver.auth.handler.AuthenticationSuccessHandler;
 import fashionable.simba.yanawaserver.auth.handler.DefaultAuthenticationFailureHandler;
@@ -40,13 +41,18 @@ public class AuthConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new SecurityContextPersistenceFilter());
-        registry.addInterceptor(new KakaoTokenAuthenticationFilter(tokenAuthenticationSuccessHandler(), loginFailureHandler(), userDetailsAuthenticationProvider())).addPathPatterns("/login/token");
+        registry.addInterceptor(new KakaoTokenAuthenticationFilter(tokenAuthenticationSuccessHandler(), loginFailureHandler(), userDetailsAuthenticationProvider(), objectMapper())).addPathPatterns("/login/token");
         registry.addInterceptor(new KakaoTokenAuthorizationFilter(successHandler(), failureHandler(), tokenAuthenticationProvider()));
     }
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         argumentResolvers.add(new AuthenticationPrincipalArgumentResolver());
+    }
+
+    @Bean
+    ObjectMapper objectMapper() {
+        return new ObjectMapper();
     }
 
     @Bean
@@ -61,7 +67,7 @@ public class AuthConfig implements WebMvcConfigurer {
 
     @Bean
     TokenAuthenticationSuccessHandler tokenAuthenticationSuccessHandler() {
-        return new TokenAuthenticationSuccessHandler(jwtTokenProvider());
+        return new TokenAuthenticationSuccessHandler(objectMapper(), jwtTokenProvider());
     }
 
     @Bean

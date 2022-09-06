@@ -1,6 +1,7 @@
 package fashionable.simba.yanawaserver.auth.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import fashionable.simba.yanawaserver.auth.dto.TokenRequest;
 import fashionable.simba.yanawaserver.auth.handler.AuthenticationFailureHandler;
 import fashionable.simba.yanawaserver.auth.handler.AuthenticationSuccessHandler;
 import fashionable.simba.yanawaserver.auth.provider.AuthenticationManager;
@@ -11,8 +12,11 @@ import java.io.IOException;
 import java.util.stream.Collectors;
 
 public class KakaoTokenAuthenticationFilter extends AbstractAuthenticationFilter {
-    public KakaoTokenAuthenticationFilter(AuthenticationSuccessHandler successHandler, AuthenticationFailureHandler failureHandler, AuthenticationManager authenticationManager) {
+    public final ObjectMapper mapper;
+
+    public KakaoTokenAuthenticationFilter(AuthenticationSuccessHandler successHandler, AuthenticationFailureHandler failureHandler, AuthenticationManager authenticationManager, ObjectMapper mapper) {
         super(successHandler, failureHandler, authenticationManager);
+        this.mapper = mapper;
     }
 
     /**
@@ -26,7 +30,7 @@ public class KakaoTokenAuthenticationFilter extends AbstractAuthenticationFilter
      * 유효시간은 카카오 API 토큰의 유효시간을 따른다.*
      * 헤더에 토큰을 추가해 응답한다.*
      *
-     * @param request  current HTTP request
+     * @param request current HTTP request
      * @return AuthenticationToken
      * @throws IOException
      */
@@ -34,7 +38,7 @@ public class KakaoTokenAuthenticationFilter extends AbstractAuthenticationFilter
     protected AuthenticationToken convert(HttpServletRequest request) throws IOException {
         // TODO : 문서에 맞게 수정
         String content = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
-        TokenRequest tokenRequest = new ObjectMapper().readValue(content, TokenRequest.class);
+        TokenRequest tokenRequest = mapper.readValue(content, TokenRequest.class);
 
         String principal = tokenRequest.getUsername();
 

@@ -23,7 +23,7 @@ public class KakaoTokenAuthorizationFilter extends AbstractAuthenticationFilter 
      * 토큰에서 사용자의 권한을 확인한다.*
      * 토큰의 만료시간을 확인해 10 분 미만이면 토큰을 재발급해서 새로운 토큰을 발급한다.*
      *
-     * @param request  current HTTP request
+     * @param request current HTTP request
      * @return AuthenticationToken
      */
     @Override

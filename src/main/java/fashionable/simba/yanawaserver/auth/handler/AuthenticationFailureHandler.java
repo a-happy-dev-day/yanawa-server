@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.auth.authentication.handler;
+package fashionable.simba.yanawaserver.auth.handler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

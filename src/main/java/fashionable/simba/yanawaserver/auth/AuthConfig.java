@@ -1,20 +1,20 @@
 package fashionable.simba.yanawaserver.auth;
 
-import fashionable.simba.yanawaserver.auth.authentication.filter.BearerTokenAuthenticationFilter;
-import fashionable.simba.yanawaserver.auth.authentication.handler.AuthenticationFailureHandler;
-import fashionable.simba.yanawaserver.auth.authentication.handler.AuthenticationSuccessHandler;
-import fashionable.simba.yanawaserver.auth.authentication.handler.DefaultAuthenticationFailureHandler;
-import fashionable.simba.yanawaserver.auth.authentication.handler.DefaultAuthenticationSuccessHandler;
-import fashionable.simba.yanawaserver.auth.authentication.handler.LoginAuthenticationFailureHandler;
-import fashionable.simba.yanawaserver.auth.authentication.handler.TokenAuthenticationSuccessHandler;
-import fashionable.simba.yanawaserver.auth.authentication.provider.AuthenticationManager;
-import fashionable.simba.yanawaserver.auth.authentication.provider.TokenAuthenticationProvider;
-import fashionable.simba.yanawaserver.auth.authentication.provider.UserDetailsAuthenticationProvider;
 import fashionable.simba.yanawaserver.auth.authorization.AuthenticationPrincipalArgumentResolver;
 import fashionable.simba.yanawaserver.auth.authorization.secured.SecuredAnnotationChecker;
 import fashionable.simba.yanawaserver.auth.context.SecurityContextPersistenceFilter;
-import fashionable.simba.yanawaserver.auth.token.JwtTokenProvider;
-import fashionable.simba.yanawaserver.auth.token.TokenAuthenticationInterceptor;
+import fashionable.simba.yanawaserver.auth.filter.BearerTokenAuthenticationFilter;
+import fashionable.simba.yanawaserver.auth.filter.TokenAuthenticationFilter;
+import fashionable.simba.yanawaserver.auth.handler.AuthenticationFailureHandler;
+import fashionable.simba.yanawaserver.auth.handler.AuthenticationSuccessHandler;
+import fashionable.simba.yanawaserver.auth.handler.DefaultAuthenticationFailureHandler;
+import fashionable.simba.yanawaserver.auth.handler.DefaultAuthenticationSuccessHandler;
+import fashionable.simba.yanawaserver.auth.handler.LoginAuthenticationFailureHandler;
+import fashionable.simba.yanawaserver.auth.handler.TokenAuthenticationSuccessHandler;
+import fashionable.simba.yanawaserver.auth.provider.AuthenticationManager;
+import fashionable.simba.yanawaserver.auth.provider.JwtTokenProvider;
+import fashionable.simba.yanawaserver.auth.provider.TokenAuthenticationProvider;
+import fashionable.simba.yanawaserver.auth.provider.UserDetailsAuthenticationProvider;
 import fashionable.simba.yanawaserver.auth.userdetails.UserDetailsService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -39,7 +39,7 @@ public class AuthConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new SecurityContextPersistenceFilter());
-        registry.addInterceptor(new TokenAuthenticationInterceptor(tokenAuthenticationSuccessHandler(), loginFailureHandler(), userDetailsAuthenticationProvider())).addPathPatterns("/login/token");
+        registry.addInterceptor(new TokenAuthenticationFilter(tokenAuthenticationSuccessHandler(), loginFailureHandler(), userDetailsAuthenticationProvider())).addPathPatterns("/login/token");
         registry.addInterceptor(new BearerTokenAuthenticationFilter(successHandler(), failureHandler(), tokenAuthenticationProvider()));
     }
 

@@ -23,6 +23,8 @@ public class SecuredAnnotationChecker {
         List<String> values = Arrays.stream(secured.value()).collect(Collectors.toList());
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        //TODO : 권한이 없다면 익명의 사용자로 설정하도록 수정
         authentication.getAuthorities().stream()
             .filter(values::contains)
             .findFirst()

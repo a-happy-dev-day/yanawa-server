@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.auth.token;
+package fashionable.simba.yanawaserver.auth.provider;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;

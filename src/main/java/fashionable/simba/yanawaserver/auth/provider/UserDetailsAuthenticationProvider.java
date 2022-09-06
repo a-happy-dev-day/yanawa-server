@@ -1,7 +1,6 @@
-package fashionable.simba.yanawaserver.auth.authentication.provider;
+package fashionable.simba.yanawaserver.auth.provider;
 
 
-import fashionable.simba.yanawaserver.auth.authentication.AuthenticationToken;
 import fashionable.simba.yanawaserver.auth.context.Authentication;
 import fashionable.simba.yanawaserver.auth.userdetails.UserDetails;
 import fashionable.simba.yanawaserver.auth.userdetails.UserDetailsService;

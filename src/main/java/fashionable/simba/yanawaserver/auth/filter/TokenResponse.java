@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.auth.token;
+package fashionable.simba.yanawaserver.auth.filter;
 
 public class TokenResponse {
     private String accessToken;

@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.auth.authentication;
+package fashionable.simba.yanawaserver.auth.provider;
 
 public enum AuthorizationType {
     BEARER;

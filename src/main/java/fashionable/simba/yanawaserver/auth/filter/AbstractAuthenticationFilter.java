@@ -1,11 +1,11 @@
-package fashionable.simba.yanawaserver.auth.authentication.filter;
+package fashionable.simba.yanawaserver.auth.filter;
 
-import fashionable.simba.yanawaserver.auth.authentication.AuthenticationToken;
-import fashionable.simba.yanawaserver.auth.authentication.handler.AuthenticationFailureHandler;
-import fashionable.simba.yanawaserver.auth.authentication.handler.AuthenticationSuccessHandler;
-import fashionable.simba.yanawaserver.auth.authentication.provider.AuthenticationManager;
 import fashionable.simba.yanawaserver.auth.context.Authentication;
 import fashionable.simba.yanawaserver.auth.context.SecurityContextHolder;
+import fashionable.simba.yanawaserver.auth.handler.AuthenticationFailureHandler;
+import fashionable.simba.yanawaserver.auth.handler.AuthenticationSuccessHandler;
+import fashionable.simba.yanawaserver.auth.provider.AuthenticationManager;
+import fashionable.simba.yanawaserver.auth.provider.AuthenticationToken;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +25,7 @@ public abstract class AbstractAuthenticationFilter implements HandlerInterceptor
     }
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         try {
             Authentication authentication = attemptAuthentication(request);
             successfulAuthentication(request, response, authentication);

@@ -25,9 +25,9 @@ public class MatchingRepositoryTest {
         Matching matching = new Matching.Builder()
                 .courtId(1L)
                 .hostId(1L)
-                .date(LocalDate.of(2022,9,3))
-                .startTime(LocalTime.of(18,0,0))
-                .endTime(LocalTime.of(20,0,0))
+                .date(LocalDate.of(2022, 9, 3))
+                .startTime(LocalTime.of(18, 0, 0))
+                .endTime(LocalTime.of(20, 0, 0))
                 .build();
         Long id = matchingRepository.save(matching).getId();
 
@@ -39,9 +39,9 @@ public class MatchingRepositoryTest {
         Matching matching = new Matching.Builder()
                 .courtId(1L)
                 .hostId(1L)
-                .date(LocalDate.of(2022,9,3))
-                .startTime(LocalTime.of(18,0,0))
-                .endTime(LocalTime.of(20,0,0))
+                .date(LocalDate.of(2022, 9, 3))
+                .startTime(LocalTime.of(18, 0, 0))
+                .endTime(LocalTime.of(20, 0, 0))
                 .build();
         Long id = matchingRepository.save(matching).getId();
 

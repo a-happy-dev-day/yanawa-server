@@ -67,6 +67,10 @@ public class Recruitment {
         return details;
     }
 
+    public RecruitmentStatusType getStatus() {
+        return status;
+    }
+
     public void changeClosed() {
         if (!this.status.equals(RecruitmentStatusType.OPENING)) {
             throw new IllegalArgumentException();
@@ -74,12 +78,8 @@ public class Recruitment {
         this.status = RecruitmentStatusType.CLOSED;
     }
 
-    public void setStatus(RecruitmentStatusType status) {
-        this.status = status;
-    }
-
-    public RecruitmentStatusType getStatus() {
-        return status;
+    public boolean isClosed() {
+        return this.status.equals(RecruitmentStatusType.CLOSED);
     }
 
     public Recruitment(Builder builder) {

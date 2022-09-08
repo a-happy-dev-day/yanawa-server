@@ -2,11 +2,13 @@ package fashionable.simba.yanawaserver.matching.repository;
 
 import fashionable.simba.yanawaserver.matching.domain.Recruitment;
 import fashionable.simba.yanawaserver.matching.domain.RecruitmentRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+@Repository
 public class MemoryRecruitmentRepository implements RecruitmentRepository {
     private static final Map<Long, Recruitment> recruitments = new HashMap<>();
     private Long sequence = 0L;
@@ -25,9 +27,14 @@ public class MemoryRecruitmentRepository implements RecruitmentRepository {
                 .costOfCourtPerPerson(recruitment.getCostOfCourtPerPerson())
                 .annual(recruitment.getAnnual())
                 .details(recruitment.getDetails())
+                .status(recruitment.getStatus())
                 .build();
         recruitments.put(id, save);
         return save;
+    }
+
+    public void clear() {
+        recruitments.clear();
     }
 
     private synchronized Long getId() {
@@ -37,5 +44,9 @@ public class MemoryRecruitmentRepository implements RecruitmentRepository {
     @Override
     public Optional<Recruitment> findRecruitmentById(Long id) {
         return Optional.ofNullable(recruitments.get(id));
+    }
+
+    public Optional<Recruitment> findRecruitmentByMatchingId(Long matchingId) {
+        return recruitments.values().stream().filter(x -> x.getMatchingId().equals(matchingId)).findAny();
     }
 }

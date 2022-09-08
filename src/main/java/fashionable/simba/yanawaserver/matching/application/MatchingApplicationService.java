@@ -3,15 +3,23 @@ package fashionable.simba.yanawaserver.matching.application;
 import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
 import fashionable.simba.yanawaserver.matching.constant.RecruitmentStatusType;
 import fashionable.simba.yanawaserver.matching.domain.Matching;
-import fashionable.simba.yanawaserver.matching.domain.MatchingRepository;
+import fashionable.simba.yanawaserver.matching.domain.MatchingService;
 import fashionable.simba.yanawaserver.matching.domain.Recruitment;
-import fashionable.simba.yanawaserver.matching.domain.RecruitmentRepository;
+import fashionable.simba.yanawaserver.matching.domain.RecruitmentService;
+import fashionable.simba.yanawaserver.matching.domain.CourtRepository;
 
 public class MatchingApplicationService {
-    MatchingRepository matchingRepository;
-    RecruitmentRepository recruitmentRepository;
+    private final MatchingService matchingService;
+    private final RecruitmentService recruitmentService;
+    private final CourtRepository courtRepository;
 
-    public MatchingResponse createRecruitment(MatchingRequsest requsest) {
+    public MatchingApplicationService(MatchingService matchingService, RecruitmentService recruitmentService, CourtRepository courtRepository) {
+        this.matchingService = matchingService;
+        this.recruitmentService = recruitmentService;
+        this.courtRepository = courtRepository;
+    }
+
+    public MatchingResponse createMatchingAndRecruitment(MatchingRequsest requsest) {
         Matching matching = new Matching.Builder()
                 .hostId(requsest.getHostId())
                 .courtId(requsest.getCourtId())
@@ -20,7 +28,9 @@ public class MatchingApplicationService {
                 .endTime(requsest.getEndTime())
                 .status(MatchingStatusType.WAITING)
                 .build();
-        Matching savedMatching = matchingRepository.save(matching);
+        Long courtId = matching.getCourtId();
+        courtRepository.findCourtNameById(courtId).orElseThrow(() -> new IllegalArgumentException("코트장 정보를 조회할 수 없습니다."));
+        Matching savedMatching = matchingService.createMatching(matching);
 
         Recruitment recruitment = new Recruitment.Builder()
                 .matchingId(savedMatching.getId())
@@ -35,27 +45,27 @@ public class MatchingApplicationService {
                 .details(requsest.getDetails())
                 .status(RecruitmentStatusType.OPENING)
                 .build();
-        Recruitment savedRecruitment = recruitmentRepository.save(recruitment);
+        Recruitment savedRecruitment = recruitmentService.createRecruitment(recruitment);
 
         MatchingResponse response = new MatchingResponse.Builder()
-                .recruitmentId(recruitment.getId())
-                .matchingId(matching.getId())
-                .courtId(matching.getCourtId())
-                .hostId(matching.getHostId())
-                .date(matching.getDate())
-                .startTime(matching.getStartTime())
-                .endTime(matching.getEndTime())
-                .matchingStatus(matching.getStatus())
-                .maximumLevel(recruitment.getMaximumLevel())
-                .minimumLevel(recruitment.getMinimumLevel())
-                .ageOfRecruitment(recruitment.getAgeOfRecruitment())
-                .sexOfRecruitment(recruitment.getSexOfRecruitment())
-                .preferenceGame(recruitment.getPreferenceGame())
-                .numberOfRecruitment(recruitment.getNumberOfRecruitment())
-                .setCostOfCourtPerPerson(recruitment.getCostOfCourtPerPerson())
-                .annual(recruitment.getAnnual())
-                .details(recruitment.getDetails())
-                .recruitmentStatus(recruitment.getStatus())
+                .recruitmentId(savedRecruitment.getId())
+                .matchingId(savedMatching.getId())
+                .courtId(savedMatching.getCourtId())
+                .hostId(savedMatching.getHostId())
+                .date(savedMatching.getDate())
+                .startTime(savedMatching.getStartTime())
+                .endTime(savedMatching.getEndTime())
+                .matchingStatus(savedMatching.getStatus())
+                .maximumLevel(savedRecruitment.getMaximumLevel())
+                .minimumLevel(savedRecruitment.getMinimumLevel())
+                .ageOfRecruitment(savedRecruitment.getAgeOfRecruitment())
+                .sexOfRecruitment(savedRecruitment.getSexOfRecruitment())
+                .preferenceGame(savedRecruitment.getPreferenceGame())
+                .numberOfRecruitment(savedRecruitment.getNumberOfRecruitment())
+                .setCostOfCourtPerPerson(savedRecruitment.getCostOfCourtPerPerson())
+                .annual(savedRecruitment.getAnnual())
+                .details(savedRecruitment.getDetails())
+                .recruitmentStatus(savedRecruitment.getStatus())
                 .build();
 
         return response;

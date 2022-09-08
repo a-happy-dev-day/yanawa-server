@@ -12,7 +12,6 @@ public class MatchingFixture {
     public static final LocalTime FIXTURE_END_TIME = LocalTime.of(21, 0);
 
 
-
     public static final Matching 진행중인매칭 = new Matching.Builder()
             .id(1L)
             .courtId(1L)

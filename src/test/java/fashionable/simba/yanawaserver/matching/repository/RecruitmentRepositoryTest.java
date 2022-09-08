@@ -48,7 +48,7 @@ public class RecruitmentRepositoryTest {
                 () -> assertThat(recruitmentRepository.findRecruitmentById(id).orElseThrow().getNumberOfRecruitment()).isEqualTo(4),
                 () -> assertThat(recruitmentRepository.findRecruitmentById(id).orElseThrow().getCostOfCourtPerPerson()).isEqualTo(2.0),
                 () -> assertThat(recruitmentRepository.findRecruitmentById(id).orElseThrow().getAnnual()).isEqualTo(AnnualType.NONE)
-                );
+        );
     }
 
     @Test

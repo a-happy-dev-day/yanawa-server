@@ -5,6 +5,8 @@ import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
 import fashionable.simba.yanawaserver.matching.error.MatchingTimeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -46,42 +48,41 @@ public class MatchingTest {
     @DisplayName("매칭 상태 진행중으로 바꾸기")
     void 매칭상태_진행중_변경_테스트() {
         //given
-        Matching matching = assertDoesNotThrow(() ->
-                new Matching.Builder()
-                        .id(1L)
-                        .courtId(1L)
-                        .hostId(1L)
-                        .date(LocalDate.of(2022, 7, 29))
-                        .startTime(LocalTime.of(19, 0))
-                        .endTime(LocalTime.of(21, 0))
-                        .status(MatchingStatusType.WAITING)
-                        .build()
-        );
+        Matching matching = getMatching(MatchingStatusType.WAITING);
         //when
-        matching.changeOngoing();
+        assertAll(
+                () -> assertDoesNotThrow(matching::changeOngoing),
+                () -> assertThat(matching.getStatus()).isEqualTo(MatchingStatusType.ONGOING)
+        );
         //then
-        assertThat(matching.getStatus()).isEqualTo(MatchingStatusType.ONGOING);
+
+    }
+
+    @ParameterizedTest
+    @EnumSource(value = MatchingStatusType.class, names = {"WAITING"}, mode = EnumSource.Mode.EXCLUDE)
+    @DisplayName("매칭 상태를 진행중으로 변경할때, 매칭상태가 WAITING이 아니라면 IllegalArgumentException가 발생한다.")
+    void changeOnGoing_throwsException(MatchingStatusType statusType) {
+        Matching matching = getMatching(statusType);
+        assertThrows(IllegalArgumentException.class, matching::changeOngoing);
     }
 
     @Test
     @DisplayName("매칭 상태 완료로 바꾸기")
     void 매칭상태_완료_변경_테스트() {
         //given
-        Matching matching = assertDoesNotThrow(() ->
-                new Matching.Builder()
-                        .id(1L)
-                        .courtId(1L)
-                        .hostId(1L)
-                        .date(LocalDate.of(2022, 7, 29))
-                        .startTime(LocalTime.of(19, 0))
-                        .endTime(LocalTime.of(21, 0))
-                        .status(MatchingStatusType.WAITING)
-                        .build()
-        );
+        Matching matching = getMatching(MatchingStatusType.ONGOING);
         //when
         matching.changeFinished();
         //then
         assertThat(matching.getStatus()).isEqualTo(MatchingStatusType.FINISHED);
+    }
+
+    @ParameterizedTest
+    @EnumSource(value = MatchingStatusType.class, names = {"ONGOING"}, mode = EnumSource.Mode.EXCLUDE)
+    @DisplayName("매칭 상태를 종료로 변경할때, 매칭상태가 ONGOING이 아니라면 IllegalArgumentException가 발생한다.")
+    void changeFinished_throwException(MatchingStatusType statusType) {
+        Matching matching = getMatching(statusType);
+        assertThrows(IllegalArgumentException.class, matching::changeFinished);
     }
 
     @Test
@@ -98,5 +99,17 @@ public class MatchingTest {
                     .status(MatchingStatusType.ONGOING)
                     .build();
         });
+    }
+
+    private static Matching getMatching(MatchingStatusType statusType) {
+        return new Matching.Builder()
+                .id(1L)
+                .courtId(1L)
+                .hostId(1L)
+                .date(LocalDate.of(2022, 7, 29))
+                .startTime(LocalTime.of(19, 0))
+                .endTime(LocalTime.of(21, 0))
+                .status(statusType)
+                .build();
     }
 }

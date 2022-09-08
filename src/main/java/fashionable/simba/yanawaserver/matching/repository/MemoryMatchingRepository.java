@@ -4,13 +4,14 @@ import fashionable.simba.yanawaserver.matching.domain.Matching;
 import fashionable.simba.yanawaserver.matching.domain.MatchingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
 public class MemoryMatchingRepository implements MatchingRepository {
-    private static final Map<Long, Matching> matchings = new ConcurrentHashMap<>();
+    private static final Map<Long, Matching> matchings = new HashMap<>();
     private Long sequence = 0L;
 
     @Override
@@ -21,6 +22,7 @@ public class MemoryMatchingRepository implements MatchingRepository {
                 .date(matching.getDate())
                 .startTime(matching.getStartTime())
                 .endTime(matching.getEndTime())
+                .status(matching.getStatus())
                 .build();
         matchings.put(id, save);
         return save;
@@ -28,6 +30,10 @@ public class MemoryMatchingRepository implements MatchingRepository {
 
     private synchronized Long getId() {
         return ++sequence;
+    }
+
+    public void clear() {
+        matchings.clear();
     }
 
     @Override

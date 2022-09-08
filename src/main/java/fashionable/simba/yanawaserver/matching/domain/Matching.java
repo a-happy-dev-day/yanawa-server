@@ -46,14 +46,14 @@ public class Matching {
 
     public void changeOngoing() {
         if(!this.status.equals(MatchingStatusType.WAITING)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("기다리는 상황에서만 진행할 수 있습니다.");
         }
         this.status = MatchingStatusType.ONGOING;
     }
 
     public void changeFinished() {
-        if(!this.status.equals(MatchingStatusType.WAITING)) {
-            throw new IllegalArgumentException();
+        if(!this.status.equals(MatchingStatusType.ONGOING)) {
+            throw new IllegalArgumentException("진행중인 상황에서만 종료할 수 있습니다.");
         }
         this.status = MatchingStatusType.FINISHED;
     }

@@ -22,6 +22,10 @@ public class MemoryParticipationRepository implements ParticipationRepository {
         return Optional.ofNullable(participations.get(id));
     }
 
+    public void clear() {
+        participations.clear();
+    }
+
     @Override
     public Integer countParticipationsByMatchingId(Long Matchingid) {
         return (int) participations.values().stream().filter(x -> x.getMatchingId().equals(Matchingid)).count();

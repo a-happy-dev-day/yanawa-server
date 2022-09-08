@@ -1,13 +1,12 @@
 package fashionable.simba.yanawaserver.matching.repository;
 
 import fashionable.simba.yanawaserver.matching.domain.Matching;
-import fashionable.simba.yanawaserver.matching.domain.MatchingRepository;
+import fashionable.simba.yanawaserver.matching.domain.repository.MatchingRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
 public class MemoryMatchingRepository implements MatchingRepository {
@@ -32,6 +31,7 @@ public class MemoryMatchingRepository implements MatchingRepository {
         return ++sequence;
     }
 
+    @Override
     public void clear() {
         matchings.clear();
     }

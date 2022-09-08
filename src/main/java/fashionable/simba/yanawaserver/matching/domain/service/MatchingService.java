@@ -1,8 +1,13 @@
-package fashionable.simba.yanawaserver.matching.domain;
+package fashionable.simba.yanawaserver.matching.domain.service;
 
 import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
-import fashionable.simba.yanawaserver.matching.constant.RecruitmentStatusType;
+import fashionable.simba.yanawaserver.matching.domain.Matching;
+import fashionable.simba.yanawaserver.matching.domain.Recruitment;
+import fashionable.simba.yanawaserver.matching.domain.repository.MatchingRepository;
+import fashionable.simba.yanawaserver.matching.domain.repository.RecruitmentRepository;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 @Service
 public class MatchingService {
@@ -32,6 +37,9 @@ public class MatchingService {
         Matching matching = matchingRepository.findMatchingById(id).orElseThrow();
         if (matching.getStatus() != MatchingStatusType.ONGOING) {
             throw new RuntimeException("매칭이 시작되지 않아 매칭을 종료할 수 없습니다.");
+        }
+        if (LocalDateTime.now().compareTo(matching.getDate().atTime(matching.getEndTime())) <= 0) {
+            throw new RuntimeException("매칭 종료시간이 되지 않아 매칭을 종료할 수 없습니다.");
         }
         matching.changeFinished();
         matchingRepository.save(matching);

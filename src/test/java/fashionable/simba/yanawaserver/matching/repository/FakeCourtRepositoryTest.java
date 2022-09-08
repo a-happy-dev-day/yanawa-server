@@ -1,6 +1,6 @@
 package fashionable.simba.yanawaserver.matching.repository;
 
-import fashionable.simba.yanawaserver.matching.domain.CourtRepository;
+import fashionable.simba.yanawaserver.matching.domain.repository.CourtRepository;
 import org.junit.jupiter.api.Test;
 
 public class FakeCourtRepositoryTest {

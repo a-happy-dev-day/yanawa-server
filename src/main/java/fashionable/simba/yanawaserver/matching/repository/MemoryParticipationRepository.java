@@ -1,7 +1,7 @@
 package fashionable.simba.yanawaserver.matching.repository;
 
 import fashionable.simba.yanawaserver.matching.domain.Participation;
-import fashionable.simba.yanawaserver.matching.domain.ParticipationRepository;
+import fashionable.simba.yanawaserver.matching.domain.repository.ParticipationRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -11,17 +11,32 @@ import java.util.Optional;
 @Repository
 public class MemoryParticipationRepository implements ParticipationRepository {
     public static Map<Long, Participation> participations = new HashMap<>();
+    private Long sequence = 0L;
 
     @Override
-    public void save(Participation Participation) {
-        participations.put(Participation.getId(), Participation);
+    public Participation save(Participation participation) {
+        Long id = getId();
+        Participation save = new Participation.Builder()
+                .id(id)
+                .matchingId(participation.getMatchingId())
+                .requestDateTime(participation.getRequestDateTime())
+                .status(participation.getStatus())
+                .build();
+        participations.put(id, save);
+        return save;
     }
+
+    private synchronized Long getId() {
+        return ++sequence;
+    }
+
 
     @Override
     public Optional<Participation> findParticipationById(Long id) {
         return Optional.ofNullable(participations.get(id));
     }
 
+    @Override
     public void clear() {
         participations.clear();
     }

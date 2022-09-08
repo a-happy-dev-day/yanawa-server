@@ -31,6 +31,14 @@ public class MatchingResponse {
     private String details;
     private RecruitmentStatusType recruitmentStatus;
 
+    public Long getMatchingId() {
+        return matchingId;
+    }
+
+    public Long getRecruitmentId() {
+        return recruitmentId;
+    }
+
     public MatchingResponse(Builder builder) {
         this.recruitmentId = builder.recruitmentId;
         this.matchingId = builder.matchingId;

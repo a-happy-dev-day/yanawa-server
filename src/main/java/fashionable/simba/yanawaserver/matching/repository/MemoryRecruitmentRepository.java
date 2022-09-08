@@ -1,7 +1,7 @@
 package fashionable.simba.yanawaserver.matching.repository;
 
 import fashionable.simba.yanawaserver.matching.domain.Recruitment;
-import fashionable.simba.yanawaserver.matching.domain.RecruitmentRepository;
+import fashionable.simba.yanawaserver.matching.domain.repository.RecruitmentRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -18,6 +18,7 @@ public class MemoryRecruitmentRepository implements RecruitmentRepository {
         Long id = getId();
         Recruitment save = new Recruitment.Builder()
                 .id(id)
+                .matchingId(recruitment.getMatchingId())
                 .maximumLevel(recruitment.getMaximumLevel())
                 .minimumLevel(recruitment.getMinimumLevel())
                 .ageOfRecruitment(recruitment.getAgeOfRecruitment())
@@ -33,6 +34,7 @@ public class MemoryRecruitmentRepository implements RecruitmentRepository {
         return save;
     }
 
+    @Override
     public void clear() {
         recruitments.clear();
     }

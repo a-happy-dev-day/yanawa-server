@@ -1,6 +1,6 @@
 package fashionable.simba.yanawaserver.matching.repository;
 
-import fashionable.simba.yanawaserver.matching.domain.CourtRepository;
+import fashionable.simba.yanawaserver.matching.domain.repository.CourtRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -23,6 +23,7 @@ public class MemoryCourtRepository implements CourtRepository {
         return ++sequence;
     }
 
+    @Override
     public void clear() {
         courts.clear();
     }

@@ -6,6 +6,7 @@ import fashionable.simba.yanawaserver.matching.constant.GenderType;
 import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
 import fashionable.simba.yanawaserver.matching.constant.PreferenceType;
 import fashionable.simba.yanawaserver.matching.constant.RecruitmentStatusType;
+import fashionable.simba.yanawaserver.matching.domain.service.MatchingService;
 import fashionable.simba.yanawaserver.matching.repository.MemoryCourtRepository;
 import fashionable.simba.yanawaserver.matching.repository.MemoryMatchingRepository;
 import fashionable.simba.yanawaserver.matching.repository.MemoryParticipationRepository;
@@ -44,7 +45,7 @@ public class MatchingServiceTest {
     @DisplayName("매칭을 생성한다.")
     void create_matching_test() {
         //given
-        Matching matching = getMatching(MatchingStatusType.ONGOING);
+        Matching matching = getMatching(MatchingStatusType.WAITING);
         //
         Matching savedMatching = matchingService.createMatching(matching);
         //
@@ -63,22 +64,6 @@ public class MatchingServiceTest {
         matchingService.startMatching(savedMatching.getId());
         //then
         assertThat(matchingRepository.findMatchingById(savedMatching.getId()).orElseThrow().getStatus()).isEqualTo(MatchingStatusType.ONGOING);
-    }
-
-    private static Recruitment getRecruitment(Matching savedMatching, RecruitmentStatusType closed) {
-        return new Recruitment.Builder()
-                .matchingId(savedMatching.getId())
-                .maximumLevel(new Level(5.0))
-                .minimumLevel(new Level(1.0))
-                .ageOfRecruitment(AgeGroupType.TWENTIES)
-                .sexOfRecruitment(GenderType.NONE)
-                .preferenceGame(PreferenceType.RALLY)
-                .numberOfRecruitment(4)
-                .costOfCourtPerPerson(2.0)
-                .annual(AnnualType.FIVE_YEARS_LESS)
-                .status(closed)
-                .details("4명이서 랠리해요~")
-                .build();
     }
 
     @ParameterizedTest
@@ -108,7 +93,7 @@ public class MatchingServiceTest {
     @DisplayName("진행중인 매칭(ONGOING)을 종료(FINISHED)한다.")
     void end_matching_test() {
         //given
-        Matching matching = getMatching(MatchingStatusType.ONGOING);
+        Matching matching = getMatching(MatchingStatusType.ONGOING, LocalDate.now(), LocalTime.now().minusHours(3), LocalTime.now().minusHours(1));
         Matching savedMatching = matchingService.createMatching(matching);
         //when
         matchingService.endMatching(savedMatching.getId());
@@ -129,14 +114,52 @@ public class MatchingServiceTest {
         });
     }
 
+    @Test
+    @DisplayName("매칭 종료시간이 지나지않으면 매칭을 종료시킬 수 없다.")
+    void end_matching_time_check_test() {
+        Matching matching = getMatching(MatchingStatusType.ONGOING
+                ,LocalDate.now(), LocalTime.now().minusHours(1), LocalTime.now().plusHours(1));
+        Matching savedMatching = matchingService.createMatching(matching);
+        assertThrows(RuntimeException.class, () -> {
+            matchingService.endMatching(savedMatching.getId());
+        });
+    }
+
     private static Matching getMatching(MatchingStatusType statusType) {
         return new Matching.Builder()
                 .courtId(서울_테니스장)
                 .hostId(1L)
-                .date(LocalDate.of(2022, 7, 29))
-                .startTime(LocalTime.of(19, 0))
-                .endTime(LocalTime.of(21, 0))
+                .date(LocalDate.now())
+                .startTime(LocalTime.now().plusHours(1))
+                .endTime(LocalTime.now().plusHours(3))
                 .status(statusType)
+                .build();
+    }
+
+    private static Matching getMatching(MatchingStatusType statusType, LocalDate date, LocalTime startTime, LocalTime endTime) {
+        return new Matching.Builder()
+                .courtId(서울_테니스장)
+                .hostId(1L)
+                .date(date)
+                .startTime(startTime)
+                .endTime(endTime)
+                .status(statusType)
+                .build();
+    }
+
+    private static Recruitment getRecruitment(Matching savedMatching, RecruitmentStatusType closed) {
+        return new Recruitment.Builder()
+                .matchingId(savedMatching.getId())
+                .maximumLevel(new Level(5.0))
+                .minimumLevel(new Level(1.0))
+                .ageOfRecruitment(AgeGroupType.TWENTIES)
+                .sexOfRecruitment(GenderType.NONE)
+                .preferenceGame(PreferenceType.RALLY)
+                .numberOfRecruitment(4)
+                .costOfCourtPerPerson(2.0)
+                .annual(AnnualType.FIVE_YEARS_LESS)
+                .status(closed)
+                .details("4명이서 랠리해요~")
                 .build();
     }
 }

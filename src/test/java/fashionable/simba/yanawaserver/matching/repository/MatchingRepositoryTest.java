@@ -1,7 +1,7 @@
 package fashionable.simba.yanawaserver.matching.repository;
 
 import fashionable.simba.yanawaserver.matching.domain.Matching;
-import fashionable.simba.yanawaserver.matching.domain.MatchingRepository;
+import fashionable.simba.yanawaserver.matching.domain.repository.MatchingRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;

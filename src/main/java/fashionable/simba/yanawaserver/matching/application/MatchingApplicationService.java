@@ -3,10 +3,11 @@ package fashionable.simba.yanawaserver.matching.application;
 import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
 import fashionable.simba.yanawaserver.matching.constant.RecruitmentStatusType;
 import fashionable.simba.yanawaserver.matching.domain.Matching;
-import fashionable.simba.yanawaserver.matching.domain.MatchingService;
+import fashionable.simba.yanawaserver.matching.domain.service.MatchingService;
 import fashionable.simba.yanawaserver.matching.domain.Recruitment;
-import fashionable.simba.yanawaserver.matching.domain.RecruitmentService;
-import fashionable.simba.yanawaserver.matching.domain.CourtRepository;
+import fashionable.simba.yanawaserver.matching.domain.service.RecruitmentService;
+import fashionable.simba.yanawaserver.matching.domain.repository.CourtRepository;
+import fashionable.simba.yanawaserver.matching.error.NoCourtDataException;
 
 public class MatchingApplicationService {
     private final MatchingService matchingService;
@@ -29,7 +30,7 @@ public class MatchingApplicationService {
                 .status(MatchingStatusType.WAITING)
                 .build();
         Long courtId = matching.getCourtId();
-        courtRepository.findCourtNameById(courtId).orElseThrow(() -> new IllegalArgumentException("코트장 정보를 조회할 수 없습니다."));
+        courtRepository.findCourtNameById(courtId).orElseThrow(() -> new NoCourtDataException("코트장 정보를 조회할 수 없습니다."));
         Matching savedMatching = matchingService.createMatching(matching);
 
         Recruitment recruitment = new Recruitment.Builder()
@@ -70,4 +71,6 @@ public class MatchingApplicationService {
 
         return response;
     }
+
+
 }

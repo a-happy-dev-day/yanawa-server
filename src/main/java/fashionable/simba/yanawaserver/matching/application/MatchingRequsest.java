@@ -49,10 +49,6 @@ public class MatchingRequsest {
         return endTime;
     }
 
-    public MatchingStatusType getMatchingStatus() {
-        return matchingStatus;
-    }
-
     public Level getMaximumLevel() {
         return maximumLevel;
     }
@@ -87,10 +83,6 @@ public class MatchingRequsest {
 
     public String getDetails() {
         return details;
-    }
-
-    public RecruitmentStatusType getRecruitmentStatus() {
-        return recruitmentStatus;
     }
 
     public MatchingRequsest(Builder builder) {

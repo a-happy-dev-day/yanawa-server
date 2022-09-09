@@ -19,8 +19,8 @@ public class RecruitmentService {
 
     public Recruitment completeRecritument(Long id) {
         Recruitment recruitment = recruitmentRepository.findRecruitmentById(id).orElseThrow();
-        Integer numberOfparticipations =  participationRepository.countParticipationsByMatchingId(recruitment.getMatchingId());
-        if (numberOfparticipations < 1 ) {
+        Integer numberOfparticipations = participationRepository.countParticipationsByMatchingId(recruitment.getMatchingId());
+        if (numberOfparticipations < 1) {
             throw new IllegalArgumentException("참가자가 없어 모집을 완료할 수 없습니다.");
         }
         recruitment.changeClosed();

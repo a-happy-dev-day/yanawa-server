@@ -3,15 +3,13 @@ package fashionable.simba.yanawaserver.matching.application;
 import fashionable.simba.yanawaserver.matching.constant.AgeGroupType;
 import fashionable.simba.yanawaserver.matching.constant.AnnualType;
 import fashionable.simba.yanawaserver.matching.constant.GenderType;
-import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
 import fashionable.simba.yanawaserver.matching.constant.PreferenceType;
-import fashionable.simba.yanawaserver.matching.constant.RecruitmentStatusType;
-import fashionable.simba.yanawaserver.matching.domain.repository.CourtRepository;
 import fashionable.simba.yanawaserver.matching.domain.Level;
+import fashionable.simba.yanawaserver.matching.domain.repository.CourtRepository;
 import fashionable.simba.yanawaserver.matching.domain.repository.MatchingRepository;
 import fashionable.simba.yanawaserver.matching.domain.repository.ParticipationRepository;
-import fashionable.simba.yanawaserver.matching.domain.service.MatchingService;
 import fashionable.simba.yanawaserver.matching.domain.repository.RecruitmentRepository;
+import fashionable.simba.yanawaserver.matching.domain.service.MatchingService;
 import fashionable.simba.yanawaserver.matching.domain.service.RecruitmentService;
 import fashionable.simba.yanawaserver.matching.error.NoCourtDataException;
 import fashionable.simba.yanawaserver.matching.repository.MemoryCourtRepository;
@@ -47,7 +45,7 @@ public class ApplicationServiceTest {
     @DisplayName("매칭과 모집을 생성한다.")
     void createMatchingAndRecruitment_test() {
         MatchingRequsest requsest = getRequsest(1L);
-        MatchingResponse response =  applicationService.createMatchingAndRecruitment(requsest);
+        MatchingResponse response = applicationService.createMatchingAndRecruitment(requsest);
 
         assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getMatchingId()).isEqualTo(response.getMatchingId());
     }
@@ -60,7 +58,6 @@ public class ApplicationServiceTest {
             applicationService.createMatchingAndRecruitment(requsest);
         });
     }
-
 
 
     private static MatchingRequsest getRequsest(long courtId) {

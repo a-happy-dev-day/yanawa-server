@@ -111,7 +111,7 @@ public class RecruitmentServiceTest {
                 .details("4명이서 랠리해요~")
                 .status(RecruitmentStatusType.OPENING)
                 .build();
-        Recruitment savedRecruitment =  recruitmentService.createRecruitment(recruitment);
+        Recruitment savedRecruitment = recruitmentService.createRecruitment(recruitment);
         assertThrows(IllegalArgumentException.class, () -> {
             recruitmentService.completeRecritument(savedRecruitment.getId());
         });

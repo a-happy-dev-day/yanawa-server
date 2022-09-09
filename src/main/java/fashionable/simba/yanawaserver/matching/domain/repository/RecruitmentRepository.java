@@ -1,6 +1,5 @@
 package fashionable.simba.yanawaserver.matching.domain.repository;
 
-import fashionable.simba.yanawaserver.matching.application.MatchingRequsest;
 import fashionable.simba.yanawaserver.matching.domain.Recruitment;
 
 import java.util.Optional;

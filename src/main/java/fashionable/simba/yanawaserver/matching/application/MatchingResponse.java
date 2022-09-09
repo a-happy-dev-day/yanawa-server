@@ -81,7 +81,7 @@ public class MatchingResponse {
         private RecruitmentStatusType recruitmentStatus;
 
         public Builder() {
-            // **no option
+            // *no option
         }
 
         public Builder recruitmentId(Long recruitmentId) {
@@ -173,6 +173,7 @@ public class MatchingResponse {
             this.recruitmentStatus = recruitmentStatus;
             return this;
         }
+
         public MatchingResponse build() {
             return new MatchingResponse(this);
         }

@@ -17,7 +17,6 @@ public class MatchingRequsest {
     private LocalDate date;
     private LocalTime startTime;
     private LocalTime endTime;
-    private MatchingStatusType matchingStatus;
     private Level maximumLevel;
     private Level minimumLevel;
     private AgeGroupType ageOfRecruitment;
@@ -27,7 +26,6 @@ public class MatchingRequsest {
     private Double costOfCourtPerPerson;
     private AnnualType annual;
     private String details;
-    private RecruitmentStatusType recruitmentStatus;
 
     public Long getCourtId() {
         return courtId;
@@ -91,7 +89,6 @@ public class MatchingRequsest {
         this.date = builder.date;
         this.startTime = builder.startTime;
         this.endTime = builder.endTime;
-        this.matchingStatus = builder.matchingStatus;
         this.maximumLevel = builder.maximumLevel;
         this.minimumLevel = builder.minimumLevel;
         this.ageOfRecruitment = builder.ageOfRecruitment;
@@ -101,7 +98,6 @@ public class MatchingRequsest {
         this.costOfCourtPerPerson = builder.costOfCourtPerPerson;
         this.annual = builder.annual;
         this.details = builder.details;
-        this.recruitmentStatus = builder.recruitmentStatus;
     }
 
     public static class Builder {
@@ -110,7 +106,6 @@ public class MatchingRequsest {
         private LocalDate date;
         private LocalTime startTime;
         private LocalTime endTime;
-        private MatchingStatusType matchingStatus;
         private Level maximumLevel;
         private Level minimumLevel;
         private AgeGroupType ageOfRecruitment;
@@ -120,7 +115,6 @@ public class MatchingRequsest {
         private Double costOfCourtPerPerson;
         private AnnualType annual;
         private String details;
-        private RecruitmentStatusType recruitmentStatus;
 
         public Builder() {
         }
@@ -147,11 +141,6 @@ public class MatchingRequsest {
 
         public Builder endTime(LocalTime endTime) {
             this.endTime = endTime;
-            return this;
-        }
-
-        public Builder matchingStatus(MatchingStatusType matchingStatus) {
-            this.matchingStatus = matchingStatus;
             return this;
         }
 
@@ -197,11 +186,6 @@ public class MatchingRequsest {
 
         public Builder details(String details) {
             this.details = details;
-            return this;
-        }
-
-        public Builder recruitmentStatus(RecruitmentStatusType recruitmentStatus) {
-            this.recruitmentStatus = recruitmentStatus;
             return this;
         }
 

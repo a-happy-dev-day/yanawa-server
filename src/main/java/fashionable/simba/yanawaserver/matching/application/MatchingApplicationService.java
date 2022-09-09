@@ -50,7 +50,7 @@ public class MatchingApplicationService {
                 .build();
         Recruitment savedRecruitment = recruitmentService.createRecruitment(recruitment);
 
-        MatchingResponse response = new MatchingResponse.Builder()
+        return new MatchingResponse.Builder()
                 .recruitmentId(savedRecruitment.getId())
                 .matchingId(savedMatching.getId())
                 .courtId(savedMatching.getCourtId())
@@ -70,8 +70,6 @@ public class MatchingApplicationService {
                 .details(savedRecruitment.getDetails())
                 .recruitmentStatus(savedRecruitment.getStatus())
                 .build();
-
-        return response;
     }
 
 

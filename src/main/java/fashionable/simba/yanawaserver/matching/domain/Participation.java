@@ -32,8 +32,8 @@ public class Participation {
         return requestDateTime;
     }
 
-    public void setStatus(ParticipationStatusType status) {
-        this.status = status;
+    public void changeAcceptedParticipation() {
+        this.status = ParticipationStatusType.ACCEPTED;
     }
 
     public Participation(Builder builder) {

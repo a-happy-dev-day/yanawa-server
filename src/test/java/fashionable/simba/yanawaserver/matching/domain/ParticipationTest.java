@@ -34,7 +34,7 @@ public class ParticipationTest {
     }
 
     @Test
-    @DisplayName("참가 상태를 변경한다.")
+    @DisplayName("참가 상태 ACCEPTED로 변경한다.")
     void 참가상태_변경_테스트() {
         //given
         Participation participation = new Participation.Builder()
@@ -45,7 +45,7 @@ public class ParticipationTest {
                 .status(ParticipationStatusType.WAITING)
                 .build();
         //when
-        participation.setStatus(ParticipationStatusType.ACCEPTED);
+        participation.changeAcceptedParticipation();
         //then
         assertThat(participation.getStatus()).isEqualTo(ParticipationStatusType.ACCEPTED);
     }

@@ -70,7 +70,6 @@ public class ApplicationServiceTest {
                 .date(LocalDate.of(2022, 7, 29))
                 .startTime(LocalTime.of(19, 0))
                 .endTime(LocalTime.of(21, 0))
-                .matchingStatus(MatchingStatusType.WAITING)
                 .maximumLevel(new Level(4.0))
                 .minimumLevel(new Level(1.5))
                 .ageOfRecruitment(AgeGroupType.TWENTIES)
@@ -80,7 +79,6 @@ public class ApplicationServiceTest {
                 .costOfCourtPerPerson(2.0)
                 .annual(AnnualType.FIVE_YEARS_LESS)
                 .details("4명이서 랠리해요~")
-                .recruitmentStatus(RecruitmentStatusType.OPENING)
                 .build();
     }
 }

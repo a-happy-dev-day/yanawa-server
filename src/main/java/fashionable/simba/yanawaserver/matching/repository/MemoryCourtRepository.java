@@ -29,7 +29,12 @@ public class MemoryCourtRepository implements CourtRepository {
     }
 
     @Override
-    public Optional<String> findCourtNameById(Long id) {
+    public Optional<String> findCourtById(Long id) {
         return Optional.ofNullable(courts.get(id));
+    }
+
+    @Override
+    public boolean isCourtExist(Long id) {
+        return courts.get(id) != null;
     }
 }

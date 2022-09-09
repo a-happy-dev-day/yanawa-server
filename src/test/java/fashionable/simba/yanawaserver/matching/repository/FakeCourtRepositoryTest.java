@@ -8,6 +8,6 @@ public class FakeCourtRepositoryTest {
 
     @Test
     void save_court() {
-        System.out.println(courtRepository.findCourtNameById(1L));
+        System.out.println(courtRepository.findCourtById(1L));
     }
 }

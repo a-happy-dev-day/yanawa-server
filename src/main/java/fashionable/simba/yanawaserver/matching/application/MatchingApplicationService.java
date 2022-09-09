@@ -29,8 +29,10 @@ public class MatchingApplicationService {
                 .endTime(requsest.getEndTime())
                 .status(MatchingStatusType.WAITING)
                 .build();
-        Long courtId = matching.getCourtId();
-        courtRepository.findCourtNameById(courtId).orElseThrow(() -> new NoCourtDataException("코트장 정보를 조회할 수 없습니다."));
+        boolean isCourtExist = courtRepository.isCourtExist(matching.getCourtId());
+        if (!isCourtExist) {
+            throw new NoCourtDataException("코트장 정보를 조회할 수 없습니다.");
+        }
         Matching savedMatching = matchingService.createMatching(matching);
 
         Recruitment recruitment = new Recruitment.Builder()

@@ -7,5 +7,7 @@ public interface CourtRepository {
 
     void clear();
 
-    Optional<String> findCourtNameById(Long id);
+    Optional<String> findCourtById(Long id);
+
+    boolean isCourtExist(Long id);
 }

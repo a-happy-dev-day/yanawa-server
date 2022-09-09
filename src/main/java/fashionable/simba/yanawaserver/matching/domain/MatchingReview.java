@@ -22,22 +22,32 @@ public class MatchingReview {
     }
 
     public MatchingReview(Builder builder) {
+        if (builder.writerId == null || builder.partnerId == null) {
+            throw new NoPlayerDataException("");
+        }
+
         this.writerId = builder.writerId;
         this.partnerId = builder.partnerId;
         this.details = builder.details;
     }
 
     public static class Builder {
-        private final UUID writerId;
-        private final UUID partnerId;
+        private UUID writerId;
+        private UUID partnerId;
         private String details;
 
-        public Builder(UUID writerId, UUID partnerId) {
-            if (writerId == null || partnerId == null) {
-                throw new NoPlayerDataException("");
-            }
+        public Builder() {
+            // **no option
+        }
+
+        public Builder writerId(UUID writerId) {
             this.writerId = writerId;
+            return this;
+        }
+
+        public Builder partnerId(UUID partnerId) {
             this.partnerId = partnerId;
+            return this;
         }
 
         public Builder details(String details) {

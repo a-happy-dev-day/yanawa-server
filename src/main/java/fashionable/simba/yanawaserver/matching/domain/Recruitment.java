@@ -122,6 +122,7 @@ public class Recruitment {
         private RecruitmentStatusType status;
 
         public Builder() {
+            // **no option
         }
 
         public Builder id(Long id) {

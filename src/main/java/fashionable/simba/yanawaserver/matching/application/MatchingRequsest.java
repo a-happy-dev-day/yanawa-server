@@ -117,6 +117,7 @@ public class MatchingRequsest {
         private String details;
 
         public Builder() {
+            // **no option
         }
 
         public Builder courtId(Long courtId) {

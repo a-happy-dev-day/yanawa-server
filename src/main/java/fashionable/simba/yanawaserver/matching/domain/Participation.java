@@ -56,6 +56,7 @@ public class Participation {
         private LocalDateTime requestDateTime;
 
         public Builder() {
+            // **no option
         }
 
         public Builder id(Long id) {

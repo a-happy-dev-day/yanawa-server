@@ -81,6 +81,7 @@ public class MatchingResponse {
         private RecruitmentStatusType recruitmentStatus;
 
         public Builder() {
+            // **no option
         }
 
         public Builder recruitmentId(Long recruitmentId) {

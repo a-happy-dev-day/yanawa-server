@@ -82,6 +82,7 @@ public class Matching {
         private MatchingStatusType status;
 
         public Builder() {
+            // **no option
         }
 
         public Builder id(Long id) {

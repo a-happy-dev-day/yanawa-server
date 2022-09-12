@@ -2,15 +2,16 @@ package fashionable.simba.yanawaserver.auth.kakao;
 
 import fashionable.simba.yanawaserver.auth.filter.AccessCode;
 import fashionable.simba.yanawaserver.auth.filter.AccessToken;
+import fashionable.simba.yanawaserver.auth.filter.AuthenticationService;
 import fashionable.simba.yanawaserver.auth.filter.UserInfo;
+import fashionable.simba.yanawaserver.members.domain.KakaoAccessToken;
+import fashionable.simba.yanawaserver.members.domain.KakaoUser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
-@Service
-public class KakaoAuthenticationService {
+public class KakaoAuthenticationService implements AuthenticationService {
     private final KakaoAuthenticationClient authenticationClient;
     private final KakaoAuthorizationClient authorizationClient;
     private static final String GRANT_TYPE = "authorization_code";
@@ -20,9 +21,9 @@ public class KakaoAuthenticationService {
 
     public KakaoAuthenticationService(KakaoAuthenticationClient authenticationClient,
                                       KakaoAuthorizationClient authorizationClient,
-                                      @Value("kakao.client.redirect-uri") String redirectUri,
-                                      @Value("kakao.client.id") String clientId,
-                                      @Value("kakao.client.secret") String secretKey) {
+                                      @Value("${kakao.client.redirect-uri}") String redirectUri,
+                                      @Value("${kakao.client.id}") String clientId,
+                                      @Value("${kakao.client.secret}") String secretKey) {
         this.authenticationClient = authenticationClient;
         this.authorizationClient = authorizationClient;
         this.redirectUri = redirectUri;
@@ -56,20 +57,31 @@ public class KakaoAuthenticationService {
      * @param token
      * @return KakaoMember
      */
-    public KakaoMember getUserInfo(AccessToken token) {
+    public KakaoUser getUserInfo(AccessToken token) {
         UserInfo userInfo = authorizationClient.getUserInfo(
             MediaType.APPLICATION_FORM_URLENCODED_VALUE,
             "Bearer" + " " + token.getAccessToken()
         ).getBody();
 
-        return new KakaoMember(
+        return new KakaoUser(
             Objects.requireNonNull(userInfo).getId(),
             userInfo.getEmail(),
             userInfo.getNickname(),
             userInfo.getProfileImage(),
             userInfo.getThumbnailImage(),
-            token
+            (KakaoAccessToken) token
         );
     }
+
+    @Override
+    public AccessToken refreshToken(AccessToken token) {
+        return null;
+    }
+
+    @Override
+    public void logout(AccessToken token) {
+
+    }
+
 
 }

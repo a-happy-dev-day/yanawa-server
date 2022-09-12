@@ -1,11 +1,11 @@
 package fashionable.simba.yanawaserver.auth.filter;
 
-import fashionable.simba.yanawaserver.members.domain.KakaoUser;
+import fashionable.simba.yanawaserver.members.domain.KakaoMember;
 
 public interface AuthenticationService {
     AccessToken getAccessToken(AccessCode code);
 
-    KakaoUser getUserInfo(AccessToken token);
+    KakaoMember getUserInfo(AccessToken token);
 
     AccessToken refreshToken(AccessToken token);
 

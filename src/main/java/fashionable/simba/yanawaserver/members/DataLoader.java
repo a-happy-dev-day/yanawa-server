@@ -1,5 +1,6 @@
 package fashionable.simba.yanawaserver.members;
 
+import fashionable.simba.yanawaserver.members.domain.DefaultMember;
 import fashionable.simba.yanawaserver.members.domain.Member;
 import fashionable.simba.yanawaserver.members.domain.MemberRepository;
 import fashionable.simba.yanawaserver.members.domain.RoleType;
@@ -17,8 +18,8 @@ public class DataLoader {
     }
 
     public void loadData() {
-        Member admin = new Member("admin@email.com", List.of(RoleType.ROLE_ADMIN.name()));
-        Member member = new Member("user@email.com", List.of(RoleType.ROLE_MEMBER.name()));
+        Member admin = new DefaultMember("admin@email.com", List.of(RoleType.ROLE_ADMIN.name()));
+        Member member = new DefaultMember("user@email.com", List.of(RoleType.ROLE_MEMBER.name()));
         memberRepository.save(admin);
         memberRepository.save(member);
     }

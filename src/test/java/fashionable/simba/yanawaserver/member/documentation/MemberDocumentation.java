@@ -1,6 +1,6 @@
 package fashionable.simba.yanawaserver.member.documentation;
 
-import fashionable.simba.yanawaserver.members.domain.Member;
+import fashionable.simba.yanawaserver.members.domain.DefaultMember;
 import fashionable.simba.yanawaserver.members.domain.RoleType;
 import fashionable.simba.yanawaserver.members.service.MemberService;
 import org.junit.jupiter.api.Disabled;
@@ -29,7 +29,9 @@ class MemberDocumentation extends Documentation {
     @Test
     void members_me() {
         when(memberService.findMemberByUserName(any()))
-            .thenReturn(Optional.of(new Member("member@email.com", List.of(RoleType.ROLE_MEMBER.name()))));
+            .thenReturn(Optional.of(
+                new DefaultMember(1L, "member@email.com", List.of(RoleType.ROLE_MEMBER.name()))
+            ));
 
         givenOauth()
             .filter(document("member/me",

@@ -17,4 +17,5 @@ public interface JpaMemberRepository extends JpaRepository<Member, Long>, Member
 
     @Override
     List<Member> findAll();
+
 }

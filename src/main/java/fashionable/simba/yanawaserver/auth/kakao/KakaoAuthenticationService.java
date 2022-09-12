@@ -5,7 +5,7 @@ import fashionable.simba.yanawaserver.auth.filter.AccessToken;
 import fashionable.simba.yanawaserver.auth.filter.AuthenticationService;
 import fashionable.simba.yanawaserver.auth.filter.UserInfo;
 import fashionable.simba.yanawaserver.members.domain.KakaoAccessToken;
-import fashionable.simba.yanawaserver.members.domain.KakaoUser;
+import fashionable.simba.yanawaserver.members.domain.KakaoMember;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 
@@ -57,13 +57,13 @@ public class KakaoAuthenticationService implements AuthenticationService {
      * @param token
      * @return KakaoMember
      */
-    public KakaoUser getUserInfo(AccessToken token) {
+    public KakaoMember getUserInfo(AccessToken token) {
         UserInfo userInfo = authorizationClient.getUserInfo(
             MediaType.APPLICATION_FORM_URLENCODED_VALUE,
             "Bearer" + " " + token.getAccessToken()
         ).getBody();
 
-        return new KakaoUser(
+        return new KakaoMember(
             Objects.requireNonNull(userInfo).getId(),
             userInfo.getEmail(),
             userInfo.getNickname(),

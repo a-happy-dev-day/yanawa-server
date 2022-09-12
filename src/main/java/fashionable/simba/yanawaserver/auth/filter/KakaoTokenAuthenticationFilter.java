@@ -5,6 +5,8 @@ import fashionable.simba.yanawaserver.auth.handler.AuthenticationFailureHandler;
 import fashionable.simba.yanawaserver.auth.handler.AuthenticationSuccessHandler;
 import fashionable.simba.yanawaserver.auth.provider.AuthenticationManager;
 import fashionable.simba.yanawaserver.auth.provider.AuthenticationToken;
+import fashionable.simba.yanawaserver.auth.userdetails.UserDetails;
+import fashionable.simba.yanawaserver.auth.userdetails.UserDetailsService;
 import fashionable.simba.yanawaserver.members.domain.KakaoMember;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,11 +16,13 @@ import java.util.stream.Collectors;
 public class KakaoTokenAuthenticationFilter extends AbstractAuthenticationFilter {
     private final ObjectMapper mapper;
     private final AuthenticationService authenticationService;
+    private final UserDetailsService userDetailsService;
 
-    public KakaoTokenAuthenticationFilter(AuthenticationSuccessHandler successHandler, AuthenticationFailureHandler failureHandler, AuthenticationManager authenticationManager, ObjectMapper mapper, AuthenticationService authenticationService) {
+    public KakaoTokenAuthenticationFilter(AuthenticationSuccessHandler successHandler, AuthenticationFailureHandler failureHandler, AuthenticationManager authenticationManager, ObjectMapper mapper, AuthenticationService authenticationService, UserDetailsService userDetailsService) {
         super(successHandler, failureHandler, authenticationManager);
         this.mapper = mapper;
         this.authenticationService = authenticationService;
+        this.userDetailsService = userDetailsService;
     }
 
     /**
@@ -38,19 +42,16 @@ public class KakaoTokenAuthenticationFilter extends AbstractAuthenticationFilter
      */
     @Override
     protected AuthenticationToken convert(HttpServletRequest request) throws IOException {
-        // TODO : 문서에 맞게 수정
         String content = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
         AccessCode code = mapper.readValue(content, AccessCode.class);
 
         AccessToken accessToken = authenticationService.getAccessToken(code);
 
-        KakaoMember userInfo = authenticationService.getUserInfo(accessToken);
+        KakaoMember kakaoMember = authenticationService.getUserInfo(accessToken);
 
-        // 카카오 ID를 통해 사용자가 저장되어 있는지 확인
+        UserDetails userDetails = userDetailsService.saveKakaoMember(kakaoMember);
 
-        // 사용자가 저장되어 있지 않다면 정보 저장후 DB ID 리턴
-
-        return new AuthenticationToken(userInfo.getKakaoId().toString());
+        return new AuthenticationToken((String)userDetails.getUsername());
     }
 
     @Override

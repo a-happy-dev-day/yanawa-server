@@ -1,5 +1,6 @@
 package fashionable.simba.yanawaserver.auth.kakao;
 
+import fashionable.simba.yanawaserver.members.domain.KakaoAccessToken;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;

@@ -1,22 +1,24 @@
 package fashionable.simba.yanawaserver.auth.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fashionable.simba.yanawaserver.auth.dto.TokenRequest;
 import fashionable.simba.yanawaserver.auth.handler.AuthenticationFailureHandler;
 import fashionable.simba.yanawaserver.auth.handler.AuthenticationSuccessHandler;
 import fashionable.simba.yanawaserver.auth.provider.AuthenticationManager;
 import fashionable.simba.yanawaserver.auth.provider.AuthenticationToken;
+import fashionable.simba.yanawaserver.members.domain.KakaoMember;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
 public class KakaoTokenAuthenticationFilter extends AbstractAuthenticationFilter {
-    public final ObjectMapper mapper;
+    private final ObjectMapper mapper;
+    private final AuthenticationService authenticationService;
 
-    public KakaoTokenAuthenticationFilter(AuthenticationSuccessHandler successHandler, AuthenticationFailureHandler failureHandler, AuthenticationManager authenticationManager, ObjectMapper mapper) {
+    public KakaoTokenAuthenticationFilter(AuthenticationSuccessHandler successHandler, AuthenticationFailureHandler failureHandler, AuthenticationManager authenticationManager, ObjectMapper mapper, AuthenticationService authenticationService) {
         super(successHandler, failureHandler, authenticationManager);
         this.mapper = mapper;
+        this.authenticationService = authenticationService;
     }
 
     /**
@@ -38,11 +40,17 @@ public class KakaoTokenAuthenticationFilter extends AbstractAuthenticationFilter
     protected AuthenticationToken convert(HttpServletRequest request) throws IOException {
         // TODO : 문서에 맞게 수정
         String content = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
-        TokenRequest tokenRequest = mapper.readValue(content, TokenRequest.class);
+        AccessCode code = mapper.readValue(content, AccessCode.class);
 
-        String principal = tokenRequest.getUsername();
+        AccessToken accessToken = authenticationService.getAccessToken(code);
 
-        return new AuthenticationToken(principal);
+        KakaoMember userInfo = authenticationService.getUserInfo(accessToken);
+
+        // 카카오 ID를 통해 사용자가 저장되어 있는지 확인
+
+        // 사용자가 저장되어 있지 않다면 정보 저장후 DB ID 리턴
+
+        return new AuthenticationToken(userInfo.getKakaoId().toString());
     }
 
     @Override

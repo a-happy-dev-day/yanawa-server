@@ -10,9 +10,9 @@ import fashionable.simba.yanawaserver.auth.provider.AuthorizationType;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class KakaoTokenAuthorizationFilter extends AbstractAuthenticationFilter {
+public class ServerTokenAuthorizationFilter extends AbstractAuthenticationFilter {
 
-    public KakaoTokenAuthorizationFilter(AuthenticationSuccessHandler successHandler, AuthenticationFailureHandler failureHandler, AuthenticationManager authenticationManager) {
+    public ServerTokenAuthorizationFilter(AuthenticationSuccessHandler successHandler, AuthenticationFailureHandler failureHandler, AuthenticationManager authenticationManager) {
         super(successHandler, failureHandler, authenticationManager);
     }
 

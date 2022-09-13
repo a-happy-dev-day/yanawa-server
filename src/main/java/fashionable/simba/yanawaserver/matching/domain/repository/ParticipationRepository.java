@@ -11,5 +11,5 @@ public interface ParticipationRepository {
 
     void clear();
 
-    Integer countParticipationsByMatchingId(Long Matchingid);
+    Integer countParticipationsByMatchingId(Long matchingId);
 }

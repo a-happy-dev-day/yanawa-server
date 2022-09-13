@@ -1,6 +1,7 @@
 package fashionable.simba.yanawaserver.auth.filter;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -23,6 +24,8 @@ class AccessCodeTest {
     @Test
     @DisplayName("동등성 테스트")
     void accessCode_equals() {
-        EqualsVerifier.forClass(AccessCode.class);
+        EqualsVerifier.forClass(AccessCode.class)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .verify();
     }
 }

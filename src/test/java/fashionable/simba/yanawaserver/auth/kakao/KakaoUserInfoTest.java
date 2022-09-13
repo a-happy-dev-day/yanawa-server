@@ -1,6 +1,7 @@
 package fashionable.simba.yanawaserver.auth.kakao;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -22,9 +23,4 @@ class KakaoUserInfoTest {
         );
     }
 
-    @Test
-    @DisplayName("동등성 테스트")
-    void userInfo_equals() {
-        EqualsVerifier.forClass(KakaoUserInfo.class);
-    }
 }

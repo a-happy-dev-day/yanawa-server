@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import fashionable.simba.yanawaserver.auth.filter.AccessToken;
 
 import javax.persistence.Embeddable;
+import javax.persistence.Entity;
 import java.util.Date;
 import java.util.Objects;
 
@@ -29,30 +30,11 @@ public final class KakaoAccessToken implements AccessToken {
         this.refreshTokenExpiresIn = refreshTokenExpiresIn;
     }
 
-    public void setTokenType(String tokenType) {
-        this.tokenType = tokenType;
-    }
-
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
-    }
-
-    public void setExpiresIn(Date expiresIn) {
-        this.expiresIn = expiresIn;
-    }
-
-    public void setRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
-    }
-
-    public void setRefreshTokenExpiresIn(Date refreshTokenExpiresIn) {
-        this.refreshTokenExpiresIn = refreshTokenExpiresIn;
-    }
-
     @Override
     public String getTokenType() {
         return tokenType;
     }
+
     @Override
     public String getAccessToken() {
         return accessToken;

@@ -15,8 +15,7 @@ public final class KakaoUserInfo implements UserInfo {
     private Map<String, String> properties;
     private Map<String, Object> kakaoAccount;
 
-    private KakaoUserInfo() {
-    }
+    private KakaoUserInfo() {/*no-op*/}
 
     public KakaoUserInfo(Long id, Map<String, String> properties, Map<String, Object> kakaoAccount) {
         this.id = id;
@@ -47,27 +46,5 @@ public final class KakaoUserInfo implements UserInfo {
     @Override
     public String getThumbnailImage() {
         return properties.get("thumbnail_image");
-    }
-
-    @Override
-    public String toString() {
-        return "KakaoUserInfo{" +
-            "id=" + id +
-            ", properties=" + properties +
-            ", kakaoAccount=" + kakaoAccount +
-            '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        KakaoUserInfo that = (KakaoUserInfo) o;
-        return Objects.equals(getId(), that.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
     }
 }

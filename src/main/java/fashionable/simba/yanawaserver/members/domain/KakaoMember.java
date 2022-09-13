@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Entity
 @DiscriminatorValue("kakao")
-public class KakaoMember extends Member {
+public final class KakaoMember extends Member {
     private Long kakaoId;
     private String nickname;
     private String profileImageUrl;
@@ -28,12 +28,7 @@ public class KakaoMember extends Member {
     }
 
     public KakaoMember(Long kakaoId, String email, String nickname, String profileImageUrl, String thumbnailImageUrl, KakaoAccessToken kakaoAccessToken) {
-        super(email, List.of(RoleType.ROLE_MEMBER.name()));
-        this.kakaoId = kakaoId;
-        this.nickname = nickname;
-        this.profileImageUrl = profileImageUrl;
-        this.thumbnailImageUrl = thumbnailImageUrl;
-        this.kakaoAccessToken = kakaoAccessToken;
+        this(email, List.of(RoleType.ROLE_MEMBER.name()), kakaoId, nickname, profileImageUrl, thumbnailImageUrl, kakaoAccessToken);
     }
 
     public String getNickname() {

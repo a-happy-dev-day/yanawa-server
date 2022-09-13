@@ -32,7 +32,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails saveKakaoMember(KakaoMember member) {
         KakaoMember kakaoMember = member;
         if (kakaoMemberRepository.findByKakaoId(kakaoMember.getKakaoId()).isEmpty()) {
-            kakaoMember = memberRepository.save(kakaoMember);
+            kakaoMember = kakaoMemberRepository.save(kakaoMember);
         }
         return new User(kakaoMember.getKakaoId().toString(), kakaoMember.getRoles());
     }

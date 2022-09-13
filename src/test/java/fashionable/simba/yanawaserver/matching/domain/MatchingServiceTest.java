@@ -68,13 +68,13 @@ public class MatchingServiceTest {
 
     @ParameterizedTest
     @EnumSource(value = RecruitmentStatusType.class, names = {"CLOSED"}, mode = EnumSource.Mode.EXCLUDE)
-    @DisplayName("모집이 CLOSED상태가 아니라면 매칭을 ONGOING으로 할때 RuntimeException 발생한다.")
+    @DisplayName("모집이 CLOSED상태가 아니라면 매칭을 ONGOING으로 할때 IllegalArgumentException 발생한다.")
     void start_matching_throw_exception(RecruitmentStatusType statusType) {
         Matching matching = getMatching(MatchingStatusType.WAITING);
         Matching savedMatching = matchingService.createMatching(matching);
         Recruitment recruitment = getRecruitment(savedMatching, statusType);
         recruitmentRepository.save(recruitment);
-        assertThrows(RuntimeException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             matchingService.startMatching(savedMatching.getId());
         });
     }
@@ -102,14 +102,14 @@ public class MatchingServiceTest {
     }
 
     @ParameterizedTest
-    @DisplayName("매칭을 종료(FINISHED)하려 할때, 매칭이 진행(ONGOING)이 아니라면 RuntimeException이 발생한다.")
+    @DisplayName("매칭을 종료(FINISHED)하려 할때, 매칭이 진행(ONGOING)이 아니라면 IllegalArgumentException이 발생한다.")
     @EnumSource(value = MatchingStatusType.class, names = {"ONGOING"}, mode = EnumSource.Mode.EXCLUDE)
     void end_matching_throw_exception(MatchingStatusType statusType) {
         //given
         Matching matching = getMatching(statusType);
         Matching savedMatching = matchingService.createMatching(matching);
         //then
-        assertThrows(RuntimeException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             matchingService.endMatching(savedMatching.getId());
         });
     }
@@ -120,7 +120,7 @@ public class MatchingServiceTest {
         Matching matching = getMatching(MatchingStatusType.ONGOING
                 , LocalDate.now(), LocalTime.now().minusHours(1), LocalTime.now().plusHours(1));
         Matching savedMatching = matchingService.createMatching(matching);
-        assertThrows(RuntimeException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             matchingService.endMatching(savedMatching.getId());
         });
     }

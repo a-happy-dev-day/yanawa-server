@@ -27,7 +27,7 @@ public class MatchingService {
         Matching matching = matchingRepository.findMatchingById(id).orElseThrow();
         Recruitment recruitment = recruitmentRepository.findRecruitmentById(matching.getId()).orElseThrow(() -> new IllegalArgumentException("모집 정보가 없습니다."));
         if (!recruitment.isClosed()) {
-            throw new RuntimeException("모집이 종료되지 않아 매칭을 시작할 수 없습니다.");
+            throw new IllegalArgumentException("모집이 종료되지 않아 매칭을 시작할 수 없습니다.");
         }
         matching.changeOngoing();
         return matchingRepository.save(matching);
@@ -36,10 +36,10 @@ public class MatchingService {
     public void endMatching(Long id) {
         Matching matching = matchingRepository.findMatchingById(id).orElseThrow();
         if (matching.getStatus() != MatchingStatusType.ONGOING) {
-            throw new RuntimeException("매칭이 시작되지 않아 매칭을 종료할 수 없습니다.");
+            throw new IllegalArgumentException("매칭이 시작되지 않아 매칭을 종료할 수 없습니다.");
         }
         if (LocalDateTime.now().compareTo(matching.getDate().atTime(matching.getEndTime())) <= 0) {
-            throw new RuntimeException("매칭 종료시간이 되지 않아 매칭을 종료할 수 없습니다.");
+            throw new IllegalArgumentException("매칭 종료시간이 되지 않아 매칭을 종료할 수 없습니다.");
         }
         matching.changeFinished();
         matchingRepository.save(matching);

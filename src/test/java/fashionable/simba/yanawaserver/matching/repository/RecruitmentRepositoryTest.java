@@ -64,6 +64,6 @@ public class RecruitmentRepositoryTest {
                 .annual(AnnualType.NONE)
                 .build();
         Long id = recruitmentRepository.save(recruitment).getId();
-        logger.debug("생성한 recruitment: " + recruitmentRepository.findRecruitmentById(id));
+        assertThat(recruitmentRepository.findRecruitmentById(id).orElseThrow().getId()).isEqualTo(id);
     }
 }

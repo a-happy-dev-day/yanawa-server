@@ -39,6 +39,70 @@ public class MatchingResponse {
         return recruitmentId;
     }
 
+    public Long getCourtId() {
+        return courtId;
+    }
+
+    public Long getHostId() {
+        return hostId;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public MatchingStatusType getMatchingStatus() {
+        return matchingStatus;
+    }
+
+    public Level getMaximumLevel() {
+        return maximumLevel;
+    }
+
+    public Level getMinimumLevel() {
+        return minimumLevel;
+    }
+
+    public AgeGroupType getAgeOfRecruitment() {
+        return ageOfRecruitment;
+    }
+
+    public GenderType getSexOfRecruitment() {
+        return sexOfRecruitment;
+    }
+
+    public PreferenceType getPreferenceGame() {
+        return preferenceGame;
+    }
+
+    public Integer getNumberOfRecruitment() {
+        return numberOfRecruitment;
+    }
+
+    public Double getCostOfCourtPerPerson() {
+        return costOfCourtPerPerson;
+    }
+
+    public AnnualType getAnnual() {
+        return annual;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public RecruitmentStatusType getRecruitmentStatus() {
+        return recruitmentStatus;
+    }
+
     public MatchingResponse(Builder builder) {
         this.recruitmentId = builder.recruitmentId;
         this.matchingId = builder.matchingId;

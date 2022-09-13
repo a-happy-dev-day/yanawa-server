@@ -22,15 +22,7 @@ class MatchingTest {
     @DisplayName("매칭 도메인 테스트.")
     void 매칭_도메인_테스트() {
         Matching matching = assertDoesNotThrow(() ->
-                new Matching.Builder()
-                        .id(1L)
-                        .courtId(1L)
-                        .hostId(1L)
-                        .date(LocalDate.of(2022, 7, 29))
-                        .startTime(LocalTime.of(19, 0))
-                        .endTime(LocalTime.of(21, 0))
-                        .status(MatchingStatusType.ONGOING)
-                        .build()
+                getMatching(MatchingStatusType.WAITING)
         );
 
         assertAll(
@@ -40,7 +32,7 @@ class MatchingTest {
                 () -> assertThat(matching.getDate()).isEqualTo(LocalDate.of(2022, 7, 29)),
                 () -> assertThat(matching.getStartTime()).isEqualTo(LocalTime.of(19, 0)),
                 () -> assertThat(matching.getEndTime()).isEqualTo(LocalTime.of(21, 0)),
-                () -> assertThat(matching.getStatus()).isEqualTo(MatchingStatusType.ONGOING)
+                () -> assertThat(matching.getStatus()).isEqualTo(MatchingStatusType.WAITING)
         );
     }
 
@@ -90,7 +82,7 @@ class MatchingTest {
     void timeTest() {
         assertThrows(MatchingTimeException.class, () -> {
             new Matching.Builder()
-                    .id(null)
+                    .id(1L)
                     .courtId(1L)
                     .hostId(1L)
                     .date(LocalDate.of(2022, 7, 29))

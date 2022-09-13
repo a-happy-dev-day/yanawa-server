@@ -3,7 +3,7 @@ package fashionable.simba.yanawaserver.auth.filter;
 import java.util.Objects;
 
 public final class AccessCode {
-    String accessCode;
+    private String accessCode;
 
     private AccessCode() {/*no-op*/}
 

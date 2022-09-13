@@ -51,7 +51,7 @@ public class KakaoTokenAuthenticationFilter extends AbstractAuthenticationFilter
 
         UserDetails userDetails = userDetailsService.saveKakaoMember(kakaoMember);
 
-        return new AuthenticationToken((String)userDetails.getUsername());
+        return new AuthenticationToken((String) userDetails.getUsername());
     }
 
     @Override

@@ -12,9 +12,6 @@ import fashionable.simba.yanawaserver.auth.handler.DefaultAuthenticationFailureH
 import fashionable.simba.yanawaserver.auth.handler.DefaultAuthenticationSuccessHandler;
 import fashionable.simba.yanawaserver.auth.handler.LoginAuthenticationFailureHandler;
 import fashionable.simba.yanawaserver.auth.handler.TokenAuthenticationSuccessHandler;
-import fashionable.simba.yanawaserver.auth.kakao.KakaoAuthenticationClient;
-import fashionable.simba.yanawaserver.auth.kakao.KakaoAuthenticationService;
-import fashionable.simba.yanawaserver.auth.kakao.KakaoAuthorizationClient;
 import fashionable.simba.yanawaserver.auth.provider.AuthenticationManager;
 import fashionable.simba.yanawaserver.auth.provider.JwtTokenProvider;
 import fashionable.simba.yanawaserver.auth.provider.TokenAuthenticationProvider;

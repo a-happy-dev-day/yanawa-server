@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class MatchingTest {
+class MatchingTest {
 
     @Test
     @DisplayName("매칭 도메인 테스트.")

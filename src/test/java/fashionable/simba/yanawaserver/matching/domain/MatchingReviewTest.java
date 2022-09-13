@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
-public class MatchingReviewTest {
+class MatchingReviewTest {
     @Test
     @DisplayName("매칭후기 생성 테스트")
     void review_생성_Test() {

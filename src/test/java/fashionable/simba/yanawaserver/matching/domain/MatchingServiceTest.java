@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
-public class MatchingServiceTest {
+class MatchingServiceTest {
     MemoryMatchingRepository matchingRepository = new MemoryMatchingRepository();
     MemoryParticipationRepository participationRepository = new MemoryParticipationRepository();
     MemoryRecruitmentRepository recruitmentRepository = new MemoryRecruitmentRepository();

@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class RecruitmentServiceTest {
+class RecruitmentServiceTest {
     MemoryRecruitmentRepository recruitmentRepository = new MemoryRecruitmentRepository();
     ParticipationRepository participationRepository = new MemoryParticipationRepository();
     RecruitmentService recruitmentService = new RecruitmentService(recruitmentRepository, participationRepository);

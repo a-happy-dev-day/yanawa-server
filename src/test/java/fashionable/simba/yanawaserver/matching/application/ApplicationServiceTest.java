@@ -25,7 +25,7 @@ import java.time.LocalTime;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class ApplicationServiceTest {
+class ApplicationServiceTest {
     MatchingRepository matchingRepository = new MemoryMatchingRepository();
     RecruitmentRepository recruitmentRepository = new MemoryRecruitmentRepository();
     ParticipationRepository participationRepository;

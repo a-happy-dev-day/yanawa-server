@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
-public class ParticipationTest {
+class ParticipationTest {
     @Test
     @DisplayName("참가 생성 테스트")
     void 매칭신청_생성_Test() {

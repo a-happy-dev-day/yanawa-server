@@ -1,5 +1,6 @@
 package fashionable.simba.yanawaserver.members.service;
 
+import fashionable.simba.yanawaserver.auth.userdetails.UserDetails;
 import fashionable.simba.yanawaserver.members.domain.KakaoAccessToken;
 import fashionable.simba.yanawaserver.members.domain.KakaoMember;
 import fashionable.simba.yanawaserver.members.domain.KakaoMemberRepository;
@@ -14,6 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Date;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -37,13 +39,15 @@ class CustomUserDetailsServiceTest {
     void saveKakaoMember_isEmpty() {
         when(kakaoMemberRepository.findByKakaoId(any())).thenReturn(Optional.empty());
         when(kakaoMemberRepository.save(any())).thenReturn(KAKAO_MEMBER);
-        userDetailsService.saveKakaoMember(KAKAO_MEMBER);
+        UserDetails 결과 = userDetailsService.saveKakaoMember(KAKAO_MEMBER);
+        assertThat(결과.getUsername()).isEqualTo("1234");
     }
 
     @Test
     @DisplayName("저장되어 있다면 데이터베이스에 저장하지 않는다.")
     void saveKakaoMember_isNotEmpty() {
         when(kakaoMemberRepository.findByKakaoId(any())).thenReturn(Optional.of(KAKAO_MEMBER));
-        userDetailsService.saveKakaoMember(KAKAO_MEMBER);
+        UserDetails 결과 = userDetailsService.saveKakaoMember(KAKAO_MEMBER);
+        assertThat(결과.getUsername()).isEqualTo("1234");
     }
 }

@@ -91,6 +91,8 @@ class KakaoTokenAuthenticationFilterTest {
         when(authenticationManager.authenticate(any())).thenReturn(authentication);
         doNothing().when(successHandler).onAuthenticationSuccess(request, response, authentication);
 
-        filter.preHandle(request, response, new Object());
+        boolean 결과 = filter.preHandle(request, response, new Object());
+
+        assertThat(결과).isFalse();
     }
 }

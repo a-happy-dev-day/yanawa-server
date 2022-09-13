@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import fashionable.simba.yanawaserver.auth.filter.AccessToken;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
 import java.util.Date;
 import java.util.Objects;
 

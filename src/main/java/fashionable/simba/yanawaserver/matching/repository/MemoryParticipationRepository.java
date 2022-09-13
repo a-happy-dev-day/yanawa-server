@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 public class MemoryParticipationRepository implements ParticipationRepository {
-    public static Map<Long, Participation> participations = new HashMap<>();
+    private static final Map<Long, Participation> participations = new HashMap<>();
     private Long sequence = 0L;
 
     @Override

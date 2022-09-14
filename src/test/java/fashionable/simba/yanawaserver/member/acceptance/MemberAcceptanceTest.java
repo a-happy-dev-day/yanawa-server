@@ -13,20 +13,6 @@ import static fashionable.simba.yanawaserver.member.acceptance.MemberSteps.로�
 
 class MemberAcceptanceTest extends AcceptanceTest {
 
-    /**
-     * Given : 처음 사용하는 사용자가 로그인하면
-     * When : 회원가입을 진행되고 로그인이 됩니다.
-     * Then : 로그인이 완료되면 토큰을 발급받습니다.
-     */
-    @Test
-    void join_and_login() {
-        String 새로운_사용자 = "new@email.com";
-
-        ExtractableResponse<Response> 로그인 = 로그인_요청(새로운_사용자);
-
-        Assertions.assertThat(로그인.statusCode()).isEqualTo(HttpStatus.OK.value());
-    }
-
 
     /**
      * Given : 기존 회원가입이 된 사용자가 로그인하면
@@ -34,7 +20,7 @@ class MemberAcceptanceTest extends AcceptanceTest {
      */
     @Test
     void login() {
-        String 기존_사용자 = "admin@email.com";
+        String 기존_사용자 = "1";
 
         ExtractableResponse<Response> 로그인 = 로그인_요청(기존_사용자);
 
@@ -49,7 +35,7 @@ class MemberAcceptanceTest extends AcceptanceTest {
     @Test
     @Disabled
     void logout() {
-        String 기존_사용자 = "admin@email.com";
+        String 기존_사용자 = "1";
 
         String accessToken = 로그인_되어_있음(기존_사용자);
 

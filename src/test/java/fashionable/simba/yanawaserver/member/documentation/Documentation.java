@@ -20,7 +20,7 @@ import static org.springframework.restdocs.restassured3.RestAssuredRestDocumenta
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(RestDocumentationExtension.class)
 public class Documentation {
-    public static final String EMAIL = "admin@email.com";
+    public static final String USERNAME = "1";
     @LocalServerPort
     int port;
     protected String accessToken;
@@ -39,7 +39,7 @@ public class Documentation {
     public void setUp(RestDocumentationContextProvider restDocumentation) {
         RestAssured.port = port;
 
-        accessToken = 로그인_되어_있음(EMAIL);
+        accessToken = 로그인_되어_있음(USERNAME);
 
         this.spec = new RequestSpecBuilder()
             .addFilter(documentationConfiguration(restDocumentation))

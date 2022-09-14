@@ -1,9 +1,9 @@
 package fashionable.simba.yanawaserver.auth.dto;
 
 public class TokenRequest {
-    private String username;
+    private Object username;
 
-    public String getUsername() {
+    public Object getUsername() {
         return username;
     }
 }

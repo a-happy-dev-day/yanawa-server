@@ -10,12 +10,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.util.Map;
+
 @ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class AcceptanceTest {
     @LocalServerPort
     int port;
-
+    Map<String, Long> loadData;
     @Autowired
     private DatabaseCleanup databaseCleanup;
 
@@ -26,6 +28,10 @@ public class AcceptanceTest {
     public void setUp() {
         RestAssured.port = port;
         databaseCleanup.execute();
-        dataLoader.loadData();
+        loadData = dataLoader.loadData();
+    }
+
+    public String getId(String username) {
+        return String.valueOf(loadData.get(username));
     }
 }

@@ -40,13 +40,12 @@ class MemberDocumentation extends Documentation {
             .when().get("/members/me")
             .then().log().all()
             .extract();
-
     }
 
     @Test
     void login() {
         Map<String, String> params = new HashMap<>();
-        params.put("username", "user@email.com");
+        params.put("username", "1");
 
         givenNotOauth()
             .filter(document("member/login",

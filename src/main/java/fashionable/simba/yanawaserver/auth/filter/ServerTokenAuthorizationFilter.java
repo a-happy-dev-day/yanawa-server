@@ -28,7 +28,6 @@ public class ServerTokenAuthorizationFilter extends AbstractAuthenticationFilter
      */
     @Override
     protected AuthenticationToken convert(HttpServletRequest request) {
-        // TODO : 문서에 맞게 수정
         String authCredentials = AuthorizationExtractor.extract(request, AuthorizationType.BEARER);
         return new AuthenticationToken(authCredentials);
     }

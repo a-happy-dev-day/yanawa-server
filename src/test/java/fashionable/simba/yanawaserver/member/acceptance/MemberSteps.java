@@ -23,8 +23,8 @@ public class MemberSteps {
             .statusCode(HttpStatus.OK.value()).extract();
     }
 
-    public static String 로그인_되어_있음(String email) {
-        ExtractableResponse<Response> response = 로그인_요청(email);
+    public static String 로그인_되어_있음(String username) {
+        ExtractableResponse<Response> response = 로그인_요청(username);
         return response.jsonPath().getString("accessToken");
     }
 

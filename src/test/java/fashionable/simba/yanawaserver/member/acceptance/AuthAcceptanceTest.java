@@ -23,9 +23,10 @@ class AuthAcceptanceTest extends AcceptanceTest {
     void members_me_get_user_email() {
         // given
         String email = "admin@email.com";
+        String id = getId("admin");
 
         // when
-        String token = 로그인_되어_있음(email);
+        String token = 로그인_되어_있음(id);
         ExtractableResponse<Response> 정보_조회 = 정보_조회_요청(token);
 
         // then
@@ -41,10 +42,10 @@ class AuthAcceptanceTest extends AcceptanceTest {
     @Test
     void get_members() {
         // given
-        String email = "admin@email.com";
+        String id = getId("admin");
 
         // when
-        String token = 로그인_되어_있음(email);
+        String token = 로그인_되어_있음(id);
         ExtractableResponse<Response> 회원_목록_조회 = 회원_목록_조회_요청(token);
 
         // then
@@ -59,10 +60,9 @@ class AuthAcceptanceTest extends AcceptanceTest {
     @Test
     void get_members_invalid_authorization() {
         // given
-        String email = "user@email.com";
-
+        String id = getId("member");
         // when
-        String token = 로그인_되어_있음(email);
+        String token = 로그인_되어_있음(id);
         ExtractableResponse<Response> 회원_목록_조회 = 회원_목록_조회_요청(token);
 
         // then

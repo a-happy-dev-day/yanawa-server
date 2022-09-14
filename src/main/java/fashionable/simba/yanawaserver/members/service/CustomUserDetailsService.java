@@ -22,9 +22,13 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(String email) {
-        Member member = memberRepository.findByEmail(email).orElseThrow(RuntimeException::new);
-        return new User(member.getEmail(), member.getRoles());
+    public UserDetails loadUserByUsername(String username) {
+        long id = Long.parseLong(username);
+
+        Member member = memberRepository.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
+
+        return new User(member.getId().toString(), member.getRoles());
     }
 
     @Override
@@ -34,6 +38,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (kakaoMemberRepository.findByKakaoId(kakaoMember.getKakaoId()).isEmpty()) {
             kakaoMember = kakaoMemberRepository.save(kakaoMember);
         }
-        return new User(kakaoMember.getKakaoId().toString(), kakaoMember.getRoles());
+        return new User(kakaoMember.getId().toString(), kakaoMember.getRoles());
     }
 }

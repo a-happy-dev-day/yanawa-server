@@ -2,16 +2,17 @@ package fashionable.simba.yanawaserver.auth.kakao;
 
 import fashionable.simba.yanawaserver.auth.filter.AccessCode;
 import fashionable.simba.yanawaserver.auth.filter.AccessToken;
-import fashionable.simba.yanawaserver.auth.filter.AuthenticationService;
 import fashionable.simba.yanawaserver.auth.filter.UserInfo;
 import fashionable.simba.yanawaserver.members.domain.KakaoAccessToken;
 import fashionable.simba.yanawaserver.members.domain.KakaoMember;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
-public class KakaoAuthenticationService implements AuthenticationService {
+@Service
+public class KakaoAuthenticationService {
     private final KakaoAuthenticationClient authenticationClient;
     private final KakaoAuthorizationClient authorizationClient;
     private static final String GRANT_TYPE = "authorization_code";
@@ -57,28 +58,27 @@ public class KakaoAuthenticationService implements AuthenticationService {
      * @param token
      * @return KakaoMember
      */
-    public KakaoMember getUserInfo(AccessToken token) {
+    public KakaoMember getUserInfo(KakaoAccessToken token) {
         UserInfo userInfo = authorizationClient.getUserInfo(
             MediaType.APPLICATION_FORM_URLENCODED_VALUE,
             "Bearer" + " " + token.getAccessToken()
         ).getBody();
 
+        //TODO : 토큰을 형변환을 실행 시점에서 진행한다면 런타임에서 문제가 발생할 가능성이 있다. 제네릭을 사용은 어떨까?
         return new KakaoMember(
             Objects.requireNonNull(userInfo).getId(),
             userInfo.getEmail(),
             userInfo.getNickname(),
             userInfo.getProfileImage(),
             userInfo.getThumbnailImage(),
-            (KakaoAccessToken) token
+            token
         );
     }
 
-    @Override
     public AccessToken refreshToken(AccessToken token) {
         return null;
     }
 
-    @Override
     public void logout(AccessToken token) {
 
     }

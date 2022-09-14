@@ -21,12 +21,9 @@ public class ServerTokenAuthenticationFilter extends AbstractAuthenticationFilte
 
     @Override
     protected AuthenticationToken convert(HttpServletRequest request) throws IOException {
-        // TODO : 문서에 맞게 수정
         String content = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
         TokenRequest tokenRequest = mapper.readValue(content, TokenRequest.class);
-
-        String principal = tokenRequest.getUsername();
-
+        String principal = tokenRequest.getUsername().toString();
         return new AuthenticationToken(principal);
     }
 

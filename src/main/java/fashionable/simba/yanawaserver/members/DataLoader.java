@@ -6,7 +6,9 @@ import fashionable.simba.yanawaserver.members.domain.MemberRepository;
 import fashionable.simba.yanawaserver.members.domain.RoleType;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class DataLoader {
@@ -17,10 +19,17 @@ public class DataLoader {
         this.memberRepository = memberRepository;
     }
 
-    public void loadData() {
+    public Map<String, Long> loadData() {
+        Map<String, Long> members = new HashMap<>();
+
         Member admin = new DefaultMember("admin@email.com", List.of(RoleType.ROLE_ADMIN.name()));
         Member member = new DefaultMember("user@email.com", List.of(RoleType.ROLE_MEMBER.name()));
-        memberRepository.save(admin);
-        memberRepository.save(member);
+
+        Member adminUser = memberRepository.save(admin);
+        Member memberUser = memberRepository.save(member);
+        members.put("admin", adminUser.getId());
+        members.put("member", memberUser.getId());
+
+        return members;
     }
 }

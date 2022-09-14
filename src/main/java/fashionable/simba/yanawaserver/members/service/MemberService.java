@@ -19,7 +19,9 @@ public class MemberService {
     }
 
     public Optional<Member> findMemberByUserName(String username) {
-        return memberRepository.findByEmail(username);
+        long id = Long.parseLong(username);
+
+        return memberRepository.findById(id);
     }
 
     public List<MemberResponse> findAll() {

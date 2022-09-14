@@ -93,7 +93,10 @@ class MatchingServiceTest {
     @DisplayName("진행중인 매칭(ONGOING)을 종료(FINISHED)한다.")
     void end_matching_test() {
         //given
-        Matching matching = getMatching(MatchingStatusType.ONGOING, LocalDate.now(), LocalTime.now().minusHours(3), LocalTime.now().minusHours(1));
+        Matching matching = getMatching(MatchingStatusType.ONGOING,
+                LocalDate.of(2022,9,1),
+                LocalTime.of(18,0),
+                LocalTime.of(20,0));
         Matching savedMatching = matchingService.createMatching(matching);
         //when
         matchingService.endMatching(savedMatching.getId());

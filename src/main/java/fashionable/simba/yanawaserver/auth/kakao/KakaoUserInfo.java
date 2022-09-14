@@ -27,6 +27,14 @@ public final class KakaoUserInfo implements UserInfo {
         return id;
     }
 
+    public Map<String, String> getProperties() {
+        return properties;
+    }
+
+    public Map<String, Object> getKakaoAccount() {
+        return kakaoAccount;
+    }
+
     @Override
     public String getNickname() {
         return properties.get("nickname");
@@ -34,7 +42,10 @@ public final class KakaoUserInfo implements UserInfo {
 
     @Override
     public String getEmail() {
-        return (String) kakaoAccount.get("email");
+        if (kakaoAccount.containsKey("email")) {
+            return (String) kakaoAccount.get("email");
+        }
+        return "none";
     }
 
     @Override
@@ -45,5 +56,14 @@ public final class KakaoUserInfo implements UserInfo {
     @Override
     public String getThumbnailImage() {
         return properties.get("thumbnail_image");
+    }
+
+    @Override
+    public String toString() {
+        return "KakaoUserInfo{" +
+            "id=" + id +
+            ", properties=" + properties +
+            ", kakaoAccount=" + kakaoAccount +
+            '}';
     }
 }

@@ -12,7 +12,7 @@ import java.time.LocalTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MatchingRepositoryTest {
+class MatchingRepositoryTest {
     private static Logger logger = LoggerFactory.getLogger(MatchingRepositoryTest.class);
 
     MatchingRepository matchingRepository;

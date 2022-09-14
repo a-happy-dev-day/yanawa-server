@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class ParticipationRepositoryTest {
+class ParticipationRepositoryTest {
     ParticipationRepository participationRepository = new MemoryParticipationRepository();
 
     @BeforeEach

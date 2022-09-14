@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-public class RecruitmentRepositoryTest {
+class RecruitmentRepositoryTest {
     private static Logger logger = LoggerFactory.getLogger(RecruitmentRepositoryTest.class);
 
     RecruitmentRepository recruitmentRepository;

@@ -3,6 +3,7 @@ package fashionable.simba.yanawaserver.matching.domain;
 import fashionable.simba.yanawaserver.matching.constant.AgeGroupType;
 import fashionable.simba.yanawaserver.matching.constant.AnnualType;
 import fashionable.simba.yanawaserver.matching.constant.GenderType;
+import fashionable.simba.yanawaserver.matching.constant.ParticipationStatusType;
 import fashionable.simba.yanawaserver.matching.constant.PreferenceType;
 import fashionable.simba.yanawaserver.matching.constant.RecruitmentStatusType;
 import fashionable.simba.yanawaserver.matching.domain.repository.ParticipationRepository;
@@ -12,6 +13,8 @@ import fashionable.simba.yanawaserver.matching.repository.MemoryRecruitmentRepos
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -65,9 +68,13 @@ class RecruitmentServiceTest {
                 .details("4명이서 랠리해요~")
                 .status(RecruitmentStatusType.OPENING)
                 .build();
-        Participation participation = new Participation.Builder()
-                .matchingId(1L)
-                .build();
+        Participation participation = new Participation(
+                1L,
+                1L,
+                1L,
+                LocalDateTime.of(2022, 9, 1, 18, 0),
+                ParticipationStatusType.WAITING
+        );
         participationRepository.save(participation);
         //when
         Recruitment savedRecruitment = recruitmentService.createRecruitment(recruitment);

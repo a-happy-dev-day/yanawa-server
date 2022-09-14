@@ -22,12 +22,13 @@ class ParticipationRepositoryTest {
     @Test
     @DisplayName("참가 신청 저장 테스트")
     void participation_save() {
-        Participation participation = new Participation.Builder()
-                .userId(1L)
-                .matchingId(1L)
-                .requestDateTime(LocalDateTime.of(2022, 8, 22, 19, 30))
-                .status(ParticipationStatusType.WAITING)
-                .build();
+        Participation participation = new Participation(
+                1L,
+                1L,
+                1L,
+                LocalDateTime.of(2022, 9, 1, 18, 0),
+                ParticipationStatusType.WAITING
+        );
         Participation savedParticipation = participationRepository.save(participation);
         assertThat(participationRepository.findParticipationById(savedParticipation.getMatchingId()).orElseThrow()).isEqualTo(savedParticipation);
     }
@@ -35,18 +36,20 @@ class ParticipationRepositoryTest {
     @Test
     @DisplayName("참가 신청자 수 테스트")
     void count_participation_test() {
-        Participation participation = new Participation.Builder()
-                .userId(1L)
-                .matchingId(1L)
-                .requestDateTime(LocalDateTime.of(2022, 8, 22, 19, 30))
-                .status(ParticipationStatusType.WAITING)
-                .build();
-        Participation participation2 = new Participation.Builder()
-                .userId(2L)
-                .matchingId(1L)
-                .requestDateTime(LocalDateTime.of(2022, 8, 22, 19, 30))
-                .status(ParticipationStatusType.WAITING)
-                .build();
+        Participation participation = new Participation(
+                1L,
+                1L,
+                1L,
+                LocalDateTime.of(2022, 9, 1, 18, 0),
+                ParticipationStatusType.WAITING
+        );
+        Participation participation2 = new Participation(
+                1L,
+                1L,
+                1L,
+                LocalDateTime.of(2022, 9, 1, 18, 0),
+                ParticipationStatusType.WAITING
+        );
         participationRepository.save(participation);
         participationRepository.save(participation2);
         assertThat(participationRepository.countParticipationsByMatchingId(1L)).isEqualTo(2);

@@ -16,19 +16,19 @@ class ParticipationTest {
     @Test
     @DisplayName("참가 생성 테스트")
     void 매칭신청_생성_Test() {
-        Participation participation = new Participation.Builder()
-                .id(1L)
-                .userId(1L)
-                .matchingId(1L)
-                .requestDateTime(LocalDateTime.of(2022, 8, 22, 19, 30))
-                .status(ParticipationStatusType.WAITING)
-                .build();
+        Participation participation = new Participation(
+                1L,
+                1L,
+                1L,
+                LocalDateTime.of(2022, 9, 1, 18, 0),
+                ParticipationStatusType.WAITING
+        );
         //
         assertAll(
                 () -> assertThat(participation.getId()).isEqualTo(1L),
                 () -> assertThat(participation.getUserId()).isEqualTo(1L),
                 () -> assertThat(participation.getMatchingId()).isEqualTo(1L),
-                () -> assertThat(participation.getRequestDateTime()).isEqualTo(LocalDateTime.of(2022, 8, 22, 19, 30)),
+                () -> assertThat(participation.getRequestDateTime()).isEqualTo(LocalDateTime.of(2022, 9, 1, 18, 0)),
                 () -> assertThat(participation.getStatus()).isEqualTo(ParticipationStatusType.WAITING)
         );
     }
@@ -37,13 +37,13 @@ class ParticipationTest {
     @DisplayName("참가 상태 ACCEPTED로 변경한다.")
     void 참가상태_변경_테스트() {
         //given
-        Participation participation = new Participation.Builder()
-                .id(1L)
-                .userId(1L)
-                .matchingId(1L)
-                .requestDateTime(LocalDateTime.of(2022, 8, 22, 19, 30))
-                .status(ParticipationStatusType.WAITING)
-                .build();
+        Participation participation = new Participation(
+                1L,
+                1L,
+                1L,
+                LocalDateTime.of(2022, 9, 1, 18, 0),
+                ParticipationStatusType.WAITING
+        );
         //when
         participation.changeAcceptedParticipation();
         //then
@@ -54,13 +54,13 @@ class ParticipationTest {
     @DisplayName("매칭 정보가 입력되지 않으면 NoMatchingExceoption이 발생한다.")
     void 매칭_아이디_실패_테스트() {
         assertThrows(NoMatchingDataException.class, () -> {
-            new Participation.Builder()
-                    .id(1L)
-                    .userId(1L)
-                    .matchingId(null)
-                    .requestDateTime(LocalDateTime.of(2022, 8, 22, 19, 30))
-                    .status(ParticipationStatusType.WAITING)
-                    .build();
+            new Participation(
+                    1L,
+                    1L,
+                    null,
+                    LocalDateTime.of(2022, 9, 1, 18, 0),
+                    ParticipationStatusType.WAITING
+            );
         });
     }
 }

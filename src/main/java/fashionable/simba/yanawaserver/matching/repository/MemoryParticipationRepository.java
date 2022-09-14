@@ -16,12 +16,13 @@ public class MemoryParticipationRepository implements ParticipationRepository {
     @Override
     public Participation save(Participation participation) {
         Long id = getId();
-        Participation save = new Participation.Builder()
-                .id(id)
-                .matchingId(participation.getMatchingId())
-                .requestDateTime(participation.getRequestDateTime())
-                .status(participation.getStatus())
-                .build();
+        Participation save = new Participation(
+                id,
+                participation.getUserId(),
+                participation.getMatchingId(),
+                participation.getRequestDateTime(),
+                participation.getStatus()
+        );
         participations.put(id, save);
         return save;
     }

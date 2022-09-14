@@ -36,56 +36,14 @@ public class Participation {
         this.status = ParticipationStatusType.ACCEPTED;
     }
 
-    public Participation(Builder builder) {
-        if (builder.matchingId == null) {
+    public Participation(Long id, Long userId, Long matchingId, LocalDateTime requestDateTime, ParticipationStatusType status) {
+        if (matchingId == null) {
             throw new NoMatchingDataException("매칭 정보를 찾을 수 없습니다.");
         }
-
-        this.id = builder.id;
-        this.userId = builder.userId;
-        this.matchingId = builder.matchingId;
-        this.status = builder.status;
-        this.requestDateTime = builder.requestDateTime;
-    }
-
-    public static class Builder {
-        private Long id;
-        private Long userId;
-        private Long matchingId;
-        private ParticipationStatusType status;
-        private LocalDateTime requestDateTime;
-
-        public Builder() {
-            // **no option
-        }
-
-        public Builder id(Long id) {
-            this.id = id;
-            return this;
-        }
-
-        public Builder userId(Long userId) {
-            this.userId = userId;
-            return this;
-        }
-
-        public Builder matchingId(Long matchingId) {
-            this.matchingId = matchingId;
-            return this;
-        }
-
-        public Builder status(ParticipationStatusType status) {
-            this.status = status;
-            return this;
-        }
-
-        public Builder requestDateTime(LocalDateTime requestDateTime) {
-            this.requestDateTime = requestDateTime;
-            return this;
-        }
-
-        public Participation build() {
-            return new Participation(this);
-        }
+        this.id = id;
+        this.userId = userId;
+        this.matchingId = matchingId;
+        this.requestDateTime = requestDateTime;
+        this.status = status;
     }
 }

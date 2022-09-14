@@ -207,45 +207,6 @@ class RecruitmentTest {
         );
     }
 
-    @Test
-    @DisplayName("레벨이 0~6사이의 0.5단위로 설정되지 않을경우, LevelSettingException 발생한다.")
-    void 모집_레벨설정_테스트2() {
-        Level maxLevel = new Level(2.3);
-        Level miniLevel = new Level(1.3);
-        assertAll(
-                () -> assertThrows(LevelSettingException.class, () -> {
-                    new Recruitment(
-                            1L,
-                            1L,
-                            maxLevel,
-                            miniLevel,
-                            AgeGroupType.TWENTIES,
-                            GenderType.NONE,
-                            PreferenceType.RALLY,
-                            3,
-                            2.0,
-                            AnnualType.FIVE_YEARS_LESS,
-                            "4명이서 랠리해요~",
-                            RecruitmentStatusType.OPENING
-                    );
-                }),
-                () -> assertThrows(LevelSettingException.class, () -> {
-                    new Recruitment(
-                            1L,
-                            maxLevel,
-                            miniLevel,
-                            AgeGroupType.TWENTIES,
-                            GenderType.NONE,
-                            PreferenceType.RALLY,
-                            3,
-                            2.0,
-                            AnnualType.FIVE_YEARS_LESS,
-                            "4명이서 랠리해요~",
-                            RecruitmentStatusType.OPENING
-                    );
-                })
-        );
-    }
 
     @Test
     void chageClosed_Test() {

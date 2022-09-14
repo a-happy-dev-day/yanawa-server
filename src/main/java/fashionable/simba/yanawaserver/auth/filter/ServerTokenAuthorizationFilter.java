@@ -28,6 +28,7 @@ public class ServerTokenAuthorizationFilter extends AbstractAuthenticationFilter
      */
     @Override
     protected AuthenticationToken convert(HttpServletRequest request) {
+        // TODO 사용자 토큰 유효시간을 갱신한다.
         String authCredentials = AuthorizationExtractor.extract(request, AuthorizationType.BEARER);
         return new AuthenticationToken(authCredentials);
     }

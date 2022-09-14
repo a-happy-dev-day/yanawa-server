@@ -32,9 +32,13 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Transactional
     public UserDetails saveKakaoMember(KakaoMember member) {
         KakaoMember kakaoMember = member;
+
+        // TODO 사용자 정보가 있는 경우 액세스 토큰만 갱신한다.
+        // TODO 카카오 토큰을 전부 저장하지 않고 Refresh Token 만 저장하도록 구현할 지 고민할 필요 O
         if (memberRepository.findByKakaoId(kakaoMember.getKakaoId()).isEmpty()) {
             kakaoMember = memberRepository.save(kakaoMember);
         }
+
         return new User(kakaoMember.getId().toString(), kakaoMember.getRoles());
     }
 }

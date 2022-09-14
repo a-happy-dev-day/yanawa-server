@@ -2,18 +2,16 @@ package fashionable.simba.yanawaserver.matching.domain;
 
 import fashionable.simba.yanawaserver.matching.error.NoPlayerDataException;
 
-import java.util.UUID;
-
 public class MatchingReview {
-    private final UUID writerId;
-    private final UUID partnerId;
+    private final Long writerId;
+    private final Long partnerId;
     private String details;
 
-    public UUID getWriterId() {
+    public Long getWriterId() {
         return writerId;
     }
 
-    public UUID getPartnerId() {
+    public Long getPartnerId() {
         return partnerId;
     }
 
@@ -21,42 +19,12 @@ public class MatchingReview {
         return details;
     }
 
-    public MatchingReview(Builder builder) {
-        if (builder.writerId == null || builder.partnerId == null) {
-            throw new NoPlayerDataException("");
+    public MatchingReview(Long writerId, Long partnerId, String details) {
+        if(writerId == null || partnerId == null) {
+            throw new NoPlayerDataException("사용자 정보가 없어 리뷰를 작성할 수 없습니다.");
         }
-
-        this.writerId = builder.writerId;
-        this.partnerId = builder.partnerId;
-        this.details = builder.details;
-    }
-
-    public static class Builder {
-        private UUID writerId;
-        private UUID partnerId;
-        private String details;
-
-        public Builder() {
-            // **no option
-        }
-
-        public Builder writerId(UUID writerId) {
-            this.writerId = writerId;
-            return this;
-        }
-
-        public Builder partnerId(UUID partnerId) {
-            this.partnerId = partnerId;
-            return this;
-        }
-
-        public Builder details(String details) {
-            this.details = details;
-            return this;
-        }
-
-        public MatchingReview build() {
-            return new MatchingReview(this);
-        }
+        this.writerId = writerId;
+        this.partnerId = partnerId;
+        this.details = details;
     }
 }

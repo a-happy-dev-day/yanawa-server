@@ -33,18 +33,19 @@ class RecruitmentServiceTest {
     @Test
     @DisplayName("모집을 생성한다.")
     void create_recuitment() {
-        Recruitment recruitment = new Recruitment.Builder()
-                .matchingId(1L)
-                .maximumLevel(new Level(4.0))
-                .minimumLevel(new Level(1.5))
-                .ageOfRecruitment(AgeGroupType.TWENTIES)
-                .sexOfRecruitment(GenderType.NONE)
-                .preferenceGame(PreferenceType.RALLY)
-                .numberOfRecruitment(3)
-                .costOfCourtPerPerson(2.0)
-                .annual(AnnualType.FIVE_YEARS_LESS)
-                .details("4명이서 랠리해요~")
-                .build();
+        Recruitment recruitment = new Recruitment(
+                1L,
+                new Level(4.0),
+                new Level(1.5),
+                AgeGroupType.TWENTIES,
+                GenderType.NONE,
+                PreferenceType.RALLY,
+                3,
+                2.0,
+                AnnualType.FIVE_YEARS_LESS,
+                "4명이서 랠리해요~",
+                RecruitmentStatusType.OPENING
+        );
 
         Recruitment savedRecruitment = recruitmentService.createRecruitment(recruitment);
 
@@ -55,19 +56,19 @@ class RecruitmentServiceTest {
     @DisplayName("진행자가 모집을 완료하면 모집을 완료한다.")
     void completeRecritument_test() {
         //given
-        Recruitment recruitment = new Recruitment.Builder()
-                .matchingId(1L)
-                .maximumLevel(new Level(4.0))
-                .minimumLevel(new Level(1.5))
-                .ageOfRecruitment(AgeGroupType.TWENTIES)
-                .sexOfRecruitment(GenderType.NONE)
-                .preferenceGame(PreferenceType.RALLY)
-                .numberOfRecruitment(3)
-                .costOfCourtPerPerson(2.0)
-                .annual(AnnualType.FIVE_YEARS_LESS)
-                .details("4명이서 랠리해요~")
-                .status(RecruitmentStatusType.OPENING)
-                .build();
+        Recruitment recruitment = new Recruitment(
+                1L,
+                new Level(4.0),
+                new Level(1.5),
+                AgeGroupType.TWENTIES,
+                GenderType.NONE,
+                PreferenceType.RALLY,
+                3,
+                2.0,
+                AnnualType.FIVE_YEARS_LESS,
+                "4명이서 랠리해요~",
+                RecruitmentStatusType.OPENING
+        );
         Participation participation = new Participation(
                 1L,
                 1L,
@@ -86,19 +87,19 @@ class RecruitmentServiceTest {
     @Test
     @DisplayName("모집을 매칭아이디로 검색한다.")
     void find_recruitment_test() {
-        Recruitment recruitment = new Recruitment.Builder()
-                .matchingId(1L)
-                .maximumLevel(new Level(4.0))
-                .minimumLevel(new Level(1.5))
-                .ageOfRecruitment(AgeGroupType.TWENTIES)
-                .sexOfRecruitment(GenderType.NONE)
-                .preferenceGame(PreferenceType.RALLY)
-                .numberOfRecruitment(3)
-                .costOfCourtPerPerson(2.0)
-                .annual(AnnualType.FIVE_YEARS_LESS)
-                .details("4명이서 랠리해요~")
-                .status(RecruitmentStatusType.OPENING)
-                .build();
+        Recruitment recruitment = new Recruitment(
+                1L,
+                new Level(4.0),
+                new Level(1.5),
+                AgeGroupType.TWENTIES,
+                GenderType.NONE,
+                PreferenceType.RALLY,
+                3,
+                2.0,
+                AnnualType.FIVE_YEARS_LESS,
+                "4명이서 랠리해요~",
+                RecruitmentStatusType.OPENING
+        );
         Recruitment save = recruitmentService.createRecruitment(recruitment);
         assertThat(recruitmentRepository.findRecruitmentByMatchingId(1L).orElseThrow()).isEqualTo(save);
     }
@@ -106,18 +107,19 @@ class RecruitmentServiceTest {
     @Test
     @DisplayName("모집을 종료할때 참가자가 없으면 IllegalArgumentException 발생한다.")
     void completeRecritument_thorw_exception_test() {
-        Recruitment recruitment = new Recruitment.Builder()
-                .maximumLevel(new Level(4.0))
-                .minimumLevel(new Level(1.5))
-                .ageOfRecruitment(AgeGroupType.TWENTIES)
-                .sexOfRecruitment(GenderType.NONE)
-                .preferenceGame(PreferenceType.RALLY)
-                .numberOfRecruitment(3)
-                .costOfCourtPerPerson(2.0)
-                .annual(AnnualType.FIVE_YEARS_LESS)
-                .details("4명이서 랠리해요~")
-                .status(RecruitmentStatusType.OPENING)
-                .build();
+        Recruitment recruitment = new Recruitment(
+                1L,
+                new Level(4.0),
+                new Level(1.5),
+                AgeGroupType.TWENTIES,
+                GenderType.NONE,
+                PreferenceType.RALLY,
+                3,
+                2.0,
+                AnnualType.FIVE_YEARS_LESS,
+                "4명이서 랠리해요~",
+                RecruitmentStatusType.OPENING
+        );
         Recruitment savedRecruitment = recruitmentService.createRecruitment(recruitment);
         assertThrows(IllegalArgumentException.class, () -> {
             recruitmentService.completeRecritument(savedRecruitment.getId());

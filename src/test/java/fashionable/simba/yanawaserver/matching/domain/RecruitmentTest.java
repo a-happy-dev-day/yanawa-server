@@ -24,35 +24,32 @@ class RecruitmentTest {
     @Test
     @DisplayName("참가 도메인 생성 테스트")
     void 모집_생성_테스트() {
-
-        Level maximumLevel = new Level(4.0);
-        Level minimumLevel = new Level(1.5);
         Recruitment recruitment = assertDoesNotThrow(() ->
-                new Recruitment.Builder()
-                        .id(1L)
-                        .matchingId(1L)
-                        .maximumLevel(maximumLevel)
-                        .minimumLevel(minimumLevel)
-                        .ageOfRecruitment(AgeGroupType.TWENTIES)
-                        .sexOfRecruitment(GenderType.NONE)
-                        .preferenceGame(PreferenceType.RALLY)
-                        .numberOfRecruitment(4)
-                        .costOfCourtPerPerson(2.0)
-                        .annual(AnnualType.FIVE_YEARS_LESS)
-                        .status(RecruitmentStatusType.OPENING)
-                        .details("4명이서 랠리해요~")
-                        .build()
+                new Recruitment(
+                        1L,
+                        1L,
+                        new Level(4.0),
+                        new Level(1.5),
+                        AgeGroupType.TWENTIES,
+                        GenderType.NONE,
+                        PreferenceType.RALLY,
+                        3,
+                        2.0,
+                        AnnualType.FIVE_YEARS_LESS,
+                        "4명이서 랠리해요~",
+                        RecruitmentStatusType.OPENING
+                )
         );
 
         assertAll(
                 () -> assertThat(recruitment.getId()).isEqualTo(1L),
                 () -> assertThat(recruitment.getMatchingId()).isEqualTo(1L),
-                () -> assertThat(recruitment.getMaximumLevel()).isEqualTo(maximumLevel),
-                () -> assertThat(recruitment.getMinimumLevel()).isEqualTo(minimumLevel),
+                () -> assertThat(recruitment.getMaximumLevel().getLevel()).isEqualTo(4.0),
+                () -> assertThat(recruitment.getMinimumLevel().getLevel()).isEqualTo(1.5),
                 () -> assertThat(recruitment.getAgeOfRecruitment()).isEqualTo(AgeGroupType.TWENTIES),
                 () -> assertThat(recruitment.getSexOfRecruitment()).isEqualTo(GenderType.NONE),
                 () -> assertThat(recruitment.getPreferenceGame()).isEqualTo(PreferenceType.RALLY),
-                () -> assertThat(recruitment.getNumberOfRecruitment()).isEqualTo(4),
+                () -> assertThat(recruitment.getNumberOfRecruitment()).isEqualTo(3),
                 () -> assertThat(recruitment.getCostOfCourtPerPerson()).isEqualTo(2.0),
                 () -> assertThat(recruitment.getAnnual()).isEqualTo(AnnualType.FIVE_YEARS_LESS),
                 () -> assertThat(recruitment.getStatus()).isEqualTo(RecruitmentStatusType.OPENING),
@@ -64,34 +61,36 @@ class RecruitmentTest {
     @DisplayName("인원이 1~8이 아닐 경우, InvalidNumberException 밸생한다.")
     void 모집_인원_테스트() {
         assertThrows(InvalidNumberException.class, () -> {
-            new Recruitment.Builder()
-                    .id(1L)
-                    .matchingId(1L)
-                    .maximumLevel(new Level(4.0))
-                    .minimumLevel(new Level(1.5))
-                    .ageOfRecruitment(AgeGroupType.TWENTIES)
-                    .sexOfRecruitment(GenderType.NONE)
-                    .preferenceGame(PreferenceType.RALLY)
-                    .numberOfRecruitment(10)
-                    .costOfCourtPerPerson(2.0)
-                    .annual(AnnualType.FIVE_YEARS_LESS)
-                    .details("4명이서 랠리해요~")
-                    .build();
+            new Recruitment(
+                    1L,
+                    1L,
+                    new Level(4.0),
+                    new Level(1.5),
+                    AgeGroupType.TWENTIES,
+                    GenderType.NONE,
+                    PreferenceType.RALLY,
+                    10,
+                    2.0,
+                    AnnualType.FIVE_YEARS_LESS,
+                    "4명이서 랠리해요~",
+                    RecruitmentStatusType.OPENING
+            );
         });
         assertThrows(InvalidNumberException.class, () -> {
-            new Recruitment.Builder()
-                    .id(1L)
-                    .matchingId(1L)
-                    .maximumLevel(new Level(4.0))
-                    .minimumLevel(new Level(1.5))
-                    .ageOfRecruitment(AgeGroupType.TWENTIES)
-                    .sexOfRecruitment(GenderType.NONE)
-                    .preferenceGame(PreferenceType.RALLY)
-                    .numberOfRecruitment(0)
-                    .costOfCourtPerPerson(2.0)
-                    .annual(AnnualType.FIVE_YEARS_LESS)
-                    .details("4명이서 랠리해요~")
-                    .build();
+            new Recruitment(
+                    1L,
+                    1L,
+                    new Level(4.0),
+                    new Level(1.5),
+                    AgeGroupType.TWENTIES,
+                    GenderType.NONE,
+                    PreferenceType.RALLY,
+                    0,
+                    2.0,
+                    AnnualType.FIVE_YEARS_LESS,
+                    "4명이서 랠리해요~",
+                    RecruitmentStatusType.OPENING
+            );
         });
     }
 
@@ -99,19 +98,20 @@ class RecruitmentTest {
     @DisplayName("비용이 0원일 경우, InvalidCostException 발생한다.")
     void 모집_비용_테스트() {
         assertThrows(InvalidCostException.class, () -> {
-            new Recruitment.Builder()
-                    .id(1L)
-                    .matchingId(1L)
-                    .maximumLevel(new Level(4.0))
-                    .minimumLevel(new Level(1.5))
-                    .ageOfRecruitment(AgeGroupType.TWENTIES)
-                    .sexOfRecruitment(GenderType.NONE)
-                    .preferenceGame(PreferenceType.RALLY)
-                    .numberOfRecruitment(4)
-                    .costOfCourtPerPerson(0.0)
-                    .annual(AnnualType.FIVE_YEARS_LESS)
-                    .details("4명이서 랠리해요~")
-                    .build();
+            new Recruitment(
+                    1L,
+                    1L,
+                    new Level(4.0),
+                    new Level(1.5),
+                    AgeGroupType.TWENTIES,
+                    GenderType.NONE,
+                    PreferenceType.RALLY,
+                    3,
+                    0.0,
+                    AnnualType.FIVE_YEARS_LESS,
+                    "4명이서 랠리해요~",
+                    RecruitmentStatusType.OPENING
+            );
         });
     }
 
@@ -119,19 +119,20 @@ class RecruitmentTest {
     @DisplayName("최소레벨이 최대레벨보다 클경우, LevelSettingException 발생한다.")
     void 모집_레벨설정_테스트() {
         assertThrows(LevelSettingException.class, () -> {
-            new Recruitment.Builder()
-                    .id(1L)
-                    .matchingId(1L)
-                    .maximumLevel(new Level(2.0))
-                    .minimumLevel(new Level(5.5))
-                    .ageOfRecruitment(AgeGroupType.TWENTIES)
-                    .sexOfRecruitment(GenderType.NONE)
-                    .preferenceGame(PreferenceType.RALLY)
-                    .numberOfRecruitment(4)
-                    .costOfCourtPerPerson(2.0)
-                    .annual(AnnualType.FIVE_YEARS_LESS)
-                    .details("4명이서 랠리해요~")
-                    .build();
+            new Recruitment(
+                    1L,
+                    1L,
+                    new Level(2.0),
+                    new Level(4.5),
+                    AgeGroupType.TWENTIES,
+                    GenderType.NONE,
+                    PreferenceType.RALLY,
+                    3,
+                    2.0,
+                    AnnualType.FIVE_YEARS_LESS,
+                    "4명이서 랠리해요~",
+                    RecruitmentStatusType.OPENING
+            );
         });
 
     }
@@ -140,38 +141,39 @@ class RecruitmentTest {
     @DisplayName("레벨이 0~6사이의 0.5단위로 설정되지 않을경우, LevelSettingException 발생한다.")
     void 모집_레벨설정_테스트2() {
         assertThrows(LevelSettingException.class, () -> {
-            new Recruitment.Builder()
-                    .id(1L)
-                    .matchingId(1L)
-                    .maximumLevel(new Level(5.2))
-                    .minimumLevel(new Level(1.0))
-                    .ageOfRecruitment(AgeGroupType.TWENTIES)
-                    .sexOfRecruitment(GenderType.NONE)
-                    .preferenceGame(PreferenceType.RALLY)
-                    .numberOfRecruitment(4)
-                    .costOfCourtPerPerson(2.0)
-                    .annual(AnnualType.FIVE_YEARS_LESS)
-                    .details("4명이서 랠리해요~")
-                    .build();
+            new Recruitment(
+                    1L,
+                    1L,
+                    new Level(2.3),
+                    new Level(1.5),
+                    AgeGroupType.TWENTIES,
+                    GenderType.NONE,
+                    PreferenceType.RALLY,
+                    3,
+                    2.0,
+                    AnnualType.FIVE_YEARS_LESS,
+                    "4명이서 랠리해요~",
+                    RecruitmentStatusType.OPENING
+            );
         });
     }
 
     @Test
     void chageClosed_Test() {
-        Recruitment recruitment = new Recruitment.Builder()
-                .id(1L)
-                .matchingId(1L)
-                .maximumLevel(new Level(5.0))
-                .minimumLevel(new Level(1.0))
-                .ageOfRecruitment(AgeGroupType.TWENTIES)
-                .sexOfRecruitment(GenderType.NONE)
-                .preferenceGame(PreferenceType.RALLY)
-                .numberOfRecruitment(4)
-                .costOfCourtPerPerson(2.0)
-                .annual(AnnualType.FIVE_YEARS_LESS)
-                .status(RecruitmentStatusType.OPENING)
-                .details("4명이서 랠리해요~")
-                .build();
+        Recruitment recruitment = new Recruitment(
+                1L,
+                1L,
+                new Level(4.0),
+                new Level(1.5),
+                AgeGroupType.TWENTIES,
+                GenderType.NONE,
+                PreferenceType.RALLY,
+                3,
+                2.0,
+                AnnualType.FIVE_YEARS_LESS,
+                "4명이서 랠리해요~",
+                RecruitmentStatusType.OPENING
+        );
 
         assertAll(
                 () -> assertDoesNotThrow(recruitment::changeClosed),
@@ -183,39 +185,39 @@ class RecruitmentTest {
     @ParameterizedTest
     @EnumSource(value = RecruitmentStatusType.class, names = {"CLOSED"})
     void changeClosed_throwException(RecruitmentStatusType statusType) {
-        Recruitment recruitment = new Recruitment.Builder()
-                .id(1L)
-                .matchingId(1L)
-                .maximumLevel(new Level(5.0))
-                .minimumLevel(new Level(1.0))
-                .ageOfRecruitment(AgeGroupType.TWENTIES)
-                .sexOfRecruitment(GenderType.NONE)
-                .preferenceGame(PreferenceType.RALLY)
-                .numberOfRecruitment(4)
-                .costOfCourtPerPerson(2.0)
-                .annual(AnnualType.FIVE_YEARS_LESS)
-                .status(statusType)
-                .details("4명이서 랠리해요~")
-                .build();
+        Recruitment recruitment = new Recruitment(
+                1L,
+                1L,
+                new Level(4.0),
+                new Level(1.5),
+                AgeGroupType.TWENTIES,
+                GenderType.NONE,
+                PreferenceType.RALLY,
+                3,
+                2.0,
+                AnnualType.FIVE_YEARS_LESS,
+                "4명이서 랠리해요~",
+                statusType
+        );
         assertThrows(IllegalArgumentException.class, recruitment::changeClosed);
     }
 
     @Test
     void isClosed_Test() {
-        Recruitment recruitment = new Recruitment.Builder()
-                .id(1L)
-                .matchingId(1L)
-                .maximumLevel(new Level(5.0))
-                .minimumLevel(new Level(1.0))
-                .ageOfRecruitment(AgeGroupType.TWENTIES)
-                .sexOfRecruitment(GenderType.NONE)
-                .preferenceGame(PreferenceType.RALLY)
-                .numberOfRecruitment(4)
-                .costOfCourtPerPerson(2.0)
-                .annual(AnnualType.FIVE_YEARS_LESS)
-                .status(RecruitmentStatusType.CLOSED)
-                .details("4명이서 랠리해요~")
-                .build();
+        Recruitment recruitment = new Recruitment(
+                1L,
+                1L,
+                new Level(4.0),
+                new Level(1.5),
+                AgeGroupType.TWENTIES,
+                GenderType.NONE,
+                PreferenceType.RALLY,
+                3,
+                2.0,
+                AnnualType.FIVE_YEARS_LESS,
+                "4명이서 랠리해요~",
+                RecruitmentStatusType.CLOSED
+        );
 
         assertTrue(recruitment::isClosed);
 

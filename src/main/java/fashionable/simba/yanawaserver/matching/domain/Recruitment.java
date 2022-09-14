@@ -82,111 +82,49 @@ public class Recruitment {
         return this.status.equals(RecruitmentStatusType.CLOSED);
     }
 
-    public Recruitment(Builder builder) {
-        if (builder.numberOfRecruitment < 1 || builder.numberOfRecruitment > 8) {
+    public Recruitment(Long id, Long matchingId, Level maximumLevel, Level minimumLevel, AgeGroupType ageOfRecruitment, GenderType sexOfRecruitment, PreferenceType preferenceGame, Integer numberOfRecruitment, Double costOfCourtPerPerson, AnnualType annual, String details, RecruitmentStatusType status) {
+        if (numberOfRecruitment < 1 || numberOfRecruitment > 8) {
             throw new InvalidNumberException("인원은 1명이상 8명이하여야 합니다.");
         }
-        if (builder.costOfCourtPerPerson <= 0) {
+        if (costOfCourtPerPerson <= 0) {
             throw new InvalidCostException("비용은 0원 이상이여야 합니다.");
         }
-        if (builder.maximumLevel.getLevel() < builder.minimumLevel.getLevel()) {
+        if (maximumLevel.getLevel() < minimumLevel.getLevel()) {
             throw new LevelSettingException("최소레벨이 최대레벨보다 클 수 없습니다.");
         }
-
-        this.id = builder.id;
-        this.matchingId = builder.matchingId;
-        this.maximumLevel = builder.maximumLevel;
-        this.minimumLevel = builder.minimumLevel;
-        this.ageOfRecruitment = builder.ageOfRecruitment;
-        this.sexOfRecruitment = builder.sexOfRecruitment;
-        this.preferenceGame = builder.preferenceGame;
-        this.numberOfRecruitment = builder.numberOfRecruitment;
-        this.costOfCourtPerPerson = builder.costOfCourtPerPerson;
-        this.annual = builder.annual;
-        this.details = builder.details;
-        this.status = builder.status;
+        this.id = id;
+        this.matchingId = matchingId;
+        this.maximumLevel = maximumLevel;
+        this.minimumLevel = minimumLevel;
+        this.ageOfRecruitment = ageOfRecruitment;
+        this.sexOfRecruitment = sexOfRecruitment;
+        this.preferenceGame = preferenceGame;
+        this.numberOfRecruitment = numberOfRecruitment;
+        this.costOfCourtPerPerson = costOfCourtPerPerson;
+        this.annual = annual;
+        this.details = details;
+        this.status = status;
     }
-
-    public static class Builder {
-        private Long id;
-        private Long matchingId;
-        private Level maximumLevel;
-        private Level minimumLevel;
-        private AgeGroupType ageOfRecruitment;
-        private GenderType sexOfRecruitment;
-        private PreferenceType preferenceGame;
-        private Integer numberOfRecruitment;
-        private Double costOfCourtPerPerson;
-        private AnnualType annual;
-        private String details;
-        private RecruitmentStatusType status;
-
-        public Builder() {
-            // **no option
+    public Recruitment(Long matchingId, Level maximumLevel, Level minimumLevel, AgeGroupType ageOfRecruitment, GenderType sexOfRecruitment, PreferenceType preferenceGame, Integer numberOfRecruitment, Double costOfCourtPerPerson, AnnualType annual, String details, RecruitmentStatusType status) {
+        if (numberOfRecruitment < 1 || numberOfRecruitment > 8) {
+            throw new InvalidNumberException("인원은 1명이상 8명이하여야 합니다.");
         }
-
-        public Builder id(Long id) {
-            this.id = id;
-            return this;
+        if (costOfCourtPerPerson <= 0) {
+            throw new InvalidCostException("비용은 0원 이상이여야 합니다.");
         }
-
-        public Builder matchingId(Long matchingId) {
-            this.matchingId = matchingId;
-            return this;
+        if (maximumLevel.getLevel() < minimumLevel.getLevel()) {
+            throw new LevelSettingException("최소레벨이 최대레벨보다 클 수 없습니다.");
         }
-
-        public Builder maximumLevel(Level maximumLevel) {
-            this.maximumLevel = maximumLevel;
-            return this;
-        }
-
-        public Builder minimumLevel(Level minimumLevel) {
-            this.minimumLevel = minimumLevel;
-            return this;
-        }
-
-        public Builder ageOfRecruitment(AgeGroupType ageOfRecruitment) {
-            this.ageOfRecruitment = ageOfRecruitment;
-            return this;
-        }
-
-        public Builder sexOfRecruitment(GenderType sexOfRecruitment) {
-            this.sexOfRecruitment = sexOfRecruitment;
-            return this;
-        }
-
-        public Builder preferenceGame(PreferenceType preferenceGame) {
-            this.preferenceGame = preferenceGame;
-            return this;
-        }
-
-        public Builder numberOfRecruitment(Integer numberOfRecruitment) {
-            this.numberOfRecruitment = numberOfRecruitment;
-            return this;
-        }
-
-        public Builder costOfCourtPerPerson(Double costOfCourtPerPerson) {
-            this.costOfCourtPerPerson = costOfCourtPerPerson;
-            return this;
-        }
-
-        public Builder annual(AnnualType annual) {
-            this.annual = annual;
-            return this;
-        }
-
-        public Builder details(String details) {
-            this.details = details;
-            return this;
-        }
-
-        public Builder status(RecruitmentStatusType status) {
-            this.status = status;
-            return this;
-        }
-
-        public Recruitment build() {
-            return new Recruitment(this);
-        }
+        this.matchingId = matchingId;
+        this.maximumLevel = maximumLevel;
+        this.minimumLevel = minimumLevel;
+        this.ageOfRecruitment = ageOfRecruitment;
+        this.sexOfRecruitment = sexOfRecruitment;
+        this.preferenceGame = preferenceGame;
+        this.numberOfRecruitment = numberOfRecruitment;
+        this.costOfCourtPerPerson = costOfCourtPerPerson;
+        this.annual = annual;
+        this.details = details;
+        this.status = status;
     }
 }

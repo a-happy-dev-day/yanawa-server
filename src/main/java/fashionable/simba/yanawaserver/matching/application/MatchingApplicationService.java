@@ -1,7 +1,12 @@
 package fashionable.simba.yanawaserver.matching.application;
 
+import fashionable.simba.yanawaserver.matching.constant.AgeGroupType;
+import fashionable.simba.yanawaserver.matching.constant.AnnualType;
+import fashionable.simba.yanawaserver.matching.constant.GenderType;
 import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
+import fashionable.simba.yanawaserver.matching.constant.PreferenceType;
 import fashionable.simba.yanawaserver.matching.constant.RecruitmentStatusType;
+import fashionable.simba.yanawaserver.matching.domain.Level;
 import fashionable.simba.yanawaserver.matching.domain.Matching;
 import fashionable.simba.yanawaserver.matching.domain.Recruitment;
 import fashionable.simba.yanawaserver.matching.domain.repository.CourtRepository;
@@ -35,19 +40,19 @@ public class MatchingApplicationService {
         }
         Matching savedMatching = matchingService.createMatching(matching);
 
-        Recruitment recruitment = new Recruitment.Builder()
-                .matchingId(savedMatching.getId())
-                .maximumLevel(requsest.getMaximumLevel())
-                .minimumLevel(requsest.getMinimumLevel())
-                .ageOfRecruitment(requsest.getAgeOfRecruitment())
-                .sexOfRecruitment(requsest.getSexOfRecruitment())
-                .preferenceGame(requsest.getPreferenceGame())
-                .numberOfRecruitment(requsest.getNumberOfRecruitment())
-                .costOfCourtPerPerson(requsest.getCostOfCourtPerPerson())
-                .annual(requsest.getAnnual())
-                .details(requsest.getDetails())
-                .status(RecruitmentStatusType.OPENING)
-                .build();
+        Recruitment recruitment = new Recruitment(
+                1L,
+                new Level(4.0),
+                new Level(1.5),
+                AgeGroupType.TWENTIES,
+                GenderType.NONE,
+                PreferenceType.RALLY,
+                3,
+                2.0,
+                AnnualType.FIVE_YEARS_LESS,
+                "4명이서 랠리해요~",
+                RecruitmentStatusType.OPENING
+        );
         Recruitment savedRecruitment = recruitmentService.createRecruitment(recruitment);
 
         return new MatchingResponse.Builder()

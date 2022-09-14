@@ -94,9 +94,9 @@ class MatchingServiceTest {
     void end_matching_test() {
         //given
         Matching matching = getMatching(MatchingStatusType.ONGOING,
-                LocalDate.of(2022,9,1),
-                LocalTime.of(18,0),
-                LocalTime.of(20,0));
+                LocalDate.of(2022, 9, 1),
+                LocalTime.of(18, 0),
+                LocalTime.of(20, 0));
         Matching savedMatching = matchingService.createMatching(matching);
         //when
         matchingService.endMatching(savedMatching.getId());
@@ -132,9 +132,9 @@ class MatchingServiceTest {
         return new Matching(
                 서울_테니스장,
                 1L,
-                LocalDate.of(2022,9,1),
-                LocalTime.of(18,0),
-                LocalTime.of(20,0),
+                LocalDate.of(2022, 9, 1),
+                LocalTime.of(18, 0),
+                LocalTime.of(20, 0),
                 statusType
         );
     }
@@ -150,19 +150,19 @@ class MatchingServiceTest {
         );
     }
 
-    private static Recruitment getRecruitment(Matching savedMatching, RecruitmentStatusType closed) {
-        return new Recruitment.Builder()
-                .matchingId(savedMatching.getId())
-                .maximumLevel(new Level(5.0))
-                .minimumLevel(new Level(1.0))
-                .ageOfRecruitment(AgeGroupType.TWENTIES)
-                .sexOfRecruitment(GenderType.NONE)
-                .preferenceGame(PreferenceType.RALLY)
-                .numberOfRecruitment(4)
-                .costOfCourtPerPerson(2.0)
-                .annual(AnnualType.FIVE_YEARS_LESS)
-                .status(closed)
-                .details("4명이서 랠리해요~")
-                .build();
+    private static Recruitment getRecruitment(Matching savedMatching, RecruitmentStatusType statusType) {
+        return new Recruitment(
+                savedMatching.getId(),
+                new Level(5.0),
+                new Level(1.0),
+                AgeGroupType.TWENTIES,
+                GenderType.NONE,
+                PreferenceType.RALLY,
+                4,
+                2.0,
+                AnnualType.FIVE_YEARS_LESS,
+                "4명이서 랠리해요~",
+                statusType
+                );
     }
 }

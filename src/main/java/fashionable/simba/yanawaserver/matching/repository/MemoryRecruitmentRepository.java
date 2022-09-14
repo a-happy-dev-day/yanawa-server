@@ -16,20 +16,20 @@ public class MemoryRecruitmentRepository implements RecruitmentRepository {
     @Override
     public Recruitment save(Recruitment recruitment) {
         Long id = getId();
-        Recruitment save = new Recruitment.Builder()
-                .id(id)
-                .matchingId(recruitment.getMatchingId())
-                .maximumLevel(recruitment.getMaximumLevel())
-                .minimumLevel(recruitment.getMinimumLevel())
-                .ageOfRecruitment(recruitment.getAgeOfRecruitment())
-                .sexOfRecruitment(recruitment.getSexOfRecruitment())
-                .preferenceGame(recruitment.getPreferenceGame())
-                .numberOfRecruitment(recruitment.getNumberOfRecruitment())
-                .costOfCourtPerPerson(recruitment.getCostOfCourtPerPerson())
-                .annual(recruitment.getAnnual())
-                .details(recruitment.getDetails())
-                .status(recruitment.getStatus())
-                .build();
+        Recruitment save = new Recruitment(
+                id,
+                recruitment.getMatchingId(),
+                recruitment.getMaximumLevel(),
+                recruitment.getMinimumLevel(),
+                recruitment.getAgeOfRecruitment(),
+                recruitment.getSexOfRecruitment(),
+                recruitment.getPreferenceGame(),
+                recruitment.getNumberOfRecruitment(),
+                recruitment.getCostOfCourtPerPerson(),
+                recruitment.getAnnual(),
+                recruitment.getDetails(),
+                recruitment.getStatus()
+        );
         recruitments.put(id, save);
         return save;
     }

@@ -1,7 +1,5 @@
 package fashionable.simba.yanawaserver.auth.ui;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import fashionable.simba.yanawaserver.auth.dto.TokenResponse;
 import fashionable.simba.yanawaserver.auth.filter.AccessCode;
 import fashionable.simba.yanawaserver.auth.filter.AccessToken;
@@ -11,6 +9,8 @@ import fashionable.simba.yanawaserver.auth.userdetails.UserDetails;
 import fashionable.simba.yanawaserver.auth.userdetails.UserDetailsService;
 import fashionable.simba.yanawaserver.members.domain.KakaoAccessToken;
 import fashionable.simba.yanawaserver.members.domain.KakaoMember;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,16 +20,19 @@ public class LoginController {
     private final KakaoAuthenticationService kakaoAuthenticationService;
     private final UserDetailsService userDetailsService;
     private final JwtTokenProvider jwtTokenProvider;
-    private final ObjectMapper objectMapper;
 
-    public LoginController(KakaoAuthenticationService kakaoAuthenticationService, UserDetailsService userDetailsService, JwtTokenProvider jwtTokenProvider, ObjectMapper objectMapper) {
+    public LoginController(KakaoAuthenticationService kakaoAuthenticationService, UserDetailsService userDetailsService, JwtTokenProvider jwtTokenProvider) {
         this.kakaoAuthenticationService = kakaoAuthenticationService;
         this.userDetailsService = userDetailsService;
         this.jwtTokenProvider = jwtTokenProvider;
-        this.objectMapper = objectMapper;
     }
 
-    @GetMapping("/auth/kakao/callback")
+    @GetMapping("/kakao/login")
+    public ResponseEntity<Void> loginPage() {
+        return ResponseEntity.status(HttpStatus.SEE_OTHER).header(HttpHeaders.LOCATION, kakaoAuthenticationService.getLoginUri()).build();
+    }
+
+    @GetMapping("/kakao/login/callback")
     public ResponseEntity<TokenResponse> loginCallback(String code) {
         AccessToken accessToken = kakaoAuthenticationService.getAccessToken(new AccessCode(code));
         KakaoMember kakaoMember = kakaoAuthenticationService.getUserInfo((KakaoAccessToken) accessToken);

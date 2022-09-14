@@ -11,7 +11,7 @@ import fashionable.simba.yanawaserver.matching.domain.Level;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class MatchingResponse {
+public class RecruitmentResponse {
     private Long recruitmentId;
     private Long matchingId;
     private Long courtId;
@@ -103,7 +103,7 @@ public class MatchingResponse {
         return recruitmentStatus;
     }
 
-    public MatchingResponse(Long recruitmentId, Long matchingId, Long courtId, Long hostId, LocalDate date, LocalTime startTime, LocalTime endTime, MatchingStatusType matchingStatus, Level maximumLevel, Level minimumLevel, AgeGroupType ageOfRecruitment, GenderType sexOfRecruitment, PreferenceType preferenceGame, Integer numberOfRecruitment, Double costOfCourtPerPerson, AnnualType annual, String details, RecruitmentStatusType recruitmentStatus) {
+    public RecruitmentResponse(Long recruitmentId, Long matchingId, Long courtId, Long hostId, LocalDate date, LocalTime startTime, LocalTime endTime, MatchingStatusType matchingStatus, Level maximumLevel, Level minimumLevel, AgeGroupType ageOfRecruitment, GenderType sexOfRecruitment, PreferenceType preferenceGame, Integer numberOfRecruitment, Double costOfCourtPerPerson, AnnualType annual, String details, RecruitmentStatusType recruitmentStatus) {
         this.recruitmentId = recruitmentId;
         this.matchingId = matchingId;
         this.courtId = courtId;

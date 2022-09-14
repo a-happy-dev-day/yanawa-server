@@ -9,7 +9,7 @@ import fashionable.simba.yanawaserver.matching.domain.Level;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class MatchingRequsest {
+public class RecruitmentRequsest {
     private Long courtId;
     private Long hostId;
     private LocalDate date;
@@ -81,7 +81,7 @@ public class MatchingRequsest {
         return details;
     }
 
-    public MatchingRequsest(Long courtId, Long hostId, LocalDate date, LocalTime startTime, LocalTime endTime, Level maximumLevel, Level minimumLevel, AgeGroupType ageOfRecruitment, GenderType sexOfRecruitment, PreferenceType preferenceGame, Integer numberOfRecruitment, Double costOfCourtPerPerson, AnnualType annual, String details) {
+    public RecruitmentRequsest(Long courtId, Long hostId, LocalDate date, LocalTime startTime, LocalTime endTime, Level maximumLevel, Level minimumLevel, AgeGroupType ageOfRecruitment, GenderType sexOfRecruitment, PreferenceType preferenceGame, Integer numberOfRecruitment, Double costOfCourtPerPerson, AnnualType annual, String details) {
         this.courtId = courtId;
         this.hostId = hostId;
         this.date = date;

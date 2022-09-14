@@ -20,7 +20,7 @@ public class MatchingApplicationService {
         this.courtRepository = courtRepository;
     }
 
-    public MatchingResponse createMatchingAndRecruitment(MatchingRequsest requsest) {
+    public RecruitmentResponse createMatchingAndRecruitment(RecruitmentRequsest requsest) {
         Matching matching = new Matching(
                 requsest.getHostId(),
                 requsest.getCourtId(),
@@ -50,7 +50,7 @@ public class MatchingApplicationService {
         );
         Recruitment savedRecruitment = recruitmentService.createRecruitment(recruitment);
 
-        return new MatchingResponse(
+        return new RecruitmentResponse(
                 savedRecruitment.getId(),
                 savedMatching.getId(),
                 savedMatching.getCourtId(),

@@ -45,8 +45,8 @@ class ApplicationServiceTest {
     @Test
     @DisplayName("매칭과 모집을 생성한다.")
     void createMatchingAndRecruitment_test() {
-        MatchingRequsest requsest = getRequsest(1L);
-        MatchingResponse response = applicationService.createMatchingAndRecruitment(requsest);
+        RecruitmentRequsest requsest = getRequsest(1L);
+        RecruitmentResponse response = applicationService.createMatchingAndRecruitment(requsest);
 
         assertAll(
                 () -> assertThat(matchingRepository.findMatchingById(response.getMatchingId()).orElseThrow().getCourtId()).isEqualTo(response.getCourtId()),
@@ -73,15 +73,15 @@ class ApplicationServiceTest {
     @Test
     @DisplayName("매칭,모집 생성시, 코트장 정보가 없으면 NoCourtDataException 발생한다.")
     void createMatchingAndRecruitment_nonCourtData() {
-        MatchingRequsest requsest = getRequsest(2L);
+        RecruitmentRequsest requsest = getRequsest(2L);
         assertThrows(NoCourtDataException.class, () -> {
             applicationService.createMatchingAndRecruitment(requsest);
         });
     }
 
 
-    private static MatchingRequsest getRequsest(long courtId) {
-        return new MatchingRequsest(
+    private static RecruitmentRequsest getRequsest(long courtId) {
+        return new RecruitmentRequsest(
                 courtId,
                 1L,
                 LocalDate.of(2022, 7, 29),

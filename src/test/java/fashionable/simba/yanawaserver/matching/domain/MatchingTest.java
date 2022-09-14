@@ -80,14 +80,17 @@ class MatchingTest {
     @Test
     @DisplayName("시작 시간은 종료 시간보다 늦을 경우, MatchingTimeException이 발생한다.")
     void timeTest() {
+        LocalDate date = LocalDate.of(2022, 7, 29);
+        LocalTime startTime = LocalTime.of(21, 0);
+        LocalTime endTime = LocalTime.of(19, 0);
         assertAll(
                 () -> assertThrows(MatchingTimeException.class, () -> {
                     new Matching(
                             1L,
                             1L,
-                            LocalDate.of(2022, 7, 29),
-                            LocalTime.of(21, 0),
-                            LocalTime.of(19, 0),
+                            date,
+                            startTime,
+                            endTime,
                             MatchingStatusType.WAITING
                     );
                 }),
@@ -96,9 +99,9 @@ class MatchingTest {
                             1L,
                             1L,
                             1L,
-                            LocalDate.of(2022, 7, 29),
-                            LocalTime.of(21, 0),
-                            LocalTime.of(19, 0),
+                            date,
+                            startTime,
+                            endTime,
                             MatchingStatusType.WAITING
                     );
                 })

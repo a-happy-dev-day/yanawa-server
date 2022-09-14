@@ -121,8 +121,9 @@ class RecruitmentServiceTest {
                 RecruitmentStatusType.OPENING
         );
         Recruitment savedRecruitment = recruitmentService.createRecruitment(recruitment);
+        Long savedRecruitmentId = savedRecruitment.getId();
         assertThrows(IllegalArgumentException.class, () -> {
-            recruitmentService.completeRecritument(savedRecruitment.getId());
+            recruitmentService.completeRecritument(savedRecruitmentId);
         });
     }
 }

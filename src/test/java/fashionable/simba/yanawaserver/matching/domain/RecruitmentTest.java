@@ -8,6 +8,7 @@ import fashionable.simba.yanawaserver.matching.constant.RecruitmentStatusType;
 import fashionable.simba.yanawaserver.matching.error.InvalidCostException;
 import fashionable.simba.yanawaserver.matching.error.InvalidNumberException;
 import fashionable.simba.yanawaserver.matching.error.LevelSettingException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,6 +21,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class RecruitmentTest {
+    Level maximumLevel = new Level(4.0);
+    Level minimumLevel = new Level(1.5);
 
     @Test
     @DisplayName("참가 도메인 생성 테스트")
@@ -28,8 +31,8 @@ class RecruitmentTest {
                 new Recruitment(
                         1L,
                         1L,
-                        new Level(4.0),
-                        new Level(1.5),
+                        maximumLevel,
+                        minimumLevel,
                         AgeGroupType.TWENTIES,
                         GenderType.NONE,
                         PreferenceType.RALLY,
@@ -65,8 +68,8 @@ class RecruitmentTest {
                     new Recruitment(
                             1L,
                             1L,
-                            new Level(4.0),
-                            new Level(1.5),
+                            maximumLevel,
+                            minimumLevel,
                             AgeGroupType.TWENTIES,
                             GenderType.NONE,
                             PreferenceType.RALLY,
@@ -81,8 +84,8 @@ class RecruitmentTest {
                     new Recruitment(
                             1L,
                             1L,
-                            new Level(4.0),
-                            new Level(1.5),
+                            maximumLevel,
+                            minimumLevel,
                             AgeGroupType.TWENTIES,
                             GenderType.NONE,
                             PreferenceType.RALLY,
@@ -96,8 +99,8 @@ class RecruitmentTest {
                 () -> assertThrows(InvalidNumberException.class, () -> {
                     new Recruitment(
                             1L,
-                            new Level(4.0),
-                            new Level(1.5),
+                            maximumLevel,
+                            minimumLevel,
                             AgeGroupType.TWENTIES,
                             GenderType.NONE,
                             PreferenceType.RALLY,
@@ -111,8 +114,8 @@ class RecruitmentTest {
                 () -> assertThrows(InvalidNumberException.class, () -> {
                     new Recruitment(
                             1L,
-                            new Level(4.0),
-                            new Level(1.5),
+                            maximumLevel,
+                            minimumLevel,
                             AgeGroupType.TWENTIES,
                             GenderType.NONE,
                             PreferenceType.RALLY,
@@ -134,8 +137,8 @@ class RecruitmentTest {
                     new Recruitment(
                             1L,
                             1L,
-                            new Level(4.0),
-                            new Level(1.5),
+                            maximumLevel,
+                            minimumLevel,
                             AgeGroupType.TWENTIES,
                             GenderType.NONE,
                             PreferenceType.RALLY,
@@ -149,8 +152,8 @@ class RecruitmentTest {
                 () -> assertThrows(InvalidCostException.class, () -> {
                     new Recruitment(
                             1L,
-                            new Level(4.0),
-                            new Level(1.5),
+                            maximumLevel,
+                            minimumLevel,
                             AgeGroupType.TWENTIES,
                             GenderType.NONE,
                             PreferenceType.RALLY,
@@ -167,13 +170,15 @@ class RecruitmentTest {
     @Test
     @DisplayName("최소레벨이 최대레벨보다 클경우, LevelSettingException 발생한다.")
     void 모집_레벨설정_테스트() {
+        Level maxLevel = new Level(2.0);
+        Level miniLevel = new Level(4.5);
         assertAll(
                 () -> assertThrows(LevelSettingException.class, () -> {
                     new Recruitment(
                             1L,
                             1L,
-                            new Level(2.0),
-                            new Level(4.5),
+                            maxLevel,
+                            miniLevel,
                             AgeGroupType.TWENTIES,
                             GenderType.NONE,
                             PreferenceType.RALLY,
@@ -187,8 +192,8 @@ class RecruitmentTest {
                 () -> assertThrows(LevelSettingException.class, () -> {
                     new Recruitment(
                             1L,
-                            new Level(2.0),
-                            new Level(4.5),
+                            maxLevel,
+                            miniLevel,
                             AgeGroupType.TWENTIES,
                             GenderType.NONE,
                             PreferenceType.RALLY,
@@ -205,13 +210,15 @@ class RecruitmentTest {
     @Test
     @DisplayName("레벨이 0~6사이의 0.5단위로 설정되지 않을경우, LevelSettingException 발생한다.")
     void 모집_레벨설정_테스트2() {
+        Level maxLevel = new Level(2.3);
+        Level miniLevel = new Level(1.3);
         assertAll(
                 () -> assertThrows(LevelSettingException.class, () -> {
                     new Recruitment(
                             1L,
                             1L,
-                            new Level(2.3),
-                            new Level(1.5),
+                            maxLevel,
+                            miniLevel,
                             AgeGroupType.TWENTIES,
                             GenderType.NONE,
                             PreferenceType.RALLY,
@@ -225,8 +232,8 @@ class RecruitmentTest {
                 () -> assertThrows(LevelSettingException.class, () -> {
                     new Recruitment(
                             1L,
-                            new Level(2.3),
-                            new Level(1.5),
+                            maxLevel,
+                            miniLevel,
                             AgeGroupType.TWENTIES,
                             GenderType.NONE,
                             PreferenceType.RALLY,

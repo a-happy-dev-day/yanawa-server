@@ -74,8 +74,10 @@ class MatchingServiceTest {
         Matching savedMatching = matchingService.createMatching(matching);
         Recruitment recruitment = getRecruitment(savedMatching, statusType);
         recruitmentRepository.save(recruitment);
+        Long savedMatchingId = savedMatching.getId();
+
         assertThrows(IllegalArgumentException.class, () -> {
-            matchingService.startMatching(savedMatching.getId());
+            matchingService.startMatching(savedMatchingId);
         });
     }
 
@@ -84,8 +86,10 @@ class MatchingServiceTest {
     void start_matching_throw_IllegalArgumentException() {
         Matching matching = getMatching(MatchingStatusType.WAITING);
         Matching savedMatching = matchingRepository.save(matching);
+        Long savedMatchingId = savedMatching.getId();
+
         assertThrows(IllegalArgumentException.class, () -> {
-            matchingService.startMatching(savedMatching.getId());
+            matchingService.startMatching(savedMatchingId);
         });
     }
 
@@ -112,8 +116,10 @@ class MatchingServiceTest {
         Matching matching = getMatching(statusType);
         Matching savedMatching = matchingService.createMatching(matching);
         //then
+        Long savedMatchingId = savedMatching.getId();
+
         assertThrows(IllegalArgumentException.class, () -> {
-            matchingService.endMatching(savedMatching.getId());
+            matchingService.endMatching(savedMatchingId);
         });
     }
 
@@ -123,8 +129,10 @@ class MatchingServiceTest {
         Matching matching = getMatching(MatchingStatusType.ONGOING
                 , LocalDate.now(), LocalTime.now().minusHours(1), LocalTime.now().plusHours(1));
         Matching savedMatching = matchingService.createMatching(matching);
+        Long savedMatchingId = savedMatching.getId();
+
         assertThrows(IllegalArgumentException.class, () -> {
-            matchingService.endMatching(savedMatching.getId());
+            matchingService.endMatching(savedMatchingId);
         });
     }
 

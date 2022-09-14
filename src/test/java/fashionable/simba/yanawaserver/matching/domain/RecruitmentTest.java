@@ -27,7 +27,7 @@ class RecruitmentTest {
 
         Level maximumLevel = new Level(4.0);
         Level minimumLevel = new Level(1.5);
-         recruitment = assertDoesNotThrow(() ->
+        Recruitment recruitment = assertDoesNotThrow(() ->
                 new Recruitment.Builder()
                         .id(1L)
                         .matchingId(1L)

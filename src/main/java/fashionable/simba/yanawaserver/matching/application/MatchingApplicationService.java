@@ -21,14 +21,14 @@ public class MatchingApplicationService {
     }
 
     public MatchingResponse createMatchingAndRecruitment(MatchingRequsest requsest) {
-        Matching matching = new Matching.Builder()
-                .hostId(requsest.getHostId())
-                .courtId(requsest.getCourtId())
-                .date(requsest.getDate())
-                .startTime(requsest.getStartTime())
-                .endTime(requsest.getEndTime())
-                .status(MatchingStatusType.WAITING)
-                .build();
+        Matching matching = new Matching(
+                requsest.getHostId(),
+                requsest.getCourtId(),
+                requsest.getDate(),
+                requsest.getStartTime(),
+                requsest.getEndTime(),
+                MatchingStatusType.WAITING
+        );
         boolean isCourtExist = courtRepository.isCourtExist(matching.getCourtId());
         if (!isCourtExist) {
             throw new NoCourtDataException("코트장 정보를 조회할 수 없습니다.");

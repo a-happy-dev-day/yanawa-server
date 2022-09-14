@@ -58,70 +58,28 @@ public class Matching {
         this.status = MatchingStatusType.FINISHED;
     }
 
-    public Matching(Builder builder) {
-        if (builder.startTime.isAfter(builder.endTime)) {
+    public Matching(Long id, Long hostId, Long courtId, LocalDate date, LocalTime startTime, LocalTime endTime, MatchingStatusType status) {
+        if (startTime.isAfter(endTime)) {
             throw new MatchingTimeException("시작시간이 종료시간보다 늦을 수 없습니다.");
         }
-
-        this.id = builder.id;
-        this.courtId = builder.courtId;
-        this.hostId = builder.hostId;
-        this.date = builder.date;
-        this.startTime = builder.startTime;
-        this.endTime = builder.endTime;
-        this.status = builder.status;
+        this.id = id;
+        this.hostId = hostId;
+        this.courtId = courtId;
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.status = status;
     }
 
-    public static class Builder {
-        private Long id;
-        private Long courtId;
-        private Long hostId;
-        private LocalDate date;
-        private LocalTime startTime;
-        private LocalTime endTime;
-        private MatchingStatusType status;
-
-        public Builder() {
-            // **no option
+    public Matching(Long hostId, Long courtId, LocalDate date, LocalTime startTime, LocalTime endTime, MatchingStatusType status) {
+        if (startTime.isAfter(endTime)) {
+            throw new MatchingTimeException("시작시간이 종료시간보다 늦을 수 없습니다.");
         }
-
-        public Builder id(Long id) {
-            this.id = id;
-            return this;
-        }
-
-        public Builder courtId(Long courtId) {
-            this.courtId = courtId;
-            return this;
-        }
-
-        public Builder hostId(Long hostId) {
-            this.hostId = hostId;
-            return this;
-        }
-
-        public Builder date(LocalDate date) {
-            this.date = date;
-            return this;
-        }
-
-        public Builder startTime(LocalTime startTime) {
-            this.startTime = startTime;
-            return this;
-        }
-
-        public Builder endTime(LocalTime endTime) {
-            this.endTime = endTime;
-            return this;
-        }
-
-        public Builder status(MatchingStatusType status) {
-            this.status = status;
-            return this;
-        }
-
-        public Matching build() {
-            return new Matching(this);
-        }
+        this.hostId = hostId;
+        this.courtId = courtId;
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.status = status;
     }
 }

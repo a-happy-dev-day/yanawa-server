@@ -129,25 +129,25 @@ class MatchingServiceTest {
     }
 
     private static Matching getMatching(MatchingStatusType statusType) {
-        return new Matching.Builder()
-                .courtId(서울_테니스장)
-                .hostId(1L)
-                .date(LocalDate.now())
-                .startTime(LocalTime.now().plusHours(1))
-                .endTime(LocalTime.now().plusHours(3))
-                .status(statusType)
-                .build();
+        return new Matching(
+                서울_테니스장,
+                1L,
+                LocalDate.of(2022,9,1),
+                LocalTime.of(18,0),
+                LocalTime.of(20,0),
+                statusType
+        );
     }
 
     private static Matching getMatching(MatchingStatusType statusType, LocalDate date, LocalTime startTime, LocalTime endTime) {
-        return new Matching.Builder()
-                .courtId(서울_테니스장)
-                .hostId(1L)
-                .date(date)
-                .startTime(startTime)
-                .endTime(endTime)
-                .status(statusType)
-                .build();
+        return new Matching(
+                서울_테니스장,
+                1L,
+                date,
+                startTime,
+                endTime,
+                statusType
+        );
     }
 
     private static Recruitment getRecruitment(Matching savedMatching, RecruitmentStatusType closed) {

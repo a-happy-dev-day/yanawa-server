@@ -81,27 +81,27 @@ class MatchingTest {
     @DisplayName("시작 시간은 종료 시간보다 늦을 경우, MatchingTimeException이 발생한다.")
     void timeTest() {
         assertThrows(MatchingTimeException.class, () -> {
-            new Matching.Builder()
-                    .id(1L)
-                    .courtId(1L)
-                    .hostId(1L)
-                    .date(LocalDate.of(2022, 7, 29))
-                    .startTime(LocalTime.of(21, 0))
-                    .endTime(LocalTime.of(19, 0))
-                    .status(MatchingStatusType.ONGOING)
-                    .build();
+            new Matching(
+                    1L,
+                    1L,
+                    LocalDate.of(2022, 7, 29),
+                    LocalTime.of(21, 0),
+                    LocalTime.of(19, 0),
+                    MatchingStatusType.WAITING
+
+            );
         });
     }
 
     private static Matching getMatching(MatchingStatusType statusType) {
-        return new Matching.Builder()
-                .id(1L)
-                .courtId(1L)
-                .hostId(1L)
-                .date(LocalDate.of(2022, 7, 29))
-                .startTime(LocalTime.of(19, 0))
-                .endTime(LocalTime.of(21, 0))
-                .status(statusType)
-                .build();
+        return new Matching(
+                1L,
+                1L,
+                1L,
+                LocalDate.of(2022, 7, 29),
+                LocalTime.of(19, 0),
+                LocalTime.of(21, 0),
+                statusType
+        );
     }
 }

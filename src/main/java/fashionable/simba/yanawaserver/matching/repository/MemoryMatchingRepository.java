@@ -16,13 +16,15 @@ public class MemoryMatchingRepository implements MatchingRepository {
     @Override
     public Matching save(Matching matching) {
         Long id = getId();
-        Matching save = new Matching.Builder()
-                .id(id)
-                .date(matching.getDate())
-                .startTime(matching.getStartTime())
-                .endTime(matching.getEndTime())
-                .status(matching.getStatus())
-                .build();
+        Matching save = new Matching(
+                id,
+                matching.getHostId(),
+                matching.getCourtId(),
+                matching.getDate(),
+                matching.getStartTime(),
+                matching.getEndTime(),
+                matching.getStatus()
+        );
         matchings.put(id, save);
         return save;
     }

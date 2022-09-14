@@ -1,5 +1,6 @@
 package fashionable.simba.yanawaserver.members.infra;
 
+import fashionable.simba.yanawaserver.members.domain.KakaoMember;
 import fashionable.simba.yanawaserver.members.domain.Member;
 import fashionable.simba.yanawaserver.members.domain.MemberRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,4 +19,6 @@ public interface JpaMemberRepository extends JpaRepository<Member, Long>, Member
 
     @Override
     List<Member> findAll();
+
+    Optional<KakaoMember> findByKakaoId(Long kakaoId);
 }

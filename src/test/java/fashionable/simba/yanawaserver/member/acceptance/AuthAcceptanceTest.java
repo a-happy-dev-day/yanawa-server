@@ -94,8 +94,8 @@ class AuthAcceptanceTest extends AcceptanceTest {
     void members_me_expiredTime() {
         // given
         String accessToken = "eyJhbGciOiJIUzI1NiJ9" +
-            ".eyJzdWIiOiJhZG1pbkBlbWFpbC5jb20iLCJpYXQiOjE2NjAxMzM1MzQsImV4cCI6MTY2MDEzMzUzNCwicm9sZXMiOlsiUk9MRV9BRE1JTiJdfQ" +
-            ".W0ZKRaSSoLFpvsPCYAVfXOWtTjxt7HWcgMIaDenT2W4";
+            ".eyJzdWIiOiI3IiwiaWF0IjoxNjYzMTM1NDkzLCJleHAiOjE2NjMxMzkwOTMsInJvbGVzIjpbIlJPTEVfTUVNQkVSIl19" +
+            ".jBTEKPOxjgO7-2IynGeVkoe9sqPLGG5sYNRSGrdOVbU";
 
         // when
         ExtractableResponse<Response> 정보_조회 = RestAssured.given().log().all()

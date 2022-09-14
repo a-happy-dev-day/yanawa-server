@@ -31,9 +31,10 @@ class KakaoUserInfoTest {
     @Test
     @DisplayName("이메일 정보가 없다면 none이 된다.")
     void userInfo_IfNotExistEmail() {
+        String none = "none";
         KakaoUserInfo userInfo = new KakaoUserInfo(321L, properties, kakaoAccount);
 
-        assertThat(userInfo.getEmail()).isEqualTo("none");
+        assertThat(none).isEqualTo(userInfo.getEmail());
     }
 
     @Test
@@ -45,7 +46,7 @@ class KakaoUserInfoTest {
         properties.put(email, userEmail);
         KakaoUserInfo userInfo = new KakaoUserInfo(321L, properties, kakaoAccount);
 
-        assertThat(userInfo.getProperties().get(email)).isEqualTo(userEmail);
+        assertThat(userEmail).isEqualTo(userInfo.getProperties().get(email));
     }
 
     @Test
@@ -57,6 +58,6 @@ class KakaoUserInfoTest {
         kakaoAccount.put(nickname, username);
         KakaoUserInfo userInfo = new KakaoUserInfo(321L, properties, kakaoAccount);
 
-        assertThat(userInfo.getKakaoAccount().get(nickname)).isEqualTo(username);
+        assertThat(username).isEqualTo(userInfo.getKakaoAccount().get(nickname));
     }
 }

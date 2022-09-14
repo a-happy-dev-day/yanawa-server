@@ -24,11 +24,10 @@ class RecruitmentTest {
     @Test
     @DisplayName("참가 도메인 생성 테스트")
     void 모집_생성_테스트() {
-        //
+
         Level maximumLevel = new Level(4.0);
         Level minimumLevel = new Level(1.5);
-        //
-        Recruitment recruitment = assertDoesNotThrow(() ->
+         recruitment = assertDoesNotThrow(() ->
                 new Recruitment.Builder()
                         .id(1L)
                         .matchingId(1L)

@@ -105,6 +105,7 @@ public class Recruitment {
         this.details = details;
         this.status = status;
     }
+
     public Recruitment(Long matchingId, Level maximumLevel, Level minimumLevel, AgeGroupType ageOfRecruitment, GenderType sexOfRecruitment, PreferenceType preferenceGame, Integer numberOfRecruitment, Double costOfCourtPerPerson, AnnualType annual, String details, RecruitmentStatusType status) {
         if (numberOfRecruitment < 1 || numberOfRecruitment > 8) {
             throw new InvalidNumberException("인원은 1명이상 8명이하여야 합니다.");

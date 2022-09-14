@@ -94,4 +94,12 @@ class KakaoAuthenticationServiceTest {
             () -> assertThat(member.getThumbnailImageUrl()).isEqualTo(thumbnail_image)
         );
     }
+
+    @Test
+    @DisplayName("리다이렉트할 URL을 찾는다.")
+    void getLoginUrl() {
+        String uri = kakaoAuthenticationService.getLoginUri();
+        assertThat(uri).contains("https://kauth.kakao.com/oauth/authorize");
+    }
+
 }

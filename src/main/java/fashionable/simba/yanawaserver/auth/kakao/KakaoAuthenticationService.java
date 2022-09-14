@@ -81,12 +81,6 @@ public class KakaoAuthenticationService {
         );
     }
 
-    public AccessToken refreshToken(AccessToken token) {
-        return null;
-    }
-
-    public void logout(AccessToken token) {}
-
     public String getLoginUri() {
         return "https://kauth.kakao.com/oauth/authorize?" +
             "client_id=" + clientId +

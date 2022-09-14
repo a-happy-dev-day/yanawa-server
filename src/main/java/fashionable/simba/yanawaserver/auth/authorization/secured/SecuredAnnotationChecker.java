@@ -25,9 +25,10 @@ public class SecuredAnnotationChecker {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         //TODO : 권한이 없다면 익명의 사용자로 설정하도록 수정
-        authentication.getAuthorities().stream()
-            .filter(values::contains)
-            .findFirst()
-            .orElseThrow(() -> new RoleAuthenticationException("권한이 없습니다."));
+        if (authentication.getAuthorities()
+            .stream()
+            .noneMatch(values::contains)) {
+            throw new RoleAuthenticationException("권한이 없습니다.");
+        }
     }
 }

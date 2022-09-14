@@ -81,21 +81,21 @@ class ApplicationServiceTest {
 
 
     private static MatchingRequsest getRequsest(long courtId) {
-        return new MatchingRequsest.Builder()
-                .courtId(courtId)
-                .hostId(1L)
-                .date(LocalDate.of(2022, 7, 29))
-                .startTime(LocalTime.of(19, 0))
-                .endTime(LocalTime.of(21, 0))
-                .maximumLevel(new Level(4.0))
-                .minimumLevel(new Level(1.5))
-                .ageOfRecruitment(AgeGroupType.TWENTIES)
-                .sexOfRecruitment(GenderType.NONE)
-                .preferenceGame(PreferenceType.RALLY)
-                .numberOfRecruitment(3)
-                .costOfCourtPerPerson(2.0)
-                .annual(AnnualType.FIVE_YEARS_LESS)
-                .details("4명이서 랠리해요~")
-                .build();
+        return new MatchingRequsest(
+                courtId,
+                1L,
+                LocalDate.of(2022, 7, 29),
+                LocalTime.of(19, 0),
+                LocalTime.of(21, 0),
+                new Level(4.0),
+                new Level(1.5),
+                AgeGroupType.TWENTIES,
+                GenderType.NONE,
+                PreferenceType.RALLY,
+                3,
+                2.0,
+                AnnualType.FIVE_YEARS_LESS,
+                "4명이서 랠리해요~"
+        );
     }
 }

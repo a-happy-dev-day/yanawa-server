@@ -81,115 +81,20 @@ public class MatchingRequsest {
         return details;
     }
 
-    public MatchingRequsest(Builder builder) {
-        this.courtId = builder.courtId;
-        this.hostId = builder.hostId;
-        this.date = builder.date;
-        this.startTime = builder.startTime;
-        this.endTime = builder.endTime;
-        this.maximumLevel = builder.maximumLevel;
-        this.minimumLevel = builder.minimumLevel;
-        this.ageOfRecruitment = builder.ageOfRecruitment;
-        this.sexOfRecruitment = builder.sexOfRecruitment;
-        this.preferenceGame = builder.preferenceGame;
-        this.numberOfRecruitment = builder.numberOfRecruitment;
-        this.costOfCourtPerPerson = builder.costOfCourtPerPerson;
-        this.annual = builder.annual;
-        this.details = builder.details;
-    }
-
-    public static class Builder {
-        private Long courtId;
-        private Long hostId;
-        private LocalDate date;
-        private LocalTime startTime;
-        private LocalTime endTime;
-        private Level maximumLevel;
-        private Level minimumLevel;
-        private AgeGroupType ageOfRecruitment;
-        private GenderType sexOfRecruitment;
-        private PreferenceType preferenceGame;
-        private Integer numberOfRecruitment;
-        private Double costOfCourtPerPerson;
-        private AnnualType annual;
-        private String details;
-
-        public Builder() {
-            // **no option
-        }
-
-        public Builder courtId(Long courtId) {
-            this.courtId = courtId;
-            return this;
-        }
-
-        public Builder hostId(Long hostId) {
-            this.hostId = hostId;
-            return this;
-        }
-
-        public Builder date(LocalDate date) {
-            this.date = date;
-            return this;
-        }
-
-        public Builder startTime(LocalTime startTime) {
-            this.startTime = startTime;
-            return this;
-        }
-
-        public Builder endTime(LocalTime endTime) {
-            this.endTime = endTime;
-            return this;
-        }
-
-        public Builder maximumLevel(Level maximumLevel) {
-            this.maximumLevel = maximumLevel;
-            return this;
-        }
-
-        public Builder minimumLevel(Level minimumLevel) {
-            this.minimumLevel = minimumLevel;
-            return this;
-        }
-
-        public Builder ageOfRecruitment(AgeGroupType ageOfRecruitment) {
-            this.ageOfRecruitment = ageOfRecruitment;
-            return this;
-        }
-
-        public Builder sexOfRecruitment(GenderType sexOfRecruitment) {
-            this.sexOfRecruitment = sexOfRecruitment;
-            return this;
-        }
-
-        public Builder preferenceGame(PreferenceType preferenceGame) {
-            this.preferenceGame = preferenceGame;
-            return this;
-        }
-
-        public Builder numberOfRecruitment(Integer numberOfRecruitment) {
-            this.numberOfRecruitment = numberOfRecruitment;
-            return this;
-        }
-
-        public Builder costOfCourtPerPerson(Double costOfCourtPerPerson) {
-            this.costOfCourtPerPerson = costOfCourtPerPerson;
-            return this;
-        }
-
-        public Builder annual(AnnualType annual) {
-            this.annual = annual;
-            return this;
-        }
-
-        public Builder details(String details) {
-            this.details = details;
-            return this;
-        }
-
-        public MatchingRequsest build() {
-            return new MatchingRequsest(this);
-        }
+    public MatchingRequsest(Long courtId, Long hostId, LocalDate date, LocalTime startTime, LocalTime endTime, Level maximumLevel, Level minimumLevel, AgeGroupType ageOfRecruitment, GenderType sexOfRecruitment, PreferenceType preferenceGame, Integer numberOfRecruitment, Double costOfCourtPerPerson, AnnualType annual, String details) {
+        this.courtId = courtId;
+        this.hostId = hostId;
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.maximumLevel = maximumLevel;
+        this.minimumLevel = minimumLevel;
+        this.ageOfRecruitment = ageOfRecruitment;
+        this.sexOfRecruitment = sexOfRecruitment;
+        this.preferenceGame = preferenceGame;
+        this.numberOfRecruitment = numberOfRecruitment;
+        this.costOfCourtPerPerson = costOfCourtPerPerson;
+        this.annual = annual;
+        this.details = details;
     }
 }

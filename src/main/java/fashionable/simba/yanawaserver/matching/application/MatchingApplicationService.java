@@ -41,41 +41,39 @@ public class MatchingApplicationService {
         Matching savedMatching = matchingService.createMatching(matching);
 
         Recruitment recruitment = new Recruitment(
-                1L,
-                new Level(4.0),
-                new Level(1.5),
-                AgeGroupType.TWENTIES,
-                GenderType.NONE,
-                PreferenceType.RALLY,
-                3,
-                2.0,
-                AnnualType.FIVE_YEARS_LESS,
-                "4명이서 랠리해요~",
+                requsest.getCourtId(),
+                requsest.getMaximumLevel(),
+                requsest.getMinimumLevel(),
+                requsest.getAgeOfRecruitment(),
+                requsest.getSexOfRecruitment(),
+                requsest.getPreferenceGame(),
+                requsest.getNumberOfRecruitment(),
+                requsest.getCostOfCourtPerPerson(),
+                requsest.getAnnual(),
+                requsest.getDetails(),
                 RecruitmentStatusType.OPENING
         );
         Recruitment savedRecruitment = recruitmentService.createRecruitment(recruitment);
 
-        return new MatchingResponse.Builder()
-                .recruitmentId(savedRecruitment.getId())
-                .matchingId(savedMatching.getId())
-                .courtId(savedMatching.getCourtId())
-                .hostId(savedMatching.getHostId())
-                .date(savedMatching.getDate())
-                .startTime(savedMatching.getStartTime())
-                .endTime(savedMatching.getEndTime())
-                .matchingStatus(savedMatching.getStatus())
-                .maximumLevel(savedRecruitment.getMaximumLevel())
-                .minimumLevel(savedRecruitment.getMinimumLevel())
-                .ageOfRecruitment(savedRecruitment.getAgeOfRecruitment())
-                .sexOfRecruitment(savedRecruitment.getSexOfRecruitment())
-                .preferenceGame(savedRecruitment.getPreferenceGame())
-                .numberOfRecruitment(savedRecruitment.getNumberOfRecruitment())
-                .setCostOfCourtPerPerson(savedRecruitment.getCostOfCourtPerPerson())
-                .annual(savedRecruitment.getAnnual())
-                .details(savedRecruitment.getDetails())
-                .recruitmentStatus(savedRecruitment.getStatus())
-                .build();
+        return new MatchingResponse(
+                savedRecruitment.getId(),
+                savedMatching.getId(),
+                savedMatching.getCourtId(),
+                savedMatching.getHostId(),
+                savedMatching.getDate(),
+                savedMatching.getStartTime(),
+                savedMatching.getEndTime(),
+                savedMatching.getStatus(),
+                savedRecruitment.getMaximumLevel(),
+                savedRecruitment.getMinimumLevel(),
+                savedRecruitment.getAgeOfRecruitment(),
+                savedRecruitment.getSexOfRecruitment(),
+                savedRecruitment.getPreferenceGame(),
+                savedRecruitment.getNumberOfRecruitment(),
+                savedRecruitment.getCostOfCourtPerPerson(),
+                savedRecruitment.getAnnual(),
+                savedRecruitment.getDetails(),
+                savedRecruitment.getStatus()
+        );
     }
-
-
 }

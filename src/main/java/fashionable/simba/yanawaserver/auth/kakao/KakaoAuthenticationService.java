@@ -5,6 +5,8 @@ import fashionable.simba.yanawaserver.auth.filter.AccessToken;
 import fashionable.simba.yanawaserver.auth.filter.UserInfo;
 import fashionable.simba.yanawaserver.members.domain.KakaoAccessToken;
 import fashionable.simba.yanawaserver.members.domain.KakaoMember;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -13,9 +15,11 @@ import java.util.Objects;
 
 @Service
 public class KakaoAuthenticationService {
+    private final Logger log = LoggerFactory.getLogger(KakaoAuthenticationService.class);
     private final KakaoAuthenticationClient authenticationClient;
     private final KakaoAuthorizationClient authorizationClient;
     private static final String GRANT_TYPE = "authorization_code";
+    private static final String CODE = "code";
     private final String redirectUri;
     private final String clientId;
     private final String secretKey;
@@ -64,6 +68,8 @@ public class KakaoAuthenticationService {
             "Bearer" + " " + token.getAccessToken()
         ).getBody();
 
+        log.debug("Get user information : {}", userInfo);
+
         //TODO : 토큰을 형변환을 실행 시점에서 진행한다면 런타임에서 문제가 발생할 가능성이 있다. 제네릭을 사용은 어떨까?
         return new KakaoMember(
             Objects.requireNonNull(userInfo).getId(),
@@ -79,9 +85,12 @@ public class KakaoAuthenticationService {
         return null;
     }
 
-    public void logout(AccessToken token) {
+    public void logout(AccessToken token) {}
 
+    public String getLoginUri() {
+        return "https://kauth.kakao.com/oauth/authorize?" +
+            "client_id=" + clientId +
+            "&redirect_uri=" + redirectUri +
+            "&response_type="+ CODE;
     }
-
-
 }

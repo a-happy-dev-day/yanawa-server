@@ -17,9 +17,9 @@ class MatchingReviewTest {
                 "매칭 후기 테스트입니다."
         );
         assertAll(
-                () -> Assertions.assertEquals(matchingReview.getWriterId(), 1L),
-                () -> Assertions.assertEquals(matchingReview.getPartnerId(), 2L),
-                () -> Assertions.assertEquals(matchingReview.getDetails(), "매칭 후기 테스트입니다.")
+                () -> Assertions.assertEquals(1L, matchingReview.getWriterId()),
+                () -> Assertions.assertEquals(2L, matchingReview.getPartnerId()),
+                () -> Assertions.assertEquals("매칭 후기 테스트입니다.", matchingReview.getDetails())
         );
     }
 

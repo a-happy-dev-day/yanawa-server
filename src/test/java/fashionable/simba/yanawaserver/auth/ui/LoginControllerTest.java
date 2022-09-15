@@ -1,9 +1,7 @@
 package fashionable.simba.yanawaserver.auth.ui;
 
 import fashionable.simba.yanawaserver.auth.dto.TokenRequest;
-import fashionable.simba.yanawaserver.auth.dto.TokenResponse;
 import fashionable.simba.yanawaserver.auth.kakao.KakaoAuthenticationService;
-import fashionable.simba.yanawaserver.auth.provider.JwtTokenProvider;
 import fashionable.simba.yanawaserver.auth.userdetails.User;
 import fashionable.simba.yanawaserver.auth.userdetails.UserDetailsService;
 import fashionable.simba.yanawaserver.members.domain.KakaoAccessToken;
@@ -31,12 +29,10 @@ class LoginControllerTest {
     private KakaoAuthenticationService kakaoAuthenticationService;
     @Mock
     private UserDetailsService userDetailsService;
-    @Mock
-    private JwtTokenProvider jwtTokenProvider;
 
     @BeforeEach
     void setUp() {
-        loginController = new LoginController(kakaoAuthenticationService, userDetailsService, jwtTokenProvider);
+        loginController = new LoginController(kakaoAuthenticationService, userDetailsService);
     }
 
     @Test

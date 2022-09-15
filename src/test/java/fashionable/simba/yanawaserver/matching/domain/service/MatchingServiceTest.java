@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.matching.domain;
+package fashionable.simba.yanawaserver.matching.domain.service;
 
 import fashionable.simba.yanawaserver.matching.constant.AgeGroupType;
 import fashionable.simba.yanawaserver.matching.constant.AnnualType;
@@ -6,6 +6,9 @@ import fashionable.simba.yanawaserver.matching.constant.GenderType;
 import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
 import fashionable.simba.yanawaserver.matching.constant.PreferenceType;
 import fashionable.simba.yanawaserver.matching.constant.RecruitmentStatusType;
+import fashionable.simba.yanawaserver.matching.domain.Level;
+import fashionable.simba.yanawaserver.matching.domain.Matching;
+import fashionable.simba.yanawaserver.matching.domain.Recruitment;
 import fashionable.simba.yanawaserver.matching.domain.service.MatchingService;
 import fashionable.simba.yanawaserver.matching.repository.MemoryCourtRepository;
 import fashionable.simba.yanawaserver.matching.repository.MemoryMatchingRepository;

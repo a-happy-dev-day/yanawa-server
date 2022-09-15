@@ -21,7 +21,7 @@ public class UserDetailsAuthenticationProvider implements AuthenticationManager 
 
     private void checkAuthentication(UserDetails userDetails) {
         if (userDetails == null) {
-            throw new AuthenticationException();
+            throw new AuthenticationException("사용자의 정보가 들어있지 않습니다.");
         }
     }
 }

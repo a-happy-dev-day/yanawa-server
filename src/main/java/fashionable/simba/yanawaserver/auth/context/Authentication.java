@@ -1,8 +1,11 @@
 package fashionable.simba.yanawaserver.auth.context;
 
+import fashionable.simba.yanawaserver.members.domain.RoleType;
+
 import java.util.List;
 
 public class Authentication {
+    public static final Authentication ANONYMOUS = new Authentication("anonymous", List.of(RoleType.ROLE_ANONYMOUS.name()));
     private final Object principal;
     private List<String> authorities;
 

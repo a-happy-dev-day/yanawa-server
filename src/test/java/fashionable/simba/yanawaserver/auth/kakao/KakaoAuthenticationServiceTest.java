@@ -13,7 +13,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
-import java.util.Date;
 import java.util.HashMap;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,7 +22,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class KakaoAuthenticationServiceTest {
     private static final String ACCESS_TOKEN = "access-token";
-    private static final KakaoAccessToken KAKAO_ACCESS_TOKEN = new KakaoAccessToken("bearer", ACCESS_TOKEN, new Date(), "refresh-token", new Date());
+    private static final KakaoAccessToken KAKAO_ACCESS_TOKEN = new KakaoAccessToken("bearer", ACCESS_TOKEN, "refresh-token");
     @Mock
     private KakaoAuthenticationClient authenticationClient;
     @Mock

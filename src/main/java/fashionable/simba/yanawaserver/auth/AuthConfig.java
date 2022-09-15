@@ -7,7 +7,6 @@ import fashionable.simba.yanawaserver.auth.context.SecurityContextPersistenceFil
 import fashionable.simba.yanawaserver.auth.filter.ServerTokenAuthenticationFilter;
 import fashionable.simba.yanawaserver.auth.filter.ServerTokenAuthorizationFilter;
 import fashionable.simba.yanawaserver.auth.handler.AuthenticationFailureHandler;
-import fashionable.simba.yanawaserver.auth.handler.AuthenticationSuccessHandler;
 import fashionable.simba.yanawaserver.auth.handler.DefaultAuthenticationFailureHandler;
 import fashionable.simba.yanawaserver.auth.handler.DefaultAuthenticationSuccessHandler;
 import fashionable.simba.yanawaserver.auth.handler.LoginAuthenticationFailureHandler;
@@ -48,11 +47,11 @@ public class AuthConfig implements WebMvcConfigurer {
     }
 
     private ServerTokenAuthorizationFilter serverTokenAuthorizationFilter() {
-        return new ServerTokenAuthorizationFilter(successHandler(), failureHandler(), tokenAuthenticationProvider());
+        return new ServerTokenAuthorizationFilter(defaultAuthenticationSuccessHandler(), failureHandler(), tokenAuthenticationProvider());
     }
 
     private ServerTokenAuthenticationFilter serverTokenAuthenticationFilter() {
-        return new ServerTokenAuthenticationFilter(tokenAuthenticationSuccessHandler(), loginFailureHandler(), userDetailsAuthenticationProvider(), objectMapper());
+        return new ServerTokenAuthenticationFilter(tokenAuthenticationSuccessHandler(), loginAuthenticationFailureHandler(), userDetailsAuthenticationProvider(), objectMapper());
     }
 
     @Override
@@ -81,7 +80,7 @@ public class AuthConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    AuthenticationSuccessHandler successHandler() {
+    DefaultAuthenticationSuccessHandler defaultAuthenticationSuccessHandler() {
         return new DefaultAuthenticationSuccessHandler();
     }
 
@@ -91,10 +90,9 @@ public class AuthConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    AuthenticationFailureHandler loginFailureHandler() {
+    LoginAuthenticationFailureHandler loginAuthenticationFailureHandler() {
         return new LoginAuthenticationFailureHandler();
     }
-
     @Bean
     JwtTokenProvider jwtTokenProvider() {
         return new JwtTokenProvider(secretKey, validityInMilliseconds);

@@ -9,6 +9,9 @@ import fashionable.simba.yanawaserver.members.domain.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
     private final MemberRepository memberRepository;
@@ -25,20 +28,32 @@ public class CustomUserDetailsService implements UserDetailsService {
         Member member = memberRepository.findById(id)
             .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
 
-        return new User(member.getId().toString(), member.getRoles());
+        return getUser(member.getId(), member.getRoles());
     }
 
     @Override
     @Transactional
     public UserDetails saveKakaoMember(KakaoMember member) {
-        KakaoMember kakaoMember = member;
-
-        // TODO 사용자 정보가 있는 경우 액세스 토큰만 갱신한다.
-        // TODO 카카오 토큰을 전부 저장하지 않고 Refresh Token 만 저장하도록 구현할 지 고민할 필요 O
-        if (memberRepository.findByKakaoId(kakaoMember.getKakaoId()).isEmpty()) {
-            kakaoMember = memberRepository.save(kakaoMember);
+        if (getMemberByKakaoId(member).isEmpty()) {
+            KakaoMember kakaoMember = memberRepository.save(member);
+            return getUser(kakaoMember.getId(), kakaoMember.getRoles());
         }
 
-        return new User(kakaoMember.getId().toString(), kakaoMember.getRoles());
+        KakaoMember kakaoMember = getMemberByKakaoId(member)
+            .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
+
+        kakaoMember.updateAccessToken(member.getKakaoAccessToken());
+
+        memberRepository.save(kakaoMember);
+
+        return getUser(kakaoMember.getId(), kakaoMember.getRoles());
+    }
+
+    private User getUser(Long id, List<String> roles) {
+        return new User(id.toString(), roles);
+    }
+
+    private Optional<KakaoMember> getMemberByKakaoId(KakaoMember member) {
+        return memberRepository.findByKakaoId(member.getKakaoId());
     }
 }

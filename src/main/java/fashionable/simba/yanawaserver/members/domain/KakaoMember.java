@@ -64,4 +64,8 @@ public final class KakaoMember extends Member {
     public int hashCode() {
         return Objects.hash(getKakaoId());
     }
+
+    public void updateAccessToken(KakaoAccessToken kakaoAccessToken) {
+        this.kakaoAccessToken = kakaoAccessToken;
+    }
 }

@@ -18,6 +18,7 @@ public class ServerTokenAuthorizationFilter extends AbstractAuthenticationFilter
 
     /**
      * 토큰 정보를 가져와 권한을 확인한다. *
+     *
      * @param request current HTTP request
      * @return AuthenticationToken
      */

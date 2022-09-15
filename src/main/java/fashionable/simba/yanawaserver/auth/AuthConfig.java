@@ -93,6 +93,7 @@ public class AuthConfig implements WebMvcConfigurer {
     LoginAuthenticationFailureHandler loginAuthenticationFailureHandler() {
         return new LoginAuthenticationFailureHandler();
     }
+
     @Bean
     JwtTokenProvider jwtTokenProvider() {
         return new JwtTokenProvider(secretKey, validityInMilliseconds);

@@ -13,9 +13,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/kakao/login")
 public class LoginController {
     private final KakaoAuthenticationService kakaoAuthenticationService;
     private final UserDetailsService userDetailsService;
@@ -27,12 +29,12 @@ public class LoginController {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
-    @GetMapping("/kakao/login")
+    @GetMapping
     public ResponseEntity<Void> loginPage() {
         return ResponseEntity.status(HttpStatus.SEE_OTHER).header(HttpHeaders.LOCATION, kakaoAuthenticationService.getLoginUri()).build();
     }
 
-    @GetMapping("/kakao/login/callback")
+    @GetMapping("callback")
     public ResponseEntity<TokenResponse> loginCallback(String code) {
         AccessToken accessToken = kakaoAuthenticationService.getAccessToken(new AccessCode(code));
         KakaoMember kakaoMember = kakaoAuthenticationService.getUserInfo((KakaoAccessToken) accessToken);

@@ -51,10 +51,10 @@ class ParticipationTest {
     }
 
     @Test
-    @DisplayName("매칭 정보가 입력되지 않으면 NoMatchingExceoption이 발생한다.")
+    @DisplayName("매칭 정보가 입력되지 않으면 IllegalArgumentException 발생한다.")
     void 매칭_아이디_실패_테스트() {
         LocalDateTime dateTime = LocalDateTime.of(2022, 9, 1, 18, 0);
-        assertThrows(NoMatchingDataException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             new Participation(
                     1L,
                     1L,

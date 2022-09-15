@@ -38,7 +38,7 @@ public class Participation {
 
     public Participation(Long id, Long userId, Long recruitmnetId, LocalDateTime requestDateTime, ParticipationStatusType status) {
         if (recruitmnetId == null) {
-            throw new NoMatchingDataException("매칭 정보를 찾을 수 없습니다.");
+            throw new IllegalArgumentException("모집 정보를 찾을 수 없습니다.");
         }
         this.id = id;
         this.userId = userId;

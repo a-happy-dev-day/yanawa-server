@@ -17,7 +17,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -52,9 +51,7 @@ class LoginControllerTest {
         KakaoAccessToken accessToken = new KakaoAccessToken(
             "Bearer",
             "access token",
-            new Date(),
-            "refresh Token",
-            new Date());
+            "refresh Token");
 
         KakaoMember kakaoMember = new KakaoMember(
             1234L,

@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import fashionable.simba.yanawaserver.auth.filter.AccessToken;
 
 import javax.persistence.Embeddable;
-import java.util.Date;
 import java.util.Objects;
 
 @Embeddable
@@ -15,18 +14,14 @@ import java.util.Objects;
 public final class KakaoAccessToken implements AccessToken {
     private String tokenType;
     private String accessToken;
-    private Date expiresIn;
     private String refreshToken;
-    private Date refreshTokenExpiresIn;
 
     protected KakaoAccessToken() {/*no-op*/}
 
-    public KakaoAccessToken(String tokenType, String accessToken, Date expiresIn, String refreshToken, Date refreshTokenExpiresIn) {
+    public KakaoAccessToken(String tokenType, String accessToken, String refreshToken) {
         this.tokenType = tokenType;
         this.accessToken = accessToken;
-        this.expiresIn = expiresIn;
         this.refreshToken = refreshToken;
-        this.refreshTokenExpiresIn = refreshTokenExpiresIn;
     }
 
     @Override
@@ -40,18 +35,8 @@ public final class KakaoAccessToken implements AccessToken {
     }
 
     @Override
-    public Date getExpiresIn() {
-        return expiresIn;
-    }
-
-    @Override
     public String getRefreshToken() {
         return refreshToken;
-    }
-
-    @Override
-    public Date getRefreshTokenExpiresIn() {
-        return refreshTokenExpiresIn;
     }
 
 

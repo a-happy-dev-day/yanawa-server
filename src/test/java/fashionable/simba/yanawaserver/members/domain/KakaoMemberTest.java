@@ -5,8 +5,6 @@ import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Date;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -16,9 +14,7 @@ class KakaoMemberTest {
     private static final KakaoAccessToken ACCESS_TOKEN = new KakaoAccessToken(
         "bearer",
         "access-token",
-        new Date(),
-        "refresh Token",
-        new Date()
+        "refresh Token"
     );
 
 

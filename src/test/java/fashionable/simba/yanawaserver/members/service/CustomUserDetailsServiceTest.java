@@ -12,7 +12,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +21,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class CustomUserDetailsServiceTest {
-    private static final KakaoAccessToken KAKAO_ACCESS_TOKEN = new KakaoAccessToken("bearer", "access token", new Date(), "refresh toekn", new Date());
+    private static final KakaoAccessToken KAKAO_ACCESS_TOKEN = new KakaoAccessToken("bearer", "access token", "refresh toekn");
     private static final KakaoMember KAKAO_MEMBER = new KakaoMember(1234L, "kakao@email.com", List.of(RoleType.ROLE_MEMBER.name()), 1234L, "nickname", "image.jpg", "image.png", KAKAO_ACCESS_TOKEN);
     @Mock
     private MemberRepository memberRepository;

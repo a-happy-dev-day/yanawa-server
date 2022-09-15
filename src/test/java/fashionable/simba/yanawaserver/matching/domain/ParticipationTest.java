@@ -27,7 +27,7 @@ class ParticipationTest {
         assertAll(
                 () -> assertThat(participation.getId()).isEqualTo(1L),
                 () -> assertThat(participation.getUserId()).isEqualTo(1L),
-                () -> assertThat(participation.getMatchingId()).isEqualTo(1L),
+                () -> assertThat(participation.getRecruitmentId()).isEqualTo(1L),
                 () -> assertThat(participation.getRequestDateTime()).isEqualTo(LocalDateTime.of(2022, 9, 1, 18, 0)),
                 () -> assertThat(participation.getStatus()).isEqualTo(ParticipationStatusType.WAITING)
         );

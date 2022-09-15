@@ -19,7 +19,7 @@ public class MemoryParticipationRepository implements ParticipationRepository {
         Participation save = new Participation(
                 id,
                 participation.getUserId(),
-                participation.getMatchingId(),
+                participation.getRecruitmentId(),
                 participation.getRequestDateTime(),
                 participation.getStatus()
         );
@@ -44,6 +44,6 @@ public class MemoryParticipationRepository implements ParticipationRepository {
 
     @Override
     public Integer countParticipationsByMatchingId(Long matchingId) {
-        return (int) participations.values().stream().filter(x -> x.getMatchingId().equals(matchingId)).count();
+        return (int) participations.values().stream().filter(x -> x.getRecruitmentId().equals(matchingId)).count();
     }
 }

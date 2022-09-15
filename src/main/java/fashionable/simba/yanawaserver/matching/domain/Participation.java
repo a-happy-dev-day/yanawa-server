@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public class Participation {
     private Long id;
     private Long userId;
-    private Long matchingId;
+    private Long recruitmentId;
     private ParticipationStatusType status;
     private LocalDateTime requestDateTime;
 
@@ -20,8 +20,8 @@ public class Participation {
         return userId;
     }
 
-    public Long getMatchingId() {
-        return matchingId;
+    public Long getRecruitmentId() {
+        return recruitmentId;
     }
 
     public ParticipationStatusType getStatus() {
@@ -36,13 +36,13 @@ public class Participation {
         this.status = ParticipationStatusType.ACCEPTED;
     }
 
-    public Participation(Long id, Long userId, Long matchingId, LocalDateTime requestDateTime, ParticipationStatusType status) {
-        if (matchingId == null) {
+    public Participation(Long id, Long userId, Long recruitmnetId, LocalDateTime requestDateTime, ParticipationStatusType status) {
+        if (recruitmnetId == null) {
             throw new NoMatchingDataException("매칭 정보를 찾을 수 없습니다.");
         }
         this.id = id;
         this.userId = userId;
-        this.matchingId = matchingId;
+        this.recruitmentId = recruitmnetId;
         this.requestDateTime = requestDateTime;
         this.status = status;
     }

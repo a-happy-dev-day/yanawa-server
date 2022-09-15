@@ -30,7 +30,7 @@ class ParticipationRepositoryTest {
                 ParticipationStatusType.WAITING
         );
         Participation savedParticipation = participationRepository.save(participation);
-        assertThat(participationRepository.findParticipationById(savedParticipation.getMatchingId()).orElseThrow()).isEqualTo(savedParticipation);
+        assertThat(participationRepository.findParticipationById(savedParticipation.getRecruitmentId()).orElseThrow()).isEqualTo(savedParticipation);
     }
 
     @Test

@@ -1,5 +1,6 @@
 package fashionable.simba.yanawaserver.auth.ui;
 
+import fashionable.simba.yanawaserver.auth.dto.TokenRequest;
 import fashionable.simba.yanawaserver.auth.dto.TokenResponse;
 import fashionable.simba.yanawaserver.auth.kakao.KakaoAuthenticationService;
 import fashionable.simba.yanawaserver.auth.provider.JwtTokenProvider;
@@ -70,7 +71,7 @@ class LoginControllerTest {
         when(kakaoAuthenticationService.getUserInfo(accessToken)).thenReturn(kakaoMember);
         when(userDetailsService.saveKakaoMember(kakaoMember)).thenReturn(user);
 
-        ResponseEntity<TokenResponse> response = loginController.loginCallback("code");
+        ResponseEntity<TokenRequest> response = loginController.loginCallback("code");
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 }

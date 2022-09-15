@@ -1,6 +1,6 @@
 package fashionable.simba.yanawaserver.auth.ui;
 
-import fashionable.simba.yanawaserver.auth.dto.TokenResponse;
+import fashionable.simba.yanawaserver.auth.dto.TokenRequest;
 import fashionable.simba.yanawaserver.auth.filter.AccessCode;
 import fashionable.simba.yanawaserver.auth.filter.AccessToken;
 import fashionable.simba.yanawaserver.auth.kakao.KakaoAuthenticationService;
@@ -35,15 +35,10 @@ public class LoginController {
     }
 
     @GetMapping("callback")
-    public ResponseEntity<TokenResponse> loginCallback(String code) {
+    public ResponseEntity<TokenRequest> loginCallback(String code) {
         AccessToken accessToken = kakaoAuthenticationService.getAccessToken(new AccessCode(code));
         KakaoMember kakaoMember = kakaoAuthenticationService.getUserInfo((KakaoAccessToken) accessToken);
         UserDetails userDetails = userDetailsService.saveKakaoMember(kakaoMember);
-
-        String token = jwtTokenProvider.createToken(userDetails.getUsername().toString(), userDetails.getAuthorities());
-        TokenResponse tokenResponse = new TokenResponse(token);
-
-        return ResponseEntity.ok(tokenResponse);
+        return ResponseEntity.ok(new TokenRequest(userDetails.getUsername()));
     }
-
 }

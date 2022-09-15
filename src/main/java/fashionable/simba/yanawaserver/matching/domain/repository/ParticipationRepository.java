@@ -9,6 +9,8 @@ public interface ParticipationRepository {
 
     Optional<Participation> findParticipationById(Long id);
 
+    Optional<Participation> findParticipationByUser(Long userId, Long recruitmentId);
+
     void clear();
 
     Integer countParticipationsByMatchingId(Long matchingId);

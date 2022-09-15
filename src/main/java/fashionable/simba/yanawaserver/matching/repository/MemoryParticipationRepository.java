@@ -1,11 +1,13 @@
 package fashionable.simba.yanawaserver.matching.repository;
 
+import fashionable.simba.yanawaserver.matching.constant.ParticipationStatusType;
 import fashionable.simba.yanawaserver.matching.domain.Participation;
 import fashionable.simba.yanawaserver.matching.domain.repository.ParticipationRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 @Repository
@@ -21,7 +23,7 @@ public class MemoryParticipationRepository implements ParticipationRepository {
                 participation.getUserId(),
                 participation.getRecruitmentId(),
                 participation.getRequestDateTime(),
-                participation.getStatus()
+                ParticipationStatusType.WAITING
         );
         participations.put(id, save);
         return save;
@@ -35,6 +37,12 @@ public class MemoryParticipationRepository implements ParticipationRepository {
     @Override
     public Optional<Participation> findParticipationById(Long id) {
         return Optional.ofNullable(participations.get(id));
+    }
+
+    @Override
+    public Optional<Participation> findParticipationByUser(Long userId, Long recruitmentId) {
+        return participations.values().stream().filter(entry -> Objects.equals(entry.getUserId(), userId)
+                && Objects.equals(entry.getRecruitmentId(), recruitmentId)).findFirst();
     }
 
     @Override

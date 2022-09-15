@@ -32,8 +32,14 @@ public class Participation {
         return requestDateTime;
     }
 
-    public void changeAcceptedParticipation() {
+    public Participation changeAcceptedParticipation() {
         this.status = ParticipationStatusType.ACCEPTED;
+        return this;
+    }
+
+    public Participation changeRejectedParticipation() {
+        this.status = ParticipationStatusType.REJECTED;
+        return this;
     }
 
     public Participation(Long id, Long userId, Long recruitmnetId, LocalDateTime requestDateTime, ParticipationStatusType status) {

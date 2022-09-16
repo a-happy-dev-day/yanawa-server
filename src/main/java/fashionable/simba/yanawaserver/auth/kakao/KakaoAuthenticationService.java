@@ -70,7 +70,6 @@ public class KakaoAuthenticationService {
 
         log.debug("Get user information : {}", userInfo);
 
-        //TODO : 토큰을 형변환을 실행 시점에서 진행한다면 런타임에서 문제가 발생할 가능성이 있다. 제네릭을 사용은 어떨까?
         return new KakaoMember(
             Objects.requireNonNull(userInfo).getId(),
             userInfo.getEmail(),

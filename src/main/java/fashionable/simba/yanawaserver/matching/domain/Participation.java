@@ -52,4 +52,10 @@ public class Participation {
         this.requestDateTime = requestDateTime;
         this.status = status;
     }
+
+    public Participation(Long userId, Long recruitmentId, LocalDateTime requestDateTime) {
+        this.userId = userId;
+        this.recruitmentId = recruitmentId;
+        this.requestDateTime = requestDateTime;
+    }
 }

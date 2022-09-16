@@ -7,13 +7,11 @@ import fashionable.simba.yanawaserver.members.domain.KakaoAccessToken;
 import fashionable.simba.yanawaserver.members.domain.KakaoMember;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
-@Service
 public class KakaoAuthenticationService {
     private final Logger log = LoggerFactory.getLogger(KakaoAuthenticationService.class);
     private final KakaoAuthenticationClient authenticationClient;
@@ -26,9 +24,9 @@ public class KakaoAuthenticationService {
 
     public KakaoAuthenticationService(KakaoAuthenticationClient authenticationClient,
                                       KakaoAuthorizationClient authorizationClient,
-                                      @Value("${kakao.client.redirect-uri}") String redirectUri,
-                                      @Value("${kakao.client.id}") String clientId,
-                                      @Value("${kakao.client.secret}") String secretKey) {
+                                      String redirectUri,
+                                      String clientId,
+                                      String secretKey) {
         this.authenticationClient = authenticationClient;
         this.authorizationClient = authorizationClient;
         this.redirectUri = redirectUri;

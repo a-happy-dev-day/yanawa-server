@@ -26,14 +26,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.List;
 
 @Configuration
-public class AuthConfig implements WebMvcConfigurer {
+public class WebSecurityConfigurer implements WebMvcConfigurer {
     private final String secretKey;
     private final long validityInMilliseconds;
     private final UserDetailsService userDetailsService;
 
-    public AuthConfig(@Value("${security.jwt.token.secret-key}") String secretKey,
-                      @Value("${security.jwt.token.expire-length}") long validityInMilliseconds,
-                      UserDetailsService userDetailsService) {
+    public WebSecurityConfigurer(@Value("${security.jwt.token.secret-key}") String secretKey,
+                                 @Value("${security.jwt.token.expire-length}") long validityInMilliseconds,
+                                 UserDetailsService userDetailsService) {
         this.secretKey = secretKey;
         this.validityInMilliseconds = validityInMilliseconds;
         this.userDetailsService = userDetailsService;

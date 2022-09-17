@@ -3,8 +3,8 @@ package fashionable.simba.yanawaserver.auth.filter;
 
 import fashionable.simba.yanawaserver.auth.handler.AuthenticationFailureHandler;
 import fashionable.simba.yanawaserver.auth.handler.AuthenticationSuccessHandler;
-import fashionable.simba.yanawaserver.auth.provider.AuthenticationManager;
-import fashionable.simba.yanawaserver.auth.provider.AuthenticationToken;
+import fashionable.simba.yanawaserver.auth.provider.AuthorizationManager;
+import fashionable.simba.yanawaserver.auth.provider.AuthorizationToken;
 import fashionable.simba.yanawaserver.auth.provider.AuthorizationExtractor;
 import fashionable.simba.yanawaserver.auth.provider.AuthorizationType;
 
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class ServerTokenAuthorizationFilter extends AbstractAuthenticationFilter {
 
-    public ServerTokenAuthorizationFilter(AuthenticationSuccessHandler successHandler, AuthenticationFailureHandler failureHandler, AuthenticationManager authenticationManager) {
+    public ServerTokenAuthorizationFilter(AuthenticationSuccessHandler successHandler, AuthenticationFailureHandler failureHandler, AuthorizationManager authenticationManager) {
         super(successHandler, failureHandler, authenticationManager);
     }
 
@@ -23,8 +23,8 @@ public class ServerTokenAuthorizationFilter extends AbstractAuthenticationFilter
      * @return AuthenticationToken
      */
     @Override
-    protected AuthenticationToken convert(HttpServletRequest request) {
+    protected AuthorizationToken convert(HttpServletRequest request) {
         String authCredentials = AuthorizationExtractor.extract(request, AuthorizationType.BEARER);
-        return new AuthenticationToken(authCredentials);
+        return new AuthorizationToken(authCredentials);
     }
 }

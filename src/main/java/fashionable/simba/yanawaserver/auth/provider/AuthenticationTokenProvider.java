@@ -5,14 +5,14 @@ import fashionable.simba.yanawaserver.auth.context.Authentication;
 
 import java.util.List;
 
-public class TokenAuthenticationProvider implements AuthenticationManager {
+public class AuthenticationTokenProvider implements AuthorizationManager {
     private final JwtTokenProvider jwtTokenProvider;
 
-    public TokenAuthenticationProvider(JwtTokenProvider jwtTokenProvider) {
+    public AuthenticationTokenProvider(JwtTokenProvider jwtTokenProvider) {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
-    public Authentication authenticate(AuthenticationToken authenticationToken) {
+    public Authentication authenticate(AuthorizationToken authenticationToken) {
         if (!jwtTokenProvider.validateToken(authenticationToken.getPrincipal())) {
             throw new AuthenticationException("토큰이 유효하지 않습니다.");
         }

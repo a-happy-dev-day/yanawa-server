@@ -4,8 +4,8 @@ import fashionable.simba.yanawaserver.auth.context.Authentication;
 import fashionable.simba.yanawaserver.auth.context.SecurityContextHolder;
 import fashionable.simba.yanawaserver.auth.handler.AuthenticationFailureHandler;
 import fashionable.simba.yanawaserver.auth.handler.AuthenticationSuccessHandler;
-import fashionable.simba.yanawaserver.auth.provider.AuthenticationManager;
-import fashionable.simba.yanawaserver.auth.provider.AuthenticationToken;
+import fashionable.simba.yanawaserver.auth.provider.AuthorizationManager;
+import fashionable.simba.yanawaserver.auth.provider.AuthorizationToken;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +16,9 @@ public abstract class AbstractAuthenticationFilter implements HandlerInterceptor
 
     private final AuthenticationSuccessHandler successHandler;
     private final AuthenticationFailureHandler failureHandler;
-    private final AuthenticationManager authenticationManager;
+    private final AuthorizationManager authenticationManager;
 
-    protected AbstractAuthenticationFilter(AuthenticationSuccessHandler successHandler, AuthenticationFailureHandler failureHandler, AuthenticationManager authenticationManager) {
+    protected AbstractAuthenticationFilter(AuthenticationSuccessHandler successHandler, AuthenticationFailureHandler failureHandler, AuthorizationManager authenticationManager) {
         this.successHandler = successHandler;
         this.failureHandler = failureHandler;
         this.authenticationManager = authenticationManager;
@@ -47,11 +47,11 @@ public abstract class AbstractAuthenticationFilter implements HandlerInterceptor
 
 
     private Authentication attemptAuthentication(HttpServletRequest request) throws IOException {
-        AuthenticationToken token = convert(request);
+        AuthorizationToken token = convert(request);
         return authenticationManager.authenticate(token);
     }
 
-    protected abstract AuthenticationToken convert(HttpServletRequest request) throws IOException;
+    protected abstract AuthorizationToken convert(HttpServletRequest request) throws IOException;
 
     protected boolean getContinueChainBeforeSuccessfulAuthentication() {
         return true;

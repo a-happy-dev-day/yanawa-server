@@ -9,12 +9,12 @@ import fashionable.simba.yanawaserver.auth.filter.ServerTokenAuthorizationFilter
 import fashionable.simba.yanawaserver.auth.handler.AuthenticationFailureHandler;
 import fashionable.simba.yanawaserver.auth.handler.DefaultAuthenticationFailureHandler;
 import fashionable.simba.yanawaserver.auth.handler.DefaultAuthenticationSuccessHandler;
-import fashionable.simba.yanawaserver.auth.handler.LoginAuthenticationFailureHandler;
+import fashionable.simba.yanawaserver.auth.handler.TokenAuthenticationFailureHandler;
 import fashionable.simba.yanawaserver.auth.handler.TokenAuthenticationSuccessHandler;
-import fashionable.simba.yanawaserver.auth.provider.AuthenticationManager;
+import fashionable.simba.yanawaserver.auth.provider.AuthenticationTokenProvider;
+import fashionable.simba.yanawaserver.auth.provider.AuthorizationManager;
+import fashionable.simba.yanawaserver.auth.provider.AuthorizationTokenProvider;
 import fashionable.simba.yanawaserver.auth.provider.JwtTokenProvider;
-import fashionable.simba.yanawaserver.auth.provider.TokenAuthenticationProvider;
-import fashionable.simba.yanawaserver.auth.provider.UserDetailsAuthenticationProvider;
 import fashionable.simba.yanawaserver.auth.userdetails.UserDetailsService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -47,11 +47,11 @@ public class WebSecurityConfigurer implements WebMvcConfigurer {
     }
 
     private ServerTokenAuthorizationFilter serverTokenAuthorizationFilter() {
-        return new ServerTokenAuthorizationFilter(defaultAuthenticationSuccessHandler(), failureHandler(), tokenAuthenticationProvider());
+        return new ServerTokenAuthorizationFilter(defaultAuthenticationSuccessHandler(), failureHandler(), authorizationTokenProvider());
     }
 
     private ServerTokenAuthenticationFilter serverTokenAuthenticationFilter() {
-        return new ServerTokenAuthenticationFilter(tokenAuthenticationSuccessHandler(), loginAuthenticationFailureHandler(), userDetailsAuthenticationProvider(), objectMapper());
+        return new ServerTokenAuthenticationFilter(tokenAuthenticationSuccessHandler(), loginAuthenticationFailureHandler(), authenticationTokenProvider(), objectMapper());
     }
 
     @Override
@@ -65,13 +65,13 @@ public class WebSecurityConfigurer implements WebMvcConfigurer {
     }
 
     @Bean
-    AuthenticationManager userDetailsAuthenticationProvider() {
-        return new UserDetailsAuthenticationProvider(userDetailsService);
+    AuthorizationManager authenticationTokenProvider() {
+        return new AuthenticationTokenProvider(jwtTokenProvider());
     }
 
     @Bean
-    AuthenticationManager tokenAuthenticationProvider() {
-        return new TokenAuthenticationProvider(jwtTokenProvider());
+    AuthorizationManager authorizationTokenProvider() {
+        return new AuthorizationTokenProvider(jwtTokenProvider());
     }
 
     @Bean
@@ -90,8 +90,8 @@ public class WebSecurityConfigurer implements WebMvcConfigurer {
     }
 
     @Bean
-    LoginAuthenticationFailureHandler loginAuthenticationFailureHandler() {
-        return new LoginAuthenticationFailureHandler();
+    TokenAuthenticationFailureHandler loginAuthenticationFailureHandler() {
+        return new TokenAuthenticationFailureHandler();
     }
 
     @Bean

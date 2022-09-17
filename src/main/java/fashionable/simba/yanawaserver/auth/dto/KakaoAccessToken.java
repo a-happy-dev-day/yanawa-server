@@ -1,17 +1,14 @@
-package fashionable.simba.yanawaserver.members.domain;
+package fashionable.simba.yanawaserver.auth.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import fashionable.simba.yanawaserver.auth.filter.AccessToken;
 
-import javax.persistence.Embeddable;
 import java.util.Objects;
 
-@Embeddable
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public final class KakaoAccessToken implements AccessToken {
+public final class KakaoAccessToken {
     private String tokenType;
     private String accessToken;
     private String refreshToken;
@@ -24,17 +21,14 @@ public final class KakaoAccessToken implements AccessToken {
         this.refreshToken = refreshToken;
     }
 
-    @Override
     public String getTokenType() {
         return tokenType;
     }
 
-    @Override
     public String getAccessToken() {
         return accessToken;
     }
 
-    @Override
     public String getRefreshToken() {
         return refreshToken;
     }

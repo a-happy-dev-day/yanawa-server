@@ -4,8 +4,6 @@ public interface AccessToken {
 
     String getTokenType();
 
-    String getAccessToken();
-
     String getRefreshToken();
 
     boolean equals(Object o);

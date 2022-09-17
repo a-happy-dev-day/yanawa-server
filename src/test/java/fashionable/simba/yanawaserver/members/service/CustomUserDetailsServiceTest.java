@@ -1,8 +1,9 @@
 package fashionable.simba.yanawaserver.members.service;
 
 import fashionable.simba.yanawaserver.auth.userdetails.UserDetails;
-import fashionable.simba.yanawaserver.members.domain.KakaoAccessToken;
+import fashionable.simba.yanawaserver.auth.dto.KakaoAccessToken;
 import fashionable.simba.yanawaserver.members.domain.KakaoMember;
+import fashionable.simba.yanawaserver.members.domain.MemberAccessToken;
 import fashionable.simba.yanawaserver.members.domain.MemberRepository;
 import fashionable.simba.yanawaserver.members.domain.RoleType;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +23,8 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class CustomUserDetailsServiceTest {
     private static final KakaoAccessToken KAKAO_ACCESS_TOKEN = new KakaoAccessToken("bearer", "access token", "refresh toekn");
-    private static final KakaoMember KAKAO_MEMBER = new KakaoMember(1234L, "kakao@email.com", List.of(RoleType.ROLE_MEMBER.name()), 1234L, "nickname", "image.jpg", "image.png", KAKAO_ACCESS_TOKEN);
+    private static final KakaoMember KAKAO_MEMBER = new KakaoMember(1234L, "kakao@email.com", List.of(RoleType.ROLE_MEMBER.name()), 1234L, "nickname", "image.jpg", "image.png", new MemberAccessToken(KAKAO_ACCESS_TOKEN.getTokenType(), KAKAO_ACCESS_TOKEN.getRefreshToken()));
+
     @Mock
     private MemberRepository memberRepository;
     private CustomUserDetailsService userDetailsService;

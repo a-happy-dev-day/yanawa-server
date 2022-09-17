@@ -1,7 +1,6 @@
 package fashionable.simba.yanawaserver.members.domain;
 
 import javax.persistence.DiscriminatorValue;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import java.util.List;
 import java.util.Objects;
@@ -13,23 +12,19 @@ public final class KakaoMember extends Member {
     private String nickname;
     private String profileImageUrl;
     private String thumbnailImageUrl;
-    @Embedded
-    private KakaoAccessToken kakaoAccessToken;
 
     protected KakaoMember() {/*no-op*/}
 
-
-    public KakaoMember(Long id, String email, List<String> roles, Long kakaoId, String nickname, String profileImageUrl, String thumbnailImageUrl, KakaoAccessToken kakaoAccessToken) {
-        super(id, email, roles);
+    public KakaoMember(Long id, String email, List<String> roles, Long kakaoId, String nickname, String profileImageUrl, String thumbnailImageUrl, MemberAccessToken memberAccessToken) {
+        super(id, email, roles, memberAccessToken);
         this.kakaoId = kakaoId;
         this.nickname = nickname;
         this.profileImageUrl = profileImageUrl;
         this.thumbnailImageUrl = thumbnailImageUrl;
-        this.kakaoAccessToken = kakaoAccessToken;
     }
 
-    public KakaoMember(Long kakaoId, String email, String nickname, String profileImageUrl, String thumbnailImageUrl, KakaoAccessToken kakaoAccessToken) {
-        this(null, email, List.of(RoleType.ROLE_MEMBER.name()), kakaoId, nickname, profileImageUrl, thumbnailImageUrl, kakaoAccessToken);
+    public KakaoMember(Long kakaoId, String email, String nickname, String profileImageUrl, String thumbnailImageUrl, MemberAccessToken memberAccessToken) {
+        this(null, email, List.of(RoleType.ROLE_MEMBER.name()), kakaoId, nickname, profileImageUrl, thumbnailImageUrl, memberAccessToken);
     }
 
     public String getNickname() {
@@ -48,10 +43,6 @@ public final class KakaoMember extends Member {
         return thumbnailImageUrl;
     }
 
-    public KakaoAccessToken getKakaoAccessToken() {
-        return kakaoAccessToken;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -65,7 +56,4 @@ public final class KakaoMember extends Member {
         return Objects.hash(getKakaoId());
     }
 
-    public void updateAccessToken(KakaoAccessToken kakaoAccessToken) {
-        this.kakaoAccessToken = kakaoAccessToken;
-    }
 }

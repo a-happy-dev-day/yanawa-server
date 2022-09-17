@@ -4,8 +4,9 @@ import fashionable.simba.yanawaserver.auth.dto.TokenRequest;
 import fashionable.simba.yanawaserver.auth.kakao.KakaoAuthenticationService;
 import fashionable.simba.yanawaserver.auth.userdetails.User;
 import fashionable.simba.yanawaserver.auth.userdetails.UserDetailsService;
-import fashionable.simba.yanawaserver.members.domain.KakaoAccessToken;
+import fashionable.simba.yanawaserver.auth.dto.KakaoAccessToken;
 import fashionable.simba.yanawaserver.members.domain.KakaoMember;
+import fashionable.simba.yanawaserver.members.domain.MemberAccessToken;
 import fashionable.simba.yanawaserver.members.domain.RoleType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -58,7 +59,7 @@ class LoginControllerTest {
             "username",
             "profile.png",
             "thumbnail.jpg",
-            accessToken
+            new MemberAccessToken(accessToken.getTokenType(), accessToken.getRefreshToken())
         );
 
         User user = new User("1234", List.of(RoleType.ROLE_MEMBER.name()));

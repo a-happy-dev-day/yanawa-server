@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.member.documentation;
+package fashionable.simba.yanawaserver.documentation;
 
 import fashionable.simba.yanawaserver.members.domain.DefaultMember;
 import fashionable.simba.yanawaserver.members.domain.RoleType;

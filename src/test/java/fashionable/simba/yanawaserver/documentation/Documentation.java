@@ -1,6 +1,7 @@
-package fashionable.simba.yanawaserver.member.documentation;
+package fashionable.simba.yanawaserver.documentation;
 
 
+import fashionable.simba.yanawaserver.acceptance.MemberSteps;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
@@ -12,7 +13,6 @@ import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.test.context.ActiveProfiles;
 
-import static fashionable.simba.yanawaserver.member.acceptance.MemberSteps.로그인_되어_있음;
 import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.documentationConfiguration;
 
 
@@ -39,7 +39,7 @@ public class Documentation {
     public void setUp(RestDocumentationContextProvider restDocumentation) {
         RestAssured.port = port;
 
-        accessToken = 로그인_되어_있음(USERNAME);
+        accessToken = MemberSteps.로그인_되어_있음(USERNAME);
 
         this.spec = new RequestSpecBuilder()
             .addFilter(documentationConfiguration(restDocumentation))

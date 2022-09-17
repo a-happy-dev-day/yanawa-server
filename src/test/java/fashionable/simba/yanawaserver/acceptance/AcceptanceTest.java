@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.member.acceptance;
+package fashionable.simba.yanawaserver.acceptance;
 
 
 import fashionable.simba.yanawaserver.members.DataLoader;

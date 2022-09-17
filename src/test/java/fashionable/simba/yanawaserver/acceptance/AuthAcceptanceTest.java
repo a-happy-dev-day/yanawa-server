@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.member.acceptance;
+package fashionable.simba.yanawaserver.acceptance;
 
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
-import static fashionable.simba.yanawaserver.member.acceptance.MemberSteps.로그인_되어_있음;
-import static fashionable.simba.yanawaserver.member.acceptance.MemberSteps.정보_조회_요청;
-import static fashionable.simba.yanawaserver.member.acceptance.MemberSteps.회원_목록_조회_요청;
+import static fashionable.simba.yanawaserver.acceptance.MemberSteps.로그인_되어_있음;
+import static fashionable.simba.yanawaserver.acceptance.MemberSteps.정보_조회_요청;
+import static fashionable.simba.yanawaserver.acceptance.MemberSteps.회원_목록_조회_요청;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class AuthAcceptanceTest extends AcceptanceTest {

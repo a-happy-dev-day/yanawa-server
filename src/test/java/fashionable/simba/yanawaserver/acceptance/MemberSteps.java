@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.member.acceptance;
+package fashionable.simba.yanawaserver.acceptance;
 
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;

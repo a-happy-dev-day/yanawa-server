@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.member.acceptance;
+package fashionable.simba.yanawaserver.acceptance;
 
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
@@ -6,10 +6,6 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
-
-import static fashionable.simba.yanawaserver.member.acceptance.MemberSteps.로그아웃_요청;
-import static fashionable.simba.yanawaserver.member.acceptance.MemberSteps.로그인_되어_있음;
-import static fashionable.simba.yanawaserver.member.acceptance.MemberSteps.로그인_요청;
 
 class MemberAcceptanceTest extends AcceptanceTest {
 
@@ -22,7 +18,7 @@ class MemberAcceptanceTest extends AcceptanceTest {
     void login() {
         String 기존_사용자 = "1";
 
-        ExtractableResponse<Response> 로그인 = 로그인_요청(기존_사용자);
+        ExtractableResponse<Response> 로그인 = MemberSteps.로그인_요청(기존_사용자);
 
         Assertions.assertThat(로그인.statusCode()).isEqualTo(HttpStatus.OK.value());
     }
@@ -37,9 +33,9 @@ class MemberAcceptanceTest extends AcceptanceTest {
     void logout() {
         String 기존_사용자 = "1";
 
-        String accessToken = 로그인_되어_있음(기존_사용자);
+        String accessToken = MemberSteps.로그인_되어_있음(기존_사용자);
 
-        ExtractableResponse<Response> 로그아웃 = 로그아웃_요청(accessToken);
+        ExtractableResponse<Response> 로그아웃 = MemberSteps.로그아웃_요청(accessToken);
         Assertions.assertThat(로그아웃.statusCode()).isEqualTo(HttpStatus.OK.value());
     }
 }

@@ -13,14 +13,14 @@ class AuthenticationTokenTest {
     @DisplayName("토큰 생성")
     void authenticationToken_create() {
         assertDoesNotThrow(
-            () -> new AuthorizationToken("12345")
+            () -> new AuthenticationToken("12345")
         );
     }
 
     @Test
     @DisplayName("동등성 비교")
     void authenticationToken_equals() {
-        EqualsVerifier.forClass(AuthorizationToken.class)
+        EqualsVerifier.forClass(AuthenticationToken.class)
             .suppress(Warning.NONFINAL_FIELDS)
             .verify();
     }

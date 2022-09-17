@@ -14,7 +14,7 @@ public class AuthenticationTokenProvider implements AuthorizationManager {
         this.userDetailsService = userDetailsService;
     }
 
-    public Authentication authenticate(AuthorizationToken authenticationToken) {
+    public Authentication authenticate(AuthenticationToken authenticationToken) {
         if (!jwtTokenProvider.validateToken(authenticationToken.getPrincipal())) {
             throw new AuthenticationException("토큰이 유효하지 않습니다.");
         }

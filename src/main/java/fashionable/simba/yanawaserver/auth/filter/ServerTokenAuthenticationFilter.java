@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fashionable.simba.yanawaserver.auth.handler.AuthenticationFailureHandler;
 import fashionable.simba.yanawaserver.auth.handler.AuthenticationSuccessHandler;
 import fashionable.simba.yanawaserver.auth.provider.AuthorizationManager;
-import fashionable.simba.yanawaserver.auth.provider.AuthorizationToken;
+import fashionable.simba.yanawaserver.auth.provider.AuthenticationToken;
 import fashionable.simba.yanawaserver.auth.ui.TokenRequest;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,11 +20,11 @@ public class ServerTokenAuthenticationFilter extends AbstractAuthenticationFilte
     }
 
     @Override
-    protected AuthorizationToken convert(HttpServletRequest request) throws IOException {
+    protected AuthenticationToken convert(HttpServletRequest request) throws IOException {
         String content = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
         // TODO 인증 토큰 메시지는 암호화가 되어 만들어진다.
         TokenRequest tokenRequest = mapper.readValue(content, TokenRequest.class);
-        return new AuthorizationToken(tokenRequest.getUsername());
+        return new AuthenticationToken(tokenRequest.getUsername());
     }
 
     @Override

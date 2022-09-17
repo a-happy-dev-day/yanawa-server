@@ -56,7 +56,7 @@ public class LoginController {
 
 
     @PostMapping("login")
-    public ResponseEntity<TokenRequest> loginAdmin(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<TokenRequest> login(@RequestBody LoginRequest loginRequest) {
         if (loginRequest.getPassword() == null || !loginRequest.getPassword().equals("password-admin")) {
             throw new AuthenticationException();
         }

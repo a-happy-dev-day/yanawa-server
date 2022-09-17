@@ -2,10 +2,10 @@ package fashionable.simba.yanawaserver.auth.provider;
 
 import java.util.Objects;
 
-public final class AuthorizationToken {
+public final class AuthenticationToken {
     private final String principal;
 
-    public AuthorizationToken(String principal) {
+    public AuthenticationToken(String principal) {
         this.principal = principal;
     }
 
@@ -17,7 +17,7 @@ public final class AuthorizationToken {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AuthorizationToken that = (AuthorizationToken) o;
+        AuthenticationToken that = (AuthenticationToken) o;
         return Objects.equals(getPrincipal(), that.getPrincipal());
     }
 

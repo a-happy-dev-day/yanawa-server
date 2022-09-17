@@ -1,16 +1,16 @@
 package fashionable.simba.yanawaserver.auth.ui;
 
 public class TokenRequest {
-    private String username;
+    private String accessCode;
 
     private TokenRequest() {
     }
 
-    public TokenRequest(String username) {
-        this.username = username;
+    public TokenRequest(String accessCode) {
+        this.accessCode = accessCode;
     }
 
-    public String getUsername() {
-        return username;
+    public String getAccessCode() {
+        return accessCode;
     }
 }

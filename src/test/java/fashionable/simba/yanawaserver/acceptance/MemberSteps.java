@@ -10,25 +10,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MemberSteps {
-    private static String 로그인_코드_발급(String username) {
-        Map<String, String> params = new HashMap<>();
-        params.put("username", username);
-        params.put("password", "password-admin");
 
-        ExtractableResponse<Response> response = RestAssured.given().log().all()
-            .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .body(params)
-            .when().post("/login")
-            .then().log().all()
-            .statusCode(HttpStatus.OK.value())
-            .extract();
 
-        return response.jsonPath().getString("username");
+    public static String 로그인_코드_발급(String username, String password) {
+        return 로그인_발급_요청(username, password).jsonPath().getString("accessCode");
     }
 
     public static ExtractableResponse<Response> 로그인_요청(String token) {
         Map<String, String> params = new HashMap<>();
-        params.put("username", token);
+        params.put("accessCode", token);
 
         return RestAssured.given().log().all()
             .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -39,11 +29,24 @@ public class MemberSteps {
     }
 
     public static String 로그인_되어_있음(String username) {
-        String token = 로그인_코드_발급(username);
+        String token = 로그인_코드_발급(username, "password-admin");
         ExtractableResponse<Response> response = 로그인_요청(token);
         return response.jsonPath().getString("accessToken");
     }
 
+    public static ExtractableResponse<Response> 로그인_발급_요청(String username, String password) {
+        Map<String, String> params = new HashMap<>();
+        params.put("username", username);
+        params.put("password", password);
+
+        ExtractableResponse<Response> response = RestAssured.given().log().all()
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .body(params)
+            .when().post("/login")
+            .then().log().all()
+            .extract();
+        return response;
+    }
 
     public static ExtractableResponse<Response> 회원_목록_조회_요청(String accessToken) {
         return RestAssured.given().log().all()

@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
 import static fashionable.simba.yanawaserver.acceptance.MemberSteps.로그인_되어_있음;
+import static fashionable.simba.yanawaserver.acceptance.MemberSteps.로그인_발급_요청;
 import static fashionable.simba.yanawaserver.acceptance.MemberSteps.정보_조회_요청;
 import static fashionable.simba.yanawaserver.acceptance.MemberSteps.회원_목록_조회_요청;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -69,6 +70,7 @@ class AuthAcceptanceTest extends AcceptanceTest {
         assertThat(회원_목록_조회.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
     }
 
+
     /**
      * When 로그인하지 않고 정보를 조회하면
      * Then 401 Unauthorized 예외가 발생한다.
@@ -107,5 +109,48 @@ class AuthAcceptanceTest extends AcceptanceTest {
 
         // then
         assertThat(정보_조회.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
+    }
+
+    /**
+     * When : 비밀번호를 모르는 사용자가 접근하면
+     * Then : 401 예외가 발생한다.
+     */
+    @Test
+    void login_failed_invalid_password() {
+        String id = getId("admin");
+        ExtractableResponse<Response> response = 로그인_발급_요청(id, "invalid-password");
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
+    }
+
+
+    /**
+     * When : 비밀번호를 모르는 사용자가 접근하면
+     * Then : 401 예외가 발생한다.
+     */
+    @Test
+    void login_failed_null_password() {
+        String id = getId("admin");
+        ExtractableResponse<Response> response = 로그인_발급_요청(id, null);
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
+    }
+
+    /**
+     * When : username을 모르는 사용자가 접근하면
+     * Then : 401 예외가 발생한다.
+     */
+    @Test
+    void login_failed_invalid_username() {
+        ExtractableResponse<Response> response = 로그인_발급_요청("12", "password-admin");
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
+    }
+
+
+    /**
+     * When Refresh Token을 입력하면 Access Token을 발급 받고
+     * Then Access Token을 이용해 사용자의 정보를 요청할 수 있다.
+     */
+    @Test
+    void refresh_token() {
+
     }
 }

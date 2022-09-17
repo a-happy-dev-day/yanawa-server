@@ -57,11 +57,11 @@ public class LoginController {
 
     @PostMapping("login")
     public ResponseEntity<TokenRequest> login(@RequestBody LoginRequest loginRequest) {
-        if (loginRequest.getPassword() == null || !loginRequest.getPassword().equals("password-admin")) {
+        if (!userDetailsService.isValidUser(loginRequest.getUsername())) {
             throw new AuthenticationException();
         }
 
-        if (!userDetailsService.isValidUser(loginRequest.getUsername())) {
+        if (loginRequest.getPassword() == null || !loginRequest.getPassword().equals("password-admin")) {
             throw new AuthenticationException();
         }
 

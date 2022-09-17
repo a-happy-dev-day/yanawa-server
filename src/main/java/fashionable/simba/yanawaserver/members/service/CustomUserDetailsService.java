@@ -1,5 +1,6 @@
 package fashionable.simba.yanawaserver.members.service;
 
+import fashionable.simba.yanawaserver.auth.provider.AuthenticationException;
 import fashionable.simba.yanawaserver.auth.userdetails.User;
 import fashionable.simba.yanawaserver.auth.userdetails.UserDetails;
 import fashionable.simba.yanawaserver.auth.userdetails.UserDetailsService;
@@ -51,10 +52,17 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     @Transactional(readOnly = true)
-    public boolean isValid(String username, String refreshToken) {
+    public boolean isValidRefreshToken(String username, String refreshToken) {
         long id = Long.parseLong(username);
-//        KakaoMember member = memberRepository.findById(id).orElseThrow();
-        return false;
+        Member member = memberRepository.findById(id).orElseThrow();
+        return member.getMemberAccessToken().getRefreshToken().equals(refreshToken);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public boolean isValidUser(String username) {
+        long id = Long.parseLong(username);
+        return memberRepository.findById(id).isPresent();
     }
 
     private User getUser(Long id, List<String> roles) {

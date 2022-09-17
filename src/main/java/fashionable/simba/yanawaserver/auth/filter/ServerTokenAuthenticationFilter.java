@@ -24,8 +24,7 @@ public class ServerTokenAuthenticationFilter extends AbstractAuthenticationFilte
         String content = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
         // TODO 인증 토큰 메시지는 암호화가 되어 만들어진다.
         TokenRequest tokenRequest = mapper.readValue(content, TokenRequest.class);
-        String principal = tokenRequest.getUsername().toString();
-        return new AuthorizationToken(principal);
+        return new AuthorizationToken(tokenRequest.getUsername());
     }
 
     @Override

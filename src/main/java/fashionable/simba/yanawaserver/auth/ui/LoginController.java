@@ -30,7 +30,6 @@ public class LoginController {
     }
 
 
-
     /**
      * 카카오 로그인 페이지로 이동
      *
@@ -52,22 +51,21 @@ public class LoginController {
     public ResponseEntity<TokenRequest> loginCallback(String accessCode) {
         KakaoMember kakaoMember = kakaoAuthenticationService.getUserInfo(kakaoAuthenticationService.getAccessToken(accessCode));
         UserDetails userDetails = userDetailsService.saveKakaoMember(kakaoMember);
-        return ResponseEntity.ok(new TokenRequest(userDetails.getUsername()));
+        return ResponseEntity.ok(new TokenRequest((String) userDetails.getUsername()));
     }
 
 
     @PostMapping("login")
-    public ResponseEntity<TokenRequest> loginAdmin(@RequestBody String username,
-                                                   @RequestBody String password) {
-        if (password == null || !password.equals("password-admin")) {
+    public ResponseEntity<TokenRequest> loginAdmin(@RequestBody LoginRequest loginRequest) {
+        if (loginRequest.getPassword() == null || !loginRequest.getPassword().equals("password-admin")) {
             throw new AuthenticationException();
         }
 
-        if (userDetailsService.isValidUser(username)) {
+        if (!userDetailsService.isValidUser(loginRequest.getUsername())) {
             throw new AuthenticationException();
         }
 
-        return ResponseEntity.ok(new TokenRequest(jwtTokenProvider.createAuthenticationToken(username)));
+        return ResponseEntity.ok(new TokenRequest(jwtTokenProvider.createAuthenticationToken(loginRequest.getUsername())));
     }
 
     @GetMapping("/refresh")

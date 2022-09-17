@@ -2,14 +2,16 @@ package fashionable.simba.yanawaserver.auth.provider;
 
 
 import fashionable.simba.yanawaserver.auth.context.Authentication;
-
-import java.util.List;
+import fashionable.simba.yanawaserver.auth.userdetails.UserDetails;
+import fashionable.simba.yanawaserver.auth.userdetails.UserDetailsService;
 
 public class AuthenticationTokenProvider implements AuthorizationManager {
     private final JwtTokenProvider jwtTokenProvider;
+    private final UserDetailsService userDetailsService;
 
-    public AuthenticationTokenProvider(JwtTokenProvider jwtTokenProvider) {
+    public AuthenticationTokenProvider(JwtTokenProvider jwtTokenProvider, UserDetailsService userDetailsService) {
         this.jwtTokenProvider = jwtTokenProvider;
+        this.userDetailsService = userDetailsService;
     }
 
     public Authentication authenticate(AuthorizationToken authenticationToken) {
@@ -17,9 +19,9 @@ public class AuthenticationTokenProvider implements AuthorizationManager {
             throw new AuthenticationException("토큰이 유효하지 않습니다.");
         }
 
-        String principal = jwtTokenProvider.getPrincipal(authenticationToken.getPrincipal());
-        List<String> roles = jwtTokenProvider.getRoles(authenticationToken.getPrincipal());
+        String username = jwtTokenProvider.getPrincipal(authenticationToken.getPrincipal());
+        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-        return new Authentication(principal, roles);
+        return new Authentication(userDetails.getUsername(), userDetails.getAuthorities());
     }
 }

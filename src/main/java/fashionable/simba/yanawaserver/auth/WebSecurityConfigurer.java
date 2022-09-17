@@ -66,7 +66,7 @@ public class WebSecurityConfigurer implements WebMvcConfigurer {
 
     @Bean
     AuthorizationManager authenticationTokenProvider() {
-        return new AuthenticationTokenProvider(jwtTokenProvider());
+        return new AuthenticationTokenProvider(jwtTokenProvider(), userDetailsService);
     }
 
     @Bean

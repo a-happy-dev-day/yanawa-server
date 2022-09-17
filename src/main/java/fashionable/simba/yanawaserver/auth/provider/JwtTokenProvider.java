@@ -5,8 +5,11 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class JwtTokenProvider {
     private static final String ROLES = "roles";
@@ -41,6 +44,7 @@ public class JwtTokenProvider {
             .setClaims(claims)
             .setIssuedAt(now)
             .setExpiration(validity)
+            .claim(ROLES, Collections.emptyList())
             .signWith(SignatureAlgorithm.HS256, secretKey)
             .compact();
     }

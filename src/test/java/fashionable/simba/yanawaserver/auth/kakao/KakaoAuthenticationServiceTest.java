@@ -1,7 +1,6 @@
 package fashionable.simba.yanawaserver.auth.kakao;
 
-import fashionable.simba.yanawaserver.auth.dto.KakaoAccessToken;
-import fashionable.simba.yanawaserver.auth.filter.AccessCode;
+import fashionable.simba.yanawaserver.auth.kakao.dto.KakaoAccessToken;
 import fashionable.simba.yanawaserver.members.domain.KakaoMember;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -42,9 +41,6 @@ class KakaoAuthenticationServiceTest {
     @Test
     @DisplayName("AccessToken을 조회한다.")
     void getAccessToken() {
-        // givne
-        AccessCode accessCode = new AccessCode("access-code");
-
         // when
         when(
             authenticationClient.getToken(
@@ -52,12 +48,12 @@ class KakaoAuthenticationServiceTest {
                 "authorization_code",
                 "client-id",
                 "redirect-uri",
-                accessCode.getAccessCode(),
+                "access-code",
                 "secret-key")
         ).thenReturn(ResponseEntity.ok(KAKAO_ACCESS_TOKEN));
 
         // then
-        KakaoAccessToken token = kakaoAuthenticationService.getAccessToken(accessCode);
+        KakaoAccessToken token = kakaoAuthenticationService.getAccessToken("access-code");
         assertThat(token.getAccessToken()).isEqualTo(ACCESS_TOKEN);
     }
 

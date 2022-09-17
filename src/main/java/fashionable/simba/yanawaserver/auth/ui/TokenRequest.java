@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.auth.dto;
+package fashionable.simba.yanawaserver.auth.ui;
 
 public class TokenRequest {
     private Object username;

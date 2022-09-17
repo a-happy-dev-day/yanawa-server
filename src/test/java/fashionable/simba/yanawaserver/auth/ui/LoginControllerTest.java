@@ -1,10 +1,9 @@
 package fashionable.simba.yanawaserver.auth.ui;
 
-import fashionable.simba.yanawaserver.auth.dto.TokenRequest;
 import fashionable.simba.yanawaserver.auth.kakao.KakaoAuthenticationService;
+import fashionable.simba.yanawaserver.auth.kakao.dto.KakaoAccessToken;
 import fashionable.simba.yanawaserver.auth.userdetails.User;
 import fashionable.simba.yanawaserver.auth.userdetails.UserDetailsService;
-import fashionable.simba.yanawaserver.auth.dto.KakaoAccessToken;
 import fashionable.simba.yanawaserver.members.domain.KakaoMember;
 import fashionable.simba.yanawaserver.members.domain.MemberAccessToken;
 import fashionable.simba.yanawaserver.members.domain.RoleType;

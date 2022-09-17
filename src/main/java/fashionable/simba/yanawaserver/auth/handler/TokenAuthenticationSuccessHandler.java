@@ -2,7 +2,6 @@ package fashionable.simba.yanawaserver.auth.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fashionable.simba.yanawaserver.auth.context.Authentication;
-import fashionable.simba.yanawaserver.auth.dto.TokenResponse;
 import fashionable.simba.yanawaserver.auth.provider.JwtTokenProvider;
 import org.springframework.http.MediaType;
 

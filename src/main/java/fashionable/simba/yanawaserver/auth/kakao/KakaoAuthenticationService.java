@@ -1,8 +1,7 @@
 package fashionable.simba.yanawaserver.auth.kakao;
 
-import fashionable.simba.yanawaserver.auth.dto.KakaoAccessToken;
-import fashionable.simba.yanawaserver.auth.filter.AccessCode;
 import fashionable.simba.yanawaserver.auth.filter.UserInfo;
+import fashionable.simba.yanawaserver.auth.kakao.dto.KakaoAccessToken;
 import fashionable.simba.yanawaserver.members.domain.KakaoMember;
 import fashionable.simba.yanawaserver.members.domain.MemberAccessToken;
 import org.slf4j.Logger;
@@ -41,13 +40,13 @@ public class KakaoAuthenticationService {
      * @param code
      * @return AccessToken
      */
-    public KakaoAccessToken getAccessToken(AccessCode code) {
+    public KakaoAccessToken getAccessToken(String code) {
         return authenticationClient.getToken(
             MediaType.APPLICATION_FORM_URLENCODED_VALUE,
             GRANT_TYPE,
             clientId,
             redirectUri,
-            code.getAccessCode(),
+            code,
             secretKey).getBody();
     }
 

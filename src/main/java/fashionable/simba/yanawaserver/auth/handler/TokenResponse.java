@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.auth.dto;
+package fashionable.simba.yanawaserver.auth.handler;
 
 public class TokenResponse {
     private String accessToken;

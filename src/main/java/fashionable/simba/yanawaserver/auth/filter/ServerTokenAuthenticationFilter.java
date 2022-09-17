@@ -1,11 +1,11 @@
 package fashionable.simba.yanawaserver.auth.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fashionable.simba.yanawaserver.auth.dto.TokenRequest;
 import fashionable.simba.yanawaserver.auth.handler.AuthenticationFailureHandler;
 import fashionable.simba.yanawaserver.auth.handler.AuthenticationSuccessHandler;
 import fashionable.simba.yanawaserver.auth.provider.AuthenticationManager;
 import fashionable.simba.yanawaserver.auth.provider.AuthenticationToken;
+import fashionable.simba.yanawaserver.auth.ui.TokenRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;

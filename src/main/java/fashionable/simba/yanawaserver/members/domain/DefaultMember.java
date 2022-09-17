@@ -8,6 +8,7 @@ import java.util.List;
 @DiscriminatorValue("default")
 public class DefaultMember extends Member {
     protected DefaultMember() {/*no-op*/}
+
     public DefaultMember(Long id, String email, List<String> roles) {
         super(id, email, roles, null);
     }

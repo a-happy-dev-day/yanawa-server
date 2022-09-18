@@ -13,7 +13,7 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.pr
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.document;
 
-public class AuthDocumentation extends Documentation {
+class AuthDocumentation extends Documentation {
 
     @Test
     void redirectKakaoLoginPage() {
@@ -86,6 +86,7 @@ public class AuthDocumentation extends Documentation {
                 preprocessResponse(prettyPrint())))
             .when().get("/logout")
             .then().log().all()
+            .statusCode(HttpStatus.OK.value())
             .extract();
     }
 }

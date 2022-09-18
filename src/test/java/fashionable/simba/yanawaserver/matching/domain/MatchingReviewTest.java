@@ -1,6 +1,5 @@
 package fashionable.simba.yanawaserver.matching.domain;
 
-import fashionable.simba.yanawaserver.matching.error.NoPlayerDataException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

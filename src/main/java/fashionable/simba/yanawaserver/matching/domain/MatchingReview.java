@@ -1,7 +1,5 @@
 package fashionable.simba.yanawaserver.matching.domain;
 
-import fashionable.simba.yanawaserver.matching.error.NoPlayerDataException;
-
 public class MatchingReview {
     private Long id;
     private Long matchingId;

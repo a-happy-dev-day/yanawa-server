@@ -10,10 +10,10 @@ public class DefaultMember extends Member {
     protected DefaultMember() {/*no-op*/}
 
     public DefaultMember(Long id, String email, List<String> roles) {
-        super(id, email, roles, null);
+        super(id, email, roles);
     }
 
     public DefaultMember(String email, List<String> roles) {
-        super(null, email, roles, null);
+        super(null, email, roles);
     }
 }

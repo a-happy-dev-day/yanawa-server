@@ -4,7 +4,6 @@ import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.ElementCollection;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -31,16 +30,13 @@ public abstract class Member {
     @Column(name = "role")
     private List<String> roles;
 
-    @Embedded
-    private MemberAccessToken memberAccessToken;
 
     protected Member() {/*no-op*/}
 
-    public Member(Long id, String email, List<String> roles, MemberAccessToken memberAccessToken) {
+    public Member(Long id, String email, List<String> roles) {
         this.id = id;
         this.email = email;
         this.roles = roles;
-        this.memberAccessToken = memberAccessToken;
     }
 
     public Long getId() {
@@ -55,11 +51,4 @@ public abstract class Member {
         return roles;
     }
 
-    public MemberAccessToken getMemberAccessToken() {
-        return memberAccessToken;
-    }
-
-    public void updateAccessToken(MemberAccessToken memberAccessToken) {
-        this.memberAccessToken = memberAccessToken;
-    }
 }

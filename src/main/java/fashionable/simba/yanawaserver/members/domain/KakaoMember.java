@@ -15,16 +15,16 @@ public final class KakaoMember extends Member {
 
     protected KakaoMember() {/*no-op*/}
 
-    public KakaoMember(Long id, String email, List<String> roles, Long kakaoId, String nickname, String profileImageUrl, String thumbnailImageUrl, MemberAccessToken memberAccessToken) {
-        super(id, email, roles, memberAccessToken);
+    public KakaoMember(Long id, String email, List<String> roles, Long kakaoId, String nickname, String profileImageUrl, String thumbnailImageUrl) {
+        super(id, email, roles);
         this.kakaoId = kakaoId;
         this.nickname = nickname;
         this.profileImageUrl = profileImageUrl;
         this.thumbnailImageUrl = thumbnailImageUrl;
     }
 
-    public KakaoMember(Long kakaoId, String email, String nickname, String profileImageUrl, String thumbnailImageUrl, MemberAccessToken memberAccessToken) {
-        this(null, email, List.of(RoleType.ROLE_MEMBER.name()), kakaoId, nickname, profileImageUrl, thumbnailImageUrl, memberAccessToken);
+    public KakaoMember(Long kakaoId, String email, String nickname, String profileImageUrl, String thumbnailImageUrl) {
+        this(null, email, List.of(RoleType.ROLE_MEMBER.name()), kakaoId, nickname, profileImageUrl, thumbnailImageUrl);
     }
 
     public String getNickname() {

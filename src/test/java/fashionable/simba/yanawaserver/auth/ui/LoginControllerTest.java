@@ -1,11 +1,12 @@
 package fashionable.simba.yanawaserver.auth.ui;
 
+import fashionable.simba.yanawaserver.auth.dto.TokenRequest;
 import fashionable.simba.yanawaserver.auth.kakao.KakaoAuthenticationService;
-import fashionable.simba.yanawaserver.auth.kakao.dto.KakaoAccessToken;
+import fashionable.simba.yanawaserver.auth.dto.KakaoAccessToken;
+import fashionable.simba.yanawaserver.auth.provider.JwtTokenProvider;
 import fashionable.simba.yanawaserver.auth.userdetails.User;
 import fashionable.simba.yanawaserver.auth.userdetails.UserDetailsService;
 import fashionable.simba.yanawaserver.members.domain.KakaoMember;
-import fashionable.simba.yanawaserver.members.domain.MemberAccessToken;
 import fashionable.simba.yanawaserver.members.domain.RoleType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -29,10 +30,11 @@ class LoginControllerTest {
     private KakaoAuthenticationService kakaoAuthenticationService;
     @Mock
     private UserDetailsService userDetailsService;
+    private JwtTokenProvider jwtTokenProvider = new JwtTokenProvider("secret-key", "refresh-key", 100000, 100000);
 
     @BeforeEach
     void setUp() {
-        loginController = new LoginController(kakaoAuthenticationService, userDetailsService);
+        loginController = new LoginController(kakaoAuthenticationService, userDetailsService, jwtTokenProvider);
     }
 
     @Test
@@ -57,9 +59,7 @@ class LoginControllerTest {
             123L,
             "username",
             "profile.png",
-            "thumbnail.jpg",
-            new MemberAccessToken(accessToken.getTokenType(), accessToken.getRefreshToken())
-        );
+            "thumbnail.jpg");
 
         User user = new User("1234", List.of(RoleType.ROLE_MEMBER.name()));
 

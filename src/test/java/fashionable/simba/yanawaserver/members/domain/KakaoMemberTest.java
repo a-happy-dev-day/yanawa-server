@@ -11,12 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 class KakaoMemberTest {
 
-    private static final MemberAccessToken ACCESS_TOKEN = new MemberAccessToken(
-        "bearer",
-        "refresh Token"
-    );
-
-
     @Test
     @DisplayName("카카오 사용자의 정보를 생성한다.")
     void kakaoMember_create() {
@@ -27,12 +21,10 @@ class KakaoMemberTest {
             "tis",
             "email@email.com",
             "profile",
-            "thumnail",
-            ACCESS_TOKEN)
+            "thumnail")
         );
 
         assertAll(
-            () -> assertThat(kakaoMember.getMemberAccessToken()).isEqualTo(ACCESS_TOKEN),
             () -> assertThat(kakaoMember.getKakaoId()).isEqualTo(kakaoId)
         );
     }

@@ -43,19 +43,9 @@ public class CustomUserDetailsService implements UserDetailsService {
         KakaoMember kakaoMember = getMemberByKakaoId(member)
             .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
 
-        kakaoMember.updateAccessToken(member.getMemberAccessToken());
-
         memberRepository.save(kakaoMember);
 
         return getUser(kakaoMember.getId(), kakaoMember.getRoles());
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public boolean isValidRefreshToken(String username, String refreshToken) {
-        long id = Long.parseLong(username);
-        Member member = memberRepository.findById(id).orElseThrow();
-        return member.getMemberAccessToken().getRefreshToken().equals(refreshToken);
     }
 
     @Override

@@ -7,7 +7,5 @@ public interface UserDetailsService {
 
     UserDetails saveKakaoMember(KakaoMember member);
 
-    boolean isValidRefreshToken(String username, String refreshToken);
-
     boolean isValidUser(String username);
 }

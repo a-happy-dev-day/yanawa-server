@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.auth.filter;
+package fashionable.simba.yanawaserver.auth.domain;
 
 import java.util.Objects;
 

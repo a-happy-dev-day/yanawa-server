@@ -5,7 +5,7 @@ import fashionable.simba.yanawaserver.auth.handler.AuthenticationFailureHandler;
 import fashionable.simba.yanawaserver.auth.handler.AuthenticationSuccessHandler;
 import fashionable.simba.yanawaserver.auth.provider.AuthorizationManager;
 import fashionable.simba.yanawaserver.auth.provider.AuthenticationToken;
-import fashionable.simba.yanawaserver.auth.ui.TokenRequest;
+import fashionable.simba.yanawaserver.auth.dto.TokenRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;

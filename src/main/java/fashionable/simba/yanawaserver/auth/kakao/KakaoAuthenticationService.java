@@ -1,7 +1,7 @@
 package fashionable.simba.yanawaserver.auth.kakao;
 
 import fashionable.simba.yanawaserver.auth.filter.UserInfo;
-import fashionable.simba.yanawaserver.auth.kakao.dto.KakaoAccessToken;
+import fashionable.simba.yanawaserver.auth.dto.KakaoAccessToken;
 import fashionable.simba.yanawaserver.members.domain.KakaoMember;
 import fashionable.simba.yanawaserver.members.domain.MemberAccessToken;
 import org.slf4j.Logger;

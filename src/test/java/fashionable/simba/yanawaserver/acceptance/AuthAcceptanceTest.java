@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static fashionable.simba.yanawaserver.acceptance.MemberSteps.PASSWORD_ADMIN;
 import static fashionable.simba.yanawaserver.acceptance.MemberSteps.로그인_되어_있음;
 import static fashionable.simba.yanawaserver.acceptance.MemberSteps.로그인_발급_요청;
@@ -98,14 +101,18 @@ class AuthAcceptanceTest extends AcceptanceTest {
     @Test
     void members_me_unauthorized() {
         // when
-        ExtractableResponse<Response> 정보_조회 = RestAssured.given().log().all()
+        ExtractableResponse<Response> 정보_조회 = 미인증_사용자_정보_조회_요청();
+
+        // then
+        assertThat(정보_조회.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
+    }
+
+    private ExtractableResponse<Response> 미인증_사용자_정보_조회_요청() {
+        return RestAssured.given().log().all()
             .accept(MediaType.APPLICATION_JSON_VALUE)
             .when().get("/members/me")
             .then().log().all()
             .extract();
-
-        // then
-        assertThat(정보_조회.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
     }
 
     /**
@@ -120,15 +127,19 @@ class AuthAcceptanceTest extends AcceptanceTest {
             ".jBTEKPOxjgO7-2IynGeVkoe9sqPLGG5sYNRSGrdOVbU";
 
         // when
-        ExtractableResponse<Response> 정보_조회 = RestAssured.given().log().all()
+        ExtractableResponse<Response> 정보_조회 = 정보_조회_요청(accessToken);
+
+        // then
+        assertThat(정보_조회.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
+    }
+
+    private ExtractableResponse<Response> 정보_조회_요청(String accessToken) {
+        return RestAssured.given().log().all()
             .auth().oauth2(accessToken)
             .accept(MediaType.APPLICATION_JSON_VALUE)
             .when().get("/members/me")
             .then().log().all()
             .extract();
-
-        // then
-        assertThat(정보_조회.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
     }
 
     /**
@@ -166,11 +177,33 @@ class AuthAcceptanceTest extends AcceptanceTest {
 
 
     /**
-     * When Refresh Token을 입력하면 Access Token을 발급 받고
-     * Then Access Token을 이용해 사용자의 정보를 요청할 수 있다.
+     * When Refresh Token을 입력하면 Access Code을 발급 받고
+     * Then Access Code로 Access Token과 Refresh Token을 재발급 받고
+     * Then Access Token으로 사용자 정보를 조회한다.
      */
     @Test
     void refresh_token() {
+        // given
+        String id = getId("admin");
 
+        String accessCode = 로그인_코드_발급(id, PASSWORD_ADMIN);
+        String refreshToken = 로그인_요청(accessCode).jsonPath().getString("refreshToken");
+
+        ExtractableResponse<Response> response = 코드_재갱신_요청(refreshToken);
+
+        assertThat(response.jsonPath().getString("accessToken")).isNotNull();
+    }
+
+    private ExtractableResponse<Response> 코드_재갱신_요청(String refreshToken) {
+        Map<String, String> params = new HashMap<>();
+        params.put("refreshToken", refreshToken);
+
+        return RestAssured.given().log().all()
+            .body(params)
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .when().post("/refresh")
+            .then().log().all()
+            .statusCode(HttpStatus.OK.value())
+            .extract();
     }
 }

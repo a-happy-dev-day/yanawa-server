@@ -61,12 +61,17 @@ public class JwtTokenProvider {
             .setClaims(claims)
             .setIssuedAt(now)
             .setExpiration(validity)
+            .claim(ROLES, Collections.emptyList())
             .signWith(SignatureAlgorithm.HS256, refreshKey)
             .compact();
     }
 
     public String getPrincipal(String token) {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
+    }
+
+    public String getPrincipalByRefreshToken(String refreshToken) {
+        return Jwts.parser().setSigningKey(refreshKey).parseClaimsJws(refreshToken).getBody().getSubject();
     }
 
     public List<String> getRoles(String token) {
@@ -82,4 +87,12 @@ public class JwtTokenProvider {
         }
     }
 
+    public boolean validateRefreshToken(String refreshToken) {
+        try {
+            Jwts.parser().setSigningKey(refreshKey).parseClaimsJws(refreshToken);
+            return true;
+        } catch (JwtException | IllegalArgumentException exception) {
+            return false;
+        }
+    }
 }

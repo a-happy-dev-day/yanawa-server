@@ -1,5 +1,6 @@
-package fashionable.simba.yanawaserver.auth.kakao.dto;
+package fashionable.simba.yanawaserver.auth.dto;
 
+import fashionable.simba.yanawaserver.auth.dto.KakaoAccessToken;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.DisplayName;

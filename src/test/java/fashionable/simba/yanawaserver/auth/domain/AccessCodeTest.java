@@ -1,5 +1,6 @@
-package fashionable.simba.yanawaserver.auth.filter;
+package fashionable.simba.yanawaserver.auth.domain;
 
+import fashionable.simba.yanawaserver.auth.domain.AccessCode;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.DisplayName;

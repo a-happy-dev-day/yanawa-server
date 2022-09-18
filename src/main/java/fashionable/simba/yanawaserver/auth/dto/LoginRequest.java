@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.auth.ui;
+package fashionable.simba.yanawaserver.auth.dto;
 
 public class LoginRequest {
     private String username;

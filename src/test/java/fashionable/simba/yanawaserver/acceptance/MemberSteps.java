@@ -25,7 +25,7 @@ public class MemberSteps {
             .body(params)
             .when().post("/login/token")
             .then().log().all()
-            .statusCode(HttpStatus.OK.value()).extract();
+            .extract();
     }
 
     public static String 로그인_되어_있음(String username) {

@@ -23,7 +23,7 @@ public class MemberController {
     }
 
     @GetMapping("me")
-    @Secured(value = {"ROLE_ADMIN", "ROLE_MEMBER"})
+    @Secured(value = {"ROLE_ADMIN", "ROLE_MEMBER", "ROLE_TEST"})
     public ResponseEntity<MemberResponse> membersMe(@AuthenticationPrincipal User user) {
         Member member = memberService.findMemberByUserName(user.getUsername()).orElseThrow(IllegalArgumentException::new);
         MemberResponse response = new MemberResponse(member.getEmail());

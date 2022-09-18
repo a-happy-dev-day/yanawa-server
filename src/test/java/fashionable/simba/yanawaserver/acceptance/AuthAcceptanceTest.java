@@ -15,11 +15,20 @@ import static fashionable.simba.yanawaserver.acceptance.MemberSteps.로그인_�
 import static fashionable.simba.yanawaserver.acceptance.MemberSteps.로그인_발급_요청;
 import static fashionable.simba.yanawaserver.acceptance.MemberSteps.로그인_요청;
 import static fashionable.simba.yanawaserver.acceptance.MemberSteps.로그인_코드_발급;
-import static fashionable.simba.yanawaserver.acceptance.MemberSteps.정보_조회_요청;
 import static fashionable.simba.yanawaserver.acceptance.MemberSteps.회원_목록_조회_요청;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class AuthAcceptanceTest extends AcceptanceTest {
+
+    /**
+     * When 유효하지 않은 액세스 코드로 접근하면
+     * Then 401 예외가 발생합니다.
+     */
+    @Test
+    void use_invalid_accessCode() {
+        ExtractableResponse<Response> response = 로그인_요청("invalid access code");
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
+    }
 
     /**
      * When 로그인에 성공하면
@@ -30,8 +39,8 @@ class AuthAcceptanceTest extends AcceptanceTest {
         // given
         String id = getId("admin");
 
-        String token = 로그인_코드_발급(id, PASSWORD_ADMIN);
-        ExtractableResponse<Response> response = 로그인_요청(token);
+        String accessCode = 로그인_코드_발급(id, PASSWORD_ADMIN);
+        ExtractableResponse<Response> response = 로그인_요청(accessCode);
 
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
         assertThat(response.jsonPath().getString("accessToken")).isNotNull();

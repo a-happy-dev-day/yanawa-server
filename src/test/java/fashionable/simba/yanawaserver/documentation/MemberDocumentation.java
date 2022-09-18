@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import static fashionable.simba.yanawaserver.acceptance.MemberSteps.PASSWORD_ADMIN;
+import static fashionable.simba.yanawaserver.acceptance.MemberSteps.로그인_코드_발급;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
@@ -42,31 +44,4 @@ class MemberDocumentation extends Documentation {
             .extract();
     }
 
-    @Test
-    void login() {
-        Map<String, String> params = new HashMap<>();
-        params.put("username", "1");
-
-        givenNotOauth()
-            .filter(document("member/login",
-                preprocessRequest(prettyPrint()),
-                preprocessResponse(prettyPrint())))
-            .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .body(params)
-            .when().post("/login/token")
-            .then().log().all()
-            .statusCode(HttpStatus.OK.value()).extract();
-    }
-
-    @Test
-    @Disabled
-    void logout() {
-        givenOauth()
-            .filter(document("member/logout",
-                preprocessRequest(prettyPrint()),
-                preprocessResponse(prettyPrint())))
-            .when().get("/logout")
-            .then().log().all()
-            .extract();
-    }
 }

@@ -1,6 +1,5 @@
 package fashionable.simba.yanawaserver.members.service;
 
-import fashionable.simba.yanawaserver.auth.provider.AuthenticationException;
 import fashionable.simba.yanawaserver.auth.userdetails.User;
 import fashionable.simba.yanawaserver.auth.userdetails.UserDetails;
 import fashionable.simba.yanawaserver.auth.userdetails.UserDetailsService;
@@ -35,16 +34,13 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails saveKakaoMember(KakaoMember member) {
-        if (getMemberByKakaoId(member).isEmpty()) {
-            KakaoMember kakaoMember = memberRepository.save(member);
-            return getUser(kakaoMember.getId(), kakaoMember.getRoles());
+        Optional<KakaoMember> kakaoMemberInDatabase = getMemberByKakaoId(member);
+        if (kakaoMemberInDatabase.isEmpty()) {
+            KakaoMember newMember = memberRepository.save(member);
+            return getUser(newMember.getId(), newMember.getRoles());
         }
-
-        KakaoMember kakaoMember = getMemberByKakaoId(member)
-            .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
-
-        memberRepository.save(kakaoMember);
-
+        
+        KakaoMember kakaoMember = kakaoMemberInDatabase.get();
         return getUser(kakaoMember.getId(), kakaoMember.getRoles());
     }
 

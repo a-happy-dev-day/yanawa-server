@@ -1,6 +1,5 @@
 package fashionable.simba.yanawaserver.documentation;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,8 +19,7 @@ public class AuthDocumentation extends Documentation {
     void redirectKakaoLoginPage() {
         givenNotOauth()
             .filter(document("member/kakao",
-                preprocessRequest(prettyPrint()),
-                preprocessResponse(prettyPrint())))
+                preprocessRequest(prettyPrint())))
             .when().get("/kakao/login")
             .then().log().all()
             .statusCode(HttpStatus.OK.value())

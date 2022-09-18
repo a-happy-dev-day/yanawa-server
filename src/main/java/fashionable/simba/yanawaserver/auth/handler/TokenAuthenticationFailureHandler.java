@@ -10,6 +10,5 @@ public class TokenAuthenticationFailureHandler implements AuthenticationFailureH
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, Exception failed) {
         SecurityContextHolder.clearContext();
-        throw new AuthenticationException("Invalid user");
     }
 }

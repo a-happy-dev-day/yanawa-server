@@ -27,7 +27,7 @@ class AuthAcceptanceTest extends AcceptanceTest {
     @Test
     void use_invalid_accessCode() {
         ExtractableResponse<Response> response = 로그인_요청("invalid access code");
-        assertThat(response.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
     }
 
     /**
@@ -200,7 +200,19 @@ class AuthAcceptanceTest extends AcceptanceTest {
 
         ExtractableResponse<Response> response = 코드_재갱신_요청(refreshToken);
 
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
         assertThat(response.jsonPath().getString("accessToken")).isNotNull();
+    }
+
+    /**
+     * When 유효하지 않은 Refresh Token을 입력하면
+     * Then 401 예외가 발생한다.
+     */
+    @Test
+    void refresh_token_failed() {
+        ExtractableResponse<Response> response = 코드_재갱신_요청("invalid refreshToken");
+
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
     }
 
     private ExtractableResponse<Response> 코드_재갱신_요청(String refreshToken) {
@@ -212,7 +224,6 @@ class AuthAcceptanceTest extends AcceptanceTest {
             .contentType(MediaType.APPLICATION_JSON_VALUE)
             .when().post("/refresh")
             .then().log().all()
-            .statusCode(HttpStatus.OK.value())
             .extract();
     }
 }

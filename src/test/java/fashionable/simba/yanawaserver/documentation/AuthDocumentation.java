@@ -81,7 +81,6 @@ public class AuthDocumentation extends Documentation {
     }
 
     @Test
-    @Disabled
     void logout() {
         givenOauth()
             .filter(document("member/logout",

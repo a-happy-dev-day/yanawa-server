@@ -25,7 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class ParticipationServiceTest {
+class ParticipationServiceTest {
     ParticipationRepository participationRepository = new MemoryParticipationRepository();
     RecruitmentRepository recruitmentRepository = new MemoryRecruitmentRepository();
     ParticipationService participationService = new ParticipationService(participationRepository, recruitmentRepository);
@@ -100,9 +100,9 @@ public class ParticipationServiceTest {
         Participation save = participationService.createParticipation(participation);
 
         Participation acceptSave = participationService.acceptParticipation(save.getId());
-
+        Long acceptSaveId = acceptSave.getId();
         assertThrows(IllegalArgumentException.class, () -> {
-            participationService.acceptParticipation(acceptSave.getId());
+            participationService.acceptParticipation(acceptSaveId);
         });
     }
 
@@ -113,9 +113,9 @@ public class ParticipationServiceTest {
         Participation save = participationService.createParticipation(participation);
 
         Participation acceptSave = participationService.acceptParticipation(save.getId());
-
+        Long acceptSaveId = acceptSave.getId();
         assertThrows(IllegalArgumentException.class, () -> {
-            participationService.rejectParticipation(acceptSave.getId());
+            participationService.rejectParticipation(acceptSaveId);
         });
     }
 

@@ -84,7 +84,7 @@ public class LoginController {
     }
 
     @GetMapping("logout")
-    @Secured(value = {"ROLE_MEMBER"})
+    @Secured(value = {"ROLE_MEMBER", "ROLE_TEST"})
     public ResponseEntity<Void> logout(@AuthenticationPrincipal User user) {
         return ResponseEntity.ok().build();
     }

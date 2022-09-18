@@ -39,16 +39,17 @@ public class MemoryRecruitmentRepository implements RecruitmentRepository {
         recruitments.clear();
     }
 
-    private synchronized Long getId() {
-        return ++sequence;
-    }
-
     @Override
     public Optional<Recruitment> findRecruitmentById(Long id) {
         return Optional.ofNullable(recruitments.get(id));
     }
 
+    @Override
     public Optional<Recruitment> findRecruitmentByMatchingId(Long matchingId) {
         return recruitments.values().stream().filter(x -> x.getMatchingId().equals(matchingId)).findAny();
+    }
+
+    private synchronized Long getId() {
+        return ++sequence;
     }
 }

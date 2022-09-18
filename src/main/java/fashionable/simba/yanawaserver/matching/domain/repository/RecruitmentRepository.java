@@ -10,4 +10,6 @@ public interface RecruitmentRepository {
     void clear();
 
     Optional<Recruitment> findRecruitmentById(Long id);
+
+    Optional<Recruitment> findRecruitmentByMatchingId(Long matchingId);
 }

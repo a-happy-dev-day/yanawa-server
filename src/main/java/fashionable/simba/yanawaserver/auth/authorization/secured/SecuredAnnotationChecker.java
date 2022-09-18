@@ -24,7 +24,6 @@ public class SecuredAnnotationChecker {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        //TODO : 권한이 없다면 익명의 사용자로 설정하도록 수정
         if (authentication.getAuthorities()
             .stream()
             .noneMatch(values::contains)) {

@@ -3,9 +3,19 @@ package fashionable.simba.yanawaserver.matching.domain;
 import fashionable.simba.yanawaserver.matching.error.NoPlayerDataException;
 
 public class MatchingReview {
-    private final Long writerId;
-    private final Long partnerId;
+    private Long id;
+    private Long matchingId;
+    private Long writerId;
+    private Long partnerId;
     private String details;
+
+    public Long getId() {
+        return id;
+    }
+
+    public Long getMatchingId() {
+        return matchingId;
+    }
 
     public Long getWriterId() {
         return writerId;
@@ -19,10 +29,16 @@ public class MatchingReview {
         return details;
     }
 
-    public MatchingReview(Long writerId, Long partnerId, String details) {
-        if(writerId == null || partnerId == null) {
-            throw new NoPlayerDataException("사용자 정보가 없어 리뷰를 작성할 수 없습니다.");
-        }
+    public MatchingReview(Long matchingId, Long writerId, Long partnerId, String details) {
+        this.matchingId = matchingId;
+        this.writerId = writerId;
+        this.partnerId = partnerId;
+        this.details = details;
+    }
+
+    public MatchingReview(Long id, Long matchingId, Long writerId, Long partnerId, String details) {
+        this.id = id;
+        this.matchingId = matchingId;
         this.writerId = writerId;
         this.partnerId = partnerId;
         this.details = details;

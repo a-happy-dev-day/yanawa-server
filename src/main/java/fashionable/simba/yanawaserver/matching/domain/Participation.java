@@ -1,7 +1,6 @@
 package fashionable.simba.yanawaserver.matching.domain;
 
 import fashionable.simba.yanawaserver.matching.constant.ParticipationStatusType;
-import fashionable.simba.yanawaserver.matching.error.NoMatchingDataException;
 
 import java.time.LocalDateTime;
 

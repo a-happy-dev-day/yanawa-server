@@ -7,13 +7,33 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
+import static fashionable.simba.yanawaserver.acceptance.MemberSteps.PASSWORD_ADMIN;
 import static fashionable.simba.yanawaserver.acceptance.MemberSteps.로그인_되어_있음;
 import static fashionable.simba.yanawaserver.acceptance.MemberSteps.로그인_발급_요청;
+import static fashionable.simba.yanawaserver.acceptance.MemberSteps.로그인_요청;
+import static fashionable.simba.yanawaserver.acceptance.MemberSteps.로그인_코드_발급;
 import static fashionable.simba.yanawaserver.acceptance.MemberSteps.정보_조회_요청;
 import static fashionable.simba.yanawaserver.acceptance.MemberSteps.회원_목록_조회_요청;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class AuthAcceptanceTest extends AcceptanceTest {
+
+    /**
+     * When 로그인에 성공하면
+     * Then Access Token 과 Refresh Token을 발급 받습니다.
+     */
+    @Test
+    void login_success() {
+        // given
+        String id = getId("admin");
+
+        String token = 로그인_코드_발급(id, PASSWORD_ADMIN);
+        ExtractableResponse<Response> response = 로그인_요청(token);
+
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+        assertThat(response.jsonPath().getString("accessToken")).isNotNull();
+        assertThat(response.jsonPath().getString("refreshToken")).isNotNull();
+    }
 
     /**
      * Given 사용자가 로그인하면

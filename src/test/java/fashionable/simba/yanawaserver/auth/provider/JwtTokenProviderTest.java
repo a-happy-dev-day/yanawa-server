@@ -12,7 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 class JwtTokenProviderTest {
     private static final String SECRET_KEY = "yanawa-secret-key";
-    private final JwtTokenProvider provider = new JwtTokenProvider(SECRET_KEY, 1000);
+    private static final String REFRESH_KEY = "yanawa-refresh-key";
+    private final JwtTokenProvider provider = new JwtTokenProvider(SECRET_KEY, REFRESH_KEY, 1000, 1000);
 
     @Test
     @Order(1)
@@ -40,7 +41,7 @@ class JwtTokenProviderTest {
     @DisplayName("토큰의 유효시간이 만료되면 false를 리턴한다.")
     void validToken_expiration() {
         // given
-        JwtTokenProvider expiredProvider = new JwtTokenProvider(SECRET_KEY, 0);
+        JwtTokenProvider expiredProvider = new JwtTokenProvider(SECRET_KEY, REFRESH_KEY, 0, 0);
         String token = expiredProvider.createAuthorizationToken("2", List.of(RoleType.ROLE_ADMIN.name()));
 
         // then

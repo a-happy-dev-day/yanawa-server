@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MemberSteps {
-
+    public static final String PASSWORD_ADMIN = "password-admin";
 
     public static String 로그인_코드_발급(String username, String password) {
         return 로그인_발급_요청(username, password).jsonPath().getString("accessCode");
@@ -29,7 +29,7 @@ public class MemberSteps {
     }
 
     public static String 로그인_되어_있음(String username) {
-        String token = 로그인_코드_발급(username, "password-admin");
+        String token = 로그인_코드_발급(username, PASSWORD_ADMIN);
         ExtractableResponse<Response> response = 로그인_요청(token);
         return response.jsonPath().getString("accessToken");
     }

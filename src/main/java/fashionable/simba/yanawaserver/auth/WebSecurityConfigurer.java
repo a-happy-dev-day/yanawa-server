@@ -28,14 +28,20 @@ import java.util.List;
 @Configuration
 public class WebSecurityConfigurer implements WebMvcConfigurer {
     private final String secretKey;
-    private final long validityInMilliseconds;
+    private final String refreshKey;
+    private final long validityAccessTokenMilliseconds;
+    private final long validityRefreshTokenMilliseconds;
     private final UserDetailsService userDetailsService;
 
     public WebSecurityConfigurer(@Value("${security.jwt.token.secret-key}") String secretKey,
-                                 @Value("${security.jwt.token.expire-length}") long validityInMilliseconds,
+                                 @Value("${security.jwt.token.refresh-key}") String refreshKey,
+                                 @Value("${security.jwt.token.access.expire-length}") long validityAccessTokenMilliseconds,
+                                 @Value("${security.jwt.token.refresh.expire-length}")long validityRefreshTokenMilliseconds,
                                  UserDetailsService userDetailsService) {
         this.secretKey = secretKey;
-        this.validityInMilliseconds = validityInMilliseconds;
+        this.refreshKey = refreshKey;
+        this.validityAccessTokenMilliseconds = validityAccessTokenMilliseconds;
+        this.validityRefreshTokenMilliseconds = validityRefreshTokenMilliseconds;
         this.userDetailsService = userDetailsService;
     }
 
@@ -96,7 +102,7 @@ public class WebSecurityConfigurer implements WebMvcConfigurer {
 
     @Bean
     JwtTokenProvider jwtTokenProvider() {
-        return new JwtTokenProvider(secretKey, validityInMilliseconds);
+        return new JwtTokenProvider(secretKey, refreshKey, validityRefreshTokenMilliseconds, validityAccessTokenMilliseconds);
     }
 
     @Bean

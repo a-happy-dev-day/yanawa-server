@@ -5,26 +5,28 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class JwtTokenProvider {
     private static final String ROLES = "roles";
     private final String secretKey;
-    private final long validityMilliseconds;
+    private final String refreshKey;
+    private final long validityRefreshTokenMilliseconds;
+    private final long validityAccessTokenMilliseconds;
 
-    public JwtTokenProvider(String secretKey, long validityMilliseconds) {
+    public JwtTokenProvider(String secretKey, String refreshKey, long validityRefreshTokenMilliseconds, long validityAccessTokenMilliseconds) {
         this.secretKey = secretKey;
-        this.validityMilliseconds = validityMilliseconds;
+        this.refreshKey = refreshKey;
+        this.validityRefreshTokenMilliseconds = validityRefreshTokenMilliseconds;
+        this.validityAccessTokenMilliseconds = validityAccessTokenMilliseconds;
     }
 
     public String createAuthorizationToken(String principal, List<String> roles) {
         Claims claims = Jwts.claims().setSubject(principal);
         Date now = new Date();
-        Date validity = new Date(now.getTime() + validityMilliseconds);
+        Date validity = new Date(now.getTime() + validityAccessTokenMilliseconds);
 
         return Jwts.builder()
             .setClaims(claims)
@@ -35,10 +37,11 @@ public class JwtTokenProvider {
             .compact();
     }
 
+
     public String createAuthenticationToken(String principal) {
         Claims claims = Jwts.claims().setSubject(principal);
         Date now = new Date();
-        Date validity = new Date(now.getTime() + validityMilliseconds);
+        Date validity = new Date(now.getTime() + validityAccessTokenMilliseconds);
 
         return Jwts.builder()
             .setClaims(claims)
@@ -46,6 +49,19 @@ public class JwtTokenProvider {
             .setExpiration(validity)
             .claim(ROLES, Collections.emptyList())
             .signWith(SignatureAlgorithm.HS256, secretKey)
+            .compact();
+    }
+
+    public String createRefreshToken(String principal) {
+        Claims claims = Jwts.claims().setSubject(principal);
+        Date now = new Date();
+        Date validity = new Date(now.getTime() + validityRefreshTokenMilliseconds);
+
+        return Jwts.builder()
+            .setClaims(claims)
+            .setIssuedAt(now)
+            .setExpiration(validity)
+            .signWith(SignatureAlgorithm.HS256, refreshKey)
             .compact();
     }
 
@@ -65,4 +81,5 @@ public class JwtTokenProvider {
             return false;
         }
     }
+
 }

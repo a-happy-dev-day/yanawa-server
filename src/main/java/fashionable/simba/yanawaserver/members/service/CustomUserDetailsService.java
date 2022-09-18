@@ -39,7 +39,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             KakaoMember newMember = memberRepository.save(member);
             return getUser(newMember.getId(), newMember.getRoles());
         }
-        
+
         KakaoMember kakaoMember = kakaoMemberInDatabase.get();
         return getUser(kakaoMember.getId(), kakaoMember.getRoles());
     }

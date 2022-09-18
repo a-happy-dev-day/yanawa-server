@@ -2,12 +2,12 @@ package fashionable.simba.yanawaserver.auth.domain;
 
 import java.util.Objects;
 
-public final class AccessCode {
+public final class AuthenticationCode {
     private String accessCode;
 
-    private AccessCode() {/*no-op*/}
+    private AuthenticationCode() {/*no-op*/}
 
-    public AccessCode(String accessCode) {
+    public AuthenticationCode(String accessCode) {
         this.accessCode = accessCode;
     }
 
@@ -19,7 +19,7 @@ public final class AccessCode {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AccessCode that = (AccessCode) o;
+        AuthenticationCode that = (AuthenticationCode) o;
         return Objects.equals(getAccessCode(), that.getAccessCode());
     }
 

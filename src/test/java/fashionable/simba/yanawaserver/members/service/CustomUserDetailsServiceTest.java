@@ -1,11 +1,9 @@
 package fashionable.simba.yanawaserver.members.service;
 
-import fashionable.simba.yanawaserver.auth.dto.KakaoAccessToken;
 import fashionable.simba.yanawaserver.auth.userdetails.UserDetails;
 import fashionable.simba.yanawaserver.members.domain.KakaoMember;
 import fashionable.simba.yanawaserver.members.domain.MemberRepository;
 import fashionable.simba.yanawaserver.members.domain.RoleType;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,8 +14,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 

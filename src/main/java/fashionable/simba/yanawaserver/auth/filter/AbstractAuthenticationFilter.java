@@ -4,8 +4,8 @@ import fashionable.simba.yanawaserver.auth.context.Authentication;
 import fashionable.simba.yanawaserver.auth.context.SecurityContextHolder;
 import fashionable.simba.yanawaserver.auth.handler.AuthenticationFailureHandler;
 import fashionable.simba.yanawaserver.auth.handler.AuthenticationSuccessHandler;
-import fashionable.simba.yanawaserver.auth.provider.AuthorizationManager;
 import fashionable.simba.yanawaserver.auth.provider.AuthenticationToken;
+import fashionable.simba.yanawaserver.auth.provider.AuthorizationManager;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;

@@ -36,7 +36,7 @@ public class WebSecurityConfigurer implements WebMvcConfigurer {
     public WebSecurityConfigurer(@Value("${security.jwt.token.secret-key}") String secretKey,
                                  @Value("${security.jwt.token.refresh-key}") String refreshKey,
                                  @Value("${security.jwt.token.access.expire-length}") long validityAccessTokenMilliseconds,
-                                 @Value("${security.jwt.token.refresh.expire-length}")long validityRefreshTokenMilliseconds,
+                                 @Value("${security.jwt.token.refresh.expire-length}") long validityRefreshTokenMilliseconds,
                                  UserDetailsService userDetailsService) {
         this.secretKey = secretKey;
         this.refreshKey = refreshKey;

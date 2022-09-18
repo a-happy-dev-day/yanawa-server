@@ -3,9 +3,9 @@ package fashionable.simba.yanawaserver.auth.filter;
 
 import fashionable.simba.yanawaserver.auth.handler.AuthenticationFailureHandler;
 import fashionable.simba.yanawaserver.auth.handler.AuthenticationSuccessHandler;
-import fashionable.simba.yanawaserver.auth.provider.AuthorizationManager;
 import fashionable.simba.yanawaserver.auth.provider.AuthenticationToken;
 import fashionable.simba.yanawaserver.auth.provider.AuthorizationExtractor;
+import fashionable.simba.yanawaserver.auth.provider.AuthorizationManager;
 import fashionable.simba.yanawaserver.auth.provider.AuthorizationType;
 
 import javax.servlet.http.HttpServletRequest;

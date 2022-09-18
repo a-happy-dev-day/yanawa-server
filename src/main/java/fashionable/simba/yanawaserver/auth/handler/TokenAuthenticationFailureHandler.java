@@ -1,7 +1,6 @@
 package fashionable.simba.yanawaserver.auth.handler;
 
 import fashionable.simba.yanawaserver.auth.context.SecurityContextHolder;
-import fashionable.simba.yanawaserver.auth.provider.AuthenticationException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

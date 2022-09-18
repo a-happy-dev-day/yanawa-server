@@ -1,11 +1,11 @@
 package fashionable.simba.yanawaserver.auth.domain;
 
-public class RefreshToken {
+public class AuthorizationRefreshToken {
     private String refreshToken;
 
-    private RefreshToken() {/*no-op*/}
+    private AuthorizationRefreshToken() {/*no-op*/}
 
-    public RefreshToken(String refreshToken) {
+    public AuthorizationRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
     }
 

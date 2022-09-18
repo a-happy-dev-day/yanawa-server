@@ -2,7 +2,7 @@ package fashionable.simba.yanawaserver.auth.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fashionable.simba.yanawaserver.auth.context.Authentication;
-import fashionable.simba.yanawaserver.auth.domain.AuthenticationToken;
+import fashionable.simba.yanawaserver.auth.domain.AuthorizationToken;
 import fashionable.simba.yanawaserver.auth.provider.JwtTokenProvider;
 import org.springframework.http.MediaType;
 
@@ -21,7 +21,7 @@ public class TokenAuthenticationSuccessHandler implements AuthenticationSuccessH
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
-        AuthenticationToken tokenResponse = new AuthenticationToken(
+        AuthorizationToken tokenResponse = new AuthorizationToken(
             jwtTokenProvider.createAuthorizationToken(authentication.getPrincipal().toString(), authentication.getAuthorities()),
             jwtTokenProvider.createRefreshToken(authentication.getPrincipal().toString())
         );

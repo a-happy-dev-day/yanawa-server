@@ -1,9 +1,9 @@
 package fashionable.simba.yanawaserver.auth.domain;
 
-public class AccessToken {
+public class AuthorizationAccessToken {
     private String accessToken;
 
-    public AccessToken(String accessToken) {
+    public AuthorizationAccessToken(String accessToken) {
         this.accessToken = accessToken;
     }
 

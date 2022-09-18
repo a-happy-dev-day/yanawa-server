@@ -2,8 +2,8 @@ package fashionable.simba.yanawaserver.auth.ui;
 
 import fashionable.simba.yanawaserver.auth.authorization.AuthenticationPrincipal;
 import fashionable.simba.yanawaserver.auth.authorization.secured.Secured;
-import fashionable.simba.yanawaserver.auth.domain.AccessToken;
-import fashionable.simba.yanawaserver.auth.domain.RefreshToken;
+import fashionable.simba.yanawaserver.auth.domain.AuthorizationAccessToken;
+import fashionable.simba.yanawaserver.auth.domain.AuthorizationRefreshToken;
 import fashionable.simba.yanawaserver.auth.dto.LoginRequest;
 import fashionable.simba.yanawaserver.auth.dto.TokenRequest;
 import fashionable.simba.yanawaserver.auth.kakao.KakaoAuthenticationService;
@@ -73,14 +73,14 @@ public class LoginController {
     }
 
     @PostMapping("/refresh")
-    public ResponseEntity<AccessToken> refreshToken(@RequestBody RefreshToken refreshToken) {
+    public ResponseEntity<AuthorizationAccessToken> refreshToken(@RequestBody AuthorizationRefreshToken refreshToken) {
         if (!jwtTokenProvider.validateRefreshToken(refreshToken.getRefreshToken())) {
             throw new AuthenticationException("Invalid Refresh Token");
         }
 
         String username = jwtTokenProvider.getPrincipalByRefreshToken(refreshToken.getRefreshToken());
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        return ResponseEntity.ok(new AccessToken(jwtTokenProvider.createAuthorizationToken(username, userDetails.getAuthorities())));
+        return ResponseEntity.ok(new AuthorizationAccessToken(jwtTokenProvider.createAuthorizationToken(username, userDetails.getAuthorities())));
     }
 
     @GetMapping("logout")

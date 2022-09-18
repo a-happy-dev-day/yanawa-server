@@ -33,7 +33,7 @@ public abstract class Member {
 
     protected Member() {/*no-op*/}
 
-    public Member(Long id, String email, List<String> roles) {
+    protected Member(Long id, String email, List<String> roles) {
         this.id = id;
         this.email = email;
         this.roles = roles;

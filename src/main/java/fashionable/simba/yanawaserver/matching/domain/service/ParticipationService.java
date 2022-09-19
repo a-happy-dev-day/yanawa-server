@@ -25,7 +25,7 @@ public class ParticipationService {
         if (recruitment.getStatus() == RecruitmentStatusType.CLOSED) {
             throw new IllegalArgumentException("모집이 종료되어 참가요청을 보낼 수 없습니다.");
         }
-        Optional<Participation> beforeParticipation = participationRepository.findParticipationByUserIdAndRecruitmentId(participation.getUserId(), participation.getRecruitmentId());
+        Participation beforeParticipation = participationRepository.findParticipationByUserIdAndRecruitmentId(participation.getUserId(), participation.getRecruitmentId()).orElseThrow();
         if (getParticipationStatus(beforeParticipation) == ParticipationStatusType.ACCEPTED
                 || getParticipationStatus(beforeParticipation) == ParticipationStatusType.REJECTED) {
             throw new IllegalArgumentException("이전 참가요청에 대해 승인, 거절에 대하여 재요청을 보낼 수 없습니다.");
@@ -40,7 +40,7 @@ public class ParticipationService {
 
     public Participation acceptParticipation(Long participationId) {
         Participation participation = participationRepository.findParticipationById(participationId).orElseThrow();
-        if(participation.getStatus() != ParticipationStatusType.WAITING) {
+        if (participation.getStatus() != ParticipationStatusType.WAITING) {
             throw new IllegalArgumentException("참여요청이 대기중이 아니므로 참가승인을 할 수 없습니다.");
         }
         participation.changeAcceptedParticipation();
@@ -49,17 +49,14 @@ public class ParticipationService {
 
     public Participation rejectParticipation(Long participationId) {
         Participation participation = participationRepository.findParticipationById(participationId).orElseThrow();
-        if(participation.getStatus() != ParticipationStatusType.WAITING) {
+        if (participation.getStatus() != ParticipationStatusType.WAITING) {
             throw new IllegalArgumentException("참여요청이 대기중이 아니므로 참가거절을 할 수 없습니다.");
         }
         participation.changeRejectedParticipation();
         return participationRepository.save(participation);
     }
 
-    public ParticipationStatusType getParticipationStatus(Optional<Participation> participation) {
-        if(participation.isPresent()) {
-            return participation.orElseThrow().getStatus();
-        }
-        return null;
+    private ParticipationStatusType getParticipationStatus(Participation participation) {
+        return participation.getStatus();
     }
 }

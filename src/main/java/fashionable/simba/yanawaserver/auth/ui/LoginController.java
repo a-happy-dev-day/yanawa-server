@@ -60,11 +60,11 @@ public class LoginController {
                                                       @RequestParam(required = false) String error,
                                                       @RequestParam(required = false) String errorDescription) {
         if (error != null) {
-            log.debug("Login failed cause : {}", errorDescription.replaceAll("[\n\r\t]", "_"));
+            logDebug(errorDescription, "Login failed cause : {}");
             throw new AccessCodeException("코드를 발급받는 곳에서 문제가 발생했습니다.");
         }
 
-        log.debug("Login success : {}", code.replaceAll("[\n\r\t]", "_"));
+        logDebug(code, "Login success : {}");
         KakaoMember kakaoMember = kakaoAuthenticationService.getUserInfo(kakaoAuthenticationService.getAccessToken(code));
         UserDetails userDetails = userDetailsService.saveKakaoMember(kakaoMember);
         return ResponseEntity.ok(new TokenRequest(jwtTokenProvider.createAuthenticationToken((String) userDetails.getUsername())));
@@ -99,5 +99,12 @@ public class LoginController {
     @Secured(value = {"ROLE_MEMBER", "ROLE_TEST"})
     public ResponseEntity<Void> logout(@AuthenticationPrincipal User user) {
         return ResponseEntity.ok().build();
+    }
+
+    private void logDebug(String message, String format) {
+        if (log.isDebugEnabled()) {
+            String replaceMessage = message.replaceAll("[\n\r\t]", "_");
+            log.debug(format, replaceMessage);
+        }
     }
 }

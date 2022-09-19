@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.matching.application;
+package fashionable.simba.yanawaserver.matching.application.dto;
 
 import fashionable.simba.yanawaserver.matching.constant.AgeGroupType;
 import fashionable.simba.yanawaserver.matching.constant.AnnualType;

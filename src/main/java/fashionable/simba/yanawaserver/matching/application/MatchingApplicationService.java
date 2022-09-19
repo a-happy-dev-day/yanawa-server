@@ -1,5 +1,7 @@
 package fashionable.simba.yanawaserver.matching.application;
 
+import fashionable.simba.yanawaserver.matching.application.dto.RecruitmentRequsest;
+import fashionable.simba.yanawaserver.matching.application.dto.RecruitmentResponse;
 import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
 import fashionable.simba.yanawaserver.matching.constant.RecruitmentStatusType;
 import fashionable.simba.yanawaserver.matching.domain.Matching;

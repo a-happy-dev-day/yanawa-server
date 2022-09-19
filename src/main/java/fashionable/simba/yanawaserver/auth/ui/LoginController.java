@@ -13,8 +13,6 @@ import fashionable.simba.yanawaserver.auth.userdetails.User;
 import fashionable.simba.yanawaserver.auth.userdetails.UserDetails;
 import fashionable.simba.yanawaserver.auth.userdetails.UserDetailsService;
 import fashionable.simba.yanawaserver.members.domain.KakaoMember;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class LoginController {
-    private final Logger log = LoggerFactory.getLogger(LoginController.class);
     private final KakaoAuthenticationService kakaoAuthenticationService;
     private final UserDetailsService userDetailsService;
     private final JwtTokenProvider jwtTokenProvider;

@@ -23,7 +23,7 @@ public class MemoryParticipationRepository implements ParticipationRepository {
                 participation.getUserId(),
                 participation.getRecruitmentId(),
                 participation.getRequestDateTime(),
-                ParticipationStatusType.WAITING
+                participation.getStatus()
         );
         participations.put(id, save);
         return save;

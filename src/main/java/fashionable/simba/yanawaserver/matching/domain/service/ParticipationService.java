@@ -30,7 +30,12 @@ public class ParticipationService {
                 || getParticipationStatus(beforeParticipation) == ParticipationStatusType.REJECTED) {
             throw new IllegalArgumentException("이전 참가요청에 대해 승인, 거절에 대하여 재요청을 보낼 수 없습니다.");
         }
-        return participationRepository.save(participation);
+        Participation saveParticipation = new Participation(participation.getUserId(),
+                participation.getRecruitmentId(),
+                participation.getRequestDateTime(),
+                ParticipationStatusType.WAITING);
+
+        return participationRepository.save(saveParticipation);
     }
 
     public Participation acceptParticipation(Long participationId) {
@@ -38,7 +43,8 @@ public class ParticipationService {
         if(participation.getStatus() != ParticipationStatusType.WAITING) {
             throw new IllegalArgumentException("참여요청이 대기중이 아니므로 참가승인을 할 수 없습니다.");
         }
-        return participation.changeAcceptedParticipation();
+        participation.changeAcceptedParticipation();
+        return participationRepository.save(participation);
     }
 
     public Participation rejectParticipation(Long participationId) {
@@ -46,7 +52,8 @@ public class ParticipationService {
         if(participation.getStatus() != ParticipationStatusType.WAITING) {
             throw new IllegalArgumentException("참여요청이 대기중이 아니므로 참가거절을 할 수 없습니다.");
         }
-        return participation.changeRejectedParticipation();
+        participation.changeRejectedParticipation();
+        return participationRepository.save(participation);
     }
 
     public ParticipationStatusType getParticipationStatus(Optional<Participation> participation) {

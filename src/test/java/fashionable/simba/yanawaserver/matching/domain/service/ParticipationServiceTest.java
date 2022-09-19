@@ -131,6 +131,6 @@ class ParticipationServiceTest {
     }
 
     private static Participation getParticipation(Long userId, Long recruitmentId) {
-        return new Participation(userId, recruitmentId, LocalDateTime.of(2022, 9, 1, 12, 0));
+        return new Participation(userId, recruitmentId, LocalDateTime.of(2022, 9, 1, 12, 0), ParticipationStatusType.WAITING);
     }
 }

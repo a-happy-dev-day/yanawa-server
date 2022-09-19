@@ -33,7 +33,7 @@ class MemberDocumentation extends Documentation {
             .filter(document("member/me",
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint())))
-            .when().get("/members/me")
+            .when().post("/members/me")
             .then().log().all()
             .statusCode(HttpStatus.OK.value())
             .extract();

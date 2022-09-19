@@ -27,18 +27,15 @@ public class MatchingReview {
         return details;
     }
 
-    public MatchingReview(Long matchingId, Long writerId, Long partnerId, String details) {
-        this.matchingId = matchingId;
-        this.writerId = writerId;
-        this.partnerId = partnerId;
-        this.details = details;
-    }
-
     public MatchingReview(Long id, Long matchingId, Long writerId, Long partnerId, String details) {
         this.id = id;
         this.matchingId = matchingId;
         this.writerId = writerId;
         this.partnerId = partnerId;
         this.details = details;
+    }
+
+    public MatchingReview(Long matchingId, Long writerId, Long partnerId, String details) {
+        this(null, matchingId, writerId, partnerId, details);
     }
 }

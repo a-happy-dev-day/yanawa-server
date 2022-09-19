@@ -107,25 +107,7 @@ public class Recruitment {
     }
 
     public Recruitment(Long matchingId, Level maximumLevel, Level minimumLevel, AgeGroupType ageOfRecruitment, GenderType sexOfRecruitment, PreferenceType preferenceGame, Integer numberOfRecruitment, Double costOfCourtPerPerson, AnnualType annual, String details, RecruitmentStatusType status) {
-        if (numberOfRecruitment < 1 || numberOfRecruitment > 8) {
-            throw new InvalidNumberException("인원은 1명이상 8명이하여야 합니다.");
-        }
-        if (costOfCourtPerPerson <= 0) {
-            throw new InvalidCostException("비용은 0원 이상이여야 합니다.");
-        }
-        if (maximumLevel.getLevel() < minimumLevel.getLevel()) {
-            throw new LevelSettingException("최소레벨이 최대레벨보다 클 수 없습니다.");
-        }
-        this.matchingId = matchingId;
-        this.maximumLevel = maximumLevel;
-        this.minimumLevel = minimumLevel;
-        this.ageOfRecruitment = ageOfRecruitment;
-        this.sexOfRecruitment = sexOfRecruitment;
-        this.preferenceGame = preferenceGame;
-        this.numberOfRecruitment = numberOfRecruitment;
-        this.costOfCourtPerPerson = costOfCourtPerPerson;
-        this.annual = annual;
-        this.details = details;
-        this.status = status;
+        this(null, matchingId, maximumLevel, minimumLevel, ageOfRecruitment, sexOfRecruitment,
+                preferenceGame, numberOfRecruitment, costOfCourtPerPerson, annual, details, status);
     }
 }

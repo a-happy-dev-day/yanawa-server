@@ -72,14 +72,6 @@ public class Matching {
     }
 
     public Matching(Long hostId, Long courtId, LocalDate date, LocalTime startTime, LocalTime endTime, MatchingStatusType status) {
-        if (startTime.isAfter(endTime)) {
-            throw new MatchingTimeException("시작시간이 종료시간보다 늦을 수 없습니다.");
-        }
-        this.hostId = hostId;
-        this.courtId = courtId;
-        this.date = date;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.status = status;
+        this(null, hostId, courtId, date, startTime, endTime, status);
     }
 }

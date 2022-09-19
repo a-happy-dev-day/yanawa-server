@@ -20,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
 
@@ -67,7 +68,15 @@ class LoginControllerTest {
         when(kakaoAuthenticationService.getUserInfo(accessToken)).thenReturn(kakaoMember);
         when(userDetailsService.saveKakaoMember(kakaoMember)).thenReturn(user);
 
-        ResponseEntity<TokenRequest> response = loginController.loginCallback("code");
+        ResponseEntity<TokenRequest> response = loginController.loginCallback("accessCode", null, null);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
+
+    @Test
+    @DisplayName("로그인에 실패하면 에러메시지를 받습니다.")
+    void kakao_login_auth_failed() {
+        assertThatThrownBy(
+            () -> loginController.loginCallback(null, "KEO301", "error message is not null")
+        ).isInstanceOf(AccessCodeException.class);
     }
 }

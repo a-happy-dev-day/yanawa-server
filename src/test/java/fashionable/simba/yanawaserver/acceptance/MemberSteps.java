@@ -52,7 +52,7 @@ public class MemberSteps {
         return RestAssured.given().log().all()
             .auth().oauth2(accessToken)
             .accept(MediaType.APPLICATION_JSON_VALUE)
-            .when().get("/members")
+            .when().post("/members")
             .then().log().all()
             .extract();
     }
@@ -61,16 +61,29 @@ public class MemberSteps {
         return RestAssured.given().log().all()
             .auth().oauth2(accessToken)
             .accept(MediaType.APPLICATION_JSON_VALUE)
-            .when().get("/members/me")
+            .when().post("/members/me")
             .then().log().all()
-            .statusCode(HttpStatus.OK.value())
             .extract();
     }
 
-    public static ExtractableResponse<Response> 로그아웃_요청(String accessToken) {
+
+    public static ExtractableResponse<Response> 미인증_사용자_정보_조회_요청() {
         return RestAssured.given().log().all()
-            .auth().oauth2(accessToken)
-            .when().get("/logout")
-            .then().log().all().extract();
+            .accept(MediaType.APPLICATION_JSON_VALUE)
+            .when().post("/members/me")
+            .then().log().all()
+            .extract();
+    }
+
+    public static ExtractableResponse<Response> 코드_재갱신_요청(String refreshToken) {
+        Map<String, String> params = new HashMap<>();
+        params.put("refreshToken", refreshToken);
+
+        return RestAssured.given().log().all()
+            .body(params)
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .when().post("/refresh")
+            .then().log().all()
+            .extract();
     }
 }

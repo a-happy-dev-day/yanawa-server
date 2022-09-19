@@ -19,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -48,14 +49,20 @@ public class LoginController {
      * 카카오 로그인 페이지에서 로그인을 하면 사용자 정보를 저장한다.*
      * 사용자의 정보를 이용해 토큰을 발급한다.*
      *
-     * @param accessCode
+     * @param code
      * @return
      */
     @GetMapping("kakao/login/callback")
-    public ResponseEntity<TokenRequest> loginCallback(String accessCode) {
-        KakaoMember kakaoMember = kakaoAuthenticationService.getUserInfo(kakaoAuthenticationService.getAccessToken(accessCode));
+    public ResponseEntity<TokenRequest> loginCallback(@RequestParam(required = false) String code,
+                                                      @RequestParam(required = false) String error,
+                                                      @RequestParam(required = false) String errorDescription) {
+        if (error != null) {
+            throw new AccessCodeException("코드를 발급받는 곳에서 문제가 발생했습니다.");
+        }
+
+        KakaoMember kakaoMember = kakaoAuthenticationService.getUserInfo(kakaoAuthenticationService.getAccessToken(code));
         UserDetails userDetails = userDetailsService.saveKakaoMember(kakaoMember);
-        return ResponseEntity.ok(new TokenRequest((String) userDetails.getUsername()));
+        return ResponseEntity.ok(new TokenRequest(jwtTokenProvider.createAuthenticationToken((String) userDetails.getUsername())));
     }
 
 

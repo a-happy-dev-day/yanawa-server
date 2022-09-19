@@ -1,20 +1,18 @@
 package fashionable.simba.yanawaserver.acceptance;
 
-import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import static fashionable.simba.yanawaserver.acceptance.MemberSteps.PASSWORD_ADMIN;
 import static fashionable.simba.yanawaserver.acceptance.MemberSteps.로그인_되어_있음;
 import static fashionable.simba.yanawaserver.acceptance.MemberSteps.로그인_발급_요청;
 import static fashionable.simba.yanawaserver.acceptance.MemberSteps.로그인_요청;
 import static fashionable.simba.yanawaserver.acceptance.MemberSteps.로그인_코드_발급;
+import static fashionable.simba.yanawaserver.acceptance.MemberSteps.미인증_사용자_정보_조회_요청;
+import static fashionable.simba.yanawaserver.acceptance.MemberSteps.정보_조회_요청;
+import static fashionable.simba.yanawaserver.acceptance.MemberSteps.코드_재갱신_요청;
 import static fashionable.simba.yanawaserver.acceptance.MemberSteps.회원_목록_조회_요청;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -116,13 +114,6 @@ class AuthAcceptanceTest extends AcceptanceTest {
         assertThat(정보_조회.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
     }
 
-    private ExtractableResponse<Response> 미인증_사용자_정보_조회_요청() {
-        return RestAssured.given().log().all()
-            .accept(MediaType.APPLICATION_JSON_VALUE)
-            .when().get("/members/me")
-            .then().log().all()
-            .extract();
-    }
 
     /**
      * When 유효시간이 지난 토큰을 사용해 조회하면
@@ -142,14 +133,6 @@ class AuthAcceptanceTest extends AcceptanceTest {
         assertThat(정보_조회.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
     }
 
-    private ExtractableResponse<Response> 정보_조회_요청(String accessToken) {
-        return RestAssured.given().log().all()
-            .auth().oauth2(accessToken)
-            .accept(MediaType.APPLICATION_JSON_VALUE)
-            .when().get("/members/me")
-            .then().log().all()
-            .extract();
-    }
 
     /**
      * When : 비밀번호를 모르는 사용자가 접근하면
@@ -213,17 +196,5 @@ class AuthAcceptanceTest extends AcceptanceTest {
         ExtractableResponse<Response> response = 코드_재갱신_요청("invalid refreshToken");
 
         assertThat(response.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
-    }
-
-    private ExtractableResponse<Response> 코드_재갱신_요청(String refreshToken) {
-        Map<String, String> params = new HashMap<>();
-        params.put("refreshToken", refreshToken);
-
-        return RestAssured.given().log().all()
-            .body(params)
-            .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .when().post("/refresh")
-            .then().log().all()
-            .extract();
     }
 }

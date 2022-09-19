@@ -9,7 +9,7 @@ public interface ParticipationRepository {
 
     Optional<Participation> findParticipationById(Long id);
 
-    Optional<Participation> findParticipationByUser(Long userId, Long recruitmentId);
+    Optional<Participation> findParticipationByUserIdAndRecruitmentId(Long userId, Long recruitmentId);
 
     void clear();
 

@@ -40,7 +40,7 @@ public class MemoryParticipationRepository implements ParticipationRepository {
     }
 
     @Override
-    public Optional<Participation> findParticipationByUser(Long userId, Long recruitmentId) {
+    public Optional<Participation> findParticipationByUserIdAndRecruitmentId(Long userId, Long recruitmentId) {
         return participations.values().stream().filter(entry -> Objects.equals(entry.getUserId(), userId)
                 && Objects.equals(entry.getRecruitmentId(), recruitmentId)).findFirst();
     }

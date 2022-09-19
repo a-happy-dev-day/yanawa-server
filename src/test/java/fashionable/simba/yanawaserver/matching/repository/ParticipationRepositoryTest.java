@@ -46,9 +46,9 @@ class ParticipationRepositoryTest {
         participationRepository.save(participation);
 
         assertAll(
-            () -> assertThat(participationRepository.findParticipationByUser(1L, 1L).orElseThrow().getId()).isEqualTo(1L),
-            () -> assertTrue(participationRepository.findParticipationByUser(2L, 1L).isEmpty()),
-            () -> assertTrue(participationRepository.findParticipationByUser(1L, 2L).isEmpty())
+            () -> assertThat(participationRepository.findParticipationByUserIdAndRecruitmentId(1L, 1L).orElseThrow().getId()).isEqualTo(1L),
+            () -> assertTrue(participationRepository.findParticipationByUserIdAndRecruitmentId(2L, 1L).isEmpty()),
+            () -> assertTrue(participationRepository.findParticipationByUserIdAndRecruitmentId(1L, 2L).isEmpty())
         );
     }
 

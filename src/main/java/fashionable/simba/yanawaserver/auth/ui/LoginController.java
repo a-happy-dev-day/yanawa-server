@@ -67,7 +67,7 @@ public class LoginController {
         log.debug("Login success : {}", code);
         KakaoMember kakaoMember = kakaoAuthenticationService.getUserInfo(kakaoAuthenticationService.getAccessToken(code));
         UserDetails userDetails = userDetailsService.saveKakaoMember(kakaoMember);
-        return ResponseEntity.ok(new TokenRequest((String) userDetails.getUsername()));
+        return ResponseEntity.ok(new TokenRequest(jwtTokenProvider.createAuthenticationToken((String) userDetails.getUsername())));
     }
 
 

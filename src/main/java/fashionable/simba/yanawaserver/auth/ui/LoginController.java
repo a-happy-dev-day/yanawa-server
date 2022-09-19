@@ -13,16 +13,20 @@ import fashionable.simba.yanawaserver.auth.userdetails.User;
 import fashionable.simba.yanawaserver.auth.userdetails.UserDetails;
 import fashionable.simba.yanawaserver.auth.userdetails.UserDetailsService;
 import fashionable.simba.yanawaserver.members.domain.KakaoMember;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class LoginController {
+    private final Logger log = LoggerFactory.getLogger(LoginController.class);
     private final KakaoAuthenticationService kakaoAuthenticationService;
     private final UserDetailsService userDetailsService;
     private final JwtTokenProvider jwtTokenProvider;
@@ -48,12 +52,20 @@ public class LoginController {
      * 카카오 로그인 페이지에서 로그인을 하면 사용자 정보를 저장한다.*
      * 사용자의 정보를 이용해 토큰을 발급한다.*
      *
-     * @param accessCode
+     * @param code
      * @return
      */
     @GetMapping("kakao/login/callback")
-    public ResponseEntity<TokenRequest> loginCallback(String accessCode) {
-        KakaoMember kakaoMember = kakaoAuthenticationService.getUserInfo(kakaoAuthenticationService.getAccessToken(accessCode));
+    public ResponseEntity<TokenRequest> loginCallback(@RequestParam(required = false) String code,
+                                                      @RequestParam(required = false) String error,
+                                                      @RequestParam(required = false) String errorDescription) {
+        if (error != null) {
+            log.debug("Login failed cause : {}", errorDescription);
+            throw new AccessCodeException("코드를 발급받는 곳에서 문제가 발생했습니다.");
+        }
+
+        log.debug("Login success : {}", code);
+        KakaoMember kakaoMember = kakaoAuthenticationService.getUserInfo(kakaoAuthenticationService.getAccessToken(code));
         UserDetails userDetails = userDetailsService.saveKakaoMember(kakaoMember);
         return ResponseEntity.ok(new TokenRequest((String) userDetails.getUsername()));
     }

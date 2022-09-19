@@ -67,7 +67,7 @@ class LoginControllerTest {
         when(kakaoAuthenticationService.getUserInfo(accessToken)).thenReturn(kakaoMember);
         when(userDetailsService.saveKakaoMember(kakaoMember)).thenReturn(user);
 
-        ResponseEntity<TokenRequest> response = loginController.loginCallback("code");
+        ResponseEntity<TokenRequest> response = loginController.loginCallback("accessCode", null, null);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 }

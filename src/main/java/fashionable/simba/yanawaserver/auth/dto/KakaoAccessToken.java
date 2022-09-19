@@ -13,6 +13,8 @@ public final class KakaoAccessToken {
     private String accessToken;
     private String refreshToken;
 
+    private KakaoAccessToken() {/*no-op*/}
+
     public KakaoAccessToken(String tokenType, String accessToken, String refreshToken) {
         this.tokenType = tokenType;
         this.accessToken = accessToken;

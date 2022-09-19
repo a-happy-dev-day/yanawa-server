@@ -76,7 +76,7 @@ class LoginControllerTest {
     @DisplayName("로그인에 실패하면 에러메시지를 받습니다.")
     void kakao_login_auth_failed() {
         assertThatThrownBy(
-            () -> loginController.loginCallback(null, "KEO301", null)
+            () -> loginController.loginCallback(null, "KEO301", "error message is not null")
         ).isInstanceOf(AccessCodeException.class);
     }
 }

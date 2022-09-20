@@ -8,7 +8,7 @@ import fashionable.simba.yanawaserver.matching.domain.repository.ParticipationRe
 import fashionable.simba.yanawaserver.matching.domain.repository.RecruitmentRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.NoSuchElementException;
 
 @Service
 public class ParticipationService {
@@ -21,15 +21,21 @@ public class ParticipationService {
     }
 
     public Participation createParticipation(Participation participation) {
-        Recruitment recruitment = recruitmentRepository.findRecruitmentById(participation.getRecruitmentId()).orElseThrow();
+        Recruitment recruitment = recruitmentRepository.findRecruitmentById(participation.getRecruitmentId())
+                .orElseThrow( () -> new IllegalArgumentException("모집정보가 없습니다."));
         if (recruitment.getStatus() == RecruitmentStatusType.CLOSED) {
             throw new IllegalArgumentException("모집이 종료되어 참가요청을 보낼 수 없습니다.");
         }
-        Participation beforeParticipation = participationRepository.findParticipationByUserIdAndRecruitmentId(participation.getUserId(), participation.getRecruitmentId()).orElseThrow();
-        if (getParticipationStatus(beforeParticipation) == ParticipationStatusType.ACCEPTED
-                || getParticipationStatus(beforeParticipation) == ParticipationStatusType.REJECTED) {
-            throw new IllegalArgumentException("이전 참가요청에 대해 승인, 거절에 대하여 재요청을 보낼 수 없습니다.");
-        }
+
+        try {
+            Participation beforeParticipation = participationRepository.findParticipationByUserIdAndRecruitmentId(
+                    participation.getUserId(), participation.getRecruitmentId()).orElseThrow();
+            if (beforeParticipation.getStatus() == ParticipationStatusType.ACCEPTED
+                    || beforeParticipation.getStatus() == ParticipationStatusType.REJECTED) {
+                throw new IllegalArgumentException("이전 참가요청에 대해 승인, 거절에 대하여 재요청을 보낼 수 없습니다.");
+            }
+        } catch (NoSuchElementException ignored) { }
+
         Participation saveParticipation = new Participation(participation.getUserId(),
                 participation.getRecruitmentId(),
                 participation.getRequestDateTime(),
@@ -54,9 +60,5 @@ public class ParticipationService {
         }
         participation.changeRejectedParticipation();
         return participationRepository.save(participation);
-    }
-
-    private ParticipationStatusType getParticipationStatus(Participation participation) {
-        return participation.getStatus();
     }
 }

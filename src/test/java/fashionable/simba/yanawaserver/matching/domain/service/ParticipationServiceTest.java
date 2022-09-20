@@ -27,12 +27,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ParticipationServiceTest {
     ParticipationRepository participationRepository = new MemoryParticipationRepository();
-    RecruitmentRepository recruitmentRepository = new MemoryRecruitmentRepository();
-    ParticipationService participationService = new ParticipationService(participationRepository, recruitmentRepository);
+    RecruitmentRepository   recruitmentRepository = new MemoryRecruitmentRepository();
+    ParticipationService    participationService = new ParticipationService(participationRepository, recruitmentRepository);
 
     @BeforeEach
     void setUp() {
         participationRepository.clear();
+        recruitmentRepository.clear();
+
         Recruitment openingRecruitment = new Recruitment(1L, new Level(4.0), new Level(1.5), AgeGroupType.TWENTIES, GenderType.NONE,
                 PreferenceType.RALLY, 3, 2.0, AnnualType.FIVE_YEARS_LESS, "4명이서 랠리해요~", RecruitmentStatusType.OPENING);
         recruitmentRepository.save(openingRecruitment);

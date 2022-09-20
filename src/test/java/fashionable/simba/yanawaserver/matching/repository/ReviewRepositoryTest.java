@@ -34,29 +34,13 @@ class ReviewRepositoryTest {
     }
 
     @Test
-    @DisplayName("매칭 아이디로 리뷰 찾기")
-    void findByMatchingId() {
+    @DisplayName("매칭아이디&작성자아이디&평가자아이디로 리뷰 찾기")
+    void findByMatchingIdAndWriterIdAndPartnerId() {
         MatchingReview review = new MatchingReview(1L, 1L, 1L, 2L, "리뷰테스트");
         Long savedReviewId = reviewRepository.save(review).getId();
 
-        assertThat(reviewRepository.findByMatchingId(1L).orElseThrow().getId()).isEqualTo(savedReviewId);
+        assertThat(reviewRepository.findByMatchingIdAndWriterIdAndPartnerId(1L, 1L, 2L).orElseThrow().getId())
+                .isEqualTo(savedReviewId);
     }
 
-    @Test
-    @DisplayName("작성자 아이디로 리뷰 찾기")
-    void findByWriterId() {
-        MatchingReview review = new MatchingReview(1L, 1L, 1L, 2L, "리뷰테스트");
-        Long savedReviewId = reviewRepository.save(review).getId();
-
-        assertThat(reviewRepository.findByWriterId(1L).orElseThrow().getId()).isEqualTo(savedReviewId);
-    }
-
-    @Test
-    @DisplayName("평가자 아이디로 리뷰 찾기")
-    void findByPartnerId() {
-        MatchingReview review = new MatchingReview(1L, 1L, 1L, 2L, "리뷰테스트");
-        Long savedReviewId = reviewRepository.save(review).getId();
-
-        assertThat(reviewRepository.findByPartnerId(2L).orElseThrow().getId()).isEqualTo(savedReviewId);
-    }
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 @Repository
@@ -33,18 +34,10 @@ public class MemoryReviewRepository implements ReviewRepository {
     }
 
     @Override
-    public Optional<MatchingReview> findByMatchingId(Long id) {
-        return reviews.values().stream().filter(x -> x.getMatchingId().equals(id)).findAny();
-    }
-
-    @Override
-    public Optional<MatchingReview> findByWriterId(Long id) {
-        return reviews.values().stream().filter(x -> x.getWriterId().equals(id)).findAny();
-    }
-
-    @Override
-    public Optional<MatchingReview> findByPartnerId(Long id) {
-        return reviews.values().stream().filter(x -> x.getPartnerId().equals(id)).findAny();
+    public Optional<MatchingReview> findByMatchingIdAndWriterIdAndPartnerId(Long mathicngId, Long writerId, Long partnerId) {
+        return reviews.values().stream().filter(entry -> Objects.equals(entry.getMatchingId(), mathicngId)
+                        && Objects.equals(entry.getWriterId(), writerId)
+                        && Objects.equals(entry.getPartnerId(), partnerId)).findAny();
     }
 
     private synchronized Long getId() {

@@ -70,6 +70,7 @@ class LoginControllerTest {
 
         ResponseEntity<TokenRequest> response = loginController.loginCallback("accessCode", null, null);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getBody()).isNotNull();
     }
 
     @Test

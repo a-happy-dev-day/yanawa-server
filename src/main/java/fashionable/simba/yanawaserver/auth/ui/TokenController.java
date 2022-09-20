@@ -7,7 +7,6 @@ import fashionable.simba.yanawaserver.global.provider.AuthenticationException;
 import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
 import fashionable.simba.yanawaserver.global.token.AuthorizationAccessToken;
 import fashionable.simba.yanawaserver.global.token.AuthorizationRefreshToken;
-import fashionable.simba.yanawaserver.global.userdetails.User;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetails;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;
 import org.springframework.http.ResponseEntity;
@@ -43,12 +42,14 @@ public class TokenController {
     @PostMapping("expire/access")
     @Secured(value = {"ROLE_ADMIN", "ROLE_MEMBER", "ROLE_TEST"})
     public ResponseEntity<Void> expireAccess(@RequestBody AuthorizationAccessToken accessToken) {
+        tokenManagementService.expireAccessToken(accessToken.getAccessToken());
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("expire/refresh")
     @Secured(value = {"ROLE_ADMIN", "ROLE_MEMBER", "ROLE_TEST"})
     public ResponseEntity<Void> expireRefresh(@AuthenticationPrincipal AuthorizationRefreshToken refreshToken) {
+        tokenManagementService.expireRefreshToken(refreshToken.getRefreshToken());
         return ResponseEntity.ok().build();
     }
 }

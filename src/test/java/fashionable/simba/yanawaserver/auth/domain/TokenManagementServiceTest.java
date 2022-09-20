@@ -38,7 +38,7 @@ class TokenManagementServiceTest {
 
         // when
         when(jwtTokenProvider.validateToken(accessToken)).thenReturn(true);
-        when(invalidAccessTokenRepository.exist(accessToken)).thenReturn(false);
+        when(invalidAccessTokenRepository.existsById(any())).thenReturn(false);
 
         // then
         tokenManagementService.expireAccessToken(accessToken);
@@ -67,7 +67,7 @@ class TokenManagementServiceTest {
 
         // when
         when(jwtTokenProvider.validateToken(accessToken)).thenReturn(true);
-        when(invalidAccessTokenRepository.exist(accessToken)).thenReturn(true);
+        when(invalidAccessTokenRepository.existsById(any())).thenReturn(true);
 
         // then
         tokenManagementService.expireAccessToken(accessToken);
@@ -82,7 +82,7 @@ class TokenManagementServiceTest {
 
         // when
         when(jwtTokenProvider.validateRefreshToken(refreshToken)).thenReturn(true);
-        when(invalidRefreshTokenRepository.exist(refreshToken)).thenReturn(false);
+        when(invalidRefreshTokenRepository.existsById(any())).thenReturn(false);
 
         // then
         tokenManagementService.expireRefreshToken(refreshToken);
@@ -112,7 +112,7 @@ class TokenManagementServiceTest {
 
         // when
         when(jwtTokenProvider.validateRefreshToken(refreshToken)).thenReturn(true);
-        when(invalidRefreshTokenRepository.exist(refreshToken)).thenReturn(true);
+        when(invalidRefreshTokenRepository.existsById(any())).thenReturn(true);
 
         // then
         tokenManagementService.expireRefreshToken(refreshToken);

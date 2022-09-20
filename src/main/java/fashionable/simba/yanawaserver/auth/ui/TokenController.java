@@ -48,7 +48,7 @@ public class TokenController {
 
     @PostMapping("expire/refresh")
     @Secured(value = {"ROLE_ADMIN", "ROLE_MEMBER", "ROLE_TEST"})
-    public ResponseEntity<Void> expireRefresh(@AuthenticationPrincipal AuthorizationRefreshToken refreshToken) {
+    public ResponseEntity<Void> expireRefresh(@RequestBody AuthorizationRefreshToken refreshToken) {
         tokenManagementService.expireRefreshToken(refreshToken.getRefreshToken());
         return ResponseEntity.ok().build();
     }

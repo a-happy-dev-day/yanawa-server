@@ -89,20 +89,20 @@ public class AuthSteps {
 
     public static ExtractableResponse<Response> 액세스_토큰_만료_요청(String accessToken) {
         Map<String, String> params = new HashMap<>();
-        params.put("AccessToken", accessToken);
+        params.put("accessToken", accessToken);
 
         return RestAssured.given().log().all()
             .auth().oauth2(accessToken)
             .body(params)
             .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .when().post("/token/expire/refresh")
+            .when().post("/token/expire/access")
             .then().log().all()
             .extract();
     }
 
-    public static ExtractableResponse<Response> 리프레시_토큰_요청(String refreshToken, String accessToken) {
+    public static ExtractableResponse<Response> 리프레시_토큰_만료_요청(String refreshToken, String accessToken) {
         Map<String, String> params = new HashMap<>();
-        params.put("RefreshToken", refreshToken);
+        params.put("refreshToken", refreshToken);
 
         return RestAssured.given().log().all()
             .auth().oauth2(accessToken)

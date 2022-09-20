@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import static fashionable.simba.yanawaserver.acceptance.AuthSteps.PASSWORD_ADMIN;
 import static fashionable.simba.yanawaserver.acceptance.AuthSteps.로그인_요청;
 import static fashionable.simba.yanawaserver.acceptance.AuthSteps.로그인_코드_발급;
-import static fashionable.simba.yanawaserver.acceptance.AuthSteps.리프레시_토큰_요청;
+import static fashionable.simba.yanawaserver.acceptance.AuthSteps.리프레시_토큰_만료_요청;
 import static fashionable.simba.yanawaserver.acceptance.AuthSteps.액세스_토큰_만료_요청;
 import static fashionable.simba.yanawaserver.acceptance.AuthSteps.코드_재갱신_요청;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -63,7 +63,7 @@ public class TokenAcceptanceTest extends AcceptanceTest {
         String refreshToken = response.jsonPath().getString("refreshToken");
 
         // when
-        ExtractableResponse<Response> 리프레시_토큰_요청 = 리프레시_토큰_요청(refreshToken, accessToken);
+        ExtractableResponse<Response> 리프레시_토큰_요청 = 리프레시_토큰_만료_요청(refreshToken, accessToken);
         ExtractableResponse<Response> 액세스_토큰_만료_요청 = 액세스_토큰_만료_요청(accessToken);
 
         // then
@@ -108,7 +108,7 @@ public class TokenAcceptanceTest extends AcceptanceTest {
         String refreshToken = response.jsonPath().getString("refreshToken");
 
         // when
-        ExtractableResponse<Response> 리프레시_토큰_요청 = 리프레시_토큰_요청(refreshToken, accessToken);
+        ExtractableResponse<Response> 리프레시_토큰_요청 = 리프레시_토큰_만료_요청(refreshToken, accessToken);
 
         // then
         assertThat(리프레시_토큰_요청.statusCode()).isEqualTo(HttpStatus.OK.value());

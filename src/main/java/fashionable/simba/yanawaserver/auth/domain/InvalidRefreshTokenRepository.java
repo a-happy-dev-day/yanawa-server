@@ -1,7 +1,7 @@
 package fashionable.simba.yanawaserver.auth.domain;
 
 public interface InvalidRefreshTokenRepository {
-    boolean exist(String accessToken);
+    boolean existsById(String refreshToken);
 
-    void save(String accessToken);
+    InvalidRefreshToken save(InvalidRefreshToken refreshToken);
 }

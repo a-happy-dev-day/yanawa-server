@@ -32,10 +32,15 @@ public class ExpiredDocumentation extends Documentation {
 
     @Test
     void accessToken_expired() {
+        Map<String, String> params = new HashMap<>();
+        params.put("accessToken", accessToken);
+
         givenOauth()
             .filter(document("expired/access",
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint())))
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .body(params)
             .when().post("/token/expire/access")
             .then().log().all()
             .statusCode(HttpStatus.OK.value())
@@ -44,10 +49,15 @@ public class ExpiredDocumentation extends Documentation {
 
     @Test
     void refreshToken_expired() {
+        Map<String, String> params = new HashMap<>();
+        params.put("refreshToken", refreshToken);
+
         givenOauth()
             .filter(document("expired/refresh",
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint())))
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .body(params)
             .when().post("/token/expire/refresh")
             .then().log().all()
             .statusCode(HttpStatus.OK.value())

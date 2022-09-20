@@ -11,10 +11,10 @@ import fashionable.simba.yanawaserver.global.filter.handler.DefaultAuthenticatio
 import fashionable.simba.yanawaserver.global.filter.handler.DefaultAuthenticationSuccessHandler;
 import fashionable.simba.yanawaserver.global.filter.handler.TokenAuthenticationFailureHandler;
 import fashionable.simba.yanawaserver.global.filter.handler.TokenAuthenticationSuccessHandler;
-import fashionable.simba.yanawaserver.global.jwt.provider.AuthenticationTokenProvider;
-import fashionable.simba.yanawaserver.global.jwt.provider.AuthorizationManager;
-import fashionable.simba.yanawaserver.global.jwt.provider.AuthorizationTokenProvider;
-import fashionable.simba.yanawaserver.global.jwt.provider.JwtTokenProvider;
+import fashionable.simba.yanawaserver.global.provider.AuthenticationTokenProvider;
+import fashionable.simba.yanawaserver.global.provider.AuthorizationManager;
+import fashionable.simba.yanawaserver.global.provider.AuthorizationTokenProvider;
+import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.global.jwt.provider;
+package fashionable.simba.yanawaserver.global.provider;
 
 import org.apache.logging.log4j.util.Strings;
 

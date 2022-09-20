@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.global.jwt.provider;
+package fashionable.simba.yanawaserver.global.provider;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;

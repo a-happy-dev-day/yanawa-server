@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.global.jwt.token;
+package fashionable.simba.yanawaserver.global.token;
 
 import java.util.Objects;
 

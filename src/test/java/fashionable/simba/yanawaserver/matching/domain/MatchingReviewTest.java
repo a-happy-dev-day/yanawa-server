@@ -12,14 +12,14 @@ class MatchingReviewTest {
     @DisplayName("매칭후기 생성 테스트")
     void review_생성_Test() {
         MatchingReview matchingReview = new MatchingReview(
-                1L,
-                2L,
-                "매칭 후기 테스트입니다."
+            1L,
+            2L,
+            "매칭 후기 테스트입니다."
         );
         assertAll(
-                () -> Assertions.assertEquals(1L, matchingReview.getWriterId()),
-                () -> Assertions.assertEquals(2L, matchingReview.getPartnerId()),
-                () -> Assertions.assertEquals("매칭 후기 테스트입니다.", matchingReview.getDetails())
+            () -> Assertions.assertEquals(1L, matchingReview.getWriterId()),
+            () -> Assertions.assertEquals(2L, matchingReview.getPartnerId()),
+            () -> Assertions.assertEquals("매칭 후기 테스트입니다.", matchingReview.getDetails())
         );
     }
 
@@ -27,12 +27,12 @@ class MatchingReviewTest {
     @DisplayName("작성자나 파트너의 정보가 잘못 입력 되었을 경우, NoPlayerDataException이 발생한다.")
     void 리뷰_실패_테스트() {
         assertAll(
-                () -> Assertions.assertThrows(NoPlayerDataException.class, () ->
-                        new MatchingReview(null, 1L, "리뷰작성테스트")),
-                () -> Assertions.assertThrows(NoPlayerDataException.class, () ->
-                        new MatchingReview(1L, null, "리뷰작성테스트")),
-                () -> Assertions.assertThrows(NoPlayerDataException.class, () ->
-                        new MatchingReview(null, null, "리뷰작성테스트"))
+            () -> Assertions.assertThrows(NoPlayerDataException.class, () ->
+                new MatchingReview(null, 1L, "리뷰작성테스트")),
+            () -> Assertions.assertThrows(NoPlayerDataException.class, () ->
+                new MatchingReview(1L, null, "리뷰작성테스트")),
+            () -> Assertions.assertThrows(NoPlayerDataException.class, () ->
+                new MatchingReview(null, null, "리뷰작성테스트"))
         );
     }
 }

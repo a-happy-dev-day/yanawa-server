@@ -1,6 +1,5 @@
-package fashionable.simba.yanawaserver.auth.dto;
+package fashionable.simba.yanawaserver.auth.kakao;
 
-import fashionable.simba.yanawaserver.auth.dto.KakaoUserInfo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

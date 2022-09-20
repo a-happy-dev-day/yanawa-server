@@ -34,17 +34,17 @@ class RecruitmentServiceTest {
     @DisplayName("모집을 생성한다.")
     void create_recuitment() {
         Recruitment recruitment = new Recruitment(
-                1L,
-                new Level(4.0),
-                new Level(1.5),
-                AgeGroupType.TWENTIES,
-                GenderType.NONE,
-                PreferenceType.RALLY,
-                3,
-                2.0,
-                AnnualType.FIVE_YEARS_LESS,
-                "4명이서 랠리해요~",
-                RecruitmentStatusType.OPENING
+            1L,
+            new Level(4.0),
+            new Level(1.5),
+            AgeGroupType.TWENTIES,
+            GenderType.NONE,
+            PreferenceType.RALLY,
+            3,
+            2.0,
+            AnnualType.FIVE_YEARS_LESS,
+            "4명이서 랠리해요~",
+            RecruitmentStatusType.OPENING
         );
 
         Recruitment savedRecruitment = recruitmentService.createRecruitment(recruitment);
@@ -57,24 +57,24 @@ class RecruitmentServiceTest {
     void completeRecritument_test() {
         //given
         Recruitment recruitment = new Recruitment(
-                1L,
-                new Level(4.0),
-                new Level(1.5),
-                AgeGroupType.TWENTIES,
-                GenderType.NONE,
-                PreferenceType.RALLY,
-                3,
-                2.0,
-                AnnualType.FIVE_YEARS_LESS,
-                "4명이서 랠리해요~",
-                RecruitmentStatusType.OPENING
+            1L,
+            new Level(4.0),
+            new Level(1.5),
+            AgeGroupType.TWENTIES,
+            GenderType.NONE,
+            PreferenceType.RALLY,
+            3,
+            2.0,
+            AnnualType.FIVE_YEARS_LESS,
+            "4명이서 랠리해요~",
+            RecruitmentStatusType.OPENING
         );
         Participation participation = new Participation(
-                1L,
-                1L,
-                1L,
-                LocalDateTime.of(2022, 9, 1, 18, 0),
-                ParticipationStatusType.WAITING
+            1L,
+            1L,
+            1L,
+            LocalDateTime.of(2022, 9, 1, 18, 0),
+            ParticipationStatusType.WAITING
         );
         participationRepository.save(participation);
         //when
@@ -88,17 +88,17 @@ class RecruitmentServiceTest {
     @DisplayName("모집을 매칭아이디로 검색한다.")
     void find_recruitment_test() {
         Recruitment recruitment = new Recruitment(
-                1L,
-                new Level(4.0),
-                new Level(1.5),
-                AgeGroupType.TWENTIES,
-                GenderType.NONE,
-                PreferenceType.RALLY,
-                3,
-                2.0,
-                AnnualType.FIVE_YEARS_LESS,
-                "4명이서 랠리해요~",
-                RecruitmentStatusType.OPENING
+            1L,
+            new Level(4.0),
+            new Level(1.5),
+            AgeGroupType.TWENTIES,
+            GenderType.NONE,
+            PreferenceType.RALLY,
+            3,
+            2.0,
+            AnnualType.FIVE_YEARS_LESS,
+            "4명이서 랠리해요~",
+            RecruitmentStatusType.OPENING
         );
         Recruitment save = recruitmentService.createRecruitment(recruitment);
         assertThat(recruitmentRepository.findRecruitmentByMatchingId(1L).orElseThrow()).isEqualTo(save);
@@ -108,17 +108,17 @@ class RecruitmentServiceTest {
     @DisplayName("모집을 종료할때 참가자가 없으면 IllegalArgumentException 발생한다.")
     void completeRecritument_thorw_exception_test() {
         Recruitment recruitment = new Recruitment(
-                1L,
-                new Level(4.0),
-                new Level(1.5),
-                AgeGroupType.TWENTIES,
-                GenderType.NONE,
-                PreferenceType.RALLY,
-                3,
-                2.0,
-                AnnualType.FIVE_YEARS_LESS,
-                "4명이서 랠리해요~",
-                RecruitmentStatusType.OPENING
+            1L,
+            new Level(4.0),
+            new Level(1.5),
+            AgeGroupType.TWENTIES,
+            GenderType.NONE,
+            PreferenceType.RALLY,
+            3,
+            2.0,
+            AnnualType.FIVE_YEARS_LESS,
+            "4명이서 랠리해요~",
+            RecruitmentStatusType.OPENING
         );
         Recruitment savedRecruitment = recruitmentService.createRecruitment(recruitment);
         Long savedRecruitmentId = savedRecruitment.getId();

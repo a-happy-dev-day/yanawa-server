@@ -20,7 +20,7 @@ public class MatchingReview {
     }
 
     public MatchingReview(Long writerId, Long partnerId, String details) {
-        if(writerId == null || partnerId == null) {
+        if (writerId == null || partnerId == null) {
             throw new NoPlayerDataException("사용자 정보가 없어 리뷰를 작성할 수 없습니다.");
         }
         this.writerId = writerId;

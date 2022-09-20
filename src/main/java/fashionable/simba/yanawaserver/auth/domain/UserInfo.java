@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.global.filter;
+package fashionable.simba.yanawaserver.auth.domain;
 
 public interface UserInfo {
     Long getId();

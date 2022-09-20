@@ -1,9 +1,9 @@
-package fashionable.simba.yanawaserver.auth.dto;
+package fashionable.simba.yanawaserver.auth.kakao;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import fashionable.simba.yanawaserver.global.filter.UserInfo;
+import fashionable.simba.yanawaserver.auth.domain.UserInfo;
 
 import java.util.Map;
 

@@ -24,12 +24,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class LoginController {
+public class AuthController {
     private final KakaoAuthenticationService kakaoAuthenticationService;
     private final UserDetailsService userDetailsService;
     private final JwtTokenProvider jwtTokenProvider;
 
-    public LoginController(KakaoAuthenticationService kakaoAuthenticationService, UserDetailsService userDetailsService, JwtTokenProvider jwtTokenProvider) {
+    public AuthController(KakaoAuthenticationService kakaoAuthenticationService, UserDetailsService userDetailsService, JwtTokenProvider jwtTokenProvider) {
         this.kakaoAuthenticationService = kakaoAuthenticationService;
         this.userDetailsService = userDetailsService;
         this.jwtTokenProvider = jwtTokenProvider;

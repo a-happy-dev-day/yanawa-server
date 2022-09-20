@@ -27,7 +27,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class LoginControllerTest {
-    private LoginController loginController;
+    private AuthController loginController;
     @Mock
     private KakaoAuthenticationService kakaoAuthenticationService;
     @Mock
@@ -36,7 +36,7 @@ class LoginControllerTest {
 
     @BeforeEach
     void setUp() {
-        loginController = new LoginController(kakaoAuthenticationService, userDetailsService, jwtTokenProvider);
+        loginController = new AuthController(kakaoAuthenticationService, userDetailsService, jwtTokenProvider);
     }
 
     @Test

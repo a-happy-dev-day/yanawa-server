@@ -1,5 +1,7 @@
 package fashionable.simba.yanawaserver.global.provider;
 
+import fashionable.simba.yanawaserver.global.provider.AuthorizationExtractor;
+import fashionable.simba.yanawaserver.global.provider.AuthorizationType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

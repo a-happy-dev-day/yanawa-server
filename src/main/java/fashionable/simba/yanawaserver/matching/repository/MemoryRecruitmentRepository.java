@@ -4,9 +4,12 @@ import fashionable.simba.yanawaserver.matching.domain.Recruitment;
 import fashionable.simba.yanawaserver.matching.domain.repository.RecruitmentRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 public class MemoryRecruitmentRepository implements RecruitmentRepository {
@@ -45,8 +48,8 @@ public class MemoryRecruitmentRepository implements RecruitmentRepository {
     }
 
     @Override
-    public Optional<Recruitment> findRecruitmentByMatchingId(Long matchingId) {
-        return recruitments.values().stream().filter(x -> x.getMatchingId().equals(matchingId)).findAny();
+    public List<Recruitment> findRecruitmentByMatchingId(Long matchingId) {
+        return recruitments.values().stream().filter(x -> x.getMatchingId().equals(matchingId)).collect(Collectors.toList());
     }
 
     private synchronized Long getId() {

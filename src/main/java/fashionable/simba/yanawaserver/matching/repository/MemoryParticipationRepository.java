@@ -1,6 +1,5 @@
 package fashionable.simba.yanawaserver.matching.repository;
 
-import fashionable.simba.yanawaserver.matching.constant.ParticipationStatusType;
 import fashionable.simba.yanawaserver.matching.domain.Participation;
 import fashionable.simba.yanawaserver.matching.domain.repository.ParticipationRepository;
 import org.springframework.stereotype.Repository;

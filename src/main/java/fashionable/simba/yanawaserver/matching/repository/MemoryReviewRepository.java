@@ -36,8 +36,8 @@ public class MemoryReviewRepository implements ReviewRepository {
     @Override
     public Optional<MatchingReview> findByMatchingIdAndWriterIdAndPartnerId(Long mathicngId, Long writerId, Long partnerId) {
         return reviews.values().stream().filter(entry -> Objects.equals(entry.getMatchingId(), mathicngId)
-                        && Objects.equals(entry.getWriterId(), writerId)
-                        && Objects.equals(entry.getPartnerId(), partnerId)).findAny();
+                && Objects.equals(entry.getWriterId(), writerId)
+                && Objects.equals(entry.getPartnerId(), partnerId)).findAny();
     }
 
     private synchronized Long getId() {

@@ -18,6 +18,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -36,19 +37,7 @@ class RecruitmentServiceTest {
     @Test
     @DisplayName("모집을 생성한다.")
     void create_recuitment() {
-        Recruitment recruitment = new Recruitment(
-                1L,
-                new Level(4.0),
-                new Level(1.5),
-                AgeGroupType.TWENTIES,
-                GenderType.NONE,
-                PreferenceType.RALLY,
-                3,
-                2.0,
-                AnnualType.FIVE_YEARS_LESS,
-                "4명이서 랠리해요~",
-                RecruitmentStatusType.OPENING
-        );
+        Recruitment recruitment = getRecruitment();
 
         Recruitment savedRecruitment = recruitmentService.createRecruitment(recruitment);
 
@@ -59,19 +48,7 @@ class RecruitmentServiceTest {
     @DisplayName("진행자가 모집을 완료하면 모집을 완료한다.")
     void completeRecritument_test() {
         //given
-        Recruitment recruitment = new Recruitment(
-                1L,
-                new Level(4.0),
-                new Level(1.5),
-                AgeGroupType.TWENTIES,
-                GenderType.NONE,
-                PreferenceType.RALLY,
-                3,
-                2.0,
-                AnnualType.FIVE_YEARS_LESS,
-                "4명이서 랠리해요~",
-                RecruitmentStatusType.OPENING
-        );
+        Recruitment recruitment = getRecruitment();
         Participation participation = new Participation(
                 1L,
                 1L,
@@ -90,27 +67,25 @@ class RecruitmentServiceTest {
     @Test
     @DisplayName("모집을 매칭아이디로 검색한다.")
     void find_recruitment_test() {
-        Recruitment recruitment = new Recruitment(
-                1L,
-                new Level(4.0),
-                new Level(1.5),
-                AgeGroupType.TWENTIES,
-                GenderType.NONE,
-                PreferenceType.RALLY,
-                3,
-                2.0,
-                AnnualType.FIVE_YEARS_LESS,
-                "4명이서 랠리해요~",
-                RecruitmentStatusType.OPENING
-        );
+        Recruitment recruitment = getRecruitment();
         Recruitment save = recruitmentService.createRecruitment(recruitment);
-        assertThat(recruitmentRepository.findRecruitmentByMatchingId(1L).orElseThrow()).isEqualTo(save);
+
+        assertThat(recruitmentRepository.findRecruitmentByMatchingId(1L)).contains(save);
     }
 
     @Test
     @DisplayName("모집을 종료할때 참가자가 없으면 IllegalArgumentException 발생한다.")
     void completeRecritument_thorw_exception_test() {
-        Recruitment recruitment = new Recruitment(
+        Recruitment recruitment = getRecruitment();
+        Recruitment savedRecruitment = recruitmentService.createRecruitment(recruitment);
+        Long savedRecruitmentId = savedRecruitment.getId();
+        assertThrows(IllegalArgumentException.class, () -> {
+            recruitmentService.completeRecritument(savedRecruitmentId);
+        });
+    }
+
+    private static Recruitment getRecruitment() {
+        return new Recruitment(
                 1L,
                 new Level(4.0),
                 new Level(1.5),
@@ -123,10 +98,5 @@ class RecruitmentServiceTest {
                 "4명이서 랠리해요~",
                 RecruitmentStatusType.OPENING
         );
-        Recruitment savedRecruitment = recruitmentService.createRecruitment(recruitment);
-        Long savedRecruitmentId = savedRecruitment.getId();
-        assertThrows(IllegalArgumentException.class, () -> {
-            recruitmentService.completeRecritument(savedRecruitmentId);
-        });
     }
 }

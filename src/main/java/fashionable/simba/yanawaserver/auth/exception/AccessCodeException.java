@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.auth.ui;
+package fashionable.simba.yanawaserver.auth.exception;
 
 public class AccessCodeException extends RuntimeException {
     public AccessCodeException(String message) {

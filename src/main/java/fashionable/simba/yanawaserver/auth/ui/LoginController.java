@@ -1,7 +1,8 @@
 package fashionable.simba.yanawaserver.auth.ui;
 
-import fashionable.simba.yanawaserver.auth.dto.LoginRequest;
-import fashionable.simba.yanawaserver.auth.dto.TokenRequest;
+import fashionable.simba.yanawaserver.auth.exception.AccessCodeException;
+import fashionable.simba.yanawaserver.auth.ui.dto.LoginRequest;
+import fashionable.simba.yanawaserver.auth.ui.dto.TokenRequest;
 import fashionable.simba.yanawaserver.auth.kakao.KakaoAuthenticationService;
 import fashionable.simba.yanawaserver.global.authorization.AuthenticationPrincipal;
 import fashionable.simba.yanawaserver.global.authorization.secured.Secured;

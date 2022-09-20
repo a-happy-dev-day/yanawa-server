@@ -1,5 +1,6 @@
 package fashionable.simba.yanawaserver.auth.domain;
 
+import fashionable.simba.yanawaserver.global.domain.AuthenticationCode;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.DisplayName;

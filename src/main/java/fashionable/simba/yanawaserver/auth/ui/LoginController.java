@@ -1,17 +1,17 @@
 package fashionable.simba.yanawaserver.auth.ui;
 
-import fashionable.simba.yanawaserver.auth.authorization.AuthenticationPrincipal;
-import fashionable.simba.yanawaserver.auth.authorization.secured.Secured;
-import fashionable.simba.yanawaserver.auth.domain.AuthorizationAccessToken;
-import fashionable.simba.yanawaserver.auth.domain.AuthorizationRefreshToken;
+import fashionable.simba.yanawaserver.global.authorization.AuthenticationPrincipal;
+import fashionable.simba.yanawaserver.global.authorization.secured.Secured;
+import fashionable.simba.yanawaserver.global.domain.AuthorizationAccessToken;
+import fashionable.simba.yanawaserver.global.domain.AuthorizationRefreshToken;
 import fashionable.simba.yanawaserver.auth.dto.LoginRequest;
 import fashionable.simba.yanawaserver.auth.dto.TokenRequest;
 import fashionable.simba.yanawaserver.auth.kakao.KakaoAuthenticationService;
-import fashionable.simba.yanawaserver.auth.provider.AuthenticationException;
-import fashionable.simba.yanawaserver.auth.provider.JwtTokenProvider;
-import fashionable.simba.yanawaserver.auth.userdetails.User;
-import fashionable.simba.yanawaserver.auth.userdetails.UserDetails;
-import fashionable.simba.yanawaserver.auth.userdetails.UserDetailsService;
+import fashionable.simba.yanawaserver.global.provider.AuthenticationException;
+import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
+import fashionable.simba.yanawaserver.global.userdetails.User;
+import fashionable.simba.yanawaserver.global.userdetails.UserDetails;
+import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;
 import fashionable.simba.yanawaserver.members.domain.KakaoMember;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

@@ -3,7 +3,7 @@ package fashionable.simba.yanawaserver.auth.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import fashionable.simba.yanawaserver.auth.filter.UserInfo;
+import fashionable.simba.yanawaserver.global.filter.UserInfo;
 
 import java.util.Map;
 

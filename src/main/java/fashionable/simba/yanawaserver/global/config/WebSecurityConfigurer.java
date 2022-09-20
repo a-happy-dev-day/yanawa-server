@@ -1,0 +1,113 @@
+package fashionable.simba.yanawaserver.global.config;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import fashionable.simba.yanawaserver.global.authorization.AuthenticationPrincipalArgumentResolver;
+import fashionable.simba.yanawaserver.global.authorization.secured.SecuredAnnotationChecker;
+import fashionable.simba.yanawaserver.global.context.SecurityContextPersistenceFilter;
+import fashionable.simba.yanawaserver.global.filter.ServerTokenAuthenticationFilter;
+import fashionable.simba.yanawaserver.global.filter.ServerTokenAuthorizationFilter;
+import fashionable.simba.yanawaserver.global.handler.AuthenticationFailureHandler;
+import fashionable.simba.yanawaserver.global.handler.DefaultAuthenticationFailureHandler;
+import fashionable.simba.yanawaserver.global.handler.DefaultAuthenticationSuccessHandler;
+import fashionable.simba.yanawaserver.global.handler.TokenAuthenticationFailureHandler;
+import fashionable.simba.yanawaserver.global.handler.TokenAuthenticationSuccessHandler;
+import fashionable.simba.yanawaserver.global.provider.AuthenticationTokenProvider;
+import fashionable.simba.yanawaserver.global.provider.AuthorizationManager;
+import fashionable.simba.yanawaserver.global.provider.AuthorizationTokenProvider;
+import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
+import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.List;
+
+@Configuration
+public class WebSecurityConfigurer implements WebMvcConfigurer {
+    private final String secretKey;
+    private final String refreshKey;
+    private final long validityAccessTokenMilliseconds;
+    private final long validityRefreshTokenMilliseconds;
+    private final UserDetailsService userDetailsService;
+
+    public WebSecurityConfigurer(@Value("${security.jwt.token.secret-key}") String secretKey,
+                                 @Value("${security.jwt.token.refresh-key}") String refreshKey,
+                                 @Value("${security.jwt.token.access.expire-length}") long validityAccessTokenMilliseconds,
+                                 @Value("${security.jwt.token.refresh.expire-length}") long validityRefreshTokenMilliseconds,
+                                 UserDetailsService userDetailsService) {
+        this.secretKey = secretKey;
+        this.refreshKey = refreshKey;
+        this.validityAccessTokenMilliseconds = validityAccessTokenMilliseconds;
+        this.validityRefreshTokenMilliseconds = validityRefreshTokenMilliseconds;
+        this.userDetailsService = userDetailsService;
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new SecurityContextPersistenceFilter());
+        registry.addInterceptor(serverTokenAuthenticationFilter()).addPathPatterns("/login/token");
+        registry.addInterceptor(serverTokenAuthorizationFilter());
+    }
+
+    private ServerTokenAuthorizationFilter serverTokenAuthorizationFilter() {
+        return new ServerTokenAuthorizationFilter(defaultAuthenticationSuccessHandler(), failureHandler(), authorizationTokenProvider());
+    }
+
+    private ServerTokenAuthenticationFilter serverTokenAuthenticationFilter() {
+        return new ServerTokenAuthenticationFilter(tokenAuthenticationSuccessHandler(), loginAuthenticationFailureHandler(), authenticationTokenProvider(), objectMapper());
+    }
+
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+        argumentResolvers.add(new AuthenticationPrincipalArgumentResolver());
+    }
+
+    @Bean
+    ObjectMapper objectMapper() {
+        return new ObjectMapper();
+    }
+
+    @Bean
+    AuthorizationManager authenticationTokenProvider() {
+        return new AuthenticationTokenProvider(jwtTokenProvider(), userDetailsService);
+    }
+
+    @Bean
+    AuthorizationManager authorizationTokenProvider() {
+        return new AuthorizationTokenProvider(jwtTokenProvider());
+    }
+
+    @Bean
+    TokenAuthenticationSuccessHandler tokenAuthenticationSuccessHandler() {
+        return new TokenAuthenticationSuccessHandler(objectMapper(), jwtTokenProvider());
+    }
+
+    @Bean
+    DefaultAuthenticationSuccessHandler defaultAuthenticationSuccessHandler() {
+        return new DefaultAuthenticationSuccessHandler();
+    }
+
+    @Bean
+    AuthenticationFailureHandler failureHandler() {
+        return new DefaultAuthenticationFailureHandler();
+    }
+
+    @Bean
+    TokenAuthenticationFailureHandler loginAuthenticationFailureHandler() {
+        return new TokenAuthenticationFailureHandler();
+    }
+
+    @Bean
+    JwtTokenProvider jwtTokenProvider() {
+        return new JwtTokenProvider(secretKey, refreshKey, validityRefreshTokenMilliseconds, validityAccessTokenMilliseconds);
+    }
+
+    @Bean
+    SecuredAnnotationChecker securedAnnotationChecker() {
+        return new SecuredAnnotationChecker();
+    }
+
+}

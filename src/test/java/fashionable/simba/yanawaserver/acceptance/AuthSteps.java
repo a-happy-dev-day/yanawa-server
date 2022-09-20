@@ -3,13 +3,12 @@ package fashionable.simba.yanawaserver.acceptance;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class MemberSteps {
+public class AuthSteps {
     public static final String PASSWORD_ADMIN = "password-admin";
 
     public static String 로그인_코드_발급(String username, String password) {
@@ -83,6 +82,33 @@ public class MemberSteps {
             .body(params)
             .contentType(MediaType.APPLICATION_JSON_VALUE)
             .when().post("token/refresh")
+            .then().log().all()
+            .extract();
+    }
+
+
+    public static ExtractableResponse<Response> 액세스_토큰_만료_요청(String accessToken) {
+        Map<String, String> params = new HashMap<>();
+        params.put("AccessToken", accessToken);
+
+        return RestAssured.given().log().all()
+            .auth().oauth2(accessToken)
+            .body(params)
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .when().post("/token/expire/refresh")
+            .then().log().all()
+            .extract();
+    }
+
+    public static ExtractableResponse<Response> 리프레시_토큰_요청(String refreshToken, String accessToken) {
+        Map<String, String> params = new HashMap<>();
+        params.put("RefreshToken", refreshToken);
+
+        return RestAssured.given().log().all()
+            .auth().oauth2(accessToken)
+            .body(params)
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .when().post("/token/expire/refresh")
             .then().log().all()
             .extract();
     }

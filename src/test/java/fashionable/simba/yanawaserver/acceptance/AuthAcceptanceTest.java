@@ -5,15 +5,14 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
-import static fashionable.simba.yanawaserver.acceptance.MemberSteps.PASSWORD_ADMIN;
-import static fashionable.simba.yanawaserver.acceptance.MemberSteps.로그인_되어_있음;
-import static fashionable.simba.yanawaserver.acceptance.MemberSteps.로그인_발급_요청;
-import static fashionable.simba.yanawaserver.acceptance.MemberSteps.로그인_요청;
-import static fashionable.simba.yanawaserver.acceptance.MemberSteps.로그인_코드_발급;
-import static fashionable.simba.yanawaserver.acceptance.MemberSteps.미인증_사용자_정보_조회_요청;
-import static fashionable.simba.yanawaserver.acceptance.MemberSteps.정보_조회_요청;
-import static fashionable.simba.yanawaserver.acceptance.MemberSteps.코드_재갱신_요청;
-import static fashionable.simba.yanawaserver.acceptance.MemberSteps.회원_목록_조회_요청;
+import static fashionable.simba.yanawaserver.acceptance.AuthSteps.PASSWORD_ADMIN;
+import static fashionable.simba.yanawaserver.acceptance.AuthSteps.로그인_되어_있음;
+import static fashionable.simba.yanawaserver.acceptance.AuthSteps.로그인_발급_요청;
+import static fashionable.simba.yanawaserver.acceptance.AuthSteps.로그인_요청;
+import static fashionable.simba.yanawaserver.acceptance.AuthSteps.로그인_코드_발급;
+import static fashionable.simba.yanawaserver.acceptance.AuthSteps.미인증_사용자_정보_조회_요청;
+import static fashionable.simba.yanawaserver.acceptance.AuthSteps.정보_조회_요청;
+import static fashionable.simba.yanawaserver.acceptance.AuthSteps.회원_목록_조회_요청;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class AuthAcceptanceTest extends AcceptanceTest {

@@ -36,7 +36,7 @@ public class ExpiredDocumentation extends Documentation {
             .filter(document("expired/access",
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint())))
-            .when().get("/token/access/expired")
+            .when().post("/token/expire/access")
             .then().log().all()
             .statusCode(HttpStatus.OK.value())
             .extract();
@@ -48,7 +48,7 @@ public class ExpiredDocumentation extends Documentation {
             .filter(document("expired/refresh",
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint())))
-            .when().get("/token/refresh/expired")
+            .when().post("/token/expire/refresh")
             .then().log().all()
             .statusCode(HttpStatus.OK.value())
             .extract();

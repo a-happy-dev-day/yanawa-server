@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ReviewRepositoryTest {
     ReviewRepository reviewRepository;
@@ -39,8 +40,14 @@ class ReviewRepositoryTest {
         MatchingReview review = new MatchingReview(1L, 1L, 1L, 2L, "리뷰테스트");
         Long savedReviewId = reviewRepository.save(review).getId();
 
-        assertThat(reviewRepository.findByMatchingIdAndWriterIdAndPartnerId(1L, 1L, 2L).orElseThrow().getId())
-                .isEqualTo(savedReviewId);
+        assertAll(
+                () -> assertThat(reviewRepository.findByMatchingIdAndWriterIdAndPartnerId(1L, 1L, 2L).orElseThrow().getId())
+                        .isEqualTo(savedReviewId),
+                () -> assertTrue(reviewRepository.findByMatchingIdAndWriterIdAndPartnerId(2L, 1L, 2L).isEmpty()),
+                () -> assertTrue(reviewRepository.findByMatchingIdAndWriterIdAndPartnerId(1L, 2L, 2L).isEmpty()),
+                () -> assertTrue(reviewRepository.findByMatchingIdAndWriterIdAndPartnerId(1L, 1L, 3L).isEmpty())
+        );
+
     }
 
 }

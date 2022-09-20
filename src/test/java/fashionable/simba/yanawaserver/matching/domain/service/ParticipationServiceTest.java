@@ -20,6 +20,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
 import java.time.LocalDateTime;
+import java.util.NoSuchElementException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -55,11 +56,15 @@ class ParticipationServiceTest {
     @DisplayName("참여요청에 대한 모집이 종료되었을 경우, IllegalArgumentExceptiond이 발생한다.")
     @Test
     void closedRecruitment_to_participation_test() {
-        Participation participation = getParticipation(1L, 2L);
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            participationService.createParticipation(participation);
-        });
+        assertAll(
+                () -> assertThrows(IllegalArgumentException.class, () -> {
+                    participationService.createParticipation(getParticipation(1L, 2L));
+                }),
+                () -> assertThrows(IllegalArgumentException.class, () -> {
+                    participationService.createParticipation(getParticipation(1L, 3L));
+                })
+        );
     }
 
     @DisplayName("참여요청에 대해 해당 모집에 승인, 거절 이력이 있다면, IllegalArgumentExceptiond이 발생한다.")
@@ -134,5 +139,9 @@ class ParticipationServiceTest {
 
     private static Participation getParticipation(Long userId, Long recruitmentId) {
         return new Participation(userId, recruitmentId, LocalDateTime.of(2022, 9, 1, 12, 0), ParticipationStatusType.WAITING);
+    }
+
+    private static Participation getParticipationStatus(Long userId, Long recruitmentId, ParticipationStatusType status) {
+        return new Participation(userId, recruitmentId, LocalDateTime.of(2022, 9, 1, 12, 0), status);
     }
 }

@@ -17,13 +17,13 @@ public class MemoryMatchingRepository implements MatchingRepository {
     public Matching save(Matching matching) {
         Long id = getId();
         Matching save = new Matching(
-                id,
-                matching.getHostId(),
-                matching.getCourtId(),
-                matching.getDate(),
-                matching.getStartTime(),
-                matching.getEndTime(),
-                matching.getStatus()
+            id,
+            matching.getHostId(),
+            matching.getCourtId(),
+            matching.getDate(),
+            matching.getStartTime(),
+            matching.getEndTime(),
+            matching.getStatus()
         );
         matchings.put(id, save);
         return save;

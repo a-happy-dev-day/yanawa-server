@@ -108,6 +108,6 @@ public class Recruitment {
 
     public Recruitment(Long matchingId, Level maximumLevel, Level minimumLevel, AgeGroupType ageOfRecruitment, GenderType sexOfRecruitment, PreferenceType preferenceGame, Integer numberOfRecruitment, Double costOfCourtPerPerson, AnnualType annual, String details, RecruitmentStatusType status) {
         this(null, matchingId, maximumLevel, minimumLevel, ageOfRecruitment, sexOfRecruitment,
-                preferenceGame, numberOfRecruitment, costOfCourtPerPerson, annual, details, status);
+            preferenceGame, numberOfRecruitment, costOfCourtPerPerson, annual, details, status);
     }
 }

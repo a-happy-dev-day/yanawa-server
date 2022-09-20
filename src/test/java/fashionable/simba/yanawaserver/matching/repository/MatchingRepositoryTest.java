@@ -26,13 +26,13 @@ class MatchingRepositoryTest {
     @Test
     void saveTest() {
         Matching matching = new Matching(
-                1L,
-                1L,
-                LocalDate.of(2022, 9, 3),
-                LocalTime.of(18, 0, 0),
-                LocalTime.of(20, 0, 0),
-                MatchingStatusType.WAITING
-                );
+            1L,
+            1L,
+            LocalDate.of(2022, 9, 3),
+            LocalTime.of(18, 0, 0),
+            LocalTime.of(20, 0, 0),
+            MatchingStatusType.WAITING
+        );
         Long id = matchingRepository.save(matching).getId();
         assertThat(matchingRepository.findMatchingById(id).orElseThrow().getId()).isEqualTo(id);
     }

@@ -28,8 +28,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ParticipationServiceTest {
     ParticipationRepository participationRepository = new MemoryParticipationRepository();
-    RecruitmentRepository   recruitmentRepository = new MemoryRecruitmentRepository();
-    ParticipationService    participationService = new ParticipationService(participationRepository, recruitmentRepository);
+    RecruitmentRepository recruitmentRepository = new MemoryRecruitmentRepository();
+    ParticipationService participationService = new ParticipationService(participationRepository, recruitmentRepository);
 
     @BeforeEach
     void setUp() {
@@ -37,10 +37,10 @@ class ParticipationServiceTest {
         recruitmentRepository.clear();
 
         Recruitment openingRecruitment = new Recruitment(1L, new Level(4.0), new Level(1.5), AgeGroupType.TWENTIES, GenderType.NONE,
-                PreferenceType.RALLY, 3, 2.0, AnnualType.FIVE_YEARS_LESS, "4명이서 랠리해요~", RecruitmentStatusType.OPENING);
+            PreferenceType.RALLY, 3, 2.0, AnnualType.FIVE_YEARS_LESS, "4명이서 랠리해요~", RecruitmentStatusType.OPENING);
         recruitmentRepository.save(openingRecruitment);
         Recruitment closedRecruitment = new Recruitment(2L, new Level(4.0), new Level(1.5), AgeGroupType.TWENTIES, GenderType.NONE,
-                PreferenceType.RALLY, 3, 2.0, AnnualType.FIVE_YEARS_LESS, "4명이서 랠리해요~", RecruitmentStatusType.CLOSED);
+            PreferenceType.RALLY, 3, 2.0, AnnualType.FIVE_YEARS_LESS, "4명이서 랠리해요~", RecruitmentStatusType.CLOSED);
         recruitmentRepository.save(closedRecruitment);
     }
 
@@ -58,12 +58,12 @@ class ParticipationServiceTest {
     void closedRecruitment_to_participation_test() {
 
         assertAll(
-                () -> assertThrows(IllegalArgumentException.class, () -> {
-                    participationService.createParticipation(getParticipation(1L, 2L));
-                }),
-                () -> assertThrows(IllegalArgumentException.class, () -> {
-                    participationService.createParticipation(getParticipation(1L, 3L));
-                })
+            () -> assertThrows(IllegalArgumentException.class, () -> {
+                participationService.createParticipation(getParticipation(1L, 2L));
+            }),
+            () -> assertThrows(IllegalArgumentException.class, () -> {
+                participationService.createParticipation(getParticipation(1L, 3L));
+            })
         );
     }
 
@@ -79,12 +79,12 @@ class ParticipationServiceTest {
         participationService.rejectParticipation(save2.getId());
 
         assertAll(
-                () -> assertThrows(IllegalArgumentException.class, () -> {
-                    participationService.createParticipation(participation1);
-                }),
-                () -> assertThrows(IllegalArgumentException.class, () -> {
-                    participationService.createParticipation(participation2);
-                })
+            () -> assertThrows(IllegalArgumentException.class, () -> {
+                participationService.createParticipation(participation1);
+            }),
+            () -> assertThrows(IllegalArgumentException.class, () -> {
+                participationService.createParticipation(participation2);
+            })
         );
 
     }

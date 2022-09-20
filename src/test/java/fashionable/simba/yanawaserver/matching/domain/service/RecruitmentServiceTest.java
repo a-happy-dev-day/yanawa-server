@@ -50,11 +50,11 @@ class RecruitmentServiceTest {
         //given
         Recruitment recruitment = getRecruitment();
         Participation participation = new Participation(
-                1L,
-                1L,
-                1L,
-                LocalDateTime.of(2022, 9, 1, 18, 0),
-                ParticipationStatusType.WAITING
+            1L,
+            1L,
+            1L,
+            LocalDateTime.of(2022, 9, 1, 18, 0),
+            ParticipationStatusType.WAITING
         );
         participationRepository.save(participation);
         //when
@@ -86,17 +86,17 @@ class RecruitmentServiceTest {
 
     private static Recruitment getRecruitment() {
         return new Recruitment(
-                1L,
-                new Level(4.0),
-                new Level(1.5),
-                AgeGroupType.TWENTIES,
-                GenderType.NONE,
-                PreferenceType.RALLY,
-                3,
-                2.0,
-                AnnualType.FIVE_YEARS_LESS,
-                "4명이서 랠리해요~",
-                RecruitmentStatusType.OPENING
+            1L,
+            new Level(4.0),
+            new Level(1.5),
+            AgeGroupType.TWENTIES,
+            GenderType.NONE,
+            PreferenceType.RALLY,
+            3,
+            2.0,
+            AnnualType.FIVE_YEARS_LESS,
+            "4명이서 랠리해요~",
+            RecruitmentStatusType.OPENING
         );
     }
 }

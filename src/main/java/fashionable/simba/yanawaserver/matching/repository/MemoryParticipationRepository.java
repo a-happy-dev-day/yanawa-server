@@ -18,11 +18,11 @@ public class MemoryParticipationRepository implements ParticipationRepository {
     public Participation save(Participation participation) {
         Long id = getId();
         Participation save = new Participation(
-                id,
-                participation.getUserId(),
-                participation.getRecruitmentId(),
-                participation.getRequestDateTime(),
-                participation.getStatus()
+            id,
+            participation.getUserId(),
+            participation.getRecruitmentId(),
+            participation.getRequestDateTime(),
+            participation.getStatus()
         );
         participations.put(id, save);
         return save;
@@ -41,7 +41,7 @@ public class MemoryParticipationRepository implements ParticipationRepository {
     @Override
     public Optional<Participation> findParticipationByUserIdAndRecruitmentId(Long userId, Long recruitmentId) {
         return participations.values().stream().filter(entry -> Objects.equals(entry.getUserId(), userId)
-                && Objects.equals(entry.getRecruitmentId(), recruitmentId)).findFirst();
+            && Objects.equals(entry.getRecruitmentId(), recruitmentId)).findFirst();
     }
 
     @Override

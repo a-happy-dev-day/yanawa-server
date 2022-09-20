@@ -63,13 +63,13 @@ class ReviewServiceTest {
 
     private static Matching getMatching(MatchingStatusType waiting) {
         return new Matching(
-                1L,
-                1L,
-                1L,
-                LocalDate.of(2022, 9, 1),
-                LocalTime.of(18, 0),
-                LocalTime.of(20, 0),
-                waiting
+            1L,
+            1L,
+            1L,
+            LocalDate.of(2022, 9, 1),
+            LocalTime.of(18, 0),
+            LocalTime.of(20, 0),
+            waiting
         );
     }
 }

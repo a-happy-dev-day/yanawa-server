@@ -24,12 +24,12 @@ public class MatchingApplicationService {
 
     public RecruitmentResponse createMatchingAndRecruitment(RecruitmentRequsest requsest) {
         Matching matching = new Matching(
-                requsest.getHostId(),
-                requsest.getCourtId(),
-                requsest.getDate(),
-                requsest.getStartTime(),
-                requsest.getEndTime(),
-                MatchingStatusType.WAITING
+            requsest.getHostId(),
+            requsest.getCourtId(),
+            requsest.getDate(),
+            requsest.getStartTime(),
+            requsest.getEndTime(),
+            MatchingStatusType.WAITING
         );
         boolean isCourtExist = courtRepository.isCourtExist(matching.getCourtId());
         if (!isCourtExist) {
@@ -38,39 +38,39 @@ public class MatchingApplicationService {
         Matching savedMatching = matchingService.createMatching(matching);
 
         Recruitment recruitment = new Recruitment(
-                requsest.getCourtId(),
-                requsest.getMaximumLevel(),
-                requsest.getMinimumLevel(),
-                requsest.getAgeOfRecruitment(),
-                requsest.getSexOfRecruitment(),
-                requsest.getPreferenceGame(),
-                requsest.getNumberOfRecruitment(),
-                requsest.getCostOfCourtPerPerson(),
-                requsest.getAnnual(),
-                requsest.getDetails(),
-                RecruitmentStatusType.OPENING
+            requsest.getCourtId(),
+            requsest.getMaximumLevel(),
+            requsest.getMinimumLevel(),
+            requsest.getAgeOfRecruitment(),
+            requsest.getSexOfRecruitment(),
+            requsest.getPreferenceGame(),
+            requsest.getNumberOfRecruitment(),
+            requsest.getCostOfCourtPerPerson(),
+            requsest.getAnnual(),
+            requsest.getDetails(),
+            RecruitmentStatusType.OPENING
         );
         Recruitment savedRecruitment = recruitmentService.createRecruitment(recruitment);
 
         return new RecruitmentResponse(
-                savedRecruitment.getId(),
-                savedMatching.getId(),
-                savedMatching.getCourtId(),
-                savedMatching.getHostId(),
-                savedMatching.getDate(),
-                savedMatching.getStartTime(),
-                savedMatching.getEndTime(),
-                savedMatching.getStatus(),
-                savedRecruitment.getMaximumLevel(),
-                savedRecruitment.getMinimumLevel(),
-                savedRecruitment.getAgeOfRecruitment(),
-                savedRecruitment.getSexOfRecruitment(),
-                savedRecruitment.getPreferenceGame(),
-                savedRecruitment.getNumberOfRecruitment(),
-                savedRecruitment.getCostOfCourtPerPerson(),
-                savedRecruitment.getAnnual(),
-                savedRecruitment.getDetails(),
-                savedRecruitment.getStatus()
+            savedRecruitment.getId(),
+            savedMatching.getId(),
+            savedMatching.getCourtId(),
+            savedMatching.getHostId(),
+            savedMatching.getDate(),
+            savedMatching.getStartTime(),
+            savedMatching.getEndTime(),
+            savedMatching.getStatus(),
+            savedRecruitment.getMaximumLevel(),
+            savedRecruitment.getMinimumLevel(),
+            savedRecruitment.getAgeOfRecruitment(),
+            savedRecruitment.getSexOfRecruitment(),
+            savedRecruitment.getPreferenceGame(),
+            savedRecruitment.getNumberOfRecruitment(),
+            savedRecruitment.getCostOfCourtPerPerson(),
+            savedRecruitment.getAnnual(),
+            savedRecruitment.getDetails(),
+            savedRecruitment.getStatus()
         );
     }
 }

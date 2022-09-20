@@ -27,10 +27,10 @@ class ReviewRepositoryTest {
 
         Long savedReviewId = savedReciew.getId();
         assertAll(
-                () -> assertThat(reviewRepository.findById(savedReviewId).orElseThrow().getMatchingId()).isEqualTo(1L),
-                () -> assertThat(reviewRepository.findById(savedReviewId).orElseThrow().getWriterId()).isEqualTo(1L),
-                () -> assertThat(reviewRepository.findById(savedReviewId).orElseThrow().getPartnerId()).isEqualTo(2L),
-                () -> assertThat(reviewRepository.findById(savedReviewId).orElseThrow().getDetails()).isEqualTo("리뷰테스트")
+            () -> assertThat(reviewRepository.findById(savedReviewId).orElseThrow().getMatchingId()).isEqualTo(1L),
+            () -> assertThat(reviewRepository.findById(savedReviewId).orElseThrow().getWriterId()).isEqualTo(1L),
+            () -> assertThat(reviewRepository.findById(savedReviewId).orElseThrow().getPartnerId()).isEqualTo(2L),
+            () -> assertThat(reviewRepository.findById(savedReviewId).orElseThrow().getDetails()).isEqualTo("리뷰테스트")
         );
     }
 
@@ -41,11 +41,11 @@ class ReviewRepositoryTest {
         Long savedReviewId = reviewRepository.save(review).getId();
 
         assertAll(
-                () -> assertThat(reviewRepository.findByMatchingIdAndWriterIdAndPartnerId(1L, 1L, 2L).orElseThrow().getId())
-                        .isEqualTo(savedReviewId),
-                () -> assertTrue(reviewRepository.findByMatchingIdAndWriterIdAndPartnerId(2L, 1L, 2L).isEmpty()),
-                () -> assertTrue(reviewRepository.findByMatchingIdAndWriterIdAndPartnerId(1L, 2L, 2L).isEmpty()),
-                () -> assertTrue(reviewRepository.findByMatchingIdAndWriterIdAndPartnerId(1L, 1L, 3L).isEmpty())
+            () -> assertThat(reviewRepository.findByMatchingIdAndWriterIdAndPartnerId(1L, 1L, 2L).orElseThrow().getId())
+                .isEqualTo(savedReviewId),
+            () -> assertTrue(reviewRepository.findByMatchingIdAndWriterIdAndPartnerId(2L, 1L, 2L).isEmpty()),
+            () -> assertTrue(reviewRepository.findByMatchingIdAndWriterIdAndPartnerId(1L, 2L, 2L).isEmpty()),
+            () -> assertTrue(reviewRepository.findByMatchingIdAndWriterIdAndPartnerId(1L, 1L, 3L).isEmpty())
         );
 
     }

@@ -51,24 +51,24 @@ class ApplicationServiceTest {
         RecruitmentResponse response = applicationService.createMatchingAndRecruitment(requsest);
 
         assertAll(
-                () -> assertThat(matchingRepository.findMatchingById(response.getMatchingId()).orElseThrow().getCourtId()).isEqualTo(response.getCourtId()),
-                () -> assertThat(matchingRepository.findMatchingById(response.getMatchingId()).orElseThrow().getHostId()).isEqualTo(response.getHostId()),
-                () -> assertThat(matchingRepository.findMatchingById(response.getMatchingId()).orElseThrow().getDate()).isEqualTo(response.getDate()),
-                () -> assertThat(matchingRepository.findMatchingById(response.getMatchingId()).orElseThrow().getStartTime()).isEqualTo(response.getStartTime()),
-                () -> assertThat(matchingRepository.findMatchingById(response.getMatchingId()).orElseThrow().getEndTime()).isEqualTo(response.getEndTime()),
-                () -> assertThat(matchingRepository.findMatchingById(response.getMatchingId()).orElseThrow().getStatus()).isEqualTo(response.getMatchingStatus()),
+            () -> assertThat(matchingRepository.findMatchingById(response.getMatchingId()).orElseThrow().getCourtId()).isEqualTo(response.getCourtId()),
+            () -> assertThat(matchingRepository.findMatchingById(response.getMatchingId()).orElseThrow().getHostId()).isEqualTo(response.getHostId()),
+            () -> assertThat(matchingRepository.findMatchingById(response.getMatchingId()).orElseThrow().getDate()).isEqualTo(response.getDate()),
+            () -> assertThat(matchingRepository.findMatchingById(response.getMatchingId()).orElseThrow().getStartTime()).isEqualTo(response.getStartTime()),
+            () -> assertThat(matchingRepository.findMatchingById(response.getMatchingId()).orElseThrow().getEndTime()).isEqualTo(response.getEndTime()),
+            () -> assertThat(matchingRepository.findMatchingById(response.getMatchingId()).orElseThrow().getStatus()).isEqualTo(response.getMatchingStatus()),
 
-                () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getMatchingId()).isEqualTo(response.getMatchingId()),
-                () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getMaximumLevel()).isEqualTo(response.getMaximumLevel()),
-                () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getMinimumLevel()).isEqualTo(response.getMinimumLevel()),
-                () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getAgeOfRecruitment()).isEqualTo(response.getAgeOfRecruitment()),
-                () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getSexOfRecruitment()).isEqualTo(response.getSexOfRecruitment()),
-                () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getPreferenceGame()).isEqualTo(response.getPreferenceGame()),
-                () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getNumberOfRecruitment()).isEqualTo(response.getNumberOfRecruitment()),
-                () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getAnnual()).isEqualTo(response.getAnnual()),
-                () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getCostOfCourtPerPerson()).isEqualTo(response.getCostOfCourtPerPerson()),
-                () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getStatus()).isEqualTo(response.getRecruitmentStatus()),
-                () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getDetails()).isEqualTo(response.getDetails())
+            () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getMatchingId()).isEqualTo(response.getMatchingId()),
+            () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getMaximumLevel()).isEqualTo(response.getMaximumLevel()),
+            () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getMinimumLevel()).isEqualTo(response.getMinimumLevel()),
+            () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getAgeOfRecruitment()).isEqualTo(response.getAgeOfRecruitment()),
+            () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getSexOfRecruitment()).isEqualTo(response.getSexOfRecruitment()),
+            () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getPreferenceGame()).isEqualTo(response.getPreferenceGame()),
+            () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getNumberOfRecruitment()).isEqualTo(response.getNumberOfRecruitment()),
+            () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getAnnual()).isEqualTo(response.getAnnual()),
+            () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getCostOfCourtPerPerson()).isEqualTo(response.getCostOfCourtPerPerson()),
+            () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getStatus()).isEqualTo(response.getRecruitmentStatus()),
+            () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getDetails()).isEqualTo(response.getDetails())
         );
     }
 
@@ -84,20 +84,20 @@ class ApplicationServiceTest {
 
     private static RecruitmentRequsest getRequsest(long courtId) {
         return new RecruitmentRequsest(
-                courtId,
-                1L,
-                LocalDate.of(2022, 7, 29),
-                LocalTime.of(19, 0),
-                LocalTime.of(21, 0),
-                new Level(4.0),
-                new Level(1.5),
-                AgeGroupType.TWENTIES,
-                GenderType.NONE,
-                PreferenceType.RALLY,
-                3,
-                2.0,
-                AnnualType.FIVE_YEARS_LESS,
-                "4명이서 랠리해요~"
+            courtId,
+            1L,
+            LocalDate.of(2022, 7, 29),
+            LocalTime.of(19, 0),
+            LocalTime.of(21, 0),
+            new Level(4.0),
+            new Level(1.5),
+            AgeGroupType.TWENTIES,
+            GenderType.NONE,
+            PreferenceType.RALLY,
+            3,
+            2.0,
+            AnnualType.FIVE_YEARS_LESS,
+            "4명이서 랠리해요~"
         );
     }
 }

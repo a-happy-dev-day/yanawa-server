@@ -16,19 +16,19 @@ class ParticipationTest {
     @DisplayName("참가 생성 테스트")
     void 매칭신청_생성_Test() {
         Participation participation = new Participation(
-                1L,
-                1L,
-                1L,
-                LocalDateTime.of(2022, 9, 1, 18, 0),
-                ParticipationStatusType.WAITING
+            1L,
+            1L,
+            1L,
+            LocalDateTime.of(2022, 9, 1, 18, 0),
+            ParticipationStatusType.WAITING
         );
         //
         assertAll(
-                () -> assertThat(participation.getId()).isEqualTo(1L),
-                () -> assertThat(participation.getUserId()).isEqualTo(1L),
-                () -> assertThat(participation.getRecruitmentId()).isEqualTo(1L),
-                () -> assertThat(participation.getRequestDateTime()).isEqualTo(LocalDateTime.of(2022, 9, 1, 18, 0)),
-                () -> assertThat(participation.getStatus()).isEqualTo(ParticipationStatusType.WAITING)
+            () -> assertThat(participation.getId()).isEqualTo(1L),
+            () -> assertThat(participation.getUserId()).isEqualTo(1L),
+            () -> assertThat(participation.getRecruitmentId()).isEqualTo(1L),
+            () -> assertThat(participation.getRequestDateTime()).isEqualTo(LocalDateTime.of(2022, 9, 1, 18, 0)),
+            () -> assertThat(participation.getStatus()).isEqualTo(ParticipationStatusType.WAITING)
         );
     }
 
@@ -37,11 +37,11 @@ class ParticipationTest {
     void 참가상태_변경_테스트() {
         //given
         Participation participation = new Participation(
-                1L,
-                1L,
-                1L,
-                LocalDateTime.of(2022, 9, 1, 18, 0),
-                ParticipationStatusType.WAITING
+            1L,
+            1L,
+            1L,
+            LocalDateTime.of(2022, 9, 1, 18, 0),
+            ParticipationStatusType.WAITING
         );
         //when
         participation.changeAcceptedParticipation();
@@ -55,11 +55,11 @@ class ParticipationTest {
         LocalDateTime dateTime = LocalDateTime.of(2022, 9, 1, 18, 0);
         assertThrows(IllegalArgumentException.class, () -> {
             new Participation(
-                    1L,
-                    1L,
-                    null,
-                    dateTime,
-                    ParticipationStatusType.WAITING
+                1L,
+                1L,
+                null,
+                dateTime,
+                ParticipationStatusType.WAITING
             );
         });
     }

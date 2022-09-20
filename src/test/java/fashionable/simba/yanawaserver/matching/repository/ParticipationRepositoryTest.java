@@ -54,11 +54,11 @@ class ParticipationRepositoryTest {
 
     private static Participation getParticipation() {
         return new Participation(
-                1L,
-                1L,
-                1L,
-                LocalDateTime.of(2022, 9, 1, 18, 0),
-                ParticipationStatusType.WAITING
+            1L,
+            1L,
+            1L,
+            LocalDateTime.of(2022, 9, 1, 18, 0),
+            ParticipationStatusType.WAITING
         );
     }
 }

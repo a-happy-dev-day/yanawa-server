@@ -77,16 +77,4 @@ class AuthDocumentation extends Documentation {
             .statusCode(HttpStatus.OK.value())
             .extract();
     }
-
-    @Test
-    void logout() {
-        givenOauth()
-            .filter(document("member/logout",
-                preprocessRequest(prettyPrint()),
-                preprocessResponse(prettyPrint())))
-            .when().get("/logout")
-            .then().log().all()
-            .statusCode(HttpStatus.OK.value())
-            .extract();
-    }
 }

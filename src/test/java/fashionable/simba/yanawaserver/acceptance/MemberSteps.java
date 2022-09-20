@@ -82,7 +82,7 @@ public class MemberSteps {
         return RestAssured.given().log().all()
             .body(params)
             .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .when().post("/refresh")
+            .when().post("token/refresh")
             .then().log().all()
             .extract();
     }

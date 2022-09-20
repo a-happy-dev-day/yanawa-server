@@ -61,20 +61,4 @@ class AuthDocumentation extends Documentation {
             .extract();
     }
 
-    @Test
-    void refreshToken() {
-        Map<String, String> params = new HashMap<>();
-        params.put("refreshToken", refreshToken);
-
-        givenNotOauth()
-            .filter(document("member/refresh",
-                preprocessRequest(prettyPrint()),
-                preprocessResponse(prettyPrint())))
-            .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .body(params)
-            .when().post("/refresh")
-            .then().log().all()
-            .statusCode(HttpStatus.OK.value())
-            .extract();
-    }
 }

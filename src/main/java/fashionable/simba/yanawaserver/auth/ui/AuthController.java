@@ -80,20 +80,4 @@ public class AuthController {
         return ResponseEntity.ok(new TokenRequest(jwtTokenProvider.createAuthenticationToken(loginRequest.getUsername())));
     }
 
-    @PostMapping("/refresh")
-    public ResponseEntity<AuthorizationAccessToken> refreshToken(@RequestBody AuthorizationRefreshToken refreshToken) {
-        if (!jwtTokenProvider.validateRefreshToken(refreshToken.getRefreshToken())) {
-            throw new AuthenticationException("Invalid Refresh Token");
-        }
-
-        String username = jwtTokenProvider.getPrincipalByRefreshToken(refreshToken.getRefreshToken());
-        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        return ResponseEntity.ok(new AuthorizationAccessToken(jwtTokenProvider.createAuthorizationToken(username, userDetails.getAuthorities())));
-    }
-
-    @GetMapping("logout")
-    @Secured(value = {"ROLE_MEMBER", "ROLE_TEST"})
-    public ResponseEntity<Void> logout(@AuthenticationPrincipal User user) {
-        return ResponseEntity.ok().build();
-    }
 }

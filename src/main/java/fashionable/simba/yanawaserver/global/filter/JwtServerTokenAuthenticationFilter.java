@@ -1,20 +1,20 @@
 package fashionable.simba.yanawaserver.global.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fashionable.simba.yanawaserver.global.domain.AuthenticationCode;
-import fashionable.simba.yanawaserver.global.handler.AuthenticationFailureHandler;
-import fashionable.simba.yanawaserver.global.handler.AuthenticationSuccessHandler;
-import fashionable.simba.yanawaserver.global.provider.AuthenticationToken;
-import fashionable.simba.yanawaserver.global.provider.AuthorizationManager;
+import fashionable.simba.yanawaserver.global.jwt.token.AuthenticationCode;
+import fashionable.simba.yanawaserver.global.filter.handler.AuthenticationFailureHandler;
+import fashionable.simba.yanawaserver.global.filter.handler.AuthenticationSuccessHandler;
+import fashionable.simba.yanawaserver.global.jwt.provider.AuthenticationToken;
+import fashionable.simba.yanawaserver.global.jwt.provider.AuthorizationManager;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
-public class ServerTokenAuthenticationFilter extends AbstractAuthenticationFilter {
+public class JwtServerTokenAuthenticationFilter extends AbstractAuthenticationFilter {
     private final ObjectMapper mapper;
 
-    public ServerTokenAuthenticationFilter(AuthenticationSuccessHandler successHandler, AuthenticationFailureHandler failureHandler, AuthorizationManager authenticationManager, ObjectMapper mapper) {
+    public JwtServerTokenAuthenticationFilter(AuthenticationSuccessHandler successHandler, AuthenticationFailureHandler failureHandler, AuthorizationManager authenticationManager, ObjectMapper mapper) {
         super(successHandler, failureHandler, authenticationManager);
         this.mapper = mapper;
     }

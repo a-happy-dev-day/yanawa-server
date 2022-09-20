@@ -1,15 +1,15 @@
 package fashionable.simba.yanawaserver.auth.ui;
 
 import fashionable.simba.yanawaserver.auth.exception.AccessCodeException;
+import fashionable.simba.yanawaserver.auth.kakao.KakaoAuthenticationService;
 import fashionable.simba.yanawaserver.auth.ui.dto.LoginRequest;
 import fashionable.simba.yanawaserver.auth.ui.dto.TokenRequest;
-import fashionable.simba.yanawaserver.auth.kakao.KakaoAuthenticationService;
 import fashionable.simba.yanawaserver.global.authorization.AuthenticationPrincipal;
 import fashionable.simba.yanawaserver.global.authorization.secured.Secured;
-import fashionable.simba.yanawaserver.global.domain.AuthorizationAccessToken;
-import fashionable.simba.yanawaserver.global.domain.AuthorizationRefreshToken;
-import fashionable.simba.yanawaserver.global.provider.AuthenticationException;
-import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
+import fashionable.simba.yanawaserver.global.jwt.token.AuthorizationAccessToken;
+import fashionable.simba.yanawaserver.global.jwt.token.AuthorizationRefreshToken;
+import fashionable.simba.yanawaserver.global.jwt.provider.AuthenticationException;
+import fashionable.simba.yanawaserver.global.jwt.provider.JwtTokenProvider;
 import fashionable.simba.yanawaserver.global.userdetails.User;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetails;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;

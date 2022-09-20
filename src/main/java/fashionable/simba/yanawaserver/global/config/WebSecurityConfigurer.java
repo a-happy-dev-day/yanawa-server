@@ -4,17 +4,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fashionable.simba.yanawaserver.global.authorization.AuthenticationPrincipalArgumentResolver;
 import fashionable.simba.yanawaserver.global.authorization.secured.SecuredAnnotationChecker;
 import fashionable.simba.yanawaserver.global.context.SecurityContextPersistenceFilter;
-import fashionable.simba.yanawaserver.global.filter.ServerTokenAuthenticationFilter;
-import fashionable.simba.yanawaserver.global.filter.ServerTokenAuthorizationFilter;
-import fashionable.simba.yanawaserver.global.handler.AuthenticationFailureHandler;
-import fashionable.simba.yanawaserver.global.handler.DefaultAuthenticationFailureHandler;
-import fashionable.simba.yanawaserver.global.handler.DefaultAuthenticationSuccessHandler;
-import fashionable.simba.yanawaserver.global.handler.TokenAuthenticationFailureHandler;
-import fashionable.simba.yanawaserver.global.handler.TokenAuthenticationSuccessHandler;
-import fashionable.simba.yanawaserver.global.provider.AuthenticationTokenProvider;
-import fashionable.simba.yanawaserver.global.provider.AuthorizationManager;
-import fashionable.simba.yanawaserver.global.provider.AuthorizationTokenProvider;
-import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
+import fashionable.simba.yanawaserver.global.filter.JwtServerTokenAuthenticationFilter;
+import fashionable.simba.yanawaserver.global.filter.JwtServerTokenAuthorizationFilter;
+import fashionable.simba.yanawaserver.global.filter.handler.AuthenticationFailureHandler;
+import fashionable.simba.yanawaserver.global.filter.handler.DefaultAuthenticationFailureHandler;
+import fashionable.simba.yanawaserver.global.filter.handler.DefaultAuthenticationSuccessHandler;
+import fashionable.simba.yanawaserver.global.filter.handler.TokenAuthenticationFailureHandler;
+import fashionable.simba.yanawaserver.global.filter.handler.TokenAuthenticationSuccessHandler;
+import fashionable.simba.yanawaserver.global.jwt.provider.AuthenticationTokenProvider;
+import fashionable.simba.yanawaserver.global.jwt.provider.AuthorizationManager;
+import fashionable.simba.yanawaserver.global.jwt.provider.AuthorizationTokenProvider;
+import fashionable.simba.yanawaserver.global.jwt.provider.JwtTokenProvider;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -52,12 +52,12 @@ public class WebSecurityConfigurer implements WebMvcConfigurer {
         registry.addInterceptor(serverTokenAuthorizationFilter());
     }
 
-    private ServerTokenAuthorizationFilter serverTokenAuthorizationFilter() {
-        return new ServerTokenAuthorizationFilter(defaultAuthenticationSuccessHandler(), failureHandler(), authorizationTokenProvider());
+    private JwtServerTokenAuthorizationFilter serverTokenAuthorizationFilter() {
+        return new JwtServerTokenAuthorizationFilter(defaultAuthenticationSuccessHandler(), failureHandler(), authorizationTokenProvider());
     }
 
-    private ServerTokenAuthenticationFilter serverTokenAuthenticationFilter() {
-        return new ServerTokenAuthenticationFilter(tokenAuthenticationSuccessHandler(), loginAuthenticationFailureHandler(), authenticationTokenProvider(), objectMapper());
+    private JwtServerTokenAuthenticationFilter serverTokenAuthenticationFilter() {
+        return new JwtServerTokenAuthenticationFilter(tokenAuthenticationSuccessHandler(), loginAuthenticationFailureHandler(), authenticationTokenProvider(), objectMapper());
     }
 
     @Override

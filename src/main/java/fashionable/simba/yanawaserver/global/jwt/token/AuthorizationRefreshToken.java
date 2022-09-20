@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.global.domain;
+package fashionable.simba.yanawaserver.global.jwt.token;
 
 public class AuthorizationRefreshToken {
     private String refreshToken;

@@ -4,7 +4,7 @@ import fashionable.simba.yanawaserver.auth.exception.AccessCodeException;
 import fashionable.simba.yanawaserver.auth.kakao.dto.KakaoAccessToken;
 import fashionable.simba.yanawaserver.auth.ui.dto.TokenRequest;
 import fashionable.simba.yanawaserver.auth.kakao.KakaoAuthenticationService;
-import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
+import fashionable.simba.yanawaserver.global.jwt.provider.JwtTokenProvider;
 import fashionable.simba.yanawaserver.global.userdetails.User;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;
 import fashionable.simba.yanawaserver.members.domain.KakaoMember;

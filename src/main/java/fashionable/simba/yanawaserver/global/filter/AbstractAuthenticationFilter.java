@@ -2,10 +2,10 @@ package fashionable.simba.yanawaserver.global.filter;
 
 import fashionable.simba.yanawaserver.global.context.Authentication;
 import fashionable.simba.yanawaserver.global.context.SecurityContextHolder;
-import fashionable.simba.yanawaserver.global.handler.AuthenticationFailureHandler;
-import fashionable.simba.yanawaserver.global.handler.AuthenticationSuccessHandler;
-import fashionable.simba.yanawaserver.global.provider.AuthenticationToken;
-import fashionable.simba.yanawaserver.global.provider.AuthorizationManager;
+import fashionable.simba.yanawaserver.global.filter.handler.AuthenticationFailureHandler;
+import fashionable.simba.yanawaserver.global.filter.handler.AuthenticationSuccessHandler;
+import fashionable.simba.yanawaserver.global.jwt.provider.AuthenticationToken;
+import fashionable.simba.yanawaserver.global.jwt.provider.AuthorizationManager;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;

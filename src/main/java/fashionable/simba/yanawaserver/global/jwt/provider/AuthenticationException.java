@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.global.provider;
+package fashionable.simba.yanawaserver.global.jwt.provider;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

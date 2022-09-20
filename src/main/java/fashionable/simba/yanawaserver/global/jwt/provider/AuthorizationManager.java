@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.global.provider;
+package fashionable.simba.yanawaserver.global.jwt.provider;
 
 import fashionable.simba.yanawaserver.global.context.Authentication;
 

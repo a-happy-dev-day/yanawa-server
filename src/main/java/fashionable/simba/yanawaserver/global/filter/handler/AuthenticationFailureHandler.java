@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.global.handler;
+package fashionable.simba.yanawaserver.global.filter.handler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -12,7 +12,7 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.pr
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.document;
 
-public class ExpiredDocumentation extends Documentation {
+class ExpiredDocumentation extends Documentation {
     @Test
     void refreshToken() {
         Map<String, String> params = new HashMap<>();

@@ -26,9 +26,13 @@ operation::member/token[snippets='http-request,http-response']
 
 operation::member/refresh[snippets='http-request,http-response']
 
-=== 로그아웃
+=== 액세스 토큰 만료
 
-operation::member/logout[snippets='http-request,http-response']
+operation::expired/access[snippets='http-request,http-response']
+
+=== 리프레시 토큰 만료
+
+operation::expired/refresh[snippets='http-request,http-response']
 
 === 회원 정보 조회
 

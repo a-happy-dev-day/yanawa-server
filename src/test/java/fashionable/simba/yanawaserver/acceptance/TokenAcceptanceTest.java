@@ -10,6 +10,7 @@ import static fashionable.simba.yanawaserver.acceptance.AuthSteps.로그인_요�
 import static fashionable.simba.yanawaserver.acceptance.AuthSteps.로그인_코드_발급;
 import static fashionable.simba.yanawaserver.acceptance.AuthSteps.리프레시_토큰_만료_요청;
 import static fashionable.simba.yanawaserver.acceptance.AuthSteps.액세스_토큰_만료_요청;
+import static fashionable.simba.yanawaserver.acceptance.AuthSteps.정보_조회_요청;
 import static fashionable.simba.yanawaserver.acceptance.AuthSteps.코드_재갱신_요청;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -112,5 +113,50 @@ public class TokenAcceptanceTest extends AcceptanceTest {
 
         // then
         assertThat(리프레시_토큰_요청.statusCode()).isEqualTo(HttpStatus.OK.value());
+    }
+
+    /**
+     * Given 로그인한 사용자는 토큰을 받고
+     * When 토큰을 만료시키면
+     * Then 자신의 정보에 접근할 수 없다.
+     */
+    @Test
+    void invalidAccessToken_accessDenied() {
+        // given
+        String id = getId("admin");
+        String accessCode = 로그인_코드_발급(id, PASSWORD_ADMIN);
+        ExtractableResponse<Response> response = 로그인_요청(accessCode);
+        String accessToken = response.jsonPath().getString("accessToken");
+
+        // when
+        ExtractableResponse<Response> 액세스_토큰_만료_요청 = 액세스_토큰_만료_요청(accessToken);
+        assertThat(액세스_토큰_만료_요청.statusCode()).isEqualTo(HttpStatus.OK.value());
+
+        // then
+        ExtractableResponse<Response> 정보_조회 = 정보_조회_요청(accessToken);
+        assertThat(정보_조회.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
+    }
+
+    /**
+     * Given 로그인한 사용자는 토큰을 받고
+     * When 리프레시 토큰을 만료시키면
+     * Then 토큰을 갱신할 수 없다.
+     */
+    @Test
+    void invalidRefreshToken_accessDenied() {
+        // given
+        String id = getId("admin");
+        String accessCode = 로그인_코드_발급(id, PASSWORD_ADMIN);
+        ExtractableResponse<Response> response = 로그인_요청(accessCode);
+        String accessToken = response.jsonPath().getString("accessToken");
+        String refreshToken = response.jsonPath().getString("refreshToken");
+
+        // when
+        ExtractableResponse<Response> 리프레시_토큰_요청 = 리프레시_토큰_만료_요청(refreshToken, accessToken);
+        assertThat(리프레시_토큰_요청.statusCode()).isEqualTo(HttpStatus.OK.value());
+
+        // then
+        ExtractableResponse<Response> 코드_재갱신_요청 = 코드_재갱신_요청(refreshToken);
+        assertThat(코드_재갱신_요청.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
     }
 }

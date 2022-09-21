@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableFeignClients
-@ConfigurationPropertiesScan("fashionable.simba.yanawaserver.global.config.kakao")
+@ConfigurationPropertiesScan("fashionable.simba.yanawaserver.auth.kakao")
 public class YanawaserverApplication {
 
     public static void main(String[] args) {

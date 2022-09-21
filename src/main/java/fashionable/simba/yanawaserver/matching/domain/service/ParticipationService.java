@@ -21,26 +21,20 @@ public class ParticipationService {
     }
 
     public Participation createParticipation(Participation participation) {
-        Recruitment recruitment = recruitmentRepository.findRecruitmentById(participation.getRecruitmentId())
-            .orElseThrow(() -> new IllegalArgumentException("모집정보가 없습니다."));
+        Recruitment recruitment = recruitmentRepository.findRecruitmentById(participation.getRecruitmentId()).orElseThrow(() -> new IllegalArgumentException("모집정보가 없습니다."));
         if (recruitment.getStatus() == RecruitmentStatusType.CLOSED) {
             throw new IllegalArgumentException("모집이 종료되어 참가요청을 보낼 수 없습니다.");
         }
 
         try {
-            Participation beforeParticipation = participationRepository.findParticipationByUserIdAndRecruitmentId(
-                participation.getUserId(), participation.getRecruitmentId()).orElseThrow();
-            if (beforeParticipation.getStatus() == ParticipationStatusType.ACCEPTED
-                || beforeParticipation.getStatus() == ParticipationStatusType.REJECTED) {
+            Participation beforeParticipation = participationRepository.findParticipationByUserIdAndRecruitmentId(participation.getUserId(), participation.getRecruitmentId()).orElseThrow();
+            if (beforeParticipation.getStatus() == ParticipationStatusType.ACCEPTED || beforeParticipation.getStatus() == ParticipationStatusType.REJECTED) {
                 throw new IllegalArgumentException("이전 참가요청에 대해 승인, 거절에 대하여 재요청을 보낼 수 없습니다.");
             }
         } catch (NoSuchElementException ignored) {
         }
 
-        Participation saveParticipation = new Participation(participation.getUserId(),
-            participation.getRecruitmentId(),
-            participation.getRequestDateTime(),
-            ParticipationStatusType.WAITING);
+        Participation saveParticipation = new Participation(participation.getUserId(), participation.getRecruitmentId(), participation.getRequestDateTime(), ParticipationStatusType.WAITING);
 
         return participationRepository.save(saveParticipation);
     }

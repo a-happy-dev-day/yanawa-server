@@ -15,6 +15,7 @@ import fashionable.simba.yanawaserver.global.provider.AuthenticationTokenProvide
 import fashionable.simba.yanawaserver.global.provider.AuthorizationManager;
 import fashionable.simba.yanawaserver.global.provider.AuthorizationTokenProvider;
 import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
+import fashionable.simba.yanawaserver.global.token.TokenDetailsService;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -32,17 +33,19 @@ public class WebSecurityConfigurer implements WebMvcConfigurer {
     private final long validityAccessTokenMilliseconds;
     private final long validityRefreshTokenMilliseconds;
     private final UserDetailsService userDetailsService;
+    private final TokenDetailsService tokenDetailsService;
 
     public WebSecurityConfigurer(@Value("${security.jwt.token.secret-key}") String secretKey,
                                  @Value("${security.jwt.token.refresh-key}") String refreshKey,
                                  @Value("${security.jwt.token.access.expire-length}") long validityAccessTokenMilliseconds,
                                  @Value("${security.jwt.token.refresh.expire-length}") long validityRefreshTokenMilliseconds,
-                                 UserDetailsService userDetailsService) {
+                                 UserDetailsService userDetailsService, TokenDetailsService tokenDetailsService) {
         this.secretKey = secretKey;
         this.refreshKey = refreshKey;
         this.validityAccessTokenMilliseconds = validityAccessTokenMilliseconds;
         this.validityRefreshTokenMilliseconds = validityRefreshTokenMilliseconds;
         this.userDetailsService = userDetailsService;
+        this.tokenDetailsService = tokenDetailsService;
     }
 
     @Override
@@ -77,7 +80,7 @@ public class WebSecurityConfigurer implements WebMvcConfigurer {
 
     @Bean
     AuthorizationManager authorizationTokenProvider() {
-        return new AuthorizationTokenProvider(jwtTokenProvider());
+        return new AuthorizationTokenProvider(jwtTokenProvider(), tokenDetailsService);
     }
 
     @Bean

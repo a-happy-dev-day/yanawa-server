@@ -1,12 +1,12 @@
 package fashionable.simba.yanawaserver.auth.ui;
 
 import fashionable.simba.yanawaserver.auth.domain.TokenManagementService;
-import fashionable.simba.yanawaserver.global.authorization.AuthenticationPrincipal;
 import fashionable.simba.yanawaserver.global.authorization.secured.Secured;
 import fashionable.simba.yanawaserver.global.provider.AuthenticationException;
 import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
 import fashionable.simba.yanawaserver.global.token.AuthorizationAccessToken;
 import fashionable.simba.yanawaserver.global.token.AuthorizationRefreshToken;
+import fashionable.simba.yanawaserver.global.token.TokenDetailsService;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetails;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;
 import org.springframework.http.ResponseEntity;
@@ -21,17 +21,23 @@ public class TokenController {
     private final JwtTokenProvider jwtTokenProvider;
     private final UserDetailsService userDetailsService;
     private final TokenManagementService tokenManagementService;
+    private final TokenDetailsService tokenDetailsService;
 
-    public TokenController(JwtTokenProvider jwtTokenProvider, UserDetailsService userDetailsService, TokenManagementService tokenManagementService) {
+    public TokenController(JwtTokenProvider jwtTokenProvider, UserDetailsService userDetailsService, TokenManagementService tokenManagementService, TokenDetailsService tokenDetailsService) {
         this.jwtTokenProvider = jwtTokenProvider;
         this.userDetailsService = userDetailsService;
         this.tokenManagementService = tokenManagementService;
+        this.tokenDetailsService = tokenDetailsService;
     }
 
     @PostMapping("refresh")
     public ResponseEntity<AuthorizationAccessToken> refreshToken(@RequestBody AuthorizationRefreshToken refreshToken) {
         if (!jwtTokenProvider.validateRefreshToken(refreshToken.getRefreshToken())) {
             throw new AuthenticationException("Invalid Refresh Token");
+        }
+
+        if (!tokenDetailsService.validateRefreshToken(refreshToken.getRefreshToken())) {
+            throw new AuthenticationException("Invalid Refresh Token in InvalidToken Storage");
         }
 
         String username = jwtTokenProvider.getPrincipalByRefreshToken(refreshToken.getRefreshToken());

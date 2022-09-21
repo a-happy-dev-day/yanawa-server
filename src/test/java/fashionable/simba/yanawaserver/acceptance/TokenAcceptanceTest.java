@@ -14,7 +14,7 @@ import static fashionable.simba.yanawaserver.acceptance.AuthSteps.정보_조회_
 import static fashionable.simba.yanawaserver.acceptance.AuthSteps.코드_재갱신_요청;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TokenAcceptanceTest extends AcceptanceTest {
+class TokenAcceptanceTest extends AcceptanceTest {
 
     /**
      * When Refresh Token을 입력하면 Access Code을 발급 받고

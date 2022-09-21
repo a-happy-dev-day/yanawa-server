@@ -59,7 +59,7 @@ public class Matching {
     }
 
     public Matching(Long id, Long hostId, Long courtId, LocalDate date, LocalTime startTime, LocalTime endTime, MatchingStatusType status) {
-        if (date.atTime(startTime).isAfter(date.atTime(endTime))) {
+        if (startTime.isAfter(endTime)) {
             throw new MatchingTimeException("시작시간이 종료시간보다 늦을 수 없습니다.");
         }
         this.id = id;

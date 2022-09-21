@@ -21,6 +21,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -129,10 +130,18 @@ class MatchingServiceTest {
     @Test
     @DisplayName("매칭 종료시간이 지나지않으면 매칭을 종료시킬 수 없다.")
     void end_matching_time_check_test() {
+        LocalTime startTime = LocalTime.now().minusHours(1);
+        if (startTime.isAfter(LocalTime.now())) {
+            startTime = LocalTime.of(0, 0);
+        }
+        LocalTime endTime = LocalTime.now().plusHours(1);
+        if (endTime.isBefore(LocalTime.now())) {
+            endTime = LocalTime.of(23, 59);
+        }
         Matching matching = getMatching(MatchingStatusType.ONGOING,
             LocalDate.now(),
-            LocalTime.now().minusHours(1),
-            LocalTime.now().plusHours(1));
+            startTime,
+            endTime);
         Matching savedMatching = matchingService.createMatching(matching);
         Long savedMatchingId = savedMatching.getId();
 

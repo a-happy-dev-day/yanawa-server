@@ -129,8 +129,10 @@ class MatchingServiceTest {
     @Test
     @DisplayName("매칭 종료시간이 지나지않으면 매칭을 종료시킬 수 없다.")
     void end_matching_time_check_test() {
-        Matching matching = getMatching(MatchingStatusType.ONGOING
-            , LocalDate.now(), LocalTime.now().minusHours(1), LocalTime.now().plusHours(1));
+        Matching matching = getMatching(MatchingStatusType.ONGOING,
+            LocalDate.now(),
+            LocalTime.now().minusHours(1),
+            LocalTime.now().plusHours(1));
         Matching savedMatching = matchingService.createMatching(matching);
         Long savedMatchingId = savedMatching.getId();
 

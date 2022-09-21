@@ -16,7 +16,7 @@ public class CustomTokenDetailService implements TokenDetailsService {
     }
 
     /**
-     * 유효한 토큰이면 true를 반환한다.
+     * 유효한 accessToken 이면 true를 반환한다.
      *
      * @param accessToken
      * @return
@@ -26,6 +26,12 @@ public class CustomTokenDetailService implements TokenDetailsService {
         return !invalidAccessTokenRepository.existsById(accessToken);
     }
 
+    /**
+     * 유효한 refreshToken 이면 true를 반환한다.
+     *
+     * @param refreshToken
+     * @return
+     */
     public boolean validateRefreshToken(String refreshToken) {
         return !invalidRefreshTokenRepository.existsById(refreshToken);
     }

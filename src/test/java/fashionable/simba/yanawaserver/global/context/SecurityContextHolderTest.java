@@ -1,6 +1,5 @@
 package fashionable.simba.yanawaserver.global.context;
 
-import fashionable.simba.yanawaserver.global.context.SecurityContextHolder;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

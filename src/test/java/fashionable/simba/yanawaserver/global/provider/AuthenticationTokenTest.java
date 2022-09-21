@@ -1,6 +1,5 @@
 package fashionable.simba.yanawaserver.global.provider;
 
-import fashionable.simba.yanawaserver.global.provider.AuthenticationToken;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.DisplayName;

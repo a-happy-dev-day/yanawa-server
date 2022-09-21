@@ -1,6 +1,5 @@
 package fashionable.simba.yanawaserver.global.provider;
 
-import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
 import fashionable.simba.yanawaserver.members.domain.RoleType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;

@@ -17,9 +17,9 @@ import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.test.context.ActiveProfiles;
 
-import static fashionable.simba.yanawaserver.acceptance.MemberSteps.PASSWORD_ADMIN;
-import static fashionable.simba.yanawaserver.acceptance.MemberSteps.로그인_요청;
-import static fashionable.simba.yanawaserver.acceptance.MemberSteps.로그인_코드_발급;
+import static fashionable.simba.yanawaserver.acceptance.AuthSteps.PASSWORD_ADMIN;
+import static fashionable.simba.yanawaserver.acceptance.AuthSteps.로그인_요청;
+import static fashionable.simba.yanawaserver.acceptance.AuthSteps.로그인_코드_발급;
 import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.documentationConfiguration;
 
 

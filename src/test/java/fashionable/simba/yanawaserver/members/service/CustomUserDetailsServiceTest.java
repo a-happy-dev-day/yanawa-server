@@ -1,6 +1,6 @@
 package fashionable.simba.yanawaserver.members.service;
 
-import fashionable.simba.yanawaserver.auth.userdetails.UserDetails;
+import fashionable.simba.yanawaserver.global.userdetails.UserDetails;
 import fashionable.simba.yanawaserver.members.domain.KakaoMember;
 import fashionable.simba.yanawaserver.members.domain.MemberRepository;
 import fashionable.simba.yanawaserver.members.domain.RoleType;

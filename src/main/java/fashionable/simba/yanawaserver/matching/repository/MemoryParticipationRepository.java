@@ -17,11 +17,11 @@ public class MemoryParticipationRepository implements ParticipationRepository {
     public Participation save(Participation participation) {
         Long id = getId();
         Participation save = new Participation(
-                id,
-                participation.getUserId(),
-                participation.getMatchingId(),
-                participation.getRequestDateTime(),
-                participation.getStatus()
+            id,
+            participation.getUserId(),
+            participation.getMatchingId(),
+            participation.getRequestDateTime(),
+            participation.getStatus()
         );
         participations.put(id, save);
         return save;

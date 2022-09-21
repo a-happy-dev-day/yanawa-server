@@ -1,11 +1,12 @@
 package fashionable.simba.yanawaserver.auth.ui;
 
-import fashionable.simba.yanawaserver.auth.dto.KakaoAccessToken;
-import fashionable.simba.yanawaserver.auth.dto.TokenRequest;
+import fashionable.simba.yanawaserver.auth.exception.AccessCodeException;
 import fashionable.simba.yanawaserver.auth.kakao.KakaoAuthenticationService;
-import fashionable.simba.yanawaserver.auth.provider.JwtTokenProvider;
-import fashionable.simba.yanawaserver.auth.userdetails.User;
-import fashionable.simba.yanawaserver.auth.userdetails.UserDetailsService;
+import fashionable.simba.yanawaserver.auth.kakao.dto.KakaoAccessToken;
+import fashionable.simba.yanawaserver.auth.ui.dto.TokenRequest;
+import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
+import fashionable.simba.yanawaserver.global.userdetails.User;
+import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;
 import fashionable.simba.yanawaserver.members.domain.KakaoMember;
 import fashionable.simba.yanawaserver.members.domain.RoleType;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +27,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class LoginControllerTest {
-    private LoginController loginController;
+    private AuthController loginController;
     @Mock
     private KakaoAuthenticationService kakaoAuthenticationService;
     @Mock
@@ -35,7 +36,7 @@ class LoginControllerTest {
 
     @BeforeEach
     void setUp() {
-        loginController = new LoginController(kakaoAuthenticationService, userDetailsService, jwtTokenProvider);
+        loginController = new AuthController(kakaoAuthenticationService, userDetailsService, jwtTokenProvider);
     }
 
     @Test
@@ -70,6 +71,7 @@ class LoginControllerTest {
 
         ResponseEntity<TokenRequest> response = loginController.loginCallback("accessCode", null, null);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getBody()).isNotNull();
     }
 
     @Test

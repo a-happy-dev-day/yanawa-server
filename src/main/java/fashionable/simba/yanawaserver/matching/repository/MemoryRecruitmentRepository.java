@@ -17,18 +17,18 @@ public class MemoryRecruitmentRepository implements RecruitmentRepository {
     public Recruitment save(Recruitment recruitment) {
         Long id = getId();
         Recruitment save = new Recruitment(
-                id,
-                recruitment.getMatchingId(),
-                recruitment.getMaximumLevel(),
-                recruitment.getMinimumLevel(),
-                recruitment.getAgeOfRecruitment(),
-                recruitment.getSexOfRecruitment(),
-                recruitment.getPreferenceGame(),
-                recruitment.getNumberOfRecruitment(),
-                recruitment.getCostOfCourtPerPerson(),
-                recruitment.getAnnual(),
-                recruitment.getDetails(),
-                recruitment.getStatus()
+            id,
+            recruitment.getMatchingId(),
+            recruitment.getMaximumLevel(),
+            recruitment.getMinimumLevel(),
+            recruitment.getAgeOfRecruitment(),
+            recruitment.getSexOfRecruitment(),
+            recruitment.getPreferenceGame(),
+            recruitment.getNumberOfRecruitment(),
+            recruitment.getCostOfCourtPerPerson(),
+            recruitment.getAnnual(),
+            recruitment.getDetails(),
+            recruitment.getStatus()
         );
         recruitments.put(id, save);
         return save;

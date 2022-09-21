@@ -1,8 +1,8 @@
 package fashionable.simba.yanawaserver.members.ui;
 
-import fashionable.simba.yanawaserver.auth.authorization.AuthenticationPrincipal;
-import fashionable.simba.yanawaserver.auth.authorization.secured.Secured;
-import fashionable.simba.yanawaserver.auth.userdetails.User;
+import fashionable.simba.yanawaserver.global.authorization.AuthenticationPrincipal;
+import fashionable.simba.yanawaserver.global.authorization.secured.Secured;
+import fashionable.simba.yanawaserver.global.userdetails.User;
 import fashionable.simba.yanawaserver.members.domain.Member;
 import fashionable.simba.yanawaserver.members.service.MemberService;
 import org.springframework.http.ResponseEntity;

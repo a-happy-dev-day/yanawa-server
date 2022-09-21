@@ -7,7 +7,7 @@ import org.springframework.http.MediaType;
 import java.util.HashMap;
 import java.util.Map;
 
-import static fashionable.simba.yanawaserver.acceptance.MemberSteps.PASSWORD_ADMIN;
+import static fashionable.simba.yanawaserver.acceptance.AuthSteps.PASSWORD_ADMIN;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
@@ -61,32 +61,4 @@ class AuthDocumentation extends Documentation {
             .extract();
     }
 
-    @Test
-    void refreshToken() {
-        Map<String, String> params = new HashMap<>();
-        params.put("refreshToken", refreshToken);
-
-        givenNotOauth()
-            .filter(document("member/refresh",
-                preprocessRequest(prettyPrint()),
-                preprocessResponse(prettyPrint())))
-            .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .body(params)
-            .when().post("/refresh")
-            .then().log().all()
-            .statusCode(HttpStatus.OK.value())
-            .extract();
-    }
-
-    @Test
-    void logout() {
-        givenOauth()
-            .filter(document("member/logout",
-                preprocessRequest(prettyPrint()),
-                preprocessResponse(prettyPrint())))
-            .when().get("/logout")
-            .then().log().all()
-            .statusCode(HttpStatus.OK.value())
-            .extract();
-    }
 }

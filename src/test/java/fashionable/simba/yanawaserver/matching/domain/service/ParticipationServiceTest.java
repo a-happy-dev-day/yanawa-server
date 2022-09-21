@@ -67,22 +67,12 @@ class ParticipationServiceTest {
     @DisplayName("참여요청에 대해 해당 모집에 승인, 거절 이력이 있다면, IllegalArgumentExceptiond이 발생한다.")
     @Test
     void before_participtaion_test() {
-        Participation participation1 = getParticipation(1L, 1L);
-        Participation save1 = participationService.createParticipation(participation1);
+        Participation save1 = participationService.createParticipation(getParticipation(1L, 1L));
         participationService.acceptParticipation(save1.getId());
 
-        Participation participation2 = getParticipation(2L, 1L);
-        Participation save2 = participationService.createParticipation(participation2);
-        participationService.rejectParticipation(save2.getId());
-
-        assertAll(
-            () -> assertThrows(IllegalArgumentException.class, () -> {
-                participationService.createParticipation(participation1);
-            }),
-            () -> assertThrows(IllegalArgumentException.class, () -> {
-                participationService.createParticipation(participation2);
-            })
-        );
+        assertThrows(IllegalArgumentException.class, () -> {
+            participationService.createParticipation(getParticipation(1L, 1L));
+        });
 
     }
 

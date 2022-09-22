@@ -17,7 +17,6 @@ import fashionable.simba.yanawaserver.global.provider.AuthorizationTokenProvider
 import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
 import fashionable.simba.yanawaserver.global.token.TokenDetailsService;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -28,22 +27,14 @@ import java.util.List;
 
 @Configuration
 public class WebSecurityConfigurer implements WebMvcConfigurer {
-    private final String secretKey;
-    private final String refreshKey;
-    private final long validityAccessTokenMilliseconds;
-    private final long validityRefreshTokenMilliseconds;
+    private final JwtPropertiesConfigurer jwtPropertiesConfigurer;
     private final UserDetailsService userDetailsService;
     private final TokenDetailsService tokenDetailsService;
 
-    public WebSecurityConfigurer(@Value("${security.jwt.token.secret-key}") String secretKey,
-                                 @Value("${security.jwt.token.refresh-key}") String refreshKey,
-                                 @Value("${security.jwt.token.access.expire-length}") long validityAccessTokenMilliseconds,
-                                 @Value("${security.jwt.token.refresh.expire-length}") long validityRefreshTokenMilliseconds,
-                                 UserDetailsService userDetailsService, TokenDetailsService tokenDetailsService) {
-        this.secretKey = secretKey;
-        this.refreshKey = refreshKey;
-        this.validityAccessTokenMilliseconds = validityAccessTokenMilliseconds;
-        this.validityRefreshTokenMilliseconds = validityRefreshTokenMilliseconds;
+    public WebSecurityConfigurer(JwtPropertiesConfigurer jwtPropertiesConfigurer,
+                                 UserDetailsService userDetailsService,
+                                 TokenDetailsService tokenDetailsService) {
+        this.jwtPropertiesConfigurer = jwtPropertiesConfigurer;
         this.userDetailsService = userDetailsService;
         this.tokenDetailsService = tokenDetailsService;
     }
@@ -105,7 +96,12 @@ public class WebSecurityConfigurer implements WebMvcConfigurer {
 
     @Bean
     JwtTokenProvider jwtTokenProvider() {
-        return new JwtTokenProvider(secretKey, refreshKey, validityRefreshTokenMilliseconds, validityAccessTokenMilliseconds);
+        return new JwtTokenProvider(
+            jwtPropertiesConfigurer.getSecretKey(),
+            jwtPropertiesConfigurer.getRefreshKey(),
+            jwtPropertiesConfigurer.getValidityRefreshTokenMilliseconds(),
+            jwtPropertiesConfigurer.getValidityAccessTokenMilliseconds()
+        );
     }
 
     @Bean

@@ -1,14 +1,14 @@
 package fashionable.simba.yanawaserver.auth.kakao.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import fashionable.simba.yanawaserver.auth.domain.UserInfo;
 
 import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public final class KakaoUserInfo implements UserInfo {
     private Long id;
     private Map<String, String> properties;

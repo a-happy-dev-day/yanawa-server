@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneOffset;
 
-public class Clock {
+public class TimeConfig {
     // 디폴트로 운영체제에 설정된 타임존과 시간을 기준으로 Clock을 반환한다.
     private static java.time.Clock clock = java.time.Clock.systemDefaultZone();
 

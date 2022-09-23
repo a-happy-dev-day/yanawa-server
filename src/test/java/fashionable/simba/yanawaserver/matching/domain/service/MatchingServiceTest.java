@@ -1,6 +1,6 @@
 package fashionable.simba.yanawaserver.matching.domain.service;
 
-import fashionable.simba.yanawaserver.matching.configuration.Clock;
+import fashionable.simba.yanawaserver.matching.configuration.TimeConfig;
 import fashionable.simba.yanawaserver.matching.constant.AgeGroupType;
 import fashionable.simba.yanawaserver.matching.constant.AnnualType;
 import fashionable.simba.yanawaserver.matching.constant.GenderType;
@@ -10,12 +10,10 @@ import fashionable.simba.yanawaserver.matching.constant.RecruitmentStatusType;
 import fashionable.simba.yanawaserver.matching.domain.Level;
 import fashionable.simba.yanawaserver.matching.domain.Matching;
 import fashionable.simba.yanawaserver.matching.domain.Recruitment;
-import fashionable.simba.yanawaserver.matching.domain.service.MatchingService;
 import fashionable.simba.yanawaserver.matching.repository.MemoryCourtRepository;
 import fashionable.simba.yanawaserver.matching.repository.MemoryMatchingRepository;
 import fashionable.simba.yanawaserver.matching.repository.MemoryParticipationRepository;
 import fashionable.simba.yanawaserver.matching.repository.MemoryRecruitmentRepository;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -132,12 +130,12 @@ class MatchingServiceTest {
     @Test
     @DisplayName("매칭 종료시간이 지나지않으면 매칭을 종료시킬 수 없다.")
     void end_matching_time_check_test() {
-        Clock.timeFixed(LocalDateTime.of(2022,9,1,19,0));
+        TimeConfig.timeFixed(LocalDateTime.of(2022,9,1,19,0));
 
         Matching matching = getMatching(MatchingStatusType.ONGOING,
-            Clock.dateOfNow(),
-            Clock.timeOfNow().minusHours(1),
-            Clock.timeOfNow().plusHours(1)
+            TimeConfig.dateOfNow(),
+            TimeConfig.timeOfNow().minusHours(1),
+            TimeConfig.timeOfNow().plusHours(1)
         );
 
         Matching savedMatching = matchingService.createMatching(matching);
@@ -147,7 +145,7 @@ class MatchingServiceTest {
             matchingService.endMatching(savedMatchingId);
         });
 
-        Clock.reset();
+        TimeConfig.reset();
     }
 
     private static Matching getMatching(MatchingStatusType statusType) {

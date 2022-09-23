@@ -1,5 +1,6 @@
 package fashionable.simba.yanawaserver.matching.domain.service;
 
+import fashionable.simba.yanawaserver.matching.configuration.Clock;
 import fashionable.simba.yanawaserver.matching.constant.AgeGroupType;
 import fashionable.simba.yanawaserver.matching.constant.AnnualType;
 import fashionable.simba.yanawaserver.matching.constant.GenderType;
@@ -14,6 +15,7 @@ import fashionable.simba.yanawaserver.matching.repository.MemoryCourtRepository;
 import fashionable.simba.yanawaserver.matching.repository.MemoryMatchingRepository;
 import fashionable.simba.yanawaserver.matching.repository.MemoryParticipationRepository;
 import fashionable.simba.yanawaserver.matching.repository.MemoryRecruitmentRepository;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -43,6 +45,11 @@ class MatchingServiceTest {
         fakeCourtRepository.clear();
         서울_테니스장 = fakeCourtRepository.save("서울 테니스장");
         recruitmentRepository.clear();
+    }
+
+    @AfterAll
+    static void afterAll() {
+        Clock.reset();
     }
 
     @Test
@@ -130,18 +137,14 @@ class MatchingServiceTest {
     @Test
     @DisplayName("매칭 종료시간이 지나지않으면 매칭을 종료시킬 수 없다.")
     void end_matching_time_check_test() {
-        LocalTime startTime = LocalTime.now().minusHours(1);
-        if (startTime.isAfter(LocalTime.now())) {
-            startTime = LocalTime.of(0, 0);
-        }
-        LocalTime endTime = LocalTime.now().plusHours(1);
-        if (endTime.isBefore(LocalTime.now())) {
-            endTime = LocalTime.of(23, 59);
-        }
+        Clock.timeFixed(LocalDateTime.of(2022,9,1,19,0));
+
         Matching matching = getMatching(MatchingStatusType.ONGOING,
-            LocalDate.now(),
-            startTime,
-            endTime);
+            Clock.dateOfNow(),
+            Clock.timeOfNow().minusHours(1),
+            Clock.timeOfNow().plusHours(1)
+        );
+
         Matching savedMatching = matchingService.createMatching(matching);
         Long savedMatchingId = savedMatching.getId();
 

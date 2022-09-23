@@ -47,11 +47,6 @@ class MatchingServiceTest {
         recruitmentRepository.clear();
     }
 
-    @AfterAll
-    static void afterAll() {
-        Clock.reset();
-    }
-
     @Test
     @DisplayName("매칭을 생성한다.")
     void create_matching_test() {
@@ -151,6 +146,8 @@ class MatchingServiceTest {
         assertThrows(IllegalArgumentException.class, () -> {
             matchingService.endMatching(savedMatchingId);
         });
+
+        Clock.reset();
     }
 
     private static Matching getMatching(MatchingStatusType statusType) {

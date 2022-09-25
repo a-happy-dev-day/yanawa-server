@@ -3,9 +3,14 @@ package fashionable.simba.yanawaserver.matching.domain.service;
 import fashionable.simba.yanawaserver.matching.domain.Recruitment;
 import fashionable.simba.yanawaserver.matching.domain.repository.ParticipationRepository;
 import fashionable.simba.yanawaserver.matching.domain.repository.RecruitmentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class RecruitmentService {
+    @Autowired
     private final RecruitmentRepository recruitmentRepository;
+    @Autowired
     private final ParticipationRepository participationRepository;
 
     public RecruitmentService(RecruitmentRepository recruitmentRepository, ParticipationRepository participationRepository) {

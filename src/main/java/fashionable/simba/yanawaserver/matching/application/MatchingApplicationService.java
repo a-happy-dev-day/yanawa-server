@@ -8,12 +8,16 @@ import fashionable.simba.yanawaserver.matching.domain.repository.CourtRepository
 import fashionable.simba.yanawaserver.matching.domain.service.MatchingService;
 import fashionable.simba.yanawaserver.matching.domain.service.RecruitmentService;
 import fashionable.simba.yanawaserver.matching.error.NoCourtDataException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MatchingApplicationService {
+    @Autowired
     private final MatchingService matchingService;
+    @Autowired
     private final RecruitmentService recruitmentService;
+    @Autowired
     private final CourtRepository courtRepository;
 
     public MatchingApplicationService(MatchingService matchingService, RecruitmentService recruitmentService, CourtRepository courtRepository) {

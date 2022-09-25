@@ -5,13 +5,16 @@ import fashionable.simba.yanawaserver.matching.domain.Matching;
 import fashionable.simba.yanawaserver.matching.domain.Recruitment;
 import fashionable.simba.yanawaserver.matching.domain.repository.MatchingRepository;
 import fashionable.simba.yanawaserver.matching.domain.repository.RecruitmentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
 @Service
 public class MatchingService {
+    @Autowired
     private final MatchingRepository matchingRepository;
+    @Autowired
     private final RecruitmentRepository recruitmentRepository;
 
     public MatchingService(MatchingRepository matchingRepository, RecruitmentRepository recruitmentRepository) {

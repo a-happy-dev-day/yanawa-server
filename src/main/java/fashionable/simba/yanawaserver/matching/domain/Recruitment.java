@@ -39,8 +39,8 @@ public class Recruitment {
     private String details;
     private RecruitmentStatusType status;
 
-    public Recruitment() {
-
+    protected Recruitment() {
+        /*no-op*/
     }
 
     public Long getId() {

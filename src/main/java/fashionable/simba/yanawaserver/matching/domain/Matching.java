@@ -23,8 +23,8 @@ public class Matching {
     private LocalTime endTime;
     private MatchingStatusType status;
 
-    public Matching() {
-
+    protected Matching() {
+        /*no-op*/
     }
 
     public Long getId() {

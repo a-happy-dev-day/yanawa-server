@@ -24,11 +24,6 @@ public class MemoryCourtRepository implements CourtRepository {
     }
 
     @Override
-    public void clear() {
-        courts.clear();
-    }
-
-    @Override
     public Optional<String> findCourtById(Long id) {
         return Optional.ofNullable(courts.get(id));
     }

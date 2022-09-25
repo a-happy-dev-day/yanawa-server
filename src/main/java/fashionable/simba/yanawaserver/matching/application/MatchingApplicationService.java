@@ -13,11 +13,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MatchingApplicationService {
-    @Autowired
     private final MatchingService matchingService;
-    @Autowired
     private final RecruitmentService recruitmentService;
-    @Autowired
     private final CourtRepository courtRepository;
 
     public MatchingApplicationService(MatchingService matchingService, RecruitmentService recruitmentService, CourtRepository courtRepository) {

@@ -12,11 +12,11 @@ import java.time.LocalDateTime;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class ParticipationRepositoryTest {
-    ParticipationRepository participationRepository = new MemoryParticipationRepository();
+    ParticipationRepository participationRepository;
 
     @BeforeEach
     void setUp() {
-        participationRepository.clear();
+        participationRepository = new MemoryParticipationRepository();
     }
 
     @Test
@@ -30,7 +30,7 @@ class ParticipationRepositoryTest {
                 ParticipationStatusType.WAITING
         );
         Participation savedParticipation = participationRepository.save(participation);
-        assertThat(participationRepository.findParticipationById(savedParticipation.getMatchingId()).orElseThrow()).isEqualTo(savedParticipation);
+        assertThat(participationRepository.findById(savedParticipation.getMatchingId()).orElseThrow()).isEqualTo(savedParticipation);
     }
 
     @Test

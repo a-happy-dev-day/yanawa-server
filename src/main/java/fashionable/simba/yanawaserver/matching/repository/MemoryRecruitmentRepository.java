@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-@Repository
 public class MemoryRecruitmentRepository implements RecruitmentRepository {
     private static final Map<Long, Recruitment> recruitments = new HashMap<>();
     private Long sequence = 0L;
@@ -34,17 +33,12 @@ public class MemoryRecruitmentRepository implements RecruitmentRepository {
         return save;
     }
 
-    @Override
-    public void clear() {
-        recruitments.clear();
-    }
-
     private synchronized Long getId() {
         return ++sequence;
     }
 
     @Override
-    public Optional<Recruitment> findRecruitmentById(Long id) {
+    public Optional<Recruitment> findById(Long id) {
         return Optional.ofNullable(recruitments.get(id));
     }
 

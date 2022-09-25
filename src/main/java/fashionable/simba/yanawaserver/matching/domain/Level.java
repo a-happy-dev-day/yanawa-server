@@ -21,8 +21,8 @@ public class Level {
         this.level = level;
     }
 
-    public Level() {
-
+    protected Level() {
+        /*no-op*/
     }
 
     public double getLevel() {

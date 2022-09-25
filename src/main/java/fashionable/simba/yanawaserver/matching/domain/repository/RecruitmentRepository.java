@@ -7,7 +7,5 @@ import java.util.Optional;
 public interface RecruitmentRepository {
     Recruitment save(Recruitment recruitment);
 
-    void clear();
-
-    Optional<Recruitment> findRecruitmentById(Long id);
+    Optional<Recruitment> findById(Long id);
 }

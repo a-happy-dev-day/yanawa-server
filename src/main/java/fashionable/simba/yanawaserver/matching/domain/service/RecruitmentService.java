@@ -3,14 +3,11 @@ package fashionable.simba.yanawaserver.matching.domain.service;
 import fashionable.simba.yanawaserver.matching.domain.Recruitment;
 import fashionable.simba.yanawaserver.matching.domain.repository.ParticipationRepository;
 import fashionable.simba.yanawaserver.matching.domain.repository.RecruitmentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RecruitmentService {
-    @Autowired
     private final RecruitmentRepository recruitmentRepository;
-    @Autowired
     private final ParticipationRepository participationRepository;
 
     public RecruitmentService(RecruitmentRepository recruitmentRepository, ParticipationRepository participationRepository) {
@@ -23,7 +20,7 @@ public class RecruitmentService {
     }
 
     public Recruitment completeRecritument(Long id) {
-        Recruitment recruitment = recruitmentRepository.findRecruitmentById(id).orElseThrow();
+        Recruitment recruitment = recruitmentRepository.findById(id).orElseThrow();
         Integer numberOfparticipations = participationRepository.countParticipationsByMatchingId(recruitment.getMatchingId());
         if (numberOfparticipations < 1) {
             throw new IllegalArgumentException("참가자가 없어 모집을 완료할 수 없습니다.");

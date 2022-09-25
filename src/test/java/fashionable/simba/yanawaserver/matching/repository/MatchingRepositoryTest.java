@@ -34,6 +34,6 @@ class MatchingRepositoryTest {
                 MatchingStatusType.WAITING
                 );
         Long id = matchingRepository.save(matching).getId();
-        assertThat(matchingRepository.findMatchingById(id).orElseThrow().getId()).isEqualTo(id);
+        assertThat(matchingRepository.findById(id).orElseThrow().getId()).isEqualTo(id);
     }
 }

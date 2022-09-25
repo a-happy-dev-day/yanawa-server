@@ -44,16 +44,16 @@ class RecruitmentRepositoryTest {
         );
         Long id = recruitmentRepository.save(recruitment).getId();
         assertAll(
-                () -> assertThat(recruitmentRepository.findRecruitmentById(id).orElseThrow().getMaximumLevel().getLevel()).isEqualTo(new Level(4.0).getLevel()),
-                () -> assertThat(recruitmentRepository.findRecruitmentById(id).orElseThrow().getMinimumLevel().getLevel()).isEqualTo(new Level(1.5).getLevel()),
-                () -> assertThat(recruitmentRepository.findRecruitmentById(id).orElseThrow().getAgeOfRecruitment()).isEqualTo(AgeGroupType.TWENTIES),
-                () -> assertThat(recruitmentRepository.findRecruitmentById(id).orElseThrow().getSexOfRecruitment()).isEqualTo(GenderType.NONE),
-                () -> assertThat(recruitmentRepository.findRecruitmentById(id).orElseThrow().getPreferenceGame()).isEqualTo(PreferenceType.RALLY),
-                () -> assertThat(recruitmentRepository.findRecruitmentById(id).orElseThrow().getNumberOfRecruitment()).isEqualTo(3),
-                () -> assertThat(recruitmentRepository.findRecruitmentById(id).orElseThrow().getCostOfCourtPerPerson()).isEqualTo(2.0),
-                () -> assertThat(recruitmentRepository.findRecruitmentById(id).orElseThrow().getAnnual()).isEqualTo(AnnualType.FIVE_YEARS_LESS),
-                () -> assertThat(recruitmentRepository.findRecruitmentById(id).orElseThrow().getDetails()).isEqualTo("4명이서 랠리해요~"),
-                () -> assertThat(recruitmentRepository.findRecruitmentById(id).orElseThrow().getStatus()).isEqualTo(RecruitmentStatusType.OPENING)
+                () -> assertThat(recruitmentRepository.findById(id).orElseThrow().getMaximumLevel().getLevel()).isEqualTo(new Level(4.0).getLevel()),
+                () -> assertThat(recruitmentRepository.findById(id).orElseThrow().getMinimumLevel().getLevel()).isEqualTo(new Level(1.5).getLevel()),
+                () -> assertThat(recruitmentRepository.findById(id).orElseThrow().getAgeOfRecruitment()).isEqualTo(AgeGroupType.TWENTIES),
+                () -> assertThat(recruitmentRepository.findById(id).orElseThrow().getSexOfRecruitment()).isEqualTo(GenderType.NONE),
+                () -> assertThat(recruitmentRepository.findById(id).orElseThrow().getPreferenceGame()).isEqualTo(PreferenceType.RALLY),
+                () -> assertThat(recruitmentRepository.findById(id).orElseThrow().getNumberOfRecruitment()).isEqualTo(3),
+                () -> assertThat(recruitmentRepository.findById(id).orElseThrow().getCostOfCourtPerPerson()).isEqualTo(2.0),
+                () -> assertThat(recruitmentRepository.findById(id).orElseThrow().getAnnual()).isEqualTo(AnnualType.FIVE_YEARS_LESS),
+                () -> assertThat(recruitmentRepository.findById(id).orElseThrow().getDetails()).isEqualTo("4명이서 랠리해요~"),
+                () -> assertThat(recruitmentRepository.findById(id).orElseThrow().getStatus()).isEqualTo(RecruitmentStatusType.OPENING)
         );
     }
 
@@ -73,6 +73,6 @@ class RecruitmentRepositoryTest {
                 RecruitmentStatusType.OPENING
         );
         Long id = recruitmentRepository.save(recruitment).getId();
-        assertThat(recruitmentRepository.findRecruitmentById(id).orElseThrow().getId()).isEqualTo(id);
+        assertThat(recruitmentRepository.findById(id).orElseThrow().getId()).isEqualTo(id);
     }
 }

@@ -7,9 +7,5 @@ import java.util.Optional;
 public interface MatchingRepository {
     Matching save(Matching matching);
 
-    void clear();
-
-    Optional<Matching> findMatchingById(Long id);
-
-
+    Optional<Matching> findById(Long id);
 }

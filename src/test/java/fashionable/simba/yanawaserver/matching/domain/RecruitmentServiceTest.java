@@ -20,14 +20,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class RecruitmentServiceTest {
-    MemoryRecruitmentRepository recruitmentRepository = new MemoryRecruitmentRepository();
-    ParticipationRepository participationRepository = new MemoryParticipationRepository();
-    RecruitmentService recruitmentService = new RecruitmentService(recruitmentRepository, participationRepository);
+    MemoryRecruitmentRepository recruitmentRepository;
+    ParticipationRepository participationRepository;
+    RecruitmentService recruitmentService;
 
     @BeforeEach
     public void setUp() {
-        recruitmentRepository.clear();
-        participationRepository.clear();
+        recruitmentRepository = new MemoryRecruitmentRepository();
+        participationRepository = new MemoryParticipationRepository();
+        recruitmentService = new RecruitmentService(recruitmentRepository, participationRepository);
     }
 
     @Test
@@ -49,7 +50,7 @@ class RecruitmentServiceTest {
 
         Recruitment savedRecruitment = recruitmentService.createRecruitment(recruitment);
 
-        assertThat(recruitmentRepository.findRecruitmentById(savedRecruitment.getId()).orElseThrow()).isEqualTo(savedRecruitment);
+        assertThat(recruitmentRepository.findById(savedRecruitment.getId()).orElseThrow()).isEqualTo(savedRecruitment);
     }
 
     @Test
@@ -81,7 +82,7 @@ class RecruitmentServiceTest {
         Recruitment savedRecruitment = recruitmentService.createRecruitment(recruitment);
         recruitmentService.completeRecritument(savedRecruitment.getId());
         //then
-        assertThat(recruitmentRepository.findRecruitmentById(savedRecruitment.getId()).orElseThrow().getStatus()).isEqualTo(RecruitmentStatusType.CLOSED);
+        assertThat(recruitmentRepository.findById(savedRecruitment.getId()).orElseThrow().getStatus()).isEqualTo(RecruitmentStatusType.CLOSED);
     }
 
     @Test

@@ -27,18 +27,23 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ApplicationServiceTest {
-    MatchingRepository matchingRepository = new MemoryMatchingRepository();
-    RecruitmentRepository recruitmentRepository = new MemoryRecruitmentRepository();
+    MatchingRepository matchingRepository;
+    RecruitmentRepository recruitmentRepository;
     ParticipationRepository participationRepository;
-    MatchingService matchingService = new MatchingService(matchingRepository, recruitmentRepository);
-    RecruitmentService recruitmentService = new RecruitmentService(recruitmentRepository, participationRepository);
-    CourtRepository courtRepository = new MemoryCourtRepository();
-    MatchingApplicationService applicationService = new MatchingApplicationService(matchingService, recruitmentService, courtRepository);
+    MatchingService matchingService;
+    RecruitmentService recruitmentService;
+    CourtRepository courtRepository;
+    MatchingApplicationService applicationService;
 
     @BeforeEach
     public void setUp() {
-        matchingRepository.clear();
-        recruitmentRepository.clear();
+        matchingRepository = new MemoryMatchingRepository();
+        recruitmentRepository = new MemoryRecruitmentRepository();
+        matchingService = new MatchingService(matchingRepository, recruitmentRepository);
+        recruitmentService = new RecruitmentService(recruitmentRepository, participationRepository);
+        courtRepository = new MemoryCourtRepository();
+        applicationService = new MatchingApplicationService(matchingService, recruitmentService, courtRepository);
+
         courtRepository.save("서울테니스장");
     }
 
@@ -49,24 +54,24 @@ class ApplicationServiceTest {
         RecruitmentResponse response = applicationService.createMatchingAndRecruitment(requsest);
 
         assertAll(
-                () -> assertThat(matchingRepository.findMatchingById(response.getMatchingId()).orElseThrow().getCourtId()).isEqualTo(response.getCourtId()),
-                () -> assertThat(matchingRepository.findMatchingById(response.getMatchingId()).orElseThrow().getHostId()).isEqualTo(response.getHostId()),
-                () -> assertThat(matchingRepository.findMatchingById(response.getMatchingId()).orElseThrow().getDate()).isEqualTo(response.getDate()),
-                () -> assertThat(matchingRepository.findMatchingById(response.getMatchingId()).orElseThrow().getStartTime()).isEqualTo(response.getStartTime()),
-                () -> assertThat(matchingRepository.findMatchingById(response.getMatchingId()).orElseThrow().getEndTime()).isEqualTo(response.getEndTime()),
-                () -> assertThat(matchingRepository.findMatchingById(response.getMatchingId()).orElseThrow().getStatus()).isEqualTo(response.getMatchingStatus()),
+                () -> assertThat(matchingRepository.findById(response.getMatchingId()).orElseThrow().getCourtId()).isEqualTo(response.getCourtId()),
+                () -> assertThat(matchingRepository.findById(response.getMatchingId()).orElseThrow().getHostId()).isEqualTo(response.getHostId()),
+                () -> assertThat(matchingRepository.findById(response.getMatchingId()).orElseThrow().getDate()).isEqualTo(response.getDate()),
+                () -> assertThat(matchingRepository.findById(response.getMatchingId()).orElseThrow().getStartTime()).isEqualTo(response.getStartTime()),
+                () -> assertThat(matchingRepository.findById(response.getMatchingId()).orElseThrow().getEndTime()).isEqualTo(response.getEndTime()),
+                () -> assertThat(matchingRepository.findById(response.getMatchingId()).orElseThrow().getStatus()).isEqualTo(response.getMatchingStatus()),
 
-                () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getMatchingId()).isEqualTo(response.getMatchingId()),
-                () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getMaximumLevel()).isEqualTo(response.getMaximumLevel()),
-                () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getMinimumLevel()).isEqualTo(response.getMinimumLevel()),
-                () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getAgeOfRecruitment()).isEqualTo(response.getAgeOfRecruitment()),
-                () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getSexOfRecruitment()).isEqualTo(response.getSexOfRecruitment()),
-                () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getPreferenceGame()).isEqualTo(response.getPreferenceGame()),
-                () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getNumberOfRecruitment()).isEqualTo(response.getNumberOfRecruitment()),
-                () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getAnnual()).isEqualTo(response.getAnnual()),
-                () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getCostOfCourtPerPerson()).isEqualTo(response.getCostOfCourtPerPerson()),
-                () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getStatus()).isEqualTo(response.getRecruitmentStatus()),
-                () -> assertThat(recruitmentRepository.findRecruitmentById(response.getRecruitmentId()).orElseThrow().getDetails()).isEqualTo(response.getDetails())
+                () -> assertThat(recruitmentRepository.findById(response.getRecruitmentId()).orElseThrow().getMatchingId()).isEqualTo(response.getMatchingId()),
+                () -> assertThat(recruitmentRepository.findById(response.getRecruitmentId()).orElseThrow().getMaximumLevel()).isEqualTo(response.getMaximumLevel()),
+                () -> assertThat(recruitmentRepository.findById(response.getRecruitmentId()).orElseThrow().getMinimumLevel()).isEqualTo(response.getMinimumLevel()),
+                () -> assertThat(recruitmentRepository.findById(response.getRecruitmentId()).orElseThrow().getAgeOfRecruitment()).isEqualTo(response.getAgeOfRecruitment()),
+                () -> assertThat(recruitmentRepository.findById(response.getRecruitmentId()).orElseThrow().getSexOfRecruitment()).isEqualTo(response.getSexOfRecruitment()),
+                () -> assertThat(recruitmentRepository.findById(response.getRecruitmentId()).orElseThrow().getPreferenceGame()).isEqualTo(response.getPreferenceGame()),
+                () -> assertThat(recruitmentRepository.findById(response.getRecruitmentId()).orElseThrow().getNumberOfRecruitment()).isEqualTo(response.getNumberOfRecruitment()),
+                () -> assertThat(recruitmentRepository.findById(response.getRecruitmentId()).orElseThrow().getAnnual()).isEqualTo(response.getAnnual()),
+                () -> assertThat(recruitmentRepository.findById(response.getRecruitmentId()).orElseThrow().getCostOfCourtPerPerson()).isEqualTo(response.getCostOfCourtPerPerson()),
+                () -> assertThat(recruitmentRepository.findById(response.getRecruitmentId()).orElseThrow().getStatus()).isEqualTo(response.getRecruitmentStatus()),
+                () -> assertThat(recruitmentRepository.findById(response.getRecruitmentId()).orElseThrow().getDetails()).isEqualTo(response.getDetails())
         );
     }
 

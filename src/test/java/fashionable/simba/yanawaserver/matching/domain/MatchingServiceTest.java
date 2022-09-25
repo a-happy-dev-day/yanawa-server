@@ -25,20 +25,22 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class MatchingServiceTest {
-    MemoryMatchingRepository matchingRepository = new MemoryMatchingRepository();
-    MemoryParticipationRepository participationRepository = new MemoryParticipationRepository();
-    MemoryRecruitmentRepository recruitmentRepository = new MemoryRecruitmentRepository();
-    MatchingService matchingService = new MatchingService(matchingRepository, recruitmentRepository);
-    MemoryCourtRepository fakeCourtRepository = new MemoryCourtRepository();
+    MemoryMatchingRepository matchingRepository;
+    MemoryParticipationRepository participationRepository;
+    MemoryRecruitmentRepository recruitmentRepository;
+    MatchingService matchingService;
+    MemoryCourtRepository fakeCourtRepository;
     static Long 서울_테니스장;
 
     @BeforeEach
     public void setUp() {
-        matchingRepository.clear();
-        participationRepository.clear();
-        fakeCourtRepository.clear();
+        matchingRepository = new MemoryMatchingRepository();
+        participationRepository = new MemoryParticipationRepository();
+        recruitmentRepository = new MemoryRecruitmentRepository();
+        matchingService = new MatchingService(matchingRepository, recruitmentRepository);
+        fakeCourtRepository = new MemoryCourtRepository();
+
         서울_테니스장 = fakeCourtRepository.save("서울 테니스장");
-        recruitmentRepository.clear();
     }
 
     @Test
@@ -49,7 +51,7 @@ class MatchingServiceTest {
         //
         Matching savedMatching = matchingService.createMatching(matching);
         //
-        assertThat(matchingRepository.findMatchingById(savedMatching.getId()).orElseThrow()).isEqualTo(savedMatching);
+        assertThat(matchingRepository.findById(savedMatching.getId()).orElseThrow()).isEqualTo(savedMatching);
     }
 
     @Test
@@ -63,7 +65,7 @@ class MatchingServiceTest {
         //when
         matchingService.startMatching(savedMatching.getId());
         //then
-        assertThat(matchingRepository.findMatchingById(savedMatching.getId()).orElseThrow().getStatus()).isEqualTo(MatchingStatusType.ONGOING);
+        assertThat(matchingRepository.findById(savedMatching.getId()).orElseThrow().getStatus()).isEqualTo(MatchingStatusType.ONGOING);
     }
 
     @ParameterizedTest
@@ -105,7 +107,7 @@ class MatchingServiceTest {
         //when
         matchingService.endMatching(savedMatching.getId());
         //then
-        assertThat(matchingRepository.findMatchingById(savedMatching.getId()).orElseThrow().getStatus()).isEqualTo(MatchingStatusType.FINISHED);
+        assertThat(matchingRepository.findById(savedMatching.getId()).orElseThrow().getStatus()).isEqualTo(MatchingStatusType.FINISHED);
     }
 
     @ParameterizedTest

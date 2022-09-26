@@ -84,25 +84,13 @@ class MatchingServiceTest {
     }
 
     @Test
-    @DisplayName("매칭을 시작할때 모집정보가 없다면 IllegalArgumentException 발생한다.")
-    void start_matching_throw_IllegalArgumentException() {
-        Matching matching = getMatching(MatchingStatusType.WAITING);
-        Matching savedMatching = matchingRepository.save(matching);
-        Long savedMatchingId = savedMatching.getId();
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            matchingService.startMatching(savedMatchingId);
-        });
-    }
-
-    @Test
     @DisplayName("진행중인 매칭(ONGOING)을 종료(FINISHED)한다.")
     void end_matching_test() {
         //given
         Matching matching = getMatching(MatchingStatusType.ONGOING,
-                LocalDate.of(2022, 9, 1),
-                LocalTime.of(18, 0),
-                LocalTime.of(20, 0));
+            LocalDate.of(2022, 9, 1),
+            LocalTime.of(18, 0),
+            LocalTime.of(20, 0));
         Matching savedMatching = matchingService.createMatching(matching);
         //when
         matchingService.endMatching(savedMatching.getId());
@@ -129,7 +117,7 @@ class MatchingServiceTest {
     @DisplayName("매칭 종료시간이 지나지않으면 매칭을 종료시킬 수 없다.")
     void end_matching_time_check_test() {
         Matching matching = getMatching(MatchingStatusType.ONGOING
-                , LocalDate.now(), LocalTime.now().minusHours(1), LocalTime.now().plusHours(1));
+            , LocalDate.now(), LocalTime.now().minusHours(1), LocalTime.now().plusHours(1));
         Matching savedMatching = matchingService.createMatching(matching);
         Long savedMatchingId = savedMatching.getId();
 
@@ -140,39 +128,39 @@ class MatchingServiceTest {
 
     private static Matching getMatching(MatchingStatusType statusType) {
         return new Matching(
-                서울_테니스장,
-                1L,
-                LocalDate.of(2022, 9, 1),
-                LocalTime.of(18, 0),
-                LocalTime.of(20, 0),
-                statusType
+            서울_테니스장,
+            1L,
+            LocalDate.of(2022, 9, 1),
+            LocalTime.of(18, 0),
+            LocalTime.of(20, 0),
+            statusType
         );
     }
 
     private static Matching getMatching(MatchingStatusType statusType, LocalDate date, LocalTime startTime, LocalTime endTime) {
         return new Matching(
-                서울_테니스장,
-                1L,
-                date,
-                startTime,
-                endTime,
-                statusType
+            서울_테니스장,
+            1L,
+            date,
+            startTime,
+            endTime,
+            statusType
         );
     }
 
     private static Recruitment getRecruitment(Matching savedMatching, RecruitmentStatusType statusType) {
         return new Recruitment(
-                savedMatching.getId(),
-                new Level(5.0),
-                new Level(1.0),
-                AgeGroupType.TWENTIES,
-                GenderType.NONE,
-                PreferenceType.RALLY,
-                4,
-                2.0,
-                AnnualType.FIVE_YEARS_LESS,
-                "4명이서 랠리해요~",
-                statusType
-                );
+            savedMatching.getId(),
+            new Level(5.0),
+            new Level(1.0),
+            AgeGroupType.TWENTIES,
+            GenderType.NONE,
+            PreferenceType.RALLY,
+            4,
+            2.0,
+            AnnualType.FIVE_YEARS_LESS,
+            "4명이서 랠리해요~",
+            statusType
+        );
     }
 }

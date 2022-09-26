@@ -5,7 +5,6 @@ import fashionable.simba.yanawaserver.matching.domain.repository.ParticipationRe
 import fashionable.simba.yanawaserver.matching.domain.repository.RecruitmentRepository;
 import org.springframework.stereotype.Service;
 
-@Service
 public class RecruitmentService {
     private final RecruitmentRepository recruitmentRepository;
     private final ParticipationRepository participationRepository;

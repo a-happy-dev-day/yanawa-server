@@ -11,7 +11,6 @@ import fashionable.simba.yanawaserver.matching.error.NoCourtDataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
 public class MatchingApplicationService {
     private final MatchingService matchingService;
     private final RecruitmentService recruitmentService;

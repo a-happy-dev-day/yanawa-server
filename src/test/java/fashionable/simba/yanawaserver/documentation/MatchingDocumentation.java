@@ -2,6 +2,7 @@ package fashionable.simba.yanawaserver.documentation;
 
 import fashionable.simba.yanawaserver.matching.application.MatchingApplicationService;
 import fashionable.simba.yanawaserver.matching.application.RecruitmentResponse;
+import fashionable.simba.yanawaserver.matching.application.RecruitmentResponses;
 import fashionable.simba.yanawaserver.matching.constant.AgeGroupType;
 import fashionable.simba.yanawaserver.matching.constant.AnnualType;
 import fashionable.simba.yanawaserver.matching.constant.GenderType;
@@ -16,7 +17,9 @@ import org.springframework.http.MediaType;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.mockito.Mockito.any;
@@ -54,25 +57,7 @@ class MatchingDocumentation extends Documentation {
 
         when(matchingApplicationService.createMatchingAndRecruitment(any()))
             .thenReturn(
-                new RecruitmentResponse(
-                    2L,
-                    3L,
-                    1L,
-                    12L,
-                    LocalDate.of(2022, 9, 25),
-                    LocalTime.of(9, 30),
-                    LocalTime.of(11, 30),
-                    MatchingStatusType.WAITING,
-                    new Level(0.5),
-                    new Level(2.5),
-                    AgeGroupType.TWENTIES,
-                    GenderType.NONE,
-                    PreferenceType.RALLY,
-                    12,
-                    3000.0,
-                    AnnualType.TWO_YEARS_LESS,
-                    "랠리하실 분 구합니다~",
-                    RecruitmentStatusType.OPENING)
+                getResponse(12L, 2L, 2L)
             );
 
         givenOauth()
@@ -89,7 +74,14 @@ class MatchingDocumentation extends Documentation {
 
     @Test
     void findList() {
+        List<RecruitmentResponse> responses = new ArrayList<>();
+        responses.add(getResponse(12L, 2L, 2L));
+        responses.add(getResponse(11L, 3L, 3L));
+        responses.add(getResponse(15L, 2L, 1L));
 
+        when(matchingApplicationService.findAll()).thenReturn(
+            new RecruitmentResponses(responses)
+        );
 
         givenOauth()
             .filter(document("matching/findList",
@@ -98,11 +90,15 @@ class MatchingDocumentation extends Documentation {
             .contentType(MediaType.APPLICATION_JSON_VALUE)
             .when().get("/matchings")
             .then().log().all()
+            .statusCode(HttpStatus.OK.value())
             .extract();
     }
 
     @Test
     void findOne() {
+        when(matchingApplicationService.findOne(2L))
+            .thenReturn(getResponse(12L, 2L, 2L));
+
         givenOauth()
             .filter(document("matching/findOne",
                 preprocessRequest(prettyPrint()),
@@ -110,6 +106,31 @@ class MatchingDocumentation extends Documentation {
             .contentType(MediaType.APPLICATION_JSON_VALUE)
             .when().get("/matchings/{matchingId}", 2)
             .then().log().all()
+            .statusCode(HttpStatus.OK.value())
             .extract();
     }
+
+
+    private RecruitmentResponse getResponse(Long hostId, Long courtId, Long matchingId) {
+        return new RecruitmentResponse(
+            2L,
+            matchingId,
+            courtId,
+            hostId,
+            LocalDate.of(2022, 9, 25),
+            LocalTime.of(9, 30),
+            LocalTime.of(11, 30),
+            MatchingStatusType.WAITING,
+            new Level(0.5),
+            new Level(2.5),
+            AgeGroupType.TWENTIES,
+            GenderType.NONE,
+            PreferenceType.RALLY,
+            12,
+            3000.0,
+            AnnualType.TWO_YEARS_LESS,
+            "랠리하실 분 구합니다~",
+            RecruitmentStatusType.OPENING);
+    }
+
 }

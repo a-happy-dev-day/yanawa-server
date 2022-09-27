@@ -28,7 +28,7 @@ public class Recruitment {
     @AttributeOverrides({@AttributeOverride(name = "level", column = @Column(name = "MAXIMUM_LEVEL"))})
     private Level maximumLevel;
     @Embedded
-    @AttributeOverrides({@AttributeOverride(name = "level", column = @Column(name = "MINIIMUM_LEVEL"))})
+    @AttributeOverrides({@AttributeOverride(name = "level", column = @Column(name = "MINIMUM_LEVEL"))})
     private Level minimumLevel;
     private AgeGroupType ageOfRecruitment;
     private GenderType sexOfRecruitment;

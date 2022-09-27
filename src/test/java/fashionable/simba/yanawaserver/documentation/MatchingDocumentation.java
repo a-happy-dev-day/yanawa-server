@@ -1,8 +1,8 @@
 package fashionable.simba.yanawaserver.documentation;
 
 import fashionable.simba.yanawaserver.matching.application.MatchingApplicationService;
-import fashionable.simba.yanawaserver.matching.application.RecruitmentResponse;
-import fashionable.simba.yanawaserver.matching.application.RecruitmentResponses;
+import fashionable.simba.yanawaserver.matching.application.dto.RecruitmentResponse;
+import fashionable.simba.yanawaserver.matching.application.dto.RecruitmentResponses;
 import fashionable.simba.yanawaserver.matching.constant.AgeGroupType;
 import fashionable.simba.yanawaserver.matching.constant.AnnualType;
 import fashionable.simba.yanawaserver.matching.constant.GenderType;

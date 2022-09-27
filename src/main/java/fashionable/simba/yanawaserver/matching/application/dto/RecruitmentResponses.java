@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.matching.application;
+package fashionable.simba.yanawaserver.matching.application.dto;
 
 import java.util.List;
 

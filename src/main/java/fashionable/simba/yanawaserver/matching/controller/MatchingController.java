@@ -1,9 +1,9 @@
 package fashionable.simba.yanawaserver.matching.controller;
 
 import fashionable.simba.yanawaserver.matching.application.MatchingApplicationService;
-import fashionable.simba.yanawaserver.matching.application.RecruitmentRequsest;
-import fashionable.simba.yanawaserver.matching.application.RecruitmentResponse;
-import fashionable.simba.yanawaserver.matching.application.RecruitmentResponses;
+import fashionable.simba.yanawaserver.matching.application.dto.RecruitmentRequsest;
+import fashionable.simba.yanawaserver.matching.application.dto.RecruitmentResponse;
+import fashionable.simba.yanawaserver.matching.application.dto.RecruitmentResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

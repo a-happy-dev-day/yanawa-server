@@ -20,13 +20,13 @@ jobs:
         distribution: 'temurin'
 
     - name: Make gradle excutable
-      run: chmod +x ./yanawa-server/gradlew 
+      run: chmod +x ./yanawaserver/gradlew 
 
     - name: Build with Gradle
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
       with:
         arguments: build -x test
-        build-root-directory: yanawa-server
+        build-root-directory: yanawaserver
         
     - name: Login to DockerHub
       uses: docker/login-action@v1
@@ -37,8 +37,8 @@ jobs:
     - name: Build and push
       uses: docker/build-push-action@v2
       with:
-        context: ./yanawa-server
-        file: ./yanawa-server/Dockerfile
+        context: ./yanawaserver
+        file: ./yanawaserver/Dockerfile
         push: true
         tags: ${{env.NAME}}/${{env.REPO}}:latest
         

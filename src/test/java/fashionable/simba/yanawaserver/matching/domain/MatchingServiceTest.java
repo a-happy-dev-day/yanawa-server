@@ -21,6 +21,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
@@ -66,6 +67,26 @@ class MatchingServiceTest {
         matchingService.startMatching(savedMatching.getId());
         //then
         assertThat(matchingRepository.findById(savedMatching.getId()).orElseThrow().getStatus()).isEqualTo(MatchingStatusType.ONGOING);
+    }
+
+    @Test
+    @DisplayName("매칭 정보가 없으면 예외가 발생한다.")
+    void start_matching_no_such_data_matching() {
+        Matching matching = getMatching(MatchingStatusType.WAITING);
+
+        assertThatThrownBy(
+            () -> matchingService.startMatching(matching.getId())
+        ).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("모집이 되지 않은 매칭이면 예외가 발생한다.")
+    void start_matching_no_such_data_recruitment() {
+        Matching matching = matchingRepository.save(getMatching(MatchingStatusType.WAITING));
+
+        assertThatThrownBy(
+            () -> matchingService.startMatching(matching.getId())
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest

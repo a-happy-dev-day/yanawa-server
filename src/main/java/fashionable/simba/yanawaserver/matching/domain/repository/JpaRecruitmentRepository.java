@@ -13,4 +13,6 @@ public interface JpaRecruitmentRepository extends JpaRepository<Recruitment, Lon
 
     @Override
     Optional<Recruitment> findById(Long aLong);
+
+    Optional<Recruitment> findByMatchingId(Long id);
 }

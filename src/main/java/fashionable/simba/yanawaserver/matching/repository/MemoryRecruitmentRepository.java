@@ -2,7 +2,6 @@ package fashionable.simba.yanawaserver.matching.repository;
 
 import fashionable.simba.yanawaserver.matching.domain.Recruitment;
 import fashionable.simba.yanawaserver.matching.domain.repository.RecruitmentRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,6 +39,11 @@ public class MemoryRecruitmentRepository implements RecruitmentRepository {
     @Override
     public Optional<Recruitment> findById(Long id) {
         return Optional.ofNullable(recruitments.get(id));
+    }
+
+    @Override
+    public Optional<Recruitment> findByMatchingId(Long id) {
+        return recruitments.values().stream().filter(recruitment -> recruitment.getMatchingId().equals(id)).findAny();
     }
 
     public Optional<Recruitment> findRecruitmentByMatchingId(Long matchingId) {

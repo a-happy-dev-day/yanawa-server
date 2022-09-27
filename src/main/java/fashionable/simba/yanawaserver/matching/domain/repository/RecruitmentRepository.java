@@ -8,4 +8,6 @@ public interface RecruitmentRepository {
     Recruitment save(Recruitment recruitment);
 
     Optional<Recruitment> findById(Long id);
+
+    Optional<Recruitment> findByMatchingId(Long id);
 }

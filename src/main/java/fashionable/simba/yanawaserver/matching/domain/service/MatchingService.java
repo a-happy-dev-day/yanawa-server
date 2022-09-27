@@ -24,8 +24,12 @@ public class MatchingService {
     }
 
     public Matching startMatching(Long id) {
-        Matching matching = matchingRepository.findById(id).orElseThrow();
-        Recruitment recruitment = recruitmentRepository.findById(matching.getId()).orElseThrow(() -> new IllegalArgumentException("모집 정보가 없습니다."));
+        Matching matching = matchingRepository.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("매칭 정보가 없습니다."));
+
+        Recruitment recruitment = recruitmentRepository.findByMatchingId(matching.getId())
+            .orElseThrow(() -> new IllegalArgumentException("모집 정보가 없습니다."));
+        
         if (!recruitment.isClosed()) {
             throw new IllegalArgumentException("모집이 종료되지 않아 매칭을 시작할 수 없습니다.");
         }

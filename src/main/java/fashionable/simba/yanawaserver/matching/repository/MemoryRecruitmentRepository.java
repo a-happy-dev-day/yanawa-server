@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class MemoryRecruitmentRepository implements RecruitmentRepository {
-    private static final Map<Long, Recruitment> recruitments = new HashMap<>();
+    private final Map<Long, Recruitment> recruitments = new HashMap<>();
     private Long sequence = 0L;
 
     @Override

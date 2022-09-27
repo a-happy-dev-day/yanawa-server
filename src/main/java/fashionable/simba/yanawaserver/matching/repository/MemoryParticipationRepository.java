@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class MemoryParticipationRepository implements ParticipationRepository {
-    private static final Map<Long, Participation> participations = new HashMap<>();
+    private final Map<Long, Participation> participations = new HashMap<>();
     private Long sequence = 0L;
 
     @Override

@@ -9,7 +9,6 @@ import fashionable.simba.yanawaserver.matching.constant.RecruitmentStatusType;
 import fashionable.simba.yanawaserver.matching.domain.service.MatchingService;
 import fashionable.simba.yanawaserver.matching.repository.MemoryCourtRepository;
 import fashionable.simba.yanawaserver.matching.repository.MemoryMatchingRepository;
-import fashionable.simba.yanawaserver.matching.repository.MemoryParticipationRepository;
 import fashionable.simba.yanawaserver.matching.repository.MemoryRecruitmentRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -21,13 +20,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class MatchingServiceTest {
     MemoryMatchingRepository matchingRepository;
-    MemoryParticipationRepository participationRepository;
     MemoryRecruitmentRepository recruitmentRepository;
     MatchingService matchingService;
     MemoryCourtRepository fakeCourtRepository;
@@ -36,7 +33,6 @@ class MatchingServiceTest {
     @BeforeEach
     public void setUp() {
         matchingRepository = new MemoryMatchingRepository();
-        participationRepository = new MemoryParticipationRepository();
         recruitmentRepository = new MemoryRecruitmentRepository();
         matchingService = new MatchingService(matchingRepository, recruitmentRepository);
         fakeCourtRepository = new MemoryCourtRepository();
@@ -74,19 +70,22 @@ class MatchingServiceTest {
     void start_matching_no_such_data_matching() {
         Matching matching = getMatching(MatchingStatusType.WAITING);
 
-        assertThatThrownBy(
+        assertThrows(
+            IllegalArgumentException.class,
             () -> matchingService.startMatching(matching.getId())
-        ).isInstanceOf(IllegalArgumentException.class);
+        );
     }
 
     @Test
     @DisplayName("모집이 되지 않은 매칭이면 예외가 발생한다.")
     void start_matching_no_such_data_recruitment() {
-        Matching matching = matchingRepository.save(getMatching(MatchingStatusType.WAITING));
+        Matching matching = getMatching(MatchingStatusType.WAITING);
+        Matching savedMatching = matchingRepository.save(matching);
 
-        assertThatThrownBy(
-            () -> matchingService.startMatching(matching.getId())
-        ).isInstanceOf(IllegalArgumentException.class);
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> matchingService.startMatching(savedMatching.getId())
+        );
     }
 
     @ParameterizedTest
@@ -158,7 +157,7 @@ class MatchingServiceTest {
         );
     }
 
-    private static Matching getMatching(MatchingStatusType statusType, LocalDate date, LocalTime startTime, LocalTime endTime) {
+    private Matching getMatching(MatchingStatusType statusType, LocalDate date, LocalTime startTime, LocalTime endTime) {
         return new Matching(
             서울_테니스장,
             1L,
@@ -169,7 +168,7 @@ class MatchingServiceTest {
         );
     }
 
-    private static Recruitment getRecruitment(Matching savedMatching, RecruitmentStatusType statusType) {
+    private Recruitment getRecruitment(Matching savedMatching, RecruitmentStatusType statusType) {
         return new Recruitment(
             savedMatching.getId(),
             new Level(5.0),

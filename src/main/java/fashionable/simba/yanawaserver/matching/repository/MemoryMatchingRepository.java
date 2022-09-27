@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class MemoryMatchingRepository implements MatchingRepository {
-    private static final Map<Long, Matching> matchings = new HashMap<>();
+    private final Map<Long, Matching> matchings = new HashMap<>();
     private Long sequence = 0L;
 
     @Override

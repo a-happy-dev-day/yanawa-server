@@ -29,10 +29,11 @@ public class MatchingService {
 
         Recruitment recruitment = recruitmentRepository.findByMatchingId(matching.getId())
             .orElseThrow(() -> new IllegalArgumentException("모집 정보가 없습니다."));
-        
+
         if (!recruitment.isClosed()) {
             throw new IllegalArgumentException("모집이 종료되지 않아 매칭을 시작할 수 없습니다.");
         }
+
         matching.changeOngoing();
         return matchingRepository.save(matching);
     }

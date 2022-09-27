@@ -1,4 +1,5 @@
 name: yanawa-server-ci-cd
+
 on:
   push:
     branches: [ main ]
@@ -6,6 +7,7 @@ on:
 env:
   NAME: geonc123
   REPO: yanawa-be
+  DIR: .
   
 jobs:
   build:
@@ -20,25 +22,24 @@ jobs:
         distribution: 'temurin'
 
     - name: Make gradle excutable
-      run: chmod +x ./yanawaserver/gradlew 
+      run: chmod +x gradlew 
+      working-directory: ${{env.DIR}}
 
-    - name: Build with Gradle
-      uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
-      with:
-        arguments: build -x test
-        build-root-directory: yanawaserver
-        
+    - name: Build with Gradle 
+      run: ./gradlew build -x test 
+      working-directory: ${{env.DIR}}
+	  
     - name: Login to DockerHub
       uses: docker/login-action@v1
       with:
         username: ${{secrets.DOCKERHUB_USERNAME}}
         password: ${{secrets.DOCKERHUB_TOKEN}}
-
+        
     - name: Build and push
       uses: docker/build-push-action@v2
       with:
-        context: ./yanawaserver
-        file: ./yanawaserver/Dockerfile
+        context: ${{env.DIR}}
+        file: ${{env.DIR}}/Dockerfile
         push: true
         tags: ${{env.NAME}}/${{env.REPO}}:latest
         

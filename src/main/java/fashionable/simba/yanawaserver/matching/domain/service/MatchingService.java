@@ -3,18 +3,18 @@ package fashionable.simba.yanawaserver.matching.domain.service;
 import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
 import fashionable.simba.yanawaserver.matching.domain.Matching;
 import fashionable.simba.yanawaserver.matching.domain.Recruitment;
-import fashionable.simba.yanawaserver.matching.domain.repository.MatchingRepository;
-import fashionable.simba.yanawaserver.matching.domain.repository.RecruitmentRepository;
+import fashionable.simba.yanawaserver.matching.domain.repository.JpaMatchingRepository;
+import fashionable.simba.yanawaserver.matching.domain.repository.JpaRecruitmentRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
 @Service
 public class MatchingService {
-    private final MatchingRepository matchingRepository;
-    private final RecruitmentRepository recruitmentRepository;
+    private final JpaMatchingRepository matchingRepository;
+    private final JpaRecruitmentRepository recruitmentRepository;
 
-    public MatchingService(MatchingRepository matchingRepository, RecruitmentRepository recruitmentRepository) {
+    public MatchingService(JpaMatchingRepository matchingRepository, JpaRecruitmentRepository recruitmentRepository) {
         this.matchingRepository = matchingRepository;
         this.recruitmentRepository = recruitmentRepository;
     }
@@ -48,5 +48,9 @@ public class MatchingService {
         }
         matching.changeFinished();
         matchingRepository.save(matching);
+    }
+
+    public Matching findMatching(Long matchingId) {
+        return matchingRepository.findById(matchingId).orElseThrow(() -> new IllegalArgumentException("매칭 정보가 없습니다."));
     }
 }

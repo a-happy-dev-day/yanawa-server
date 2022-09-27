@@ -13,6 +13,9 @@ import fashionable.simba.yanawaserver.matching.domain.service.RecruitmentService
 import fashionable.simba.yanawaserver.matching.error.NoCourtDataException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class MatchingApplicationService {
     private final MatchingService matchingService;
@@ -79,11 +82,60 @@ public class MatchingApplicationService {
 
     // TODO : 구현 필요
     public RecruitmentResponses findAll() {
-        return null;
+        List<RecruitmentResponse> responses = new ArrayList<>();
+        List<Recruitment> recruitments = recruitmentService.findAllRecruitment();
+
+        for (Recruitment recruitment : recruitments) {
+            Matching matching = matchingService.findMatching(recruitment.getMatchingId());
+            RecruitmentResponse response = new RecruitmentResponse(
+                recruitment.getId(),
+                recruitment.getMatchingId(),
+                matching.getCourtId(),
+                matching.getHostId(),
+                matching.getDate(),
+                matching.getStartTime(),
+                matching.getEndTime(),
+                matching.getStatus(),
+                recruitment.getMaximumLevel(),
+                recruitment.getMinimumLevel(),
+                recruitment.getAgeOfRecruitment(),
+                recruitment.getSexOfRecruitment(),
+                recruitment.getPreferenceGame(),
+                recruitment.getNumberOfRecruitment(),
+                recruitment.getCostOfCourtPerPerson(),
+                recruitment.getAnnual(),
+                recruitment.getDetails(),
+                recruitment.getStatus()
+            );
+            responses.add(response);
+        }
+            return new RecruitmentResponses(responses);
     }
 
     // TODO : 구현 필요
     public RecruitmentResponse findOne(Long matchingId) {
-        return null;
+        Recruitment recruitment = recruitmentService.findRecruitment(matchingId);
+        Matching matching = matchingService.findMatching(recruitment.getMatchingId());
+
+        return new RecruitmentResponse(
+            recruitment.getId(),
+            recruitment.getMatchingId(),
+            matching.getCourtId(),
+            matching.getHostId(),
+            matching.getDate(),
+            matching.getStartTime(),
+            matching.getEndTime(),
+            matching.getStatus(),
+            recruitment.getMaximumLevel(),
+            recruitment.getMinimumLevel(),
+            recruitment.getAgeOfRecruitment(),
+            recruitment.getSexOfRecruitment(),
+            recruitment.getPreferenceGame(),
+            recruitment.getNumberOfRecruitment(),
+            recruitment.getCostOfCourtPerPerson(),
+            recruitment.getAnnual(),
+            recruitment.getDetails(),
+            recruitment.getStatus()
+        );
     }
 }

@@ -1,16 +1,18 @@
 package fashionable.simba.yanawaserver.matching.domain.service;
 
 import fashionable.simba.yanawaserver.matching.domain.Recruitment;
-import fashionable.simba.yanawaserver.matching.domain.repository.ParticipationRepository;
-import fashionable.simba.yanawaserver.matching.domain.repository.RecruitmentRepository;
+import fashionable.simba.yanawaserver.matching.domain.repository.JpaParticipationRepository;
+import fashionable.simba.yanawaserver.matching.domain.repository.JpaRecruitmentRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class RecruitmentService {
-    private final RecruitmentRepository recruitmentRepository;
-    private final ParticipationRepository participationRepository;
+    private final JpaRecruitmentRepository recruitmentRepository;
+    private final JpaParticipationRepository participationRepository;
 
-    public RecruitmentService(RecruitmentRepository recruitmentRepository, ParticipationRepository participationRepository) {
+    public RecruitmentService(JpaRecruitmentRepository recruitmentRepository, JpaParticipationRepository participationRepository) {
         this.recruitmentRepository = recruitmentRepository;
         this.participationRepository = participationRepository;
     }
@@ -27,5 +29,13 @@ public class RecruitmentService {
         }
         recruitment.changeClosed();
         return recruitmentRepository.save(recruitment);
+    }
+
+    public List<Recruitment> findAllRecruitment() {
+        return recruitmentRepository.findAll();
+    }
+
+    public Recruitment findRecruitment(Long recruitmentId) {
+        return recruitmentRepository.findById(recruitmentId).orElseThrow(() -> new IllegalArgumentException("모집 정보가 없습니다."));
     }
 }

@@ -8,6 +8,9 @@ import fashionable.simba.yanawaserver.matching.constant.GenderType;
 import fashionable.simba.yanawaserver.matching.constant.PreferenceType;
 import fashionable.simba.yanawaserver.matching.domain.Level;
 import fashionable.simba.yanawaserver.matching.domain.repository.CourtRepository;
+import fashionable.simba.yanawaserver.matching.domain.repository.JpaMatchingRepository;
+import fashionable.simba.yanawaserver.matching.domain.repository.JpaParticipationRepository;
+import fashionable.simba.yanawaserver.matching.domain.repository.JpaRecruitmentRepository;
 import fashionable.simba.yanawaserver.matching.domain.repository.MatchingRepository;
 import fashionable.simba.yanawaserver.matching.domain.repository.ParticipationRepository;
 import fashionable.simba.yanawaserver.matching.domain.repository.RecruitmentRepository;
@@ -29,9 +32,9 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ApplicationServiceTest {
-    MatchingRepository matchingRepository;
-    RecruitmentRepository recruitmentRepository;
-    ParticipationRepository participationRepository;
+    JpaMatchingRepository matchingRepository;
+    JpaRecruitmentRepository recruitmentRepository;
+    JpaParticipationRepository participationRepository;
     MatchingService matchingService;
     RecruitmentService recruitmentService;
     CourtRepository courtRepository;
@@ -39,8 +42,6 @@ class ApplicationServiceTest {
 
     @BeforeEach
     public void setUp() {
-        matchingRepository = new MemoryMatchingRepository();
-        recruitmentRepository = new MemoryRecruitmentRepository();
         matchingService = new MatchingService(matchingRepository, recruitmentRepository);
         recruitmentService = new RecruitmentService(recruitmentRepository, participationRepository);
         courtRepository = new MemoryCourtRepository();

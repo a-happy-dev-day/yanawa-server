@@ -6,6 +6,8 @@ import fashionable.simba.yanawaserver.matching.constant.GenderType;
 import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
 import fashionable.simba.yanawaserver.matching.constant.PreferenceType;
 import fashionable.simba.yanawaserver.matching.constant.RecruitmentStatusType;
+import fashionable.simba.yanawaserver.matching.domain.repository.JpaMatchingRepository;
+import fashionable.simba.yanawaserver.matching.domain.repository.JpaRecruitmentRepository;
 import fashionable.simba.yanawaserver.matching.domain.service.MatchingService;
 import fashionable.simba.yanawaserver.matching.repository.MemoryCourtRepository;
 import fashionable.simba.yanawaserver.matching.repository.MemoryMatchingRepository;
@@ -24,16 +26,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class MatchingServiceTest {
-    MemoryMatchingRepository matchingRepository;
-    MemoryRecruitmentRepository recruitmentRepository;
+    JpaMatchingRepository matchingRepository;
+    JpaRecruitmentRepository recruitmentRepository;
     MatchingService matchingService;
     MemoryCourtRepository fakeCourtRepository;
     static Long 서울_테니스장;
 
     @BeforeEach
     public void setUp() {
-        matchingRepository = new MemoryMatchingRepository();
-        recruitmentRepository = new MemoryRecruitmentRepository();
         matchingService = new MatchingService(matchingRepository, recruitmentRepository);
         fakeCourtRepository = new MemoryCourtRepository();
 

@@ -6,6 +6,8 @@ import fashionable.simba.yanawaserver.matching.constant.GenderType;
 import fashionable.simba.yanawaserver.matching.constant.ParticipationStatusType;
 import fashionable.simba.yanawaserver.matching.constant.PreferenceType;
 import fashionable.simba.yanawaserver.matching.constant.RecruitmentStatusType;
+import fashionable.simba.yanawaserver.matching.domain.repository.JpaParticipationRepository;
+import fashionable.simba.yanawaserver.matching.domain.repository.JpaRecruitmentRepository;
 import fashionable.simba.yanawaserver.matching.domain.repository.ParticipationRepository;
 import fashionable.simba.yanawaserver.matching.domain.service.RecruitmentService;
 import fashionable.simba.yanawaserver.matching.repository.MemoryParticipationRepository;
@@ -20,14 +22,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class RecruitmentServiceTest {
-    MemoryRecruitmentRepository recruitmentRepository;
-    ParticipationRepository participationRepository;
+    JpaRecruitmentRepository recruitmentRepository;
+    JpaParticipationRepository participationRepository;
     RecruitmentService recruitmentService;
 
     @BeforeEach
     public void setUp() {
-        recruitmentRepository = new MemoryRecruitmentRepository();
-        participationRepository = new MemoryParticipationRepository();
         recruitmentService = new RecruitmentService(recruitmentRepository, participationRepository);
     }
 
@@ -102,7 +102,7 @@ class RecruitmentServiceTest {
             RecruitmentStatusType.OPENING
         );
         Recruitment save = recruitmentService.createRecruitment(recruitment);
-        assertThat(recruitmentRepository.findRecruitmentByMatchingId(1L).orElseThrow()).isEqualTo(save);
+        assertThat(recruitmentRepository.findByMatchingId(1L).orElseThrow()).isEqualTo(save);
     }
 
     @Test

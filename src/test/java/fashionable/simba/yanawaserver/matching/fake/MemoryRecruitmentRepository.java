@@ -1,16 +1,16 @@
-package fashionable.simba.yanawaserver.matching.repository;
+package fashionable.simba.yanawaserver.matching.fake;
 
 import fashionable.simba.yanawaserver.matching.domain.Recruitment;
 import fashionable.simba.yanawaserver.matching.domain.repository.RecruitmentRepository;
-import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-@Repository
 public class MemoryRecruitmentRepository implements RecruitmentRepository {
-    private static final Map<Long, Recruitment> recruitments = new HashMap<>();
+    private final Map<Long, Recruitment> recruitments = new HashMap<>();
     private Long sequence = 0L;
 
     @Override
@@ -34,18 +34,23 @@ public class MemoryRecruitmentRepository implements RecruitmentRepository {
         return save;
     }
 
-    @Override
-    public void clear() {
-        recruitments.clear();
-    }
-
     private synchronized Long getId() {
         return ++sequence;
     }
 
     @Override
-    public Optional<Recruitment> findRecruitmentById(Long id) {
+    public Optional<Recruitment> findById(Long id) {
         return Optional.ofNullable(recruitments.get(id));
+    }
+
+    @Override
+    public Optional<Recruitment> findByMatchingId(Long id) {
+        return recruitments.values().stream().filter(recruitment -> recruitment.getMatchingId().equals(id)).findAny();
+    }
+
+    @Override
+    public List<Recruitment> findAll() {
+        return new ArrayList<>(recruitments.values());
     }
 
     public Optional<Recruitment> findRecruitmentByMatchingId(Long matchingId) {

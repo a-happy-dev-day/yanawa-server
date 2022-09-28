@@ -4,10 +4,17 @@ package fashionable.simba.yanawaserver.matching.domain;
 import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
 import fashionable.simba.yanawaserver.matching.error.MatchingTimeException;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+@Entity
 public class Matching {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long hostId;
     private Long courtId;
@@ -15,6 +22,10 @@ public class Matching {
     private LocalTime startTime;
     private LocalTime endTime;
     private MatchingStatusType status;
+
+    protected Matching() {
+        /*no-op*/
+    }
 
     public Long getId() {
         return id;

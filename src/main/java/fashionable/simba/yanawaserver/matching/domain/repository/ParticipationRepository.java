@@ -7,9 +7,7 @@ import java.util.Optional;
 public interface ParticipationRepository {
     Participation save(Participation apply);
 
-    Optional<Participation> findParticipationById(Long id);
-
-    void clear();
+    Optional<Participation> findById(Long id);
 
     Integer countParticipationsByMatchingId(Long matchingId);
 }

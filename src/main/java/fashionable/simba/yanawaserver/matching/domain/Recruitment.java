@@ -9,10 +9,27 @@ import fashionable.simba.yanawaserver.matching.error.InvalidCostException;
 import fashionable.simba.yanawaserver.matching.error.InvalidNumberException;
 import fashionable.simba.yanawaserver.matching.error.LevelSettingException;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Recruitment {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long matchingId;
+    @Embedded
+    @AttributeOverrides({@AttributeOverride(name = "level", column = @Column(name = "MAXIMUM_LEVEL"))})
     private Level maximumLevel;
+    @Embedded
+    @AttributeOverrides({@AttributeOverride(name = "level", column = @Column(name = "MINIMUM_LEVEL"))})
     private Level minimumLevel;
     private AgeGroupType ageOfRecruitment;
     private GenderType sexOfRecruitment;
@@ -22,6 +39,10 @@ public class Recruitment {
     private AnnualType annual;
     private String details;
     private RecruitmentStatusType status;
+
+    protected Recruitment() {
+        /*no-op*/
+    }
 
     public Long getId() {
         return id;

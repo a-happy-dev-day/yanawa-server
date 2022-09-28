@@ -1,16 +1,14 @@
-package fashionable.simba.yanawaserver.matching.repository;
+package fashionable.simba.yanawaserver.matching.fake;
 
 import fashionable.simba.yanawaserver.matching.domain.Participation;
 import fashionable.simba.yanawaserver.matching.domain.repository.ParticipationRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-@Repository
 public class MemoryParticipationRepository implements ParticipationRepository {
-    private static final Map<Long, Participation> participations = new HashMap<>();
+    private final Map<Long, Participation> participations = new HashMap<>();
     private Long sequence = 0L;
 
     @Override
@@ -33,13 +31,8 @@ public class MemoryParticipationRepository implements ParticipationRepository {
 
 
     @Override
-    public Optional<Participation> findParticipationById(Long id) {
+    public Optional<Participation> findById(Long id) {
         return Optional.ofNullable(participations.get(id));
-    }
-
-    @Override
-    public void clear() {
-        participations.clear();
     }
 
     @Override

@@ -7,9 +7,10 @@ import fashionable.simba.yanawaserver.matching.constant.ParticipationStatusType;
 import fashionable.simba.yanawaserver.matching.constant.PreferenceType;
 import fashionable.simba.yanawaserver.matching.constant.RecruitmentStatusType;
 import fashionable.simba.yanawaserver.matching.domain.repository.ParticipationRepository;
+import fashionable.simba.yanawaserver.matching.domain.repository.RecruitmentRepository;
 import fashionable.simba.yanawaserver.matching.domain.service.RecruitmentService;
-import fashionable.simba.yanawaserver.matching.repository.MemoryParticipationRepository;
-import fashionable.simba.yanawaserver.matching.repository.MemoryRecruitmentRepository;
+import fashionable.simba.yanawaserver.matching.fake.MemoryParticipationRepository;
+import fashionable.simba.yanawaserver.matching.fake.MemoryRecruitmentRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,14 +21,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class RecruitmentServiceTest {
-    MemoryRecruitmentRepository recruitmentRepository = new MemoryRecruitmentRepository();
-    ParticipationRepository participationRepository = new MemoryParticipationRepository();
-    RecruitmentService recruitmentService = new RecruitmentService(recruitmentRepository, participationRepository);
+    RecruitmentRepository recruitmentRepository;
+    ParticipationRepository participationRepository;
+    RecruitmentService recruitmentService;
 
     @BeforeEach
     public void setUp() {
-        recruitmentRepository.clear();
-        participationRepository.clear();
+        recruitmentRepository = new MemoryRecruitmentRepository();
+        participationRepository = new MemoryParticipationRepository();
+        recruitmentService = new RecruitmentService(recruitmentRepository, participationRepository);
     }
 
     @Test
@@ -49,7 +51,7 @@ class RecruitmentServiceTest {
 
         Recruitment savedRecruitment = recruitmentService.createRecruitment(recruitment);
 
-        assertThat(recruitmentRepository.findRecruitmentById(savedRecruitment.getId()).orElseThrow()).isEqualTo(savedRecruitment);
+        assertThat(recruitmentRepository.findById(savedRecruitment.getId()).orElseThrow()).isEqualTo(savedRecruitment);
     }
 
     @Test
@@ -81,7 +83,7 @@ class RecruitmentServiceTest {
         Recruitment savedRecruitment = recruitmentService.createRecruitment(recruitment);
         recruitmentService.completeRecritument(savedRecruitment.getId());
         //then
-        assertThat(recruitmentRepository.findRecruitmentById(savedRecruitment.getId()).orElseThrow().getStatus()).isEqualTo(RecruitmentStatusType.CLOSED);
+        assertThat(recruitmentRepository.findById(savedRecruitment.getId()).orElseThrow().getStatus()).isEqualTo(RecruitmentStatusType.CLOSED);
     }
 
     @Test
@@ -101,7 +103,7 @@ class RecruitmentServiceTest {
             RecruitmentStatusType.OPENING
         );
         Recruitment save = recruitmentService.createRecruitment(recruitment);
-        assertThat(recruitmentRepository.findRecruitmentByMatchingId(1L).orElseThrow()).isEqualTo(save);
+        assertThat(recruitmentRepository.findByMatchingId(1L).orElseThrow()).isEqualTo(save);
     }
 
     @Test

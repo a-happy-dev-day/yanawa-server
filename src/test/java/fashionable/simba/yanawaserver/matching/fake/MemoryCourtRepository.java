@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.matching.repository;
+package fashionable.simba.yanawaserver.matching.fake;
 
 import fashionable.simba.yanawaserver.matching.domain.repository.CourtRepository;
 import org.springframework.stereotype.Repository;
@@ -21,11 +21,6 @@ public class MemoryCourtRepository implements CourtRepository {
 
     private synchronized Long getId() {
         return ++sequence;
-    }
-
-    @Override
-    public void clear() {
-        courts.clear();
     }
 
     @Override

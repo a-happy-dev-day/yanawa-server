@@ -1,0 +1,21 @@
+= yanawa Application API Document
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+== matching
+
+=== 매칭 생성
+
+operation::matching/create[snippets='http-request,http-response']
+
+=== 매칭 조회
+
+operation::matching/findOne[snippets='http-request,http-response']
+
+=== 매칭 리스트 조회
+
+operation::matching/findList[snippets='http-request,http-response']

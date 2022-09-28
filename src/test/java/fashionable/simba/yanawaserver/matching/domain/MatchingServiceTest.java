@@ -6,11 +6,12 @@ import fashionable.simba.yanawaserver.matching.constant.GenderType;
 import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
 import fashionable.simba.yanawaserver.matching.constant.PreferenceType;
 import fashionable.simba.yanawaserver.matching.constant.RecruitmentStatusType;
+import fashionable.simba.yanawaserver.matching.domain.repository.MatchingRepository;
+import fashionable.simba.yanawaserver.matching.domain.repository.RecruitmentRepository;
 import fashionable.simba.yanawaserver.matching.domain.service.MatchingService;
-import fashionable.simba.yanawaserver.matching.repository.MemoryCourtRepository;
-import fashionable.simba.yanawaserver.matching.repository.MemoryMatchingRepository;
-import fashionable.simba.yanawaserver.matching.repository.MemoryParticipationRepository;
-import fashionable.simba.yanawaserver.matching.repository.MemoryRecruitmentRepository;
+import fashionable.simba.yanawaserver.matching.fake.MemoryCourtRepository;
+import fashionable.simba.yanawaserver.matching.fake.MemoryMatchingRepository;
+import fashionable.simba.yanawaserver.matching.fake.MemoryRecruitmentRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,20 +26,22 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class MatchingServiceTest {
-    MemoryMatchingRepository matchingRepository = new MemoryMatchingRepository();
-    MemoryParticipationRepository participationRepository = new MemoryParticipationRepository();
-    MemoryRecruitmentRepository recruitmentRepository = new MemoryRecruitmentRepository();
-    MatchingService matchingService = new MatchingService(matchingRepository, recruitmentRepository);
-    MemoryCourtRepository fakeCourtRepository = new MemoryCourtRepository();
+    MatchingRepository matchingRepository;
+    RecruitmentRepository recruitmentRepository;
+    MemoryCourtRepository courtRepository;
+
+    MatchingService matchingService;
     static Long 서울_테니스장;
 
     @BeforeEach
     public void setUp() {
-        matchingRepository.clear();
-        participationRepository.clear();
-        fakeCourtRepository.clear();
-        서울_테니스장 = fakeCourtRepository.save("서울 테니스장");
-        recruitmentRepository.clear();
+        matchingRepository = new MemoryMatchingRepository();
+        recruitmentRepository = new MemoryRecruitmentRepository();
+        courtRepository = new MemoryCourtRepository();
+
+        matchingService = new MatchingService(matchingRepository, recruitmentRepository);
+
+        서울_테니스장 = courtRepository.save("서울 테니스장");
     }
 
     @Test
@@ -49,7 +52,7 @@ class MatchingServiceTest {
         //
         Matching savedMatching = matchingService.createMatching(matching);
         //
-        assertThat(matchingRepository.findMatchingById(savedMatching.getId()).orElseThrow()).isEqualTo(savedMatching);
+        assertThat(matchingRepository.findById(savedMatching.getId()).orElseThrow()).isEqualTo(savedMatching);
     }
 
     @Test
@@ -63,7 +66,30 @@ class MatchingServiceTest {
         //when
         matchingService.startMatching(savedMatching.getId());
         //then
-        assertThat(matchingRepository.findMatchingById(savedMatching.getId()).orElseThrow().getStatus()).isEqualTo(MatchingStatusType.ONGOING);
+        assertThat(matchingRepository.findById(savedMatching.getId()).orElseThrow().getStatus()).isEqualTo(MatchingStatusType.ONGOING);
+    }
+
+    @Test
+    @DisplayName("매칭 정보가 없으면 예외가 발생한다.")
+    void start_matching_no_such_data_matching() {
+        Matching matching = getMatching(MatchingStatusType.WAITING);
+
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> matchingService.startMatching(matching.getId())
+        );
+    }
+
+    @Test
+    @DisplayName("모집이 되지 않은 매칭이면 예외가 발생한다.")
+    void start_matching_no_such_data_recruitment() {
+        Matching matching = getMatching(MatchingStatusType.WAITING);
+        Matching savedMatching = matchingRepository.save(matching);
+
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> matchingService.startMatching(savedMatching.getId())
+        );
     }
 
     @ParameterizedTest
@@ -82,30 +108,18 @@ class MatchingServiceTest {
     }
 
     @Test
-    @DisplayName("매칭을 시작할때 모집정보가 없다면 IllegalArgumentException 발생한다.")
-    void start_matching_throw_IllegalArgumentException() {
-        Matching matching = getMatching(MatchingStatusType.WAITING);
-        Matching savedMatching = matchingRepository.save(matching);
-        Long savedMatchingId = savedMatching.getId();
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            matchingService.startMatching(savedMatchingId);
-        });
-    }
-
-    @Test
     @DisplayName("진행중인 매칭(ONGOING)을 종료(FINISHED)한다.")
     void end_matching_test() {
         //given
         Matching matching = getMatching(MatchingStatusType.ONGOING,
-                LocalDate.of(2022, 9, 1),
-                LocalTime.of(18, 0),
-                LocalTime.of(20, 0));
+            LocalDate.of(2022, 9, 1),
+            LocalTime.of(18, 0),
+            LocalTime.of(20, 0));
         Matching savedMatching = matchingService.createMatching(matching);
         //when
         matchingService.endMatching(savedMatching.getId());
         //then
-        assertThat(matchingRepository.findMatchingById(savedMatching.getId()).orElseThrow().getStatus()).isEqualTo(MatchingStatusType.FINISHED);
+        assertThat(matchingRepository.findById(savedMatching.getId()).orElseThrow().getStatus()).isEqualTo(MatchingStatusType.FINISHED);
     }
 
     @ParameterizedTest
@@ -127,7 +141,7 @@ class MatchingServiceTest {
     @DisplayName("매칭 종료시간이 지나지않으면 매칭을 종료시킬 수 없다.")
     void end_matching_time_check_test() {
         Matching matching = getMatching(MatchingStatusType.ONGOING
-                , LocalDate.now(), LocalTime.now().minusHours(1), LocalTime.now().plusHours(1));
+            , LocalDate.now(), LocalTime.now().minusHours(1), LocalTime.now().plusHours(1));
         Matching savedMatching = matchingService.createMatching(matching);
         Long savedMatchingId = savedMatching.getId();
 
@@ -138,39 +152,39 @@ class MatchingServiceTest {
 
     private static Matching getMatching(MatchingStatusType statusType) {
         return new Matching(
-                서울_테니스장,
-                1L,
-                LocalDate.of(2022, 9, 1),
-                LocalTime.of(18, 0),
-                LocalTime.of(20, 0),
-                statusType
+            서울_테니스장,
+            1L,
+            LocalDate.of(2022, 9, 1),
+            LocalTime.of(18, 0),
+            LocalTime.of(20, 0),
+            statusType
         );
     }
 
-    private static Matching getMatching(MatchingStatusType statusType, LocalDate date, LocalTime startTime, LocalTime endTime) {
+    private Matching getMatching(MatchingStatusType statusType, LocalDate date, LocalTime startTime, LocalTime endTime) {
         return new Matching(
-                서울_테니스장,
-                1L,
-                date,
-                startTime,
-                endTime,
-                statusType
+            서울_테니스장,
+            1L,
+            date,
+            startTime,
+            endTime,
+            statusType
         );
     }
 
-    private static Recruitment getRecruitment(Matching savedMatching, RecruitmentStatusType statusType) {
+    private Recruitment getRecruitment(Matching savedMatching, RecruitmentStatusType statusType) {
         return new Recruitment(
-                savedMatching.getId(),
-                new Level(5.0),
-                new Level(1.0),
-                AgeGroupType.TWENTIES,
-                GenderType.NONE,
-                PreferenceType.RALLY,
-                4,
-                2.0,
-                AnnualType.FIVE_YEARS_LESS,
-                "4명이서 랠리해요~",
-                statusType
-                );
+            savedMatching.getId(),
+            new Level(5.0),
+            new Level(1.0),
+            AgeGroupType.TWENTIES,
+            GenderType.NONE,
+            PreferenceType.RALLY,
+            4,
+            2.0,
+            AnnualType.FIVE_YEARS_LESS,
+            "4명이서 랠리해요~",
+            statusType
+        );
     }
 }

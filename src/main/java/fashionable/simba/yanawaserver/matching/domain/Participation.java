@@ -3,14 +3,25 @@ package fashionable.simba.yanawaserver.matching.domain;
 import fashionable.simba.yanawaserver.matching.constant.ParticipationStatusType;
 import fashionable.simba.yanawaserver.matching.error.NoMatchingDataException;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
 
+@Entity
 public class Participation {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long userId;
     private Long matchingId;
     private ParticipationStatusType status;
     private LocalDateTime requestDateTime;
+
+    protected Participation() {
+        /*no-op*/
+    }
 
     public Long getId() {
         return id;

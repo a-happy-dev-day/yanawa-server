@@ -1,6 +1,4 @@
-package fashionable.simba.yanawaserver.matching.domain.repository;
-
-import fashionable.simba.yanawaserver.matching.domain.Recruitment;
+package fashionable.simba.yanawaserver.matching.domain;
 
 import java.util.List;
 import java.util.Optional;

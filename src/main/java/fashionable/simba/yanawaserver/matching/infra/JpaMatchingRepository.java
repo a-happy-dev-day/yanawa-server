@@ -1,6 +1,7 @@
-package fashionable.simba.yanawaserver.matching.domain.repository;
+package fashionable.simba.yanawaserver.matching.infra;
 
 import fashionable.simba.yanawaserver.matching.domain.Matching;
+import fashionable.simba.yanawaserver.matching.domain.MatchingRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

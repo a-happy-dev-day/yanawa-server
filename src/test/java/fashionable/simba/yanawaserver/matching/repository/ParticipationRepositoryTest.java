@@ -2,7 +2,7 @@ package fashionable.simba.yanawaserver.matching.repository;
 
 import fashionable.simba.yanawaserver.matching.constant.ParticipationStatusType;
 import fashionable.simba.yanawaserver.matching.domain.Participation;
-import fashionable.simba.yanawaserver.matching.domain.repository.ParticipationRepository;
+import fashionable.simba.yanawaserver.matching.domain.ParticipationRepository;
 import fashionable.simba.yanawaserver.matching.fake.MemoryParticipationRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

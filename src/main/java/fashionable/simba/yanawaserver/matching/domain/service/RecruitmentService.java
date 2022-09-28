@@ -1,8 +1,8 @@
 package fashionable.simba.yanawaserver.matching.domain.service;
 
+import fashionable.simba.yanawaserver.matching.domain.ParticipationRepository;
 import fashionable.simba.yanawaserver.matching.domain.Recruitment;
-import fashionable.simba.yanawaserver.matching.domain.repository.ParticipationRepository;
-import fashionable.simba.yanawaserver.matching.domain.repository.RecruitmentRepository;
+import fashionable.simba.yanawaserver.matching.domain.RecruitmentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

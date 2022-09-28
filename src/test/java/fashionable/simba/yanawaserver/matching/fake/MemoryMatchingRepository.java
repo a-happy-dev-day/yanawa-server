@@ -1,7 +1,7 @@
 package fashionable.simba.yanawaserver.matching.fake;
 
 import fashionable.simba.yanawaserver.matching.domain.Matching;
-import fashionable.simba.yanawaserver.matching.domain.repository.MatchingRepository;
+import fashionable.simba.yanawaserver.matching.domain.MatchingRepository;
 
 import java.util.HashMap;
 import java.util.Map;

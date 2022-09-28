@@ -1,7 +1,7 @@
 package fashionable.simba.yanawaserver.matching.repository;
 
-import fashionable.simba.yanawaserver.matching.domain.repository.CourtRepository;
-import fashionable.simba.yanawaserver.matching.fake.MemoryCourtRepository;
+import fashionable.simba.yanawaserver.matching.domain.CourtRepository;
+import fashionable.simba.yanawaserver.matching.infra.MemoryCourtRepository;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

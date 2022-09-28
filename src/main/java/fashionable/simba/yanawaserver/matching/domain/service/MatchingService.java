@@ -2,9 +2,9 @@ package fashionable.simba.yanawaserver.matching.domain.service;
 
 import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
 import fashionable.simba.yanawaserver.matching.domain.Matching;
+import fashionable.simba.yanawaserver.matching.domain.MatchingRepository;
 import fashionable.simba.yanawaserver.matching.domain.Recruitment;
-import fashionable.simba.yanawaserver.matching.domain.repository.MatchingRepository;
-import fashionable.simba.yanawaserver.matching.domain.repository.RecruitmentRepository;
+import fashionable.simba.yanawaserver.matching.domain.RecruitmentRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

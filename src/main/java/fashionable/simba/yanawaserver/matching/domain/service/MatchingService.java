@@ -3,8 +3,6 @@ package fashionable.simba.yanawaserver.matching.domain.service;
 import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
 import fashionable.simba.yanawaserver.matching.domain.Matching;
 import fashionable.simba.yanawaserver.matching.domain.Recruitment;
-import fashionable.simba.yanawaserver.matching.domain.repository.JpaMatchingRepository;
-import fashionable.simba.yanawaserver.matching.domain.repository.JpaRecruitmentRepository;
 import fashionable.simba.yanawaserver.matching.domain.repository.MatchingRepository;
 import fashionable.simba.yanawaserver.matching.domain.repository.RecruitmentRepository;
 import org.springframework.stereotype.Service;

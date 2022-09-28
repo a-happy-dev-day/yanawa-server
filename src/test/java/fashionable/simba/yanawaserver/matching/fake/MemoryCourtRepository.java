@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.matching.repository;
+package fashionable.simba.yanawaserver.matching.fake;
 
 import fashionable.simba.yanawaserver.matching.domain.repository.CourtRepository;
 import org.springframework.stereotype.Repository;

@@ -108,7 +108,7 @@ public class MatchingApplicationService {
             );
             responses.add(response);
         }
-            return new RecruitmentResponses(responses);
+        return new RecruitmentResponses(responses);
     }
 
     public RecruitmentResponse findOne(Long matchingId) {

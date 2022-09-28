@@ -3,6 +3,7 @@ package fashionable.simba.yanawaserver.matching.repository;
 import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
 import fashionable.simba.yanawaserver.matching.domain.Matching;
 import fashionable.simba.yanawaserver.matching.domain.repository.MatchingRepository;
+import fashionable.simba.yanawaserver.matching.fake.MemoryMatchingRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -26,13 +27,13 @@ class MatchingRepositoryTest {
     @Test
     void saveTest() {
         Matching matching = new Matching(
-                1L,
-                1L,
-                LocalDate.of(2022, 9, 3),
-                LocalTime.of(18, 0, 0),
-                LocalTime.of(20, 0, 0),
-                MatchingStatusType.WAITING
-                );
+            1L,
+            1L,
+            LocalDate.of(2022, 9, 3),
+            LocalTime.of(18, 0, 0),
+            LocalTime.of(20, 0, 0),
+            MatchingStatusType.WAITING
+        );
         Long id = matchingRepository.save(matching).getId();
         assertThat(matchingRepository.findById(id).orElseThrow().getId()).isEqualTo(id);
     }

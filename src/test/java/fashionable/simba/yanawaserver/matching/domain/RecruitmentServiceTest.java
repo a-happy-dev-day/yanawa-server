@@ -6,12 +6,11 @@ import fashionable.simba.yanawaserver.matching.constant.GenderType;
 import fashionable.simba.yanawaserver.matching.constant.ParticipationStatusType;
 import fashionable.simba.yanawaserver.matching.constant.PreferenceType;
 import fashionable.simba.yanawaserver.matching.constant.RecruitmentStatusType;
-import fashionable.simba.yanawaserver.matching.domain.repository.JpaParticipationRepository;
-import fashionable.simba.yanawaserver.matching.domain.repository.JpaRecruitmentRepository;
 import fashionable.simba.yanawaserver.matching.domain.repository.ParticipationRepository;
+import fashionable.simba.yanawaserver.matching.domain.repository.RecruitmentRepository;
 import fashionable.simba.yanawaserver.matching.domain.service.RecruitmentService;
-import fashionable.simba.yanawaserver.matching.repository.MemoryParticipationRepository;
-import fashionable.simba.yanawaserver.matching.repository.MemoryRecruitmentRepository;
+import fashionable.simba.yanawaserver.matching.fake.MemoryParticipationRepository;
+import fashionable.simba.yanawaserver.matching.fake.MemoryRecruitmentRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,12 +21,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class RecruitmentServiceTest {
-    JpaRecruitmentRepository recruitmentRepository;
-    JpaParticipationRepository participationRepository;
+    RecruitmentRepository recruitmentRepository;
+    ParticipationRepository participationRepository;
     RecruitmentService recruitmentService;
 
     @BeforeEach
     public void setUp() {
+        recruitmentRepository = new MemoryRecruitmentRepository();
+        participationRepository = new MemoryParticipationRepository();
         recruitmentService = new RecruitmentService(recruitmentRepository, participationRepository);
     }
 

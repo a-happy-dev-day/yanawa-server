@@ -11,16 +11,16 @@ import fashionable.simba.yanawaserver.matching.domain.Level;
 import fashionable.simba.yanawaserver.matching.domain.Matching;
 import fashionable.simba.yanawaserver.matching.domain.Recruitment;
 import fashionable.simba.yanawaserver.matching.domain.repository.CourtRepository;
-import fashionable.simba.yanawaserver.matching.domain.repository.JpaMatchingRepository;
-import fashionable.simba.yanawaserver.matching.domain.repository.JpaParticipationRepository;
-import fashionable.simba.yanawaserver.matching.domain.repository.JpaRecruitmentRepository;
 import fashionable.simba.yanawaserver.matching.domain.repository.MatchingRepository;
 import fashionable.simba.yanawaserver.matching.domain.repository.ParticipationRepository;
 import fashionable.simba.yanawaserver.matching.domain.repository.RecruitmentRepository;
 import fashionable.simba.yanawaserver.matching.domain.service.MatchingService;
 import fashionable.simba.yanawaserver.matching.domain.service.RecruitmentService;
 import fashionable.simba.yanawaserver.matching.error.NoCourtDataException;
-import fashionable.simba.yanawaserver.matching.repository.MemoryCourtRepository;
+import fashionable.simba.yanawaserver.matching.fake.MemoryCourtRepository;
+import fashionable.simba.yanawaserver.matching.fake.MemoryMatchingRepository;
+import fashionable.simba.yanawaserver.matching.fake.MemoryParticipationRepository;
+import fashionable.simba.yanawaserver.matching.fake.MemoryRecruitmentRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,22 +31,26 @@ import java.time.LocalTime;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ApplicationServiceTest {
     MatchingRepository matchingRepository;
     RecruitmentRepository recruitmentRepository;
     ParticipationRepository participationRepository;
+    CourtRepository courtRepository;
+
     MatchingService matchingService;
     RecruitmentService recruitmentService;
-    CourtRepository courtRepository;
     MatchingApplicationService applicationService;
 
     @BeforeEach
     public void setUp() {
+        matchingRepository = new MemoryMatchingRepository();
+        recruitmentRepository = new MemoryRecruitmentRepository();
+        participationRepository = new MemoryParticipationRepository();
+        courtRepository = new MemoryCourtRepository();
+
         matchingService = new MatchingService(matchingRepository, recruitmentRepository);
         recruitmentService = new RecruitmentService(recruitmentRepository, participationRepository);
-        courtRepository = new MemoryCourtRepository();
         applicationService = new MatchingApplicationService(matchingService, recruitmentService, courtRepository);
 
         courtRepository.save("서울테니스장");
@@ -62,24 +66,24 @@ class ApplicationServiceTest {
         Recruitment recruitment = recruitmentRepository.findById(response.getRecruitmentId()).orElseThrow();
 
         assertAll(
-                () -> assertThat(matching.getCourtId()).isEqualTo(response.getCourtId()),
-                () -> assertThat(matching.getHostId()).isEqualTo(response.getHostId()),
-                () -> assertThat(matching.getDate()).isEqualTo(response.getDate()),
-                () -> assertThat(matching.getStartTime()).isEqualTo(response.getStartTime()),
-                () -> assertThat(matching.getEndTime()).isEqualTo(response.getEndTime()),
-                () -> assertThat(matching.getStatus()).isEqualTo(response.getMatchingStatus()),
+            () -> assertThat(matching.getCourtId()).isEqualTo(response.getCourtId()),
+            () -> assertThat(matching.getHostId()).isEqualTo(response.getHostId()),
+            () -> assertThat(matching.getDate()).isEqualTo(response.getDate()),
+            () -> assertThat(matching.getStartTime()).isEqualTo(response.getStartTime()),
+            () -> assertThat(matching.getEndTime()).isEqualTo(response.getEndTime()),
+            () -> assertThat(matching.getStatus()).isEqualTo(response.getMatchingStatus()),
 
-                () -> assertThat(recruitment.getMatchingId()).isEqualTo(response.getMatchingId()),
-                () -> assertThat(recruitment.getMaximumLevel()).isEqualTo(response.getMaximumLevel()),
-                () -> assertThat(recruitment.getMinimumLevel()).isEqualTo(response.getMinimumLevel()),
-                () -> assertThat(recruitment.getAgeOfRecruitment()).isEqualTo(response.getAgeOfRecruitment()),
-                () -> assertThat(recruitment.getSexOfRecruitment()).isEqualTo(response.getSexOfRecruitment()),
-                () -> assertThat(recruitment.getPreferenceGame()).isEqualTo(response.getPreferenceGame()),
-                () -> assertThat(recruitment.getNumberOfRecruitment()).isEqualTo(response.getNumberOfRecruitment()),
-                () -> assertThat(recruitment.getAnnual()).isEqualTo(response.getAnnual()),
-                () -> assertThat(recruitment.getCostOfCourtPerPerson()).isEqualTo(response.getCostOfCourtPerPerson()),
-                () -> assertThat(recruitment.getStatus()).isEqualTo(response.getRecruitmentStatus()),
-                () -> assertThat(recruitment.getDetails()).isEqualTo(response.getDetails())
+            () -> assertThat(recruitment.getMatchingId()).isEqualTo(response.getMatchingId()),
+            () -> assertThat(recruitment.getMaximumLevel()).isEqualTo(response.getMaximumLevel()),
+            () -> assertThat(recruitment.getMinimumLevel()).isEqualTo(response.getMinimumLevel()),
+            () -> assertThat(recruitment.getAgeOfRecruitment()).isEqualTo(response.getAgeOfRecruitment()),
+            () -> assertThat(recruitment.getSexOfRecruitment()).isEqualTo(response.getSexOfRecruitment()),
+            () -> assertThat(recruitment.getPreferenceGame()).isEqualTo(response.getPreferenceGame()),
+            () -> assertThat(recruitment.getNumberOfRecruitment()).isEqualTo(response.getNumberOfRecruitment()),
+            () -> assertThat(recruitment.getAnnual()).isEqualTo(response.getAnnual()),
+            () -> assertThat(recruitment.getCostOfCourtPerPerson()).isEqualTo(response.getCostOfCourtPerPerson()),
+            () -> assertThat(recruitment.getStatus()).isEqualTo(response.getRecruitmentStatus()),
+            () -> assertThat(recruitment.getDetails()).isEqualTo(response.getDetails())
         );
     }
 
@@ -90,7 +94,7 @@ class ApplicationServiceTest {
         RecruitmentResponse response = applicationService.createMatchingAndRecruitment(requsest);
 
         RecruitmentResponses responses = applicationService.findAll();
-        assertTrue(responses.getRecruitmentResponses().contains(response));
+        assertThat(responses.getRecruitmentResponses().size()).isEqualTo(1);
     }
 
     @Test
@@ -115,20 +119,20 @@ class ApplicationServiceTest {
 
     private static RecruitmentRequsest getRequsest(long courtId) {
         return new RecruitmentRequsest(
-                courtId,
-                1L,
-                LocalDate.of(2022, 7, 29),
-                LocalTime.of(19, 0),
-                LocalTime.of(21, 0),
-                new Level(4.0),
-                new Level(1.5),
-                AgeGroupType.TWENTIES,
-                GenderType.NONE,
-                PreferenceType.RALLY,
-                3,
-                2.0,
-                AnnualType.FIVE_YEARS_LESS,
-                "4명이서 랠리해요~"
+            courtId,
+            1L,
+            LocalDate.of(2022, 7, 29),
+            LocalTime.of(19, 0),
+            LocalTime.of(21, 0),
+            new Level(4.0),
+            new Level(1.5),
+            AgeGroupType.TWENTIES,
+            GenderType.NONE,
+            PreferenceType.RALLY,
+            3,
+            2.0,
+            AnnualType.FIVE_YEARS_LESS,
+            "4명이서 랠리해요~"
         );
     }
 }

@@ -22,17 +22,17 @@ class MatchingTest {
     @DisplayName("매칭 도메인 테스트.")
     void 매칭_도메인_테스트() {
         Matching matching = assertDoesNotThrow(() ->
-                getMatching(MatchingStatusType.WAITING)
+            getMatching(MatchingStatusType.WAITING)
         );
 
         assertAll(
-                () -> assertThat(matching.getId()).isEqualTo(1L),
-                () -> assertThat(matching.getCourtId()).isEqualTo(1L),
-                () -> assertThat(matching.getHostId()).isEqualTo(1L),
-                () -> assertThat(matching.getDate()).isEqualTo(LocalDate.of(2022, 7, 29)),
-                () -> assertThat(matching.getStartTime()).isEqualTo(LocalTime.of(19, 0)),
-                () -> assertThat(matching.getEndTime()).isEqualTo(LocalTime.of(21, 0)),
-                () -> assertThat(matching.getStatus()).isEqualTo(MatchingStatusType.WAITING)
+            () -> assertThat(matching.getId()).isEqualTo(1L),
+            () -> assertThat(matching.getCourtId()).isEqualTo(1L),
+            () -> assertThat(matching.getHostId()).isEqualTo(1L),
+            () -> assertThat(matching.getDate()).isEqualTo(LocalDate.of(2022, 7, 29)),
+            () -> assertThat(matching.getStartTime()).isEqualTo(LocalTime.of(19, 0)),
+            () -> assertThat(matching.getEndTime()).isEqualTo(LocalTime.of(21, 0)),
+            () -> assertThat(matching.getStatus()).isEqualTo(MatchingStatusType.WAITING)
         );
     }
 
@@ -43,8 +43,8 @@ class MatchingTest {
         Matching matching = getMatching(MatchingStatusType.WAITING);
         //when
         assertAll(
-                () -> assertDoesNotThrow(matching::changeOngoing),
-                () -> assertThat(matching.getStatus()).isEqualTo(MatchingStatusType.ONGOING)
+            () -> assertDoesNotThrow(matching::changeOngoing),
+            () -> assertThat(matching.getStatus()).isEqualTo(MatchingStatusType.ONGOING)
         );
         //then
 
@@ -84,39 +84,39 @@ class MatchingTest {
         LocalTime startTime = LocalTime.of(21, 0);
         LocalTime endTime = LocalTime.of(19, 0);
         assertAll(
-                () -> assertThrows(MatchingTimeException.class, () -> {
-                    new Matching(
-                            1L,
-                            1L,
-                            date,
-                            startTime,
-                            endTime,
-                            MatchingStatusType.WAITING
-                    );
-                }),
-                () -> assertThrows(MatchingTimeException.class, () -> {
-                    new Matching(
-                            1L,
-                            1L,
-                            1L,
-                            date,
-                            startTime,
-                            endTime,
-                            MatchingStatusType.WAITING
-                    );
-                })
+            () -> assertThrows(MatchingTimeException.class, () -> {
+                new Matching(
+                    1L,
+                    1L,
+                    date,
+                    startTime,
+                    endTime,
+                    MatchingStatusType.WAITING
+                );
+            }),
+            () -> assertThrows(MatchingTimeException.class, () -> {
+                new Matching(
+                    1L,
+                    1L,
+                    1L,
+                    date,
+                    startTime,
+                    endTime,
+                    MatchingStatusType.WAITING
+                );
+            })
         );
     }
 
     private static Matching getMatching(MatchingStatusType statusType) {
         return new Matching(
-                1L,
-                1L,
-                1L,
-                LocalDate.of(2022, 7, 29),
-                LocalTime.of(19, 0),
-                LocalTime.of(21, 0),
-                statusType
+            1L,
+            1L,
+            1L,
+            LocalDate.of(2022, 7, 29),
+            LocalTime.of(19, 0),
+            LocalTime.of(21, 0),
+            statusType
         );
     }
 }

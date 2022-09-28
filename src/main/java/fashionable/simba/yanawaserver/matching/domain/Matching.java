@@ -3,7 +3,6 @@ package fashionable.simba.yanawaserver.matching.domain;
 
 import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
 import fashionable.simba.yanawaserver.matching.error.MatchingTimeException;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +13,8 @@ import java.time.LocalTime;
 
 @Entity
 public class Matching {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long hostId;
     private Long courtId;

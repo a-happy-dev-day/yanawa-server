@@ -1,8 +1,7 @@
-package fashionable.simba.yanawaserver.matching.repository;
+package fashionable.simba.yanawaserver.matching.fake;
 
 import fashionable.simba.yanawaserver.matching.domain.Matching;
 import fashionable.simba.yanawaserver.matching.domain.repository.MatchingRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,13 +15,13 @@ public class MemoryMatchingRepository implements MatchingRepository {
     public Matching save(Matching matching) {
         Long id = getId();
         Matching save = new Matching(
-                id,
-                matching.getHostId(),
-                matching.getCourtId(),
-                matching.getDate(),
-                matching.getStartTime(),
-                matching.getEndTime(),
-                matching.getStatus()
+            id,
+            matching.getHostId(),
+            matching.getCourtId(),
+            matching.getDate(),
+            matching.getStartTime(),
+            matching.getEndTime(),
+            matching.getStatus()
         );
         matchings.put(id, save);
         return save;

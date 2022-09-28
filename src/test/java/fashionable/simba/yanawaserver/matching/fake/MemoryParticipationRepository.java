@@ -1,8 +1,7 @@
-package fashionable.simba.yanawaserver.matching.repository;
+package fashionable.simba.yanawaserver.matching.fake;
 
 import fashionable.simba.yanawaserver.matching.domain.Participation;
 import fashionable.simba.yanawaserver.matching.domain.repository.ParticipationRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;

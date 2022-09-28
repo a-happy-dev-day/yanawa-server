@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.matching.repository;
+package fashionable.simba.yanawaserver.matching.fake;
 
 import fashionable.simba.yanawaserver.matching.domain.Recruitment;
 import fashionable.simba.yanawaserver.matching.domain.repository.RecruitmentRepository;
@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class MemoryRecruitmentRepository implements RecruitmentRepository {
     private final Map<Long, Recruitment> recruitments = new HashMap<>();

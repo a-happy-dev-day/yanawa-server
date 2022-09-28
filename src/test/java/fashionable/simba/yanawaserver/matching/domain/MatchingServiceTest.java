@@ -6,13 +6,12 @@ import fashionable.simba.yanawaserver.matching.constant.GenderType;
 import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
 import fashionable.simba.yanawaserver.matching.constant.PreferenceType;
 import fashionable.simba.yanawaserver.matching.constant.RecruitmentStatusType;
-import fashionable.simba.yanawaserver.matching.domain.repository.JpaMatchingRepository;
-import fashionable.simba.yanawaserver.matching.domain.repository.JpaRecruitmentRepository;
 import fashionable.simba.yanawaserver.matching.domain.repository.MatchingRepository;
+import fashionable.simba.yanawaserver.matching.domain.repository.RecruitmentRepository;
 import fashionable.simba.yanawaserver.matching.domain.service.MatchingService;
-import fashionable.simba.yanawaserver.matching.repository.MemoryCourtRepository;
-import fashionable.simba.yanawaserver.matching.repository.MemoryMatchingRepository;
-import fashionable.simba.yanawaserver.matching.repository.MemoryRecruitmentRepository;
+import fashionable.simba.yanawaserver.matching.fake.MemoryCourtRepository;
+import fashionable.simba.yanawaserver.matching.fake.MemoryMatchingRepository;
+import fashionable.simba.yanawaserver.matching.fake.MemoryRecruitmentRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,19 +26,22 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class MatchingServiceTest {
-    MatchingRepository matchingRepository = new MemoryMatchingRepository();
+    MatchingRepository matchingRepository;
+    RecruitmentRepository recruitmentRepository;
+    MemoryCourtRepository courtRepository;
 
-    JpaRecruitmentRepository recruitmentRepository;
     MatchingService matchingService;
-    MemoryCourtRepository fakeCourtRepository;
     static Long 서울_테니스장;
 
     @BeforeEach
     public void setUp() {
-        matchingService = new MatchingService(matchingRepository, recruitmentRepository);
-        fakeCourtRepository = new MemoryCourtRepository();
+        matchingRepository = new MemoryMatchingRepository();
+        recruitmentRepository = new MemoryRecruitmentRepository();
+        courtRepository = new MemoryCourtRepository();
 
-        서울_테니스장 = fakeCourtRepository.save("서울 테니스장");
+        matchingService = new MatchingService(matchingRepository, recruitmentRepository);
+
+        서울_테니스장 = courtRepository.save("서울 테니스장");
     }
 
     @Test

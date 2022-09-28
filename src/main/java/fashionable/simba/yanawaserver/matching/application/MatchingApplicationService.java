@@ -80,7 +80,6 @@ public class MatchingApplicationService {
         );
     }
 
-    // TODO : 구현 필요
     public RecruitmentResponses findAll() {
         List<RecruitmentResponse> responses = new ArrayList<>();
         List<Recruitment> recruitments = recruitmentService.findAllRecruitment();
@@ -112,7 +111,6 @@ public class MatchingApplicationService {
             return new RecruitmentResponses(responses);
     }
 
-    // TODO : 구현 필요
     public RecruitmentResponse findOne(Long matchingId) {
         Recruitment recruitment = recruitmentService.findRecruitment(matchingId);
         Matching matching = matchingService.findMatching(recruitment.getMatchingId());

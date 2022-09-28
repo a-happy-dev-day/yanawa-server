@@ -2,6 +2,7 @@ package fashionable.simba.yanawaserver.matching.application;
 
 import fashionable.simba.yanawaserver.matching.application.dto.RecruitmentRequsest;
 import fashionable.simba.yanawaserver.matching.application.dto.RecruitmentResponse;
+import fashionable.simba.yanawaserver.matching.application.dto.RecruitmentResponses;
 import fashionable.simba.yanawaserver.matching.constant.AgeGroupType;
 import fashionable.simba.yanawaserver.matching.constant.AnnualType;
 import fashionable.simba.yanawaserver.matching.constant.GenderType;
@@ -11,15 +12,10 @@ import fashionable.simba.yanawaserver.matching.domain.repository.CourtRepository
 import fashionable.simba.yanawaserver.matching.domain.repository.JpaMatchingRepository;
 import fashionable.simba.yanawaserver.matching.domain.repository.JpaParticipationRepository;
 import fashionable.simba.yanawaserver.matching.domain.repository.JpaRecruitmentRepository;
-import fashionable.simba.yanawaserver.matching.domain.repository.MatchingRepository;
-import fashionable.simba.yanawaserver.matching.domain.repository.ParticipationRepository;
-import fashionable.simba.yanawaserver.matching.domain.repository.RecruitmentRepository;
 import fashionable.simba.yanawaserver.matching.domain.service.MatchingService;
 import fashionable.simba.yanawaserver.matching.domain.service.RecruitmentService;
 import fashionable.simba.yanawaserver.matching.error.NoCourtDataException;
 import fashionable.simba.yanawaserver.matching.repository.MemoryCourtRepository;
-import fashionable.simba.yanawaserver.matching.repository.MemoryMatchingRepository;
-import fashionable.simba.yanawaserver.matching.repository.MemoryRecruitmentRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,6 +26,7 @@ import java.time.LocalTime;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ApplicationServiceTest {
     JpaMatchingRepository matchingRepository;
@@ -76,6 +73,26 @@ class ApplicationServiceTest {
                 () -> assertThat(recruitmentRepository.findById(response.getRecruitmentId()).orElseThrow().getStatus()).isEqualTo(response.getRecruitmentStatus()),
                 () -> assertThat(recruitmentRepository.findById(response.getRecruitmentId()).orElseThrow().getDetails()).isEqualTo(response.getDetails())
         );
+    }
+
+    @Test
+    @DisplayName("모든 모집정보를 불러온다.")
+    void find_all_recruitment_test() {
+        RecruitmentRequsest requsest = getRequsest(1L);
+        RecruitmentResponse response = applicationService.createMatchingAndRecruitment(requsest);
+
+        RecruitmentResponses responses = applicationService.findAll();
+        assertTrue(responses.getRecruitmentResponses().contains(response));
+    }
+
+    @Test
+    @DisplayName("매칭에대한 모집정보를 불러온다.")
+    void find_one_recruitment_test() {
+        RecruitmentRequsest requsest = getRequsest(1L);
+        RecruitmentResponse response = applicationService.createMatchingAndRecruitment(requsest);
+
+        RecruitmentResponse target = applicationService.findOne(response.getMatchingId());
+        assertThat(target.getRecruitmentId()).isEqualTo(response.getRecruitmentId());
     }
 
     @Test

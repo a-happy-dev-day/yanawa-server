@@ -20,7 +20,7 @@ public class DataLoader {
     }
 
     public boolean isValid() {
-        return memberRepository.findAll().size() == 0;
+        return memberRepository.findAll().isEmpty();
     }
     public Map<String, Long> loadData() {
         Map<String, Long> members = new HashMap<>();

@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.members;
+package fashionable.simba.yanawaserver;
 
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -14,6 +14,8 @@ public class DataLoaderBootstrap implements ApplicationListener<ContextRefreshed
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        dataLoader.loadData();
+        if (dataLoader.isValid()) {
+            dataLoader.loadData();
+        }
     }
 }

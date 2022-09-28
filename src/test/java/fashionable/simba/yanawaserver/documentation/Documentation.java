@@ -1,7 +1,7 @@
 package fashionable.simba.yanawaserver.documentation;
 
 
-import fashionable.simba.yanawaserver.members.DataLoader;
+import fashionable.simba.yanawaserver.DataLoader;
 import fashionable.simba.yanawaserver.utils.DatabaseCleanup;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -17,6 +17,9 @@ import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static fashionable.simba.yanawaserver.acceptance.AuthSteps.PASSWORD_ADMIN;
 import static fashionable.simba.yanawaserver.acceptance.AuthSteps.로그인_요청;
 import static fashionable.simba.yanawaserver.acceptance.AuthSteps.로그인_코드_발급;
@@ -27,6 +30,7 @@ import static org.springframework.restdocs.restassured3.RestAssuredRestDocumenta
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(RestDocumentationExtension.class)
 public class Documentation {
+    private Map<String, Long> data = new HashMap<>();
     @LocalServerPort
     int port;
     @Autowired
@@ -52,7 +56,7 @@ public class Documentation {
         RestAssured.port = port;
 
         databaseCleanup.execute();
-        username = String.valueOf(dataLoader.loadData().get("user"));
+        username = String.valueOf(getData().get("user"));
 
         accessCode = 로그인_코드_발급(username, PASSWORD_ADMIN);
         ExtractableResponse<Response> response = 로그인_요청(accessCode);
@@ -63,6 +67,13 @@ public class Documentation {
         this.spec = new RequestSpecBuilder()
             .addFilter(documentationConfiguration(restDocumentation))
             .build();
+    }
+
+    private Map<String, Long> getData() {
+        if (data.isEmpty()) {
+            data = dataLoader.loadData();
+        }
+        return data;
     }
 }
 

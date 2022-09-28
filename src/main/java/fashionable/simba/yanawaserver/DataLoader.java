@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.members;
+package fashionable.simba.yanawaserver;
 
 import fashionable.simba.yanawaserver.members.domain.DefaultMember;
 import fashionable.simba.yanawaserver.members.domain.Member;
@@ -19,6 +19,9 @@ public class DataLoader {
         this.memberRepository = memberRepository;
     }
 
+    public boolean isValid() {
+        return memberRepository.findAll().size() == 0;
+    }
     public Map<String, Long> loadData() {
         Map<String, Long> members = new HashMap<>();
 

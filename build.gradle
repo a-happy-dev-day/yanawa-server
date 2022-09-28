@@ -34,6 +34,7 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
     runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'mysql:mysql-connector-java'
     // https://mvnrepository.com/artifact/nl.jqno.equalsverifier/equalsverifier
     testImplementation group: 'nl.jqno.equalsverifier', name: 'equalsverifier', version: '1.0.2'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

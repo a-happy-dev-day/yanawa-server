@@ -5,16 +5,18 @@ import fashionable.simba.yanawaserver.matching.domain.Matching;
 import fashionable.simba.yanawaserver.matching.domain.Recruitment;
 import fashionable.simba.yanawaserver.matching.domain.repository.JpaMatchingRepository;
 import fashionable.simba.yanawaserver.matching.domain.repository.JpaRecruitmentRepository;
+import fashionable.simba.yanawaserver.matching.domain.repository.MatchingRepository;
+import fashionable.simba.yanawaserver.matching.domain.repository.RecruitmentRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
 @Service
 public class MatchingService {
-    private final JpaMatchingRepository matchingRepository;
-    private final JpaRecruitmentRepository recruitmentRepository;
+    private final MatchingRepository matchingRepository;
+    private final RecruitmentRepository recruitmentRepository;
 
-    public MatchingService(JpaMatchingRepository matchingRepository, JpaRecruitmentRepository recruitmentRepository) {
+    public MatchingService(MatchingRepository matchingRepository, RecruitmentRepository recruitmentRepository) {
         this.matchingRepository = matchingRepository;
         this.recruitmentRepository = recruitmentRepository;
     }

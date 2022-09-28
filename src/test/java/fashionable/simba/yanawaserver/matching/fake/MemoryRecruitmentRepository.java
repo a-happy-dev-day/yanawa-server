@@ -3,9 +3,12 @@ package fashionable.simba.yanawaserver.matching.repository;
 import fashionable.simba.yanawaserver.matching.domain.Recruitment;
 import fashionable.simba.yanawaserver.matching.domain.repository.RecruitmentRepository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class MemoryRecruitmentRepository implements RecruitmentRepository {
     private final Map<Long, Recruitment> recruitments = new HashMap<>();
@@ -44,6 +47,11 @@ public class MemoryRecruitmentRepository implements RecruitmentRepository {
     @Override
     public Optional<Recruitment> findByMatchingId(Long id) {
         return recruitments.values().stream().filter(recruitment -> recruitment.getMatchingId().equals(id)).findAny();
+    }
+
+    @Override
+    public List<Recruitment> findAll() {
+        return new ArrayList<>(recruitments.values());
     }
 
     public Optional<Recruitment> findRecruitmentByMatchingId(Long matchingId) {

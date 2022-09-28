@@ -3,16 +3,18 @@ package fashionable.simba.yanawaserver.matching.domain.service;
 import fashionable.simba.yanawaserver.matching.domain.Recruitment;
 import fashionable.simba.yanawaserver.matching.domain.repository.JpaParticipationRepository;
 import fashionable.simba.yanawaserver.matching.domain.repository.JpaRecruitmentRepository;
+import fashionable.simba.yanawaserver.matching.domain.repository.ParticipationRepository;
+import fashionable.simba.yanawaserver.matching.domain.repository.RecruitmentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class RecruitmentService {
-    private final JpaRecruitmentRepository recruitmentRepository;
-    private final JpaParticipationRepository participationRepository;
+    private final RecruitmentRepository recruitmentRepository;
+    private final ParticipationRepository participationRepository;
 
-    public RecruitmentService(JpaRecruitmentRepository recruitmentRepository, JpaParticipationRepository participationRepository) {
+    public RecruitmentService(RecruitmentRepository recruitmentRepository, ParticipationRepository participationRepository) {
         this.recruitmentRepository = recruitmentRepository;
         this.participationRepository = participationRepository;
     }

@@ -8,6 +8,7 @@ import fashionable.simba.yanawaserver.matching.constant.PreferenceType;
 import fashionable.simba.yanawaserver.matching.constant.RecruitmentStatusType;
 import fashionable.simba.yanawaserver.matching.domain.repository.JpaMatchingRepository;
 import fashionable.simba.yanawaserver.matching.domain.repository.JpaRecruitmentRepository;
+import fashionable.simba.yanawaserver.matching.domain.repository.MatchingRepository;
 import fashionable.simba.yanawaserver.matching.domain.service.MatchingService;
 import fashionable.simba.yanawaserver.matching.repository.MemoryCourtRepository;
 import fashionable.simba.yanawaserver.matching.repository.MemoryMatchingRepository;
@@ -26,7 +27,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class MatchingServiceTest {
-    JpaMatchingRepository matchingRepository;
+    MatchingRepository matchingRepository = new MemoryMatchingRepository();
+
     JpaRecruitmentRepository recruitmentRepository;
     MatchingService matchingService;
     MemoryCourtRepository fakeCourtRepository;

@@ -1,5 +1,6 @@
 package fashionable.simba.yanawaserver.matching.domain.service;
 
+import fashionable.simba.yanawaserver.matching.configuration.TimeConfig;
 import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
 import fashionable.simba.yanawaserver.matching.domain.Matching;
 import fashionable.simba.yanawaserver.matching.domain.Recruitment;
@@ -38,7 +39,8 @@ public class MatchingService {
         if (matching.getStatus() != MatchingStatusType.ONGOING) {
             throw new IllegalArgumentException("매칭이 시작되지 않아 매칭을 종료할 수 없습니다.");
         }
-        if (LocalDateTime.now().compareTo(matching.getDate().atTime(matching.getEndTime())) <= 0) {
+        LocalDateTime dateTimeNow = TimeConfig.dateTimeOfNow();
+        if (dateTimeNow.compareTo(matching.getDate().atTime(matching.getEndTime())) <= 0) {
             throw new IllegalArgumentException("매칭 종료시간이 되지 않아 매칭을 종료할 수 없습니다.");
         }
         matching.changeFinished();

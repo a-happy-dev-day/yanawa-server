@@ -1,5 +1,6 @@
 package fashionable.simba.yanawaserver.matching.domain.service;
 
+import fashionable.simba.yanawaserver.matching.configuration.TimeConfig;
 import fashionable.simba.yanawaserver.matching.constant.AgeGroupType;
 import fashionable.simba.yanawaserver.matching.constant.AnnualType;
 import fashionable.simba.yanawaserver.matching.constant.GenderType;
@@ -20,6 +21,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -128,14 +130,22 @@ class MatchingServiceTest {
     @Test
     @DisplayName("매칭 종료시간이 지나지않으면 매칭을 종료시킬 수 없다.")
     void end_matching_time_check_test() {
-        Matching matching = getMatching(MatchingStatusType.ONGOING
-            , LocalDate.now(), LocalTime.now().minusHours(1), LocalTime.now().plusHours(1));
+        TimeConfig.timeFixed(LocalDateTime.of(2022,9,1,19,0));
+
+        Matching matching = getMatching(MatchingStatusType.ONGOING,
+            TimeConfig.dateOfNow(),
+            TimeConfig.timeOfNow().minusHours(1),
+            TimeConfig.timeOfNow().plusHours(1)
+        );
+
         Matching savedMatching = matchingService.createMatching(matching);
         Long savedMatchingId = savedMatching.getId();
 
         assertThrows(IllegalArgumentException.class, () -> {
             matchingService.endMatching(savedMatchingId);
         });
+
+        TimeConfig.reset();
     }
 
     private static Matching getMatching(MatchingStatusType statusType) {

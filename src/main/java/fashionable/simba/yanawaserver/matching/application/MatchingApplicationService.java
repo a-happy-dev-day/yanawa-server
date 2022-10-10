@@ -5,7 +5,7 @@ import fashionable.simba.yanawaserver.matching.application.dto.RecruitmentRespon
 import fashionable.simba.yanawaserver.matching.application.dto.RecruitmentResponses;
 import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
 import fashionable.simba.yanawaserver.matching.constant.RecruitmentStatusType;
-import fashionable.simba.yanawaserver.matching.domain.CourtRepository;
+import fashionable.simba.yanawaserver.matching.domain.CourtApi;
 import fashionable.simba.yanawaserver.matching.domain.Matching;
 import fashionable.simba.yanawaserver.matching.domain.Recruitment;
 import fashionable.simba.yanawaserver.matching.domain.service.MatchingService;
@@ -20,9 +20,9 @@ import java.util.List;
 public class MatchingApplicationService {
     private final MatchingService matchingService;
     private final RecruitmentService recruitmentService;
-    private final CourtRepository courtRepository;
+    private final CourtApi courtRepository;
 
-    public MatchingApplicationService(MatchingService matchingService, RecruitmentService recruitmentService, CourtRepository courtRepository) {
+    public MatchingApplicationService(MatchingService matchingService, RecruitmentService recruitmentService, CourtApi courtRepository) {
         this.matchingService = matchingService;
         this.recruitmentService = recruitmentService;
         this.courtRepository = courtRepository;

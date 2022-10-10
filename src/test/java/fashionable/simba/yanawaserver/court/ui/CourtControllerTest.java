@@ -16,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -46,7 +45,7 @@ class CourtControllerTest {
     @DisplayName("ID를 입력해 코트장을 조회합니다.")
     void test2() {
         // given
-        UUID 응봉공원_ID = UUID.randomUUID();
+        Long 응봉공원_ID = 1L;
         Court 응봉공원 = new Court(응봉공원_ID, "성동구", "응봉공원", "image/path");
 
         // when
@@ -67,7 +66,7 @@ class CourtControllerTest {
     @DisplayName("한글 파라미터 명을 입력해 데이터를 조회합니다.")
     void test3() {
         String 입력값 = "응봉공원";
-        UUID 응봉공원_ID = UUID.randomUUID();
+        Long 응봉공원_ID = 1L;
         Court 응봉공원 = new Court(응봉공원_ID, "성동구", "응봉공원", null);
         List<Court> 코트장_리스트 = List.of(응봉공원);
 
@@ -93,7 +92,7 @@ class CourtControllerTest {
     @ParameterizedTest
     @NullAndEmptySource
     void test7(String 입력값) {
-        UUID 응봉공원_ID = UUID.randomUUID();
+        Long 응봉공원_ID = 2L;
         Court 응봉공원 = new Court(응봉공원_ID, "성동구", "응봉공원", null);
         List<Court> 코트장_리스트 = List.of(응봉공원);
 

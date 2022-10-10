@@ -9,7 +9,7 @@ import fashionable.simba.yanawaserver.matching.constant.RecruitmentStatusType;
 import fashionable.simba.yanawaserver.matching.domain.service.MatchingService;
 import fashionable.simba.yanawaserver.matching.fake.MemoryMatchingRepository;
 import fashionable.simba.yanawaserver.matching.fake.MemoryRecruitmentRepository;
-import fashionable.simba.yanawaserver.matching.infra.MemoryCourtRepository;
+import fashionable.simba.yanawaserver.matching.repository.MemoryCourtRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,19 +1,17 @@
 package fashionable.simba.yanawaserver.court.dto;
 
-import java.util.UUID;
-
 public class CourtResponse {
-    private UUID id;
+    private Long id;
     private String name;
     private String imagePath;
 
-    public CourtResponse(UUID id, String name, String imagePath) {
+    public CourtResponse(Long id, String name, String imagePath) {
         this.id = id;
         this.name = name;
         this.imagePath = imagePath;
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 

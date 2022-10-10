@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository
 public interface JpaCourtRepository extends JpaRepository<Court, Long>, CourtRepository {
@@ -15,7 +14,7 @@ public interface JpaCourtRepository extends JpaRepository<Court, Long>, CourtRep
     <S extends Court> List<S> saveAll(Iterable<S> entities);
 
     @Override
-    Optional<Court> findById(UUID aLong);
+    Optional<Court> findById(Long aLong);
 
     List<Court> findCourtByAreaNameContainingOrPlaceNameContainingOrderByAreaNameAsc(String name, String region);
 

@@ -9,14 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 class SpringCourtApplicationServiceTest {
-    private static final Court 코트장 = new Court(UUID.randomUUID(), "성동구", "응봉공원", null);
-
     @Autowired
     private CourtApplicationService courtApplicationService;
     @Autowired

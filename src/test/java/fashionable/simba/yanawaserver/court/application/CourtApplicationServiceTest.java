@@ -10,7 +10,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -20,7 +19,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class CourtApplicationServiceTest {
-    private static final Court 코트장 = new Court(UUID.randomUUID(), "성동구", "응봉공원", null);
+    private static final Court 코트장 = new Court(2L, "성동구", "응봉공원", null);
 
     private CourtApplicationService courtApplicationService;
     @Mock
@@ -97,7 +96,7 @@ class CourtApplicationServiceTest {
     @DisplayName("ID 값을 가져와 데이터 스토어에서 데이터를 조회합니다.")
     void test6() {
         // given
-        UUID 코트장_ID = UUID.randomUUID();
+        long 코트장_ID = 2L;
 
         // when
         when(courtService.findCourt(코트장_ID)).thenReturn(코트장);

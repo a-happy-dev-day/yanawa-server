@@ -12,7 +12,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyString;
@@ -92,7 +91,7 @@ class CourtServiceTest {
     void test4() {
         // given
         Court 코트장 = new Court(null, "성동구", "응봉공원", null);
-        UUID 코트장_ID = UUID.randomUUID();
+        long 코트장_ID = 2L;
 
         // when
         when(courtRepository.findById(any()))
@@ -109,8 +108,7 @@ class CourtServiceTest {
     @DisplayName("코트장 ID에 데이터가 없으면 NoCourtDataException 예외가 발생한다.")
     void test5() {
         // given
-        Court 코트장 = new Court(null, "성동구", "응봉공원", null);
-        UUID 코트장_ID = UUID.randomUUID();
+        long 코트장_ID = 3L;
 
         // when
         when(courtRepository.findById(any()))

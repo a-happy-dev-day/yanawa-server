@@ -7,7 +7,6 @@ import fashionable.simba.yanawaserver.matching.constant.AgeGroupType;
 import fashionable.simba.yanawaserver.matching.constant.AnnualType;
 import fashionable.simba.yanawaserver.matching.constant.GenderType;
 import fashionable.simba.yanawaserver.matching.constant.PreferenceType;
-import fashionable.simba.yanawaserver.matching.domain.CourtRepository;
 import fashionable.simba.yanawaserver.matching.domain.Level;
 import fashionable.simba.yanawaserver.matching.domain.Matching;
 import fashionable.simba.yanawaserver.matching.domain.MatchingRepository;
@@ -20,7 +19,7 @@ import fashionable.simba.yanawaserver.matching.error.NoCourtDataException;
 import fashionable.simba.yanawaserver.matching.fake.MemoryMatchingRepository;
 import fashionable.simba.yanawaserver.matching.fake.MemoryParticipationRepository;
 import fashionable.simba.yanawaserver.matching.fake.MemoryRecruitmentRepository;
-import fashionable.simba.yanawaserver.matching.infra.MemoryCourtRepository;
+import fashionable.simba.yanawaserver.matching.repository.MemoryCourtRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -36,7 +35,7 @@ class ApplicationServiceTest {
     MatchingRepository matchingRepository;
     RecruitmentRepository recruitmentRepository;
     ParticipationRepository participationRepository;
-    CourtRepository courtRepository;
+    MemoryCourtRepository courtRepository;
 
     MatchingService matchingService;
     RecruitmentService recruitmentService;

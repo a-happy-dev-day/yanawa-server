@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 import java.util.List;
-import java.util.UUID;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -63,7 +62,7 @@ public class CourtController {
     }
 
     @GetMapping("/v1/api/courts/{id}")
-    public ResponseEntity<CourtResponse> getCourt(@PathVariable UUID id) {
+    public ResponseEntity<CourtResponse> getCourt(@PathVariable Long id) {
         log.info("Request to find list, Id is {}", id);
         return ResponseEntity.ok(
             getCourtResponse(courtApplicationService.findCourt(id))

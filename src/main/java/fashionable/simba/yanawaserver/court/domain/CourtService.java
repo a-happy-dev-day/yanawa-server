@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class CourtService {
@@ -36,7 +35,7 @@ public class CourtService {
     }
 
     @Transactional(readOnly = true)
-    public Court findCourt(UUID id) {
+    public Court findCourt(Long id) {
         log.info("Find court by id in repository, Id is {}", id);
         return courtRepository.findById(id)
             .orElseThrow(() -> {

@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class CourtApplicationService {
@@ -35,7 +34,7 @@ public class CourtApplicationService {
         return courtService.saveCourts(courts);
     }
 
-    public Court findCourt(UUID id) {
+    public Court findCourt(Long id) {
         log.info("Find courts by id, Id is {}", id);
         return courtService.findCourt(id);
     }

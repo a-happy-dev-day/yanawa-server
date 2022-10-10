@@ -6,8 +6,9 @@ import io.restassured.response.Response;
 
 class CourtAcceptanceTemplate {
 
-    public static ExtractableResponse<Response> 데이터_저장() {
+    public static ExtractableResponse<Response> 데이터_저장(String accessToken) {
         return RestAssured.given().log().all()
+            .auth().oauth2(accessToken)
             .when().post("/v1/api/courts")
             .then().log().all().extract();
     }

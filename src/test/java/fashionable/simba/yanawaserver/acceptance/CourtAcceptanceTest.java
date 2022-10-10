@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
+import static fashionable.simba.yanawaserver.acceptance.AuthSteps.로그인_되어_있음;
 import static fashionable.simba.yanawaserver.acceptance.CourtAcceptanceTemplate.데이터_저장;
 import static fashionable.simba.yanawaserver.acceptance.CourtAcceptanceTemplate.데이터_조회;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,7 +28,9 @@ class CourtAcceptanceTest extends AcceptanceTest {
     @DisplayName("이름을 입력해 코트장을 검색한 후 데이터를 조회합니다.")
     void test2() {
         // given 공공 데이터 API에서 데이터 목록을 조회해 저장하고
-        ExtractableResponse<Response> 데이터_저장 = 데이터_저장();
+        String id = getId("admin");
+        String token = 로그인_되어_있음(id);
+        ExtractableResponse<Response> 데이터_저장 = 데이터_저장(token);
         assertThat(데이터_저장.statusCode()).isEqualTo(HttpStatus.CREATED.value());
 
         // when & then 이름을 입력해 데이터를 조회합니다.
@@ -45,7 +48,9 @@ class CourtAcceptanceTest extends AcceptanceTest {
     @DisplayName("지역을 입력해 검색한 후 데이터를 조회합니다.")
     void test3() {
         // given
-        ExtractableResponse<Response> 데이터_저장 = 데이터_저장();
+        String id = getId("admin");
+        String token = 로그인_되어_있음(id);
+        ExtractableResponse<Response> 데이터_저장 = 데이터_저장(token);
         assertThat(데이터_저장.statusCode()).isEqualTo(HttpStatus.CREATED.value());
 
         // when & then 지역을 입력해 데이터를 조회합니다.
@@ -63,7 +68,9 @@ class CourtAcceptanceTest extends AcceptanceTest {
     @DisplayName("정확한 지역과 이름을 입력해 데이터를 조회합니다.")
     void test4() {
         // given 공공 데이터 API에서 데이터 목록을 조회해 저장하고
-        ExtractableResponse<Response> 데이터_저장 = 데이터_저장();
+        String id = getId("admin");
+        String token = 로그인_되어_있음(id);
+        ExtractableResponse<Response> 데이터_저장 = 데이터_저장(token);
         assertThat(데이터_저장.statusCode()).isEqualTo(HttpStatus.CREATED.value());
 
         // when & then 정확한 지역과 이름을 입력해 데이터를 조회합니다.
@@ -81,7 +88,9 @@ class CourtAcceptanceTest extends AcceptanceTest {
     @DisplayName("서울시가 아닌 지역의 이름을 검색하면 데이터가 조회되지 않습니다.")
     void test5() {
         // given 공공 데이터 API에서 데이터 목록을 조회해 저장하고
-        ExtractableResponse<Response> 데이터_저장 = 데이터_저장();
+        String id = getId("admin");
+        String token = 로그인_되어_있음(id);
+        ExtractableResponse<Response> 데이터_저장 = 데이터_저장(token);
         assertThat(데이터_저장.statusCode()).isEqualTo(HttpStatus.CREATED.value());
 
         // when & then 서울시가 아닌 지역의 이름을 검색하면 데이터가 조회되지 않습니다.

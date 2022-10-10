@@ -3,6 +3,7 @@ package fashionable.simba.yanawaserver.court.ui;
 import fashionable.simba.yanawaserver.court.application.CourtApplicationService;
 import fashionable.simba.yanawaserver.court.domain.Court;
 import fashionable.simba.yanawaserver.court.dto.CourtResponse;
+import fashionable.simba.yanawaserver.global.authorization.secured.Secured;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,7 @@ public class CourtController {
         this.courtApplicationService = courtApplicationService;
     }
 
+    @Secured(value = {"ROLE_ADMIN"})
     @PostMapping("/v1/api/courts")
     public ResponseEntity<Void> saveCourtList() {
         log.info("Request to save list");

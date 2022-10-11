@@ -1,21 +1,20 @@
-package fashionable.simba.yanawaserver.matching.infra;
+package fashionable.simba.yanawaserver.matching.repository;
 
-import fashionable.simba.yanawaserver.matching.domain.CourtRepository;
+import fashionable.simba.yanawaserver.court.domain.Court;
+import fashionable.simba.yanawaserver.matching.domain.CourtApi;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-@Repository
-public class MemoryCourtRepository implements CourtRepository {
-    private final Map<Long, String> courts = new HashMap<>();
+public class MemoryCourtRepository implements CourtApi {
+    private final Map<Long, Court> courts = new HashMap<>();
     private Long sequence = 0L;
 
-    @Override
     public Long save(String courtName) {
         Long id = getId();
-        courts.put(id, courtName);
+        courts.put(id, new Court(id, "어딘가", courtName, null));
         return id;
     }
 
@@ -23,8 +22,7 @@ public class MemoryCourtRepository implements CourtRepository {
         return ++sequence;
     }
 
-    @Override
-    public Optional<String> findCourtById(Long id) {
+    public Optional<Court> findCourtById(Long id) {
         return Optional.ofNullable(courts.get(id));
     }
 

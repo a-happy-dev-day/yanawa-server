@@ -27,6 +27,7 @@ ext {
 dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
+    implementation group: 'org.json', name: 'json', version: '20220320'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -49,13 +50,13 @@ dependencyManagement {
 }
 
 sonarqube {
-	properties {
-		property "sonar.projectKey", "a-happy-dev-day_yanawa-server"
-		property "sonar.organization", "a-happy-dev-day"
-		property "sonar.host.url", "https://sonarcloud.io"
-		property "sonar.exclusions", "src/main/java/fashionable/simba/yanawaserver/matching/application/dto/RecruitmentRequsest.java, " +
-									 "src/main/java/fashionable/simba/yanawaserver/matching/application/dto/RecruitmentResponse.java"
-	}
+    properties {
+        property "sonar.projectKey", "a-happy-dev-day_yanawa-server"
+        property "sonar.organization", "a-happy-dev-day"
+        property "sonar.host.url", "https://sonarcloud.io"
+        property "sonar.exclusions", "src/main/java/fashionable/simba/yanawaserver/matching/application/dto/RecruitmentRequsest.java, " +
+                "src/main/java/fashionable/simba/yanawaserver/matching/application/dto/RecruitmentResponse.java"
+    }
 }
 
 test {
@@ -117,7 +118,7 @@ task testDocument(type: Test) {
 
 bootJar {
     dependsOn asciidoctor
-    from ("${asciidoctor.outputDir}/html5") {
+    from("${asciidoctor.outputDir}/html5") {
         into 'static/docs'
     }
 }

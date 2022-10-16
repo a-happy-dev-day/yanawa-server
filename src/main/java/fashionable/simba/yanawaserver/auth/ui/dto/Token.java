@@ -1,11 +1,11 @@
 package fashionable.simba.yanawaserver.auth.ui.dto;
 
-public class TokenRequest {
+public class Token {
     private String accessCode;
 
-    private TokenRequest() {/*no-op*/}
+    private Token() {/*no-op*/}
 
-    public TokenRequest(String accessCode) {
+    public Token(String accessCode) {
         this.accessCode = accessCode;
     }
 

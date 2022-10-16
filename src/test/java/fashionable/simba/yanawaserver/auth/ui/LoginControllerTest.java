@@ -3,7 +3,7 @@ package fashionable.simba.yanawaserver.auth.ui;
 import fashionable.simba.yanawaserver.auth.exception.AccessCodeException;
 import fashionable.simba.yanawaserver.auth.kakao.KakaoAuthenticationService;
 import fashionable.simba.yanawaserver.auth.kakao.dto.KakaoAccessToken;
-import fashionable.simba.yanawaserver.auth.ui.dto.TokenRequest;
+import fashionable.simba.yanawaserver.auth.ui.dto.Token;
 import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
 import fashionable.simba.yanawaserver.global.userdetails.User;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;
@@ -32,18 +32,11 @@ class LoginControllerTest {
     private KakaoAuthenticationService kakaoAuthenticationService;
     @Mock
     private UserDetailsService userDetailsService;
-    private JwtTokenProvider jwtTokenProvider = new JwtTokenProvider("secret-key", "refresh-key", 100000, 100000);
+    private final JwtTokenProvider jwtTokenProvider = new JwtTokenProvider("secret-key", "refresh-key", 100000, 100000);
 
     @BeforeEach
     void setUp() {
         loginController = new AuthController(kakaoAuthenticationService, userDetailsService, jwtTokenProvider);
-    }
-
-    @Test
-    @DisplayName("카카오 로그인 페이지로 이동한다.")
-    void kakao_login_page() {
-        ResponseEntity<Void> response = loginController.loginPage();
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SEE_OTHER);
     }
 
     @Test
@@ -69,16 +62,8 @@ class LoginControllerTest {
         when(kakaoAuthenticationService.getUserInfo(accessToken)).thenReturn(kakaoMember);
         when(userDetailsService.saveKakaoMember(kakaoMember)).thenReturn(user);
 
-        ResponseEntity<TokenRequest> response = loginController.loginCallback("accessCode", null, null);
+        ResponseEntity<Token> response = loginController.login(new Token("accessCode"));
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isNotNull();
-    }
-
-    @Test
-    @DisplayName("로그인에 실패하면 에러메시지를 받습니다.")
-    void kakao_login_auth_failed() {
-        assertThatThrownBy(
-            () -> loginController.loginCallback(null, "KEO301", "error message is not null")
-        ).isInstanceOf(AccessCodeException.class);
     }
 }

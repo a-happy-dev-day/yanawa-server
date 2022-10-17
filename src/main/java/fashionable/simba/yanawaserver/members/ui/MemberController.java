@@ -42,6 +42,8 @@ public class MemberController {
      */
     @PostMapping("me")
     public ResponseEntity<Void> getInformation(InformationRequest informationRequest) {
+        memberService.updateMember(informationRequest.getNickname(), informationRequest.getBirthDate(), informationRequest.getLevel());
+
         return ResponseEntity.ok().build();
     }
 

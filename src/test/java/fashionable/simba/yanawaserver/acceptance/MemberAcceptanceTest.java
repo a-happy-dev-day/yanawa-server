@@ -95,7 +95,7 @@ public class MemberAcceptanceTest extends AcceptanceTest {
     private ExtractableResponse<Response> 사용자_정보_등록(String token, String nickname, String birthDate, String level) {
         Map<String, String> params = new HashMap<>();
         params.put("nickname", nickname);
-        params.put("localDate", birthDate);
+        params.put("birthDate", birthDate);
         params.put("level", level);
 
         return RestAssured.given().log().all()

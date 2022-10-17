@@ -29,15 +29,17 @@ public class DataLoader {
         Member admin = new DefaultMember("admin@email.com", List.of(RoleType.ROLE_ADMIN.name()));
         Member member = new DefaultMember("user@email.com", List.of(RoleType.ROLE_MEMBER.name()));
         Member user = new DefaultMember(1010L, "user2@email.com", List.of(RoleType.ROLE_TEST.name()));
-        Member firstUser = new DefaultMember(1010L, "firstUser@email.com", List.of(RoleType.ROLE_TEST.name()));
+        Member firstUser = new DefaultMember("firstUser@email.com", List.of(RoleType.ROLE_MEMBER.name()));
 
         Member adminUser = memberRepository.save(admin);
         Member memberUser = memberRepository.save(member);
         Member userUser = memberRepository.save(user);
+        Member firstVisitUser = memberRepository.save(firstUser);
+        
         members.put("admin", adminUser.getId());
         members.put("member", memberUser.getId());
         members.put("user", userUser.getId());
-        members.put("firstVisitUser", firstUser.getId());
+        members.put("firstVisitUser", firstVisitUser.getId());
 
         return members;
     }

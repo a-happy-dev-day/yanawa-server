@@ -1,17 +1,21 @@
 package fashionable.simba.yanawaserver.members.ui;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class InformationRequest {
     private String nickname;
-    private LocalDate localDate;
-    private float level;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate birthDate;
+    private BigDecimal level;
 
     private InformationRequest() {/*no-op*/}
 
-    public InformationRequest(String nickname, LocalDate localDate, float level) {
+    public InformationRequest(String nickname, LocalDate birthDate, BigDecimal level) {
         this.nickname = nickname;
-        this.localDate = localDate;
+        this.birthDate = birthDate;
         this.level = level;
     }
 
@@ -19,11 +23,11 @@ public class InformationRequest {
         return nickname;
     }
 
-    public LocalDate getLocalDate() {
-        return localDate;
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
-    public float getLevel() {
+    public BigDecimal getLevel() {
         return level;
     }
 }

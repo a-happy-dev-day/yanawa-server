@@ -6,6 +6,7 @@ import fashionable.simba.yanawaserver.global.userdetails.User;
 import fashionable.simba.yanawaserver.members.domain.Member;
 import fashionable.simba.yanawaserver.members.service.MemberService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,12 +23,26 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    @PostMapping("me")
+    /**
+     * 닉네임과 데이터 등록 여부를 반환합니다.
+     * @return
+     */
+    @GetMapping("me")
     @Secured(value = {"ROLE_ADMIN", "ROLE_MEMBER", "ROLE_TEST"})
     public ResponseEntity<MemberResponse> membersMe(@AuthenticationPrincipal User user) {
         Member member = memberService.findMemberByUserName(user.getUsername()).orElseThrow(IllegalArgumentException::new);
         MemberResponse response = new MemberResponse(member.getEmail());
         return ResponseEntity.ok(response);
+    }
+
+    /**
+     * 사용자의 정보를 입력합니다.
+     * @param informationRequest
+     * @return
+     */
+    @PostMapping("me")
+    public ResponseEntity<Void> getInformation(InformationRequest informationRequest) {
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping

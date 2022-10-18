@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
@@ -14,9 +15,10 @@ class BirthDateTest {
     @Test
     @DisplayName("생일을 등록한다.")
     void createBirthDate() {
-        assertDoesNotThrow(
+        MemberBirthDate birthDate = assertDoesNotThrow(
             () -> new MemberBirthDate(LocalDate.of(1996, 9, 1))
         );
+        assertThat(birthDate.getBirth()).isEqualTo(LocalDate.of(1996, 9, 1));
     }
 
     @Test

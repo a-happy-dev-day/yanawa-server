@@ -162,7 +162,7 @@ class AuthAcceptanceTest extends AcceptanceTest {
      */
     @Test
     void login_failed_invalid_username() {
-        ExtractableResponse<Response> response = 로그인_발급_요청("12", "password-admin");
+        ExtractableResponse<Response> response = 로그인_발급_요청("999999", "password-admin");
         assertThat(response.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
     }
 }

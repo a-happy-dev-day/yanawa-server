@@ -39,7 +39,7 @@ class MemberDocumentation extends Documentation {
     void get_members_me() {
         when(memberService.findMemberByUserName(any()))
             .thenReturn(Optional.of(
-                new DefaultMember("nickname", 1L, "member@email.com", List.of(RoleType.ROLE_MEMBER.name()), false)
+                new DefaultMember("nickname", 1L, "member@email.com", List.of(RoleType.ROLE_MEMBER.name()), true)
             ));
 
         givenOauth()

@@ -24,8 +24,10 @@ class BirthDateTest {
     @Test
     @DisplayName("생일은 현재 시간을 넘길 수 없다.")
     void createBirthDate_isBeforeNow() {
+        LocalDate invalidDate = LocalDate.now().plusDays(2L);
+        
         assertThatThrownBy(
-            () -> new MemberBirthDate(LocalDate.now().plusDays(2L))
+            () -> new MemberBirthDate(invalidDate)
         ).isInstanceOf(InvalidBirthDateException.class);
     }
 }

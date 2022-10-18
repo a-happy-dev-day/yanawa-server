@@ -1,20 +1,15 @@
 package fashionable.simba.yanawaserver.acceptance;
 
-import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import static fashionable.simba.yanawaserver.acceptance.AuthSteps.로그인_되어_있음;
 import static fashionable.simba.yanawaserver.acceptance.AuthSteps.정보_조회_요청;
 
-public class MemberAcceptanceTest extends AcceptanceTest {
+class MemberAcceptanceTest extends AcceptanceTest {
 
     /**
      * Given : 사용자가 회원가입을 하고

@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class CustomUserDetailsServiceTest {
-    private static final KakaoMember KAKAO_MEMBER = new KakaoMember(1234L, "kakao@email.com", List.of(RoleType.ROLE_MEMBER.name()), 1234L, "nickname", "image.jpg", "image.png");
+    private static final KakaoMember KAKAO_MEMBER = new KakaoMember(1234L, "kakao@email.com", List.of(RoleType.ROLE_MEMBER.name()), 1234L, "nickname", "image.jpg", "image.png", true);
 
     @Mock
     private MemberRepository memberRepository;

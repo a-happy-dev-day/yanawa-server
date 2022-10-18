@@ -9,11 +9,11 @@ import java.util.List;
 public class DefaultMember extends Member {
     protected DefaultMember() {/*no-op*/}
 
-    public DefaultMember(Long id, String email, List<String> roles) {
-        super(id, email, roles);
+    public DefaultMember(String nickname, Long id, String email, List<String> roles, boolean isFirst) {
+        super(nickname, id, email, roles, isFirst);
     }
 
-    public DefaultMember(String email, List<String> roles) {
-        super(null, email, roles);
+    public DefaultMember(String nickname, String email, List<String> roles, boolean isFirst) {
+        super(nickname, null, email, roles, isFirst);
     }
 }

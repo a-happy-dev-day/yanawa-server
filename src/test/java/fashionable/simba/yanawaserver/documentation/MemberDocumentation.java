@@ -1,6 +1,7 @@
 package fashionable.simba.yanawaserver.documentation;
 
 import fashionable.simba.yanawaserver.members.domain.DefaultMember;
+import fashionable.simba.yanawaserver.members.domain.MemberSex;
 import fashionable.simba.yanawaserver.members.domain.RoleType;
 import fashionable.simba.yanawaserver.members.service.MemberService;
 import org.junit.jupiter.api.Test;
@@ -38,7 +39,7 @@ class MemberDocumentation extends Documentation {
     void get_members_me() {
         when(memberService.findMemberByUserName(any()))
             .thenReturn(Optional.of(
-                new DefaultMember(1L, "member@email.com", List.of(RoleType.ROLE_MEMBER.name()))
+                new DefaultMember("nickname", 1L, "member@email.com", List.of(RoleType.ROLE_MEMBER.name()), false)
             ));
 
         givenOauth()
@@ -56,13 +57,11 @@ class MemberDocumentation extends Documentation {
      */
     @Test
     void post_members_me() {
-        doNothing().when(memberService)
-            .updateMember("tis", LocalDate.of(1996, 9, 1), BigDecimal.valueOf(0.5));
-
         Map<String, String> params = new HashMap<>();
         params.put("nickname", "tis");
         params.put("birthDate", "1996-09-01");
         params.put("level", "0.5");
+        params.put("sex", "MALE");
 
         givenNotOauth()
             .auth().oauth2(

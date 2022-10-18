@@ -70,7 +70,8 @@ public class KakaoAuthenticationService {
             userInfo.getEmail(),
             userInfo.getNickname(),
             userInfo.getProfileImage(),
-            userInfo.getThumbnailImage()
+            userInfo.getThumbnailImage(),
+            true
         );
     }
 

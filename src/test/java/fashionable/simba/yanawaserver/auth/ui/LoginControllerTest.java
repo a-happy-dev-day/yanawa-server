@@ -25,6 +25,19 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class LoginControllerTest {
+    private static final KakaoMember KAKAO_MEMBER = new KakaoMember(
+        1234L,
+        "email@email.com",
+        List.of(RoleType.ROLE_MEMBER.name()),
+        123L,
+        "username",
+        "profile.png",
+        "thumbnail.jpg",
+        true);
+    private static final KakaoAccessToken KAKAO_ACCESS_TOKEN = new KakaoAccessToken(
+        "Bearer",
+        "access token",
+        "refresh Token");
     private AuthController loginController;
     @Mock
     private KakaoAuthenticationService kakaoAuthenticationService;
@@ -40,19 +53,8 @@ class LoginControllerTest {
     @Test
     @DisplayName("카카오 로그인 인증 코드를 받아 사용자 정보를 가져온다.")
     void kakao_login_auth() {
-        KakaoAccessToken accessToken = new KakaoAccessToken(
-            "Bearer",
-            "access token",
-            "refresh Token");
-
-        KakaoMember kakaoMember = new KakaoMember(
-            1234L,
-            "email@email.com",
-            List.of(RoleType.ROLE_MEMBER.name()),
-            123L,
-            "username",
-            "profile.png",
-            "thumbnail.jpg");
+        KakaoAccessToken accessToken = KAKAO_ACCESS_TOKEN;
+        KakaoMember kakaoMember = KAKAO_MEMBER;
 
         User user = new User("1234", List.of(RoleType.ROLE_MEMBER.name()));
 

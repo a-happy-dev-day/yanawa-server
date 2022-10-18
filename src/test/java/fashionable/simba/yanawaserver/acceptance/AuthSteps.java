@@ -60,7 +60,7 @@ public class AuthSteps {
         return RestAssured.given().log().all()
             .auth().oauth2(accessToken)
             .accept(MediaType.APPLICATION_JSON_VALUE)
-            .when().post("/members/me")
+            .when().get("/members/me")
             .then().log().all()
             .extract();
     }
@@ -69,7 +69,7 @@ public class AuthSteps {
     public static ExtractableResponse<Response> 미인증_사용자_정보_조회_요청() {
         return RestAssured.given().log().all()
             .accept(MediaType.APPLICATION_JSON_VALUE)
-            .when().post("/members/me")
+            .when().get("/members/me")
             .then().log().all()
             .extract();
     }

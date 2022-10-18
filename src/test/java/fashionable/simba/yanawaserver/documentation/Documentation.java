@@ -37,7 +37,7 @@ public class Documentation {
     private DatabaseCleanup databaseCleanup;
     @Autowired
     private DataLoader dataLoader;
-    protected String username = "1";
+    protected String username;
     protected String accessCode;
     protected String accessToken;
     protected String refreshToken;
@@ -69,7 +69,7 @@ public class Documentation {
             .build();
     }
 
-    private Map<String, Long> getData() {
+    protected Map<String, Long> getData() {
         if (data.isEmpty()) {
             data = dataLoader.loadData();
         }

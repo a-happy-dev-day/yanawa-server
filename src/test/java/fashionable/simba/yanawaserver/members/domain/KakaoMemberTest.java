@@ -1,7 +1,5 @@
 package fashionable.simba.yanawaserver.members.domain;
 
-import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -21,20 +19,12 @@ class KakaoMemberTest {
             "tis",
             "email@email.com",
             "profile",
-            "thumnail")
+            "thumnail",
+            true)
         );
 
         assertAll(
             () -> assertThat(kakaoMember.getKakaoId()).isEqualTo(kakaoId)
         );
-    }
-
-    @Test
-    @DisplayName("동등성 테스트")
-    void kakaoMember_equals() {
-        EqualsVerifier.forClass(KakaoMember.class)
-            .suppress(Warning.NONFINAL_FIELDS)
-            .withRedefinedSuperclass()
-            .verify();
     }
 }

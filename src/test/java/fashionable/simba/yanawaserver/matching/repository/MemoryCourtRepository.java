@@ -2,7 +2,6 @@ package fashionable.simba.yanawaserver.matching.repository;
 
 import fashionable.simba.yanawaserver.court.domain.Court;
 import fashionable.simba.yanawaserver.matching.domain.CourtApi;
-import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;

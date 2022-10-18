@@ -1,4 +1,4 @@
-= Subway Application API Document
+= Yanawa API Document
 :doctype: book
 :icons: font
 :source-highlighter: highlightjs
@@ -6,8 +6,8 @@
 :toclevels: 2
 :sectlinks:
 
-[[member]]
-== 회원 인증
+[[authentication]]
+== 인증
 
 === 소셜 로그인
 
@@ -24,7 +24,7 @@ operation::member/token[snippets='http-request,http-response']
 
 === 토큰 갱신
 
-operation::member/refresh[snippets='http-request,http-response']
+operation::token/refresh[snippets='http-request,http-response']
 
 === 액세스 토큰 만료
 
@@ -33,7 +33,3 @@ operation::expired/access[snippets='http-request,http-response']
 === 리프레시 토큰 만료
 
 operation::expired/refresh[snippets='http-request,http-response']
-
-=== 회원 정보 조회
-
-operation::member/me[snippets='http-request,http-response']

@@ -1,9 +1,8 @@
 package fashionable.simba.yanawaserver.auth.ui;
 
-import fashionable.simba.yanawaserver.auth.exception.AccessCodeException;
 import fashionable.simba.yanawaserver.auth.kakao.KakaoAuthenticationService;
 import fashionable.simba.yanawaserver.auth.kakao.dto.KakaoAccessToken;
-import fashionable.simba.yanawaserver.auth.ui.dto.TokenRequest;
+import fashionable.simba.yanawaserver.auth.ui.dto.Token;
 import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
 import fashionable.simba.yanawaserver.global.userdetails.User;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;
@@ -21,18 +20,30 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class LoginControllerTest {
+    private static final KakaoMember KAKAO_MEMBER = new KakaoMember(
+        1234L,
+        "email@email.com",
+        List.of(RoleType.ROLE_MEMBER.name()),
+        123L,
+        "username",
+        "profile.png",
+        "thumbnail.jpg",
+        true);
+    private static final KakaoAccessToken KAKAO_ACCESS_TOKEN = new KakaoAccessToken(
+        "Bearer",
+        "access token",
+        "refresh Token");
     private AuthController loginController;
     @Mock
     private KakaoAuthenticationService kakaoAuthenticationService;
     @Mock
     private UserDetailsService userDetailsService;
-    private JwtTokenProvider jwtTokenProvider = new JwtTokenProvider("secret-key", "refresh-key", 100000, 100000);
+    private final JwtTokenProvider jwtTokenProvider = new JwtTokenProvider("secret-key", "refresh-key", 100000, 100000);
 
     @BeforeEach
     void setUp() {
@@ -40,28 +51,10 @@ class LoginControllerTest {
     }
 
     @Test
-    @DisplayName("카카오 로그인 페이지로 이동한다.")
-    void kakao_login_page() {
-        ResponseEntity<Void> response = loginController.loginPage();
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SEE_OTHER);
-    }
-
-    @Test
     @DisplayName("카카오 로그인 인증 코드를 받아 사용자 정보를 가져온다.")
     void kakao_login_auth() {
-        KakaoAccessToken accessToken = new KakaoAccessToken(
-            "Bearer",
-            "access token",
-            "refresh Token");
-
-        KakaoMember kakaoMember = new KakaoMember(
-            1234L,
-            "email@email.com",
-            List.of(RoleType.ROLE_MEMBER.name()),
-            123L,
-            "username",
-            "profile.png",
-            "thumbnail.jpg");
+        KakaoAccessToken accessToken = KAKAO_ACCESS_TOKEN;
+        KakaoMember kakaoMember = KAKAO_MEMBER;
 
         User user = new User("1234", List.of(RoleType.ROLE_MEMBER.name()));
 
@@ -69,16 +62,8 @@ class LoginControllerTest {
         when(kakaoAuthenticationService.getUserInfo(accessToken)).thenReturn(kakaoMember);
         when(userDetailsService.saveKakaoMember(kakaoMember)).thenReturn(user);
 
-        ResponseEntity<TokenRequest> response = loginController.loginCallback("accessCode", null, null);
+        ResponseEntity<Token> response = loginController.login(new Token("accessCode"));
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isNotNull();
-    }
-
-    @Test
-    @DisplayName("로그인에 실패하면 에러메시지를 받습니다.")
-    void kakao_login_auth_failed() {
-        assertThatThrownBy(
-            () -> loginController.loginCallback(null, "KEO301", "error message is not null")
-        ).isInstanceOf(AccessCodeException.class);
     }
 }

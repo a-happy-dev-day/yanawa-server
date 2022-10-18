@@ -24,19 +24,21 @@ class MemberLevelTest {
     @ParameterizedTest
     @DisplayName("레벨이 0 이상 6이하가 아니면 InvalidLevelException 예외가 발생한다.")
     @ValueSource(longs = {-1, 10})
-    void createLevel_invalidSize(long level) {
+    void createLevel_invalidSize(long value) {
+        BigDecimal invalidLevel = BigDecimal.valueOf(value);
+
         assertThatThrownBy(
-            () -> new MemberLevel(BigDecimal.valueOf(level))
+            () -> new MemberLevel(invalidLevel)
         ).isInstanceOf(InvalidLevelException.class);
     }
 
     @Test
     @DisplayName("사용자의 레벨이 0.5 단위가 아니면 InvalidLevelException 예외가 발생한다.")
     void createLevel_invalidPoint() {
-        double invalidLevel = 0.7;
+        BigDecimal invalidLevel = BigDecimal.valueOf(0.7);
 
         assertThatThrownBy(
-            () -> new MemberLevel(BigDecimal.valueOf(invalidLevel))
+            () -> new MemberLevel(invalidLevel)
         ).isInstanceOf(InvalidLevelException.class);
     }
 }

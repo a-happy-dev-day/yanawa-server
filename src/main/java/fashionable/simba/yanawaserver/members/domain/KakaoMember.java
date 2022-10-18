@@ -24,10 +24,6 @@ public final class KakaoMember extends Member {
         this(null, email, List.of(RoleType.ROLE_MEMBER.name()), kakaoId, nickname, profileImageUrl, thumbnailImageUrl, isFirst);
     }
 
-    public String getNickname() {
-        return super.getNickname();
-    }
-
     public Long getKakaoId() {
         return kakaoId;
     }

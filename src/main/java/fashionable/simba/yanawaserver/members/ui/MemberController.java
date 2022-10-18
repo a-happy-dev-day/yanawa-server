@@ -33,10 +33,10 @@ public class MemberController {
      */
     @GetMapping("me")
     @Secured(value = {"ROLE_ADMIN", "ROLE_MEMBER", "ROLE_TEST"})
-    public ResponseEntity<MemberResponse> membersMe(@AuthenticationPrincipal User user) {
+    public ResponseEntity<InformationResponse> membersMe(@AuthenticationPrincipal User user) {
         log.debug("Request id {}'s information", user.getUsername());
         Member member = memberService.findMemberByUserName(user.getUsername()).orElseThrow(IllegalArgumentException::new);
-        MemberResponse response = new MemberResponse(member.getEmail());
+        InformationResponse response = new InformationResponse(member.getNickname(), member.getEmail(), member.getSex(), member.getBirthDate(), member.getLevel(), member.isFirst());
         return ResponseEntity.ok(response);
     }
 

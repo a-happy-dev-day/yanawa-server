@@ -67,6 +67,18 @@ public abstract class Member {
         return email;
     }
 
+    public MemberSex getSex() {
+        return sex;
+    }
+
+    public MemberBirthDate getBirthDate() {
+        return birthDate;
+    }
+
+    public MemberLevel getLevel() {
+        return level;
+    }
+
     public List<String> getRoles() {
         return roles;
     }

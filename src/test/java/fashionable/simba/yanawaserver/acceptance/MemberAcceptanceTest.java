@@ -36,7 +36,7 @@ public class MemberAcceptanceTest extends AcceptanceTest {
         ExtractableResponse<Response> 정보_조회 = 정보_조회_요청(token);
 
         Assertions.assertThat(정보_조회.statusCode()).isEqualTo(HttpStatus.OK.value());
-        Assertions.assertThat(정보_조회.jsonPath().getString("isFirst")).isEqualTo("true");
+        Assertions.assertThat(정보_조회.jsonPath().getString("first")).isEqualTo("true");
 
         // then
         ExtractableResponse<Response> 사용자_정보_등록 = 사용자_정보_등록(token, nickname, birthDate, level);
@@ -63,7 +63,7 @@ public class MemberAcceptanceTest extends AcceptanceTest {
         ExtractableResponse<Response> 정보_조회 = 정보_조회_요청(token);
 
         Assertions.assertThat(정보_조회.statusCode()).isEqualTo(HttpStatus.OK.value());
-        Assertions.assertThat(정보_조회.jsonPath().getString("isFirst")).isEqualTo("true");
+        Assertions.assertThat(정보_조회.jsonPath().getString("first")).isEqualTo("true");
 
         // then
         String nickname = 정보_조회.jsonPath().getString("nickname");
@@ -88,7 +88,7 @@ public class MemberAcceptanceTest extends AcceptanceTest {
         ExtractableResponse<Response> 정보_조회 = 정보_조회_요청(token);
 
         Assertions.assertThat(정보_조회.statusCode()).isEqualTo(HttpStatus.OK.value());
-        Assertions.assertThat(정보_조회.jsonPath().getString("isFirst")).isEqualTo("false");
+        Assertions.assertThat(정보_조회.jsonPath().getString("first")).isEqualTo("false");
     }
 
 
@@ -100,6 +100,7 @@ public class MemberAcceptanceTest extends AcceptanceTest {
 
         return RestAssured.given().log().all()
             .auth().oauth2(token)
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
             .body(params)
             .accept(MediaType.APPLICATION_JSON_VALUE)
             .when().post("/members/me")

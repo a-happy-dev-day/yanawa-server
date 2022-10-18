@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: dep
+    active: test
 
 security:
   jwt:

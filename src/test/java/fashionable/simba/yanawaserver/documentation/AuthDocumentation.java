@@ -16,17 +16,6 @@ import static org.springframework.restdocs.restassured3.RestAssuredRestDocumenta
 class AuthDocumentation extends Documentation {
 
     @Test
-    void redirectKakaoLoginPage() {
-        givenNotOauth()
-            .filter(document("member/kakao",
-                preprocessRequest(prettyPrint())))
-            .when().get("/kakao/login")
-            .then().log().all()
-            .statusCode(HttpStatus.OK.value())
-            .extract();
-    }
-
-    @Test
     void getAccessCode() {
         Map<String, String> params = new HashMap<>();
         params.put("username", username);

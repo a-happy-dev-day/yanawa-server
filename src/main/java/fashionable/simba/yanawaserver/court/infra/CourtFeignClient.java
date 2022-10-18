@@ -19,5 +19,5 @@ public interface CourtFeignClient extends CourtFeignApi {
 
     @Override
     @GetMapping("/6663504c7867656f3635516a6b4770/json/ListPublicReservationSport/{minNum}/{maxNum}/%ED%85%8C%EB%8B%88%EC%8A%A4%EC%9E%A5")
-    ResponseEntity<Map<String, Object>> findCourts(@PathVariable int minNum, @PathVariable int maxNum);
+    ResponseEntity<Map<String, Object>> findCourts(@PathVariable("minNum") int minNum, @PathVariable("maxNum") int maxNum);
 }

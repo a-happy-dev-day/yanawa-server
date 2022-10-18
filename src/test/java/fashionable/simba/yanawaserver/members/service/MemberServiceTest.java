@@ -25,6 +25,7 @@ import static org.mockito.Mockito.when;
 class MemberServiceTest {
     private static final DefaultMember 이미_정보를_등록한_사용자 = new DefaultMember("tis", 1L, "email", List.of(RoleType.ROLE_MEMBER.name()), false);
     private static final DefaultMember 처음_방문한_사용자 = new DefaultMember("tis", 1L, "email", List.of(RoleType.ROLE_MEMBER.name()), true);
+    private static final LocalDate BIRTH_DATE = LocalDate.of(1996, 9, 1);
 
     @Mock
     MemberRepository memberRepository;
@@ -42,7 +43,7 @@ class MemberServiceTest {
                 "1",
                 "tis",
                 MemberSex.MALE,
-                LocalDate.of(1996, 9, 1),
+                BIRTH_DATE,
                 BigDecimal.ONE)
         );
     }
@@ -55,7 +56,7 @@ class MemberServiceTest {
 
         assertThatThrownBy(
             () -> memberService.updateMember("1", "tis", MemberSex.MALE,
-                LocalDate.of(1996, 9, 1), BigDecimal.ONE)
+                BIRTH_DATE, BigDecimal.ONE)
         ).isInstanceOf(NoMemberDateException.class);
     }
 
@@ -67,7 +68,7 @@ class MemberServiceTest {
 
         assertThatThrownBy(
             () -> memberService.updateMember("1", "tis", MemberSex.MALE,
-                LocalDate.of(1996, 9, 1), BigDecimal.ONE)
+                BIRTH_DATE, BigDecimal.ONE)
         ).isInstanceOf(AlreadyUpdatedException.class);
     }
 }

@@ -2,14 +2,16 @@ package fashionable.simba.yanawaserver.members.domain;
 
 import fashionable.simba.yanawaserver.members.exception.InvalidLevelException;
 
+import javax.persistence.Embeddable;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
+@Embeddable
 public class MemberLevel {
     private BigDecimal value;
 
-    private MemberLevel() {/*no-op*/}
+    protected MemberLevel() {/*no-op*/}
 
     public MemberLevel(BigDecimal value) {
         if (value.compareTo(BigDecimal.ZERO) < 0 || value.compareTo(BigDecimal.valueOf(6)) > 0) {
@@ -17,7 +19,7 @@ public class MemberLevel {
         }
 
         BigDecimal decimal = value.divide(BigDecimal.valueOf(0.5), MathContext.DECIMAL128);
-        
+
         if (!decimal.equals(decimal.setScale(0, RoundingMode.DOWN))) {
             throw new InvalidLevelException();
         }

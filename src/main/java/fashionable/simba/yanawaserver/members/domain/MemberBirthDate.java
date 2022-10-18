@@ -2,8 +2,10 @@ package fashionable.simba.yanawaserver.members.domain;
 
 import fashionable.simba.yanawaserver.members.exception.InvalidBirthDateException;
 
+import javax.persistence.Embeddable;
 import java.time.LocalDate;
 
+@Embeddable
 public class MemberBirthDate {
     private LocalDate birth;
 

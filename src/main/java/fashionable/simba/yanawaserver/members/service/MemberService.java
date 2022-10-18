@@ -28,6 +28,7 @@ public class MemberService {
         return memberRepository.findById(getId(username));
     }
 
+    @Transactional(readOnly = true)
     public List<MemberResponse> findAll() {
         return memberRepository.findAll()
             .stream()

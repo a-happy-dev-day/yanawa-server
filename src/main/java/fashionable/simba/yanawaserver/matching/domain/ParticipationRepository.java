@@ -8,4 +8,6 @@ public interface ParticipationRepository {
     Optional<Participation> findById(Long id);
 
     Integer countParticipationsByMatchingId(Long matchingId);
+
+    Optional<Participation> findByMatchingIdAndUserId(Long recruitmentId, Long participantId);
 }

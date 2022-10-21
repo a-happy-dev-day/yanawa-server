@@ -10,9 +10,9 @@ import java.util.Optional;
 
 @Service
 public class RatingService {
-    RatingRepository ratingRepository;
-    RecruitmentRepository recruitmentRepository;
-    ParticipationRepository participationRepository;
+    private final RatingRepository ratingRepository;
+    private final RecruitmentRepository recruitmentRepository;
+    private final ParticipationRepository participationRepository;
 
     public RatingService(RatingRepository ratingRepository, RecruitmentRepository recruitmentRepository, ParticipationRepository participationRepository) {
         this.ratingRepository = ratingRepository;
@@ -30,8 +30,8 @@ public class RatingService {
             throw new IllegalArgumentException("해당 매칭에 참여자 정보가 없습니다.");
         }
         Optional<Participation> user = participationRepository.findByMatchingIdAndUserId(rating.getRecruitmentId(), rating.getUserId());
-        if (user.isEmpty()){
-            throw new IllegalArgumentException("해당 매칭에 사용자 정보가 없습니다.");
+        if (participation.isEmpty()){
+            throw new IllegalArgumentException("");
         }
 
         Rating savedRating = new Rating(rating.getId(), rating.getParticipantId(), rating.getRecruitmentId(), rating.getRatingScore(), rating.getMannerTemperature(), rating.getUserId(), rating.getDetail());

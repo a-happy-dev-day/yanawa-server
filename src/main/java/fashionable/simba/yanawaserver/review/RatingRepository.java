@@ -1,8 +1,10 @@
 package fashionable.simba.yanawaserver.review;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import java.util.Optional;
-
+@Repository
 public interface RatingRepository {
     Rating save(Rating rating);
 

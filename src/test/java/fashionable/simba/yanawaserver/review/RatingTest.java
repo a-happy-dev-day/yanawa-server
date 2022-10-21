@@ -1,6 +1,5 @@
 package fashionable.simba.yanawaserver.review;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,7 +26,7 @@ class RatingTest {
             () -> assertThat(rating.getMannerTemperature()).isEqualTo(1L),
             () -> assertThat(rating.getUserId()).isEqualTo(1L),
             () -> assertThat(rating.getDetail()).isEqualTo("후기")
-            );
+        );
     }
 
     @Test

@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class FakeRatingRepository implements RatingRepository{
+public class FakeRatingRepository implements RatingRepository {
     private final Map<Long, Rating> ratings = new HashMap<>();
 
     @Override

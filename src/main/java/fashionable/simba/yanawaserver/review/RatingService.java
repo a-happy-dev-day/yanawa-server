@@ -26,11 +26,11 @@ public class RatingService {
             throw new IllegalArgumentException("매칭 정보가 없습니다.");
         }
         Optional<Participation> participation = participationRepository.findByMatchingIdAndUserId(rating.getRecruitmentId(), rating.getParticipantId());
-        if (participation.isEmpty()){
+        if (participation.isEmpty()) {
             throw new IllegalArgumentException("해당 매칭에 참여자 정보가 없습니다.");
         }
         Optional<Participation> user = participationRepository.findByMatchingIdAndUserId(rating.getRecruitmentId(), rating.getUserId());
-        if (participation.isEmpty()){
+        if (participation.isEmpty()) {
             throw new IllegalArgumentException("");
         }
 

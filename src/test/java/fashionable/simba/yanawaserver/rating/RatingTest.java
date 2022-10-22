@@ -24,7 +24,7 @@ class RatingTest {
             () -> assertThat(rating.getId()).isEqualTo(1L),
             () -> assertThat(rating.getParticipantId()).isEqualTo(1L),
             () -> assertThat(rating.getRecruitmentId()).isEqualTo(1L),
-            () -> assertThat(rating.getRatingScore()).isEqualTo(BigDecimal.valueOf(3.0)),
+            () -> assertThat(rating.getRatingScore().getScore()).isEqualTo(BigDecimal.valueOf(3.0)),
             () -> assertThat(rating.getMannerTemperature()).isEqualTo(MannerTemperatureType.EXCELLENT),
             () -> assertThat(rating.getUserId()).isEqualTo(1L),
             () -> assertThat(rating.getDetail()).isEqualTo("후기")

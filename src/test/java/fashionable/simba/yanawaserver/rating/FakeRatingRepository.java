@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.review;
+package fashionable.simba.yanawaserver.rating;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +29,7 @@ public class FakeRatingRepository implements RatingRepository {
     }
 
     @Override
-    public List<Rating> findByRequritmentId(Long requritmentId) {
+    public List<Rating> findByRecruitmentId(Long recruitmentId) {
         return null;
     }
 

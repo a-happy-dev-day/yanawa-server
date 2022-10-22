@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.review;
+package fashionable.simba.yanawaserver.rating;
 
 public enum MannerTemperatureType {
     BAD, GOOD, EXCELLENT

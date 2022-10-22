@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.review;
+package fashionable.simba.yanawaserver.rating;
 
 import fashionable.simba.yanawaserver.matching.constant.AgeGroupType;
 import fashionable.simba.yanawaserver.matching.constant.AnnualType;
@@ -16,7 +16,6 @@ import fashionable.simba.yanawaserver.matching.fake.MemoryRecruitmentRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

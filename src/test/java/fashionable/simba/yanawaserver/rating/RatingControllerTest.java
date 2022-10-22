@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.review;
+package fashionable.simba.yanawaserver.rating;
 
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;

@@ -6,6 +6,8 @@ import fashionable.simba.yanawaserver.matching.domain.Recruitment;
 import fashionable.simba.yanawaserver.matching.domain.RecruitmentRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -39,4 +41,16 @@ public class RatingService {
 
         return savedRating;
     }
+
+    public BigDecimal findAverageRating(long userId) {
+        List<Rating> ratings = ratingRepository.findByParticipantId(userId);
+
+        BigDecimal sum = BigDecimal.ZERO;
+        for (Rating rating : ratings) {
+            sum = sum.add(rating.getRatingScore().getScore());
+        }
+
+        return sum.divide(BigDecimal.valueOf(ratings.size()));
+    }
+
 }

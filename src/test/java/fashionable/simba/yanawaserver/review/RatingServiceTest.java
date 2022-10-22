@@ -18,6 +18,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,9 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class RatingServiceTest {
     RatingRepository ratingRepository = new FakeRatingRepository();
-    @Mock
     RecruitmentRepository recruitmentRepository = new MemoryRecruitmentRepository();
-    @Mock
     ParticipationRepository participationRepository = new MemoryParticipationRepository();
 
     RatingService ratingService;
@@ -53,7 +52,7 @@ class RatingServiceTest {
     @Test
     @DisplayName("사용자가 참여자의 능력을 평가한다")
     void createRating() {
-        Rating rating = new Rating(1L, 1L, 1L, 3.5, 1L, 2L, "후기");
+        Rating rating = new Rating(1L, 1L, 1L, new RatingScore(BigDecimal.valueOf(3.0)), MannerTemperatureType.EXCELLENT, 2L, "후기");
 
         Rating savedRating = ratingService.createRating(rating);
 
@@ -63,9 +62,9 @@ class RatingServiceTest {
     @Test
     @DisplayName("참여자와 사용자는 해당 모집의 일원이 아닐경우, 예외가 발생한다.")
     void not_include_recruitment_test() {
-        Rating rating1 = new Rating(1L, 1L, 2L, 3.5, 1L, 2L, "후기");
-        Rating rating2 = new Rating(1L, 3L, 1L, 3.5, 1L, 2L, "후기");
-        Rating rating3 = new Rating(1L, 1L, 1L, 3.5, 1L, 3L, "후기");
+        Rating rating1 = new Rating(1L, 1L, 1L, new RatingScore(BigDecimal.valueOf(3.0)), MannerTemperatureType.EXCELLENT, 3L, "후기");
+        Rating rating2 = new Rating(2L, 3L, 1L, new RatingScore(BigDecimal.valueOf(3.0)), MannerTemperatureType.EXCELLENT, 1L, "후기");
+        Rating rating3 = new Rating(3L, 1L, 2L, new RatingScore(BigDecimal.valueOf(3.0)), MannerTemperatureType.EXCELLENT, 2L, "후기");
 
         assertAll(
             () -> assertThrows(IllegalArgumentException.class, () -> ratingService.createRating(rating1)),

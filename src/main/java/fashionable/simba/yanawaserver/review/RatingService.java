@@ -30,8 +30,8 @@ public class RatingService {
             throw new IllegalArgumentException("해당 매칭에 참여자 정보가 없습니다.");
         }
         Optional<Participation> user = participationRepository.findByMatchingIdAndUserId(rating.getRecruitmentId(), rating.getUserId());
-        if (participation.isEmpty()) {
-            throw new IllegalArgumentException("");
+        if (user.isEmpty()) {
+            throw new IllegalArgumentException("해당 매칭에 리뷰 작성자 정보가 없습니다.");
         }
 
         Rating savedRating = new Rating(rating.getId(), rating.getParticipantId(), rating.getRecruitmentId(), rating.getRatingScore(), rating.getMannerTemperature(), rating.getUserId(), rating.getDetail());

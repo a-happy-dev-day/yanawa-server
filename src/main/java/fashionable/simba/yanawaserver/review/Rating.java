@@ -1,5 +1,6 @@
 package fashionable.simba.yanawaserver.review;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,8 +13,9 @@ public class Rating {
     private Long id; // 후기 식별자
     private Long participantId; // 게임에 참여하는 참여자의 식별자
     private Long recruitmentId; // 모집의 고유 식별자
-    private double ratingScore; // 사용자의 실력 점수
-    private Long mannerTemperature; // 사용자의 매너 점수
+    @Embedded
+    private RatingScore ratingScore; // 사용자의 실력 점수
+    private MannerTemperatureType mannerTemperature; // 사용자의 매너 점수
     private Long userId; // 사용자의 정보를 확인할 수 있는 식별자
     private String detail;
 
@@ -21,7 +23,7 @@ public class Rating {
         /*no-op*/
     }
 
-    public Rating(Long id, Long participantId, Long recruitmentId, double ratingScore, Long mannerTemperature, Long userId, String detail) {
+    public Rating(Long id, Long participantId, Long recruitmentId, RatingScore ratingScore, MannerTemperatureType mannerTemperature, Long userId, String detail) {
         this.id = id;
         this.participantId = participantId;
         this.recruitmentId = recruitmentId;
@@ -43,11 +45,11 @@ public class Rating {
         return recruitmentId;
     }
 
-    public double getRatingScore() {
+    public RatingScore getRatingScore() {
         return ratingScore;
     }
 
-    public Long getMannerTemperature() {
+    public MannerTemperatureType getMannerTemperature() {
         return mannerTemperature;
     }
 
@@ -59,11 +61,11 @@ public class Rating {
         return detail;
     }
 
-    public void editRatingScore(double ratingScore) {
+    public void editRatingScore(RatingScore ratingScore) {
         this.ratingScore = ratingScore;
     }
 
-    public void editMannerTemperature(Long mannerTemperature) {
+    public void editMannerTemperature(MannerTemperatureType mannerTemperature) {
         this.mannerTemperature = mannerTemperature;
     }
 }

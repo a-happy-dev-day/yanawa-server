@@ -64,9 +64,9 @@ class RatingServiceTest {
     @Test
     @DisplayName("참여자와 사용자는 해당 모집의 일원이 아닐경우, 예외가 발생한다.")
     void not_include_recruitment_test() {
-        Rating rating1 = new Rating(1L, 1L, 1L, new RatingScore(BigDecimal.valueOf(3.0)), MannerTemperatureType.EXCELLENT, 3L, "후기");
-        Rating rating2 = new Rating(2L, 3L, 1L, new RatingScore(BigDecimal.valueOf(3.0)), MannerTemperatureType.EXCELLENT, 1L, "후기");
-        Rating rating3 = new Rating(3L, 1L, 2L, new RatingScore(BigDecimal.valueOf(3.0)), MannerTemperatureType.EXCELLENT, 2L, "후기");
+        Rating rating1 = new Rating(1L, 1L, 1L, new RatingScore(BigDecimal.valueOf(3.0)), MannerTemperatureType.EXCELLENT, 10L, "후기");
+        Rating rating2 = new Rating(2L, 10L, 1L, new RatingScore(BigDecimal.valueOf(3.0)), MannerTemperatureType.EXCELLENT, 1L, "후기");
+        Rating rating3 = new Rating(3L, 1L, 10L, new RatingScore(BigDecimal.valueOf(3.0)), MannerTemperatureType.EXCELLENT, 2L, "후기");
 
         assertAll(
             () -> assertThrows(IllegalArgumentException.class, () -> ratingService.createRating(rating1)),

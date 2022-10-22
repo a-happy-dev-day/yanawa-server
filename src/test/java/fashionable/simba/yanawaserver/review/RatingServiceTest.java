@@ -34,6 +34,7 @@ class RatingServiceTest {
     Recruitment recruitment;
     Participation participation1;
     Participation participation2;
+    Participation participation3;
 
 
     @BeforeEach
@@ -41,10 +42,12 @@ class RatingServiceTest {
         recruitment = new Recruitment(1L, 1L, new Level(2.0), new Level(1.0), AgeGroupType.TWENTIES, GenderType.NONE, PreferenceType.MATCHING, 3, 2.0, AnnualType.NONE, "123", RecruitmentStatusType.CLOSED);
         participation1 = new Participation(1L, 1L, 1L, LocalDateTime.now(), ParticipationStatusType.ACCEPTED);
         participation2 = new Participation(1L, 2L, 1L, LocalDateTime.now(), ParticipationStatusType.ACCEPTED);
+        participation3 = new Participation(1L, 3L, 1L, LocalDateTime.now(), ParticipationStatusType.ACCEPTED);
 
         recruitmentRepository.save(recruitment);
         participationRepository.save(participation1);
         participationRepository.save(participation2);
+        participationRepository.save(participation3);
 
         ratingService = new RatingService(ratingRepository, recruitmentRepository, participationRepository);
     }
@@ -76,8 +79,14 @@ class RatingServiceTest {
 
     @Test
     @DisplayName("상대방의 평가 점수를 조회한다.")
-    void search_rating_score() {
+    void find_average_ratingScore() {
+        //given
+        Rating rating1 = new Rating(1L, 1L, 1L, new RatingScore(BigDecimal.valueOf(3.0)), MannerTemperatureType.EXCELLENT, 2L, "후기");
+        ratingService.createRating(rating1);
+        Rating rating2 = new Rating(2L, 1L, 1L, new RatingScore(BigDecimal.valueOf(4.0)), MannerTemperatureType.EXCELLENT, 3L, "후기");
+        ratingService.createRating(rating2);
 
+        assertThat(ratingService.findAverageRating(1L)).isEqualTo(BigDecimal.valueOf(3.5));
     }
 
 

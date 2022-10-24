@@ -1,5 +1,8 @@
 package fashionable.simba.yanawaserver.rating;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
@@ -27,16 +30,20 @@ class RatingControllerTest {
     }
 
     @Test
-    void 사용자가_참여자의_능력을_평가한다() {
+    void 사용자가_참여자의_능력을_평가한다() throws JsonProcessingException {
 
         Map<String, String> param = new HashMap<>();
 
-        param.put("id", "1L");
-        param.put("participantId", "1L");
-        param.put("recruitmentId", "1L");
-        param.put("ratingScore", String.valueOf(new RatingScore(BigDecimal.valueOf(3.0))));
-        param.put("mannerTemperature", String.valueOf(MannerTemperatureType.EXCELLENT));
-        param.put("userId", "2L");
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
+        String ratingScoreString = mapper.writeValueAsString(new RatingScore(BigDecimal.valueOf(3.0)));
+
+        param.put("id", "1");
+        param.put("participantId", "1");
+        param.put("recruitmentId", "1");
+        param.put("ratingScore", ratingScoreString);
+        param.put("mannerTemperature", MannerTemperatureType.EXCELLENT.name());
+        param.put("userId", "2");
         param.put("detail", "후기");
 
         ExtractableResponse<Response> response = RestAssured
@@ -44,7 +51,7 @@ class RatingControllerTest {
             .contentType(MediaType.APPLICATION_JSON_VALUE)
             .when()
             .body(param)
-            .post("/rating")
+            .post("rating")
             .then().log().all()
             .extract();
 

@@ -19,7 +19,6 @@ public class RatingController {
     @PostMapping
     public ResponseEntity<Rating> createRating(@RequestBody Rating rating) {
         Rating response = ratingService.createRating(rating);
-        System.out.println(response.getId());
 
         return ResponseEntity.ok(response);
     }

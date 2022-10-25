@@ -11,6 +11,10 @@ public class RatingRequest {
     private Long userId;
     private String detail;
 
+    public RatingRequest() {
+        /*no-op*/
+    }
+
     public RatingRequest(Long id, Long participantId, Long recruitmentId, BigDecimal ratingScore, MannerTemperatureType mannerTemperatureType, Long userId, String detail) {
         this.id = id;
         this.participantId = participantId;

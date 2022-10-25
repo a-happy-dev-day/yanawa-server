@@ -22,21 +22,21 @@ public class RatingService {
         this.participationRepository = participationRepository;
     }
 
-    public Rating createRating(Rating rating) {
-        Optional<Recruitment> recruitment = recruitmentRepository.findById(rating.getRecruitmentId());
+    public Rating createRating(RatingRequest request) {
+        Optional<Recruitment> recruitment = recruitmentRepository.findById(request.getRecruitmentId());
         if (recruitment.isEmpty()) {
             throw new IllegalArgumentException("매칭 정보가 없습니다.");
         }
-        Optional<Participation> participation = participationRepository.findByMatchingIdAndUserId(rating.getRecruitmentId(), rating.getParticipantId());
+        Optional<Participation> participation = participationRepository.findByMatchingIdAndUserId(request.getRecruitmentId(), request.getParticipantId());
         if (participation.isEmpty()) {
             throw new IllegalArgumentException("해당 매칭에 참여자 정보가 없습니다.");
         }
-        Optional<Participation> user = participationRepository.findByMatchingIdAndUserId(rating.getRecruitmentId(), rating.getUserId());
+        Optional<Participation> user = participationRepository.findByMatchingIdAndUserId(request.getRecruitmentId(), request.getUserId());
         if (user.isEmpty()) {
             throw new IllegalArgumentException("해당 매칭에 리뷰 작성자 정보가 없습니다.");
         }
 
-        Rating savedRating = new Rating(rating.getId(), rating.getParticipantId(), rating.getRecruitmentId(), rating.getRatingScore(), rating.getMannerTemperature(), rating.getUserId(), rating.getDetail());
+        Rating savedRating = new Rating(request.getId(), request.getParticipantId(), request.getRecruitmentId(), new RatingScore(request.getRatingScore()), request.getMannerTemperatureType(), request.getUserId(), request.getDetail());
         ratingRepository.save(savedRating);
 
         return savedRating;

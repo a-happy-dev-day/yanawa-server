@@ -11,7 +11,6 @@ import org.springframework.http.MediaType;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
@@ -24,6 +23,18 @@ class KakaoLoginDocumentation extends Documentation {
     private static final KakaoMember KAKAO_MEMBER = new KakaoMember(1L, "tis@email.com", "tis", "tis.img", "tis.jpg", false);
     @MockBean
     KakaoAuthenticationService kakaoAuthenticationService;
+
+    @Test
+    void getKakaoLoginPage() {
+        givenNotOauth()
+            .filter(document("page/kakao",
+                preprocessRequest(prettyPrint()),
+                preprocessResponse(prettyPrint())))
+            .when().get("login/kakao")
+            .then().log().all()
+            .statusCode(HttpStatus.SEE_OTHER.value())
+            .extract();
+    }
 
     @Test
     void kakaoLogin() {
@@ -43,6 +54,5 @@ class KakaoLoginDocumentation extends Documentation {
             .then().log().all()
             .statusCode(HttpStatus.OK.value())
             .extract();
-        ;
     }
 }

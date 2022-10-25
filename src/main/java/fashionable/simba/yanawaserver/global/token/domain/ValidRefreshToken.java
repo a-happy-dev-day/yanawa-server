@@ -2,26 +2,25 @@ package fashionable.simba.yanawaserver.global.token.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.Date;
 
 @Entity
-public class InvalidRefreshToken {
+public class ValidRefreshToken {
     @Id
+    private Long userId;
     private String refreshToken;
-    private Date date;
 
-    protected InvalidRefreshToken() {/*no-op*/}
+    protected ValidRefreshToken() {/*no-op*/}
 
-    public InvalidRefreshToken(String refreshToken, Date date) {
+    public ValidRefreshToken(Long userId, String refreshToken) {
+        this.userId = userId;
         this.refreshToken = refreshToken;
-        this.date = date;
     }
 
     public String getRefreshToken() {
         return refreshToken;
     }
 
-    public Date getDate() {
-        return date;
+    public Long getUserId() {
+        return userId;
     }
 }

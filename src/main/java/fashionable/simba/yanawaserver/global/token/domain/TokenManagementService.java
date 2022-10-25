@@ -7,11 +7,11 @@ import java.util.Date;
 
 @Service
 public class TokenManagementService {
-    private final InvalidAccessTokenRepository invalidAccessTokenRepository;
-    private final InvalidRefreshTokenRepository invalidRefreshTokenRepository;
+    private final ValidAccessTokenRepository invalidAccessTokenRepository;
+    private final ValidRefreshTokenRepository invalidRefreshTokenRepository;
     private final JwtTokenProvider jwtTokenProvider;
 
-    public TokenManagementService(InvalidAccessTokenRepository invalidAccessTokenRepository, InvalidRefreshTokenRepository invalidRefreshTokenRepository, JwtTokenProvider jwtTokenProvider) {
+    public TokenManagementService(ValidAccessTokenRepository invalidAccessTokenRepository, ValidRefreshTokenRepository invalidRefreshTokenRepository, JwtTokenProvider jwtTokenProvider) {
         this.invalidAccessTokenRepository = invalidAccessTokenRepository;
         this.invalidRefreshTokenRepository = invalidRefreshTokenRepository;
         this.jwtTokenProvider = jwtTokenProvider;
@@ -27,7 +27,7 @@ public class TokenManagementService {
         }
 
         Date date = jwtTokenProvider.getExpiredDate(accessToken);
-        InvalidAccessToken invalidAccessToken = new InvalidAccessToken(accessToken, date);
+        ValidAccessToken invalidAccessToken = new ValidAccessToken(accessToken, date);
         invalidAccessTokenRepository.save(invalidAccessToken);
     }
 
@@ -41,7 +41,7 @@ public class TokenManagementService {
         }
 
         Date date = jwtTokenProvider.getExpiredDateByRefreshToken(refreshToken);
-        InvalidRefreshToken invalidRefreshToken = new InvalidRefreshToken(refreshToken, date);
+        ValidRefreshToken invalidRefreshToken = new ValidRefreshToken(refreshToken, date);
         invalidRefreshTokenRepository.save(invalidRefreshToken);
     }
 }

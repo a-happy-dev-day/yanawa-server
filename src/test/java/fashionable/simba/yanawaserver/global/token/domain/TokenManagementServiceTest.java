@@ -1,9 +1,6 @@
 package fashionable.simba.yanawaserver.global.token.domain;
 
 import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
-import fashionable.simba.yanawaserver.global.token.domain.InvalidAccessTokenRepository;
-import fashionable.simba.yanawaserver.global.token.domain.InvalidRefreshTokenRepository;
-import fashionable.simba.yanawaserver.global.token.domain.TokenManagementService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,9 +18,9 @@ import static org.mockito.Mockito.when;
 class TokenManagementServiceTest {
 
     @Mock
-    private InvalidAccessTokenRepository invalidAccessTokenRepository;
+    private ValidAccessTokenRepository invalidAccessTokenRepository;
     @Mock
-    private InvalidRefreshTokenRepository invalidRefreshTokenRepository;
+    private ValidRefreshTokenRepository invalidRefreshTokenRepository;
     @Mock
     private JwtTokenProvider jwtTokenProvider;
     private TokenManagementService tokenManagementService;

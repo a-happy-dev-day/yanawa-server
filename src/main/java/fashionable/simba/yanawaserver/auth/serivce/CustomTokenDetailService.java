@@ -1,16 +1,16 @@
 package fashionable.simba.yanawaserver.auth.serivce;
 
-import fashionable.simba.yanawaserver.global.token.domain.InvalidAccessTokenRepository;
-import fashionable.simba.yanawaserver.global.token.domain.InvalidRefreshTokenRepository;
+import fashionable.simba.yanawaserver.global.token.domain.ValidAccessTokenRepository;
+import fashionable.simba.yanawaserver.global.token.domain.ValidRefreshTokenRepository;
 import fashionable.simba.yanawaserver.global.token.domain.TokenDetailsService;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CustomTokenDetailService implements TokenDetailsService {
-    private final InvalidAccessTokenRepository invalidAccessTokenRepository;
-    private final InvalidRefreshTokenRepository invalidRefreshTokenRepository;
+    private final ValidAccessTokenRepository invalidAccessTokenRepository;
+    private final ValidRefreshTokenRepository invalidRefreshTokenRepository;
 
-    public CustomTokenDetailService(InvalidAccessTokenRepository invalidAccessTokenRepository, InvalidRefreshTokenRepository invalidRefreshTokenRepository) {
+    public CustomTokenDetailService(ValidAccessTokenRepository invalidAccessTokenRepository, ValidRefreshTokenRepository invalidRefreshTokenRepository) {
         this.invalidAccessTokenRepository = invalidAccessTokenRepository;
         this.invalidRefreshTokenRepository = invalidRefreshTokenRepository;
     }

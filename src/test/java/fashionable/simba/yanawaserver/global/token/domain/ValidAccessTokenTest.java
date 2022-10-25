@@ -1,30 +1,28 @@
 package fashionable.simba.yanawaserver.global.token.domain;
 
-import fashionable.simba.yanawaserver.global.token.domain.InvalidAccessToken;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Date;
-
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-class InvalidAccessTokenTest {
+class ValidAccessTokenTest {
+    private static final Long USER_ID = 1L;
     private static final String ACCESS_TOKEN = "access token";
-    private static final Date DATE = new Date();
 
     @Test
     @DisplayName("유효하지 않은 액세스 코드를 생성한다.")
     void invalidAccessToken_create() {
         assertDoesNotThrow(
-            () -> new InvalidAccessToken(ACCESS_TOKEN, DATE)
+            () -> new ValidAccessToken(USER_ID, ACCESS_TOKEN)
         );
     }
 
     @Test
     @DisplayName("유효하지 않은 액세스 코드의 날짜를 확인한다.")
     void invalidAccessToken_getDate() {
-        InvalidAccessToken token = new InvalidAccessToken("access token", DATE);
-        Assertions.assertThat(token.getDate()).isEqualTo(DATE);
+        ValidAccessToken token = new ValidAccessToken(USER_ID, ACCESS_TOKEN);
+        Assertions.assertThat(token.getUserId()).isEqualTo(USER_ID);
+        Assertions.assertThat(token.getAccessToken()).isEqualTo(ACCESS_TOKEN);
     }
 }

@@ -1,7 +1,7 @@
 package fashionable.simba.yanawaserver.auth.serivce;
 
-import fashionable.simba.yanawaserver.global.token.domain.InvalidAccessTokenRepository;
-import fashionable.simba.yanawaserver.global.token.domain.InvalidRefreshTokenRepository;
+import fashionable.simba.yanawaserver.global.token.domain.ValidAccessTokenRepository;
+import fashionable.simba.yanawaserver.global.token.domain.ValidRefreshTokenRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,10 +18,10 @@ class CustomTokenDetailServiceTest {
     CustomTokenDetailService customTokenDetailService;
 
     @Mock
-    InvalidAccessTokenRepository invalidAccessTokenRepository;
+    ValidAccessTokenRepository invalidAccessTokenRepository;
 
     @Mock
-    InvalidRefreshTokenRepository invalidRefreshTokenRepository;
+    ValidRefreshTokenRepository invalidRefreshTokenRepository;
 
     @BeforeEach
     void setUp() {

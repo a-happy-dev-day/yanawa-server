@@ -10,13 +10,13 @@ import javax.persistence.Id;
 public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // 후기 식별자
-    private Long participantId; // 게임에 참여하는 참여자의 식별자
-    private Long recruitmentId; // 모집의 고유 식별자
+    private Long id;
+    private Long participantId;
+    private Long recruitmentId;
     @Embedded
-    private RatingScore ratingScore; // 사용자의 실력 점수
-    private MannerTemperatureType mannerTemperature; // 사용자의 매너 점수
-    private Long userId; // 사용자의 정보를 확인할 수 있는 식별자
+    private RatingScore ratingScore;
+    private MannerTemperatureType mannerTemperature;
+    private Long userId;
     private String detail;
 
     protected Rating() {

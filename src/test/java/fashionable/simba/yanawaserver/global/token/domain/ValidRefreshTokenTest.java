@@ -1,5 +1,7 @@
 package fashionable.simba.yanawaserver.global.token.domain;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,5 +26,14 @@ class ValidRefreshTokenTest {
         ValidRefreshToken token = new ValidRefreshToken(USER_ID, REFRESH_TOKEN);
         Assertions.assertThat(token.getUserId()).isEqualTo(USER_ID);
         Assertions.assertThat(token.getRefreshToken()).isEqualTo(REFRESH_TOKEN);
+    }
+
+    @Test
+    @DisplayName("동등성 비교 테스트")
+    void equalsTest() {
+        EqualsVerifier.simple()
+            .forClass(ValidRefreshToken.class)
+            .suppress(Warning.ALL_FIELDS_SHOULD_BE_USED)
+            .verify();
     }
 }

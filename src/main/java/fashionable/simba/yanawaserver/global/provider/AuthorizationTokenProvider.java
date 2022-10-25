@@ -2,7 +2,7 @@ package fashionable.simba.yanawaserver.global.provider;
 
 
 import fashionable.simba.yanawaserver.global.context.Authentication;
-import fashionable.simba.yanawaserver.global.token.TokenDetailsService;
+import fashionable.simba.yanawaserver.global.token.domain.TokenDetailsService;
 
 import java.util.List;
 

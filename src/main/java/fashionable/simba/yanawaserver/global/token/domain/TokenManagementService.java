@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.auth.domain;
+package fashionable.simba.yanawaserver.global.token.domain;
 
 import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
 import org.springframework.stereotype.Service;

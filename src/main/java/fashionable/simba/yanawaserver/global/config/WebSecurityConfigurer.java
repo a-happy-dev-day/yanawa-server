@@ -15,7 +15,7 @@ import fashionable.simba.yanawaserver.global.provider.AuthenticationTokenProvide
 import fashionable.simba.yanawaserver.global.provider.AuthorizationManager;
 import fashionable.simba.yanawaserver.global.provider.AuthorizationTokenProvider;
 import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
-import fashionable.simba.yanawaserver.global.token.TokenDetailsService;
+import fashionable.simba.yanawaserver.global.token.domain.TokenDetailsService;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

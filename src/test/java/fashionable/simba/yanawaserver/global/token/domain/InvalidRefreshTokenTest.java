@@ -1,5 +1,6 @@
-package fashionable.simba.yanawaserver.auth.domain;
+package fashionable.simba.yanawaserver.global.token.domain;
 
+import fashionable.simba.yanawaserver.global.token.domain.InvalidRefreshToken;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

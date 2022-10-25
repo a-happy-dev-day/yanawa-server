@@ -1,8 +1,8 @@
 package fashionable.simba.yanawaserver.auth.serivce;
 
-import fashionable.simba.yanawaserver.auth.domain.InvalidAccessTokenRepository;
-import fashionable.simba.yanawaserver.auth.domain.InvalidRefreshTokenRepository;
-import fashionable.simba.yanawaserver.global.token.TokenDetailsService;
+import fashionable.simba.yanawaserver.global.token.domain.InvalidAccessTokenRepository;
+import fashionable.simba.yanawaserver.global.token.domain.InvalidRefreshTokenRepository;
+import fashionable.simba.yanawaserver.global.token.domain.TokenDetailsService;
 import org.springframework.stereotype.Service;
 
 @Service

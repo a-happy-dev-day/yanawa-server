@@ -1,7 +1,7 @@
 package fashionable.simba.yanawaserver.auth.serivce;
 
-import fashionable.simba.yanawaserver.auth.domain.InvalidAccessTokenRepository;
-import fashionable.simba.yanawaserver.auth.domain.InvalidRefreshTokenRepository;
+import fashionable.simba.yanawaserver.global.token.domain.InvalidAccessTokenRepository;
+import fashionable.simba.yanawaserver.global.token.domain.InvalidRefreshTokenRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

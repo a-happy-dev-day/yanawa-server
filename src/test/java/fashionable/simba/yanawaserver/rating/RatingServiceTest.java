@@ -54,9 +54,9 @@ class RatingServiceTest {
     @Test
     @DisplayName("사용자가 참여자의 능력을 평가한다")
     void createRating() {
-        Rating rating = new Rating(1L, 1L, 1L, new RatingScore(BigDecimal.valueOf(3.0)), MannerTemperatureType.EXCELLENT, 2L, "후기");
+        RatingRequest request = new RatingRequest(1L, 1L, 1L, BigDecimal.valueOf(3.0), MannerTemperatureType.EXCELLENT, 2L, "후기");
 
-        Rating savedRating = ratingService.createRating(rating);
+        Rating savedRating = ratingService.createRating(request);
 
         assertThat(ratingRepository.findById(savedRating.getId()).orElseThrow()).isEqualTo(savedRating);
     }
@@ -64,14 +64,14 @@ class RatingServiceTest {
     @Test
     @DisplayName("참여자와 사용자는 해당 모집의 일원이 아닐경우, 예외가 발생한다.")
     void not_include_recruitment_test() {
-        Rating rating1 = new Rating(1L, 1L, 1L, new RatingScore(BigDecimal.valueOf(3.0)), MannerTemperatureType.EXCELLENT, 10L, "후기");
-        Rating rating2 = new Rating(2L, 10L, 1L, new RatingScore(BigDecimal.valueOf(3.0)), MannerTemperatureType.EXCELLENT, 1L, "후기");
-        Rating rating3 = new Rating(3L, 1L, 10L, new RatingScore(BigDecimal.valueOf(3.0)), MannerTemperatureType.EXCELLENT, 2L, "후기");
+        RatingRequest request1 = new RatingRequest(1L, 1L, 1L, BigDecimal.valueOf(3.0), MannerTemperatureType.EXCELLENT, 10L, "후기");
+        RatingRequest request2 = new RatingRequest(2L, 10L, 1L, BigDecimal.valueOf(3.0), MannerTemperatureType.EXCELLENT, 2L, "후기");
+        RatingRequest request3 = new RatingRequest(3L, 1L, 10L, BigDecimal.valueOf(3.0), MannerTemperatureType.EXCELLENT, 2L, "후기");
 
         assertAll(
-            () -> assertThrows(IllegalArgumentException.class, () -> ratingService.createRating(rating1)),
-            () -> assertThrows(IllegalArgumentException.class, () -> ratingService.createRating(rating2)),
-            () -> assertThrows(IllegalArgumentException.class, () -> ratingService.createRating(rating3))
+            () -> assertThrows(IllegalArgumentException.class, () -> ratingService.createRating(request1)),
+            () -> assertThrows(IllegalArgumentException.class, () -> ratingService.createRating(request2)),
+            () -> assertThrows(IllegalArgumentException.class, () -> ratingService.createRating(request3))
         );
 
     }
@@ -80,10 +80,10 @@ class RatingServiceTest {
     @DisplayName("상대방의 평가 점수를 조회한다.")
     void find_average_ratingScore() {
         //given
-        Rating rating1 = new Rating(1L, 1L, 1L, new RatingScore(BigDecimal.valueOf(3.0)), MannerTemperatureType.EXCELLENT, 2L, "후기");
-        ratingService.createRating(rating1);
-        Rating rating2 = new Rating(2L, 1L, 1L, new RatingScore(BigDecimal.valueOf(4.0)), MannerTemperatureType.EXCELLENT, 3L, "후기");
-        ratingService.createRating(rating2);
+        RatingRequest request1 = new RatingRequest(1L, 1L, 1L, BigDecimal.valueOf(3.0), MannerTemperatureType.EXCELLENT, 2L, "후기");
+        ratingService.createRating(request1);
+        RatingRequest request2 = new RatingRequest(2L, 1L, 1L, BigDecimal.valueOf(4.0), MannerTemperatureType.EXCELLENT, 3L, "후기");
+        ratingService.createRating(request2);
 
         assertThat(ratingService.findAverageRating(1L)).isEqualTo(BigDecimal.valueOf(3.5));
     }

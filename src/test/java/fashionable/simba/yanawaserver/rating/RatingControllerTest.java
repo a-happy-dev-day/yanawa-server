@@ -1,15 +1,16 @@
 package fashionable.simba.yanawaserver.rating;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,12 +21,18 @@ import java.util.Map;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class RatingControllerTest {
+    @MockBean
+    RatingService ratingService;
 
     @LocalServerPort
     private int RANDOM_PORT;
 
     @BeforeEach
     void setUp() {
+        RatingRequest request = new RatingRequest(1L, 1L, 1L, BigDecimal.valueOf(3.0), MannerTemperatureType.EXCELLENT, 2L, "후기");
+        Rating rating = new Rating(1L, 1L, 1L, new RatingScore(BigDecimal.valueOf(3.0)), MannerTemperatureType.EXCELLENT, 2L, "후기");
+
+        Mockito.when(ratingService.createRating(request)).thenReturn(rating);
         RestAssured.port = RANDOM_PORT;
     }
 
@@ -34,15 +41,11 @@ class RatingControllerTest {
 
         Map<String, String> param = new HashMap<>();
 
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.enable(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
-        String ratingScoreString = mapper.writeValueAsString(new RatingScore(BigDecimal.valueOf(3.0)));
-
         param.put("id", "1");
         param.put("participantId", "1");
         param.put("recruitmentId", "1");
-        param.put("ratingScore", ratingScoreString);
-        param.put("mannerTemperature", MannerTemperatureType.EXCELLENT.name());
+        param.put("ratingScore", "3.0");
+        param.put("mannerTemperatureType", MannerTemperatureType.EXCELLENT.name());
         param.put("userId", "2");
         param.put("detail", "후기");
 

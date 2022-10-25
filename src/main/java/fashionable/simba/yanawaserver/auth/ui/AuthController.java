@@ -28,7 +28,7 @@ public class AuthController {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
-    @GetMapping("loing/kakao")
+    @GetMapping("login/kakao")
     public ResponseEntity<Void> loginPage() {
         return ResponseEntity.status(HttpStatus.SEE_OTHER)
             .header(HttpHeaders.LOCATION, kakaoAuthenticationService.getLoginUri()).build();

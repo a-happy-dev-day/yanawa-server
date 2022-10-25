@@ -26,13 +26,16 @@ class KakaoLoginDocumentation extends Documentation {
 
     @Test
     void getKakaoLoginPage() {
+        when(kakaoAuthenticationService.getLoginUri())
+            .thenReturn("https://kauth.kakao.com/oauth/authorize");
+
         givenNotOauth()
             .filter(document("page/kakao",
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint())))
             .when().get("login/kakao")
             .then().log().all()
-            .statusCode(HttpStatus.SEE_OTHER.value())
+            .statusCode(HttpStatus.OK.value())
             .extract();
     }
 

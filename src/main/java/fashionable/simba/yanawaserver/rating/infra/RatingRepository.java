@@ -1,4 +1,6 @@
-package fashionable.simba.yanawaserver.rating;
+package fashionable.simba.yanawaserver.rating.infra;
+
+import fashionable.simba.yanawaserver.rating.domain.Rating;
 
 import java.util.List;
 import java.util.Optional;

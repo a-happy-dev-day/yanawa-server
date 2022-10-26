@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.rating;
+package fashionable.simba.yanawaserver.rating.service;
 
 import fashionable.simba.yanawaserver.matching.constant.AgeGroupType;
 import fashionable.simba.yanawaserver.matching.constant.AnnualType;
@@ -13,6 +13,11 @@ import fashionable.simba.yanawaserver.matching.domain.Recruitment;
 import fashionable.simba.yanawaserver.matching.domain.RecruitmentRepository;
 import fashionable.simba.yanawaserver.matching.fake.MemoryParticipationRepository;
 import fashionable.simba.yanawaserver.matching.fake.MemoryRecruitmentRepository;
+import fashionable.simba.yanawaserver.rating.domain.MannerTemperatureType;
+import fashionable.simba.yanawaserver.rating.domain.Rating;
+import fashionable.simba.yanawaserver.rating.dto.RatingRequest;
+import fashionable.simba.yanawaserver.rating.fake.FakeRatingRepository;
+import fashionable.simba.yanawaserver.rating.infra.RatingRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

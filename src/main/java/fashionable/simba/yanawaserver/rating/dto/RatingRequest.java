@@ -1,4 +1,6 @@
-package fashionable.simba.yanawaserver.rating;
+package fashionable.simba.yanawaserver.rating.dto;
+
+import fashionable.simba.yanawaserver.rating.domain.MannerTemperatureType;
 
 import java.math.BigDecimal;
 

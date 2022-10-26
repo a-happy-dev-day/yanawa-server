@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.rating;
+package fashionable.simba.yanawaserver.rating.domain;
 
 import fashionable.simba.yanawaserver.members.exception.InvalidLevelException;
 
@@ -16,7 +16,7 @@ public class RatingScore {
     }
 
     public RatingScore(BigDecimal score) {
-        if(score.compareTo(BigDecimal.ZERO) < 0 || score.compareTo(BigDecimal.valueOf(5)) >= 0) {
+        if (score.compareTo(BigDecimal.ZERO) < 0 || score.compareTo(BigDecimal.valueOf(5)) >= 0) {
             throw new InvalidLevelException();
         }
         BigDecimal decimal = score.divide(BigDecimal.valueOf(0.5), MathContext.DECIMAL128);

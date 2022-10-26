@@ -1,9 +1,13 @@
-package fashionable.simba.yanawaserver.rating;
+package fashionable.simba.yanawaserver.rating.service;
 
 import fashionable.simba.yanawaserver.matching.domain.Participation;
 import fashionable.simba.yanawaserver.matching.domain.ParticipationRepository;
 import fashionable.simba.yanawaserver.matching.domain.Recruitment;
 import fashionable.simba.yanawaserver.matching.domain.RecruitmentRepository;
+import fashionable.simba.yanawaserver.rating.domain.Rating;
+import fashionable.simba.yanawaserver.rating.domain.RatingScore;
+import fashionable.simba.yanawaserver.rating.dto.RatingRequest;
+import fashionable.simba.yanawaserver.rating.infra.RatingRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

@@ -1,5 +1,8 @@
-package fashionable.simba.yanawaserver.rating;
+package fashionable.simba.yanawaserver.rating.ui;
 
+import fashionable.simba.yanawaserver.rating.domain.Rating;
+import fashionable.simba.yanawaserver.rating.dto.RatingRequest;
+import fashionable.simba.yanawaserver.rating.service.RatingService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

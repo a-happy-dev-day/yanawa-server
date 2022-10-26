@@ -1,4 +1,7 @@
-package fashionable.simba.yanawaserver.rating;
+package fashionable.simba.yanawaserver.rating.fake;
+
+import fashionable.simba.yanawaserver.rating.domain.Rating;
+import fashionable.simba.yanawaserver.rating.infra.RatingRepository;
 
 import java.util.HashMap;
 import java.util.List;

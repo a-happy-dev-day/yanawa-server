@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.rating;
+package fashionable.simba.yanawaserver.rating.domain;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;

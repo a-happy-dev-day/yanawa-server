@@ -1,13 +1,17 @@
-package fashionable.simba.yanawaserver.rating;
+package fashionable.simba.yanawaserver.rating.application;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import fashionable.simba.yanawaserver.rating.domain.MannerTemperatureType;
+import fashionable.simba.yanawaserver.rating.domain.Rating;
+import fashionable.simba.yanawaserver.rating.domain.RatingScore;
+import fashionable.simba.yanawaserver.rating.dto.RatingRequest;
+import fashionable.simba.yanawaserver.rating.service.RatingService;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;

@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.auth.ui;
+package fashionable.simba.yanawaserver.global.token.ui;
 
 import fashionable.simba.yanawaserver.global.authorization.secured.Secured;
 import fashionable.simba.yanawaserver.global.provider.AuthenticationException;
@@ -32,15 +32,13 @@ public class TokenController {
 
     @PostMapping("refresh")
     public ResponseEntity<AuthorizationAccessToken> refreshToken(@RequestBody AuthorizationRefreshToken refreshToken) {
-        if (!jwtTokenProvider.validateRefreshToken(refreshToken.getRefreshToken())) {
-            throw new AuthenticationException("Invalid Refresh Token");
-        }
-
         tokenDetailsService.validateRefreshToken(refreshToken.getRefreshToken());
 
         String username = jwtTokenProvider.getPrincipalByRefreshToken(refreshToken.getRefreshToken());
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        return ResponseEntity.ok(new AuthorizationAccessToken(jwtTokenProvider.createAuthorizationToken(username, userDetails.getAuthorities())));
+        AuthorizationAccessToken accessToken = new AuthorizationAccessToken(jwtTokenProvider.createAuthorizationToken(username, userDetails.getAuthorities()));
+        tokenManager.manageAccessToken(accessToken.getAccessToken());
+        return ResponseEntity.ok(accessToken);
     }
 
     @PostMapping("expire/access")

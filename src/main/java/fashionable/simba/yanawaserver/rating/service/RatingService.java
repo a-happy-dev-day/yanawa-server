@@ -7,12 +7,13 @@ import fashionable.simba.yanawaserver.matching.domain.RecruitmentRepository;
 import fashionable.simba.yanawaserver.rating.domain.Rating;
 import fashionable.simba.yanawaserver.rating.domain.RatingScore;
 import fashionable.simba.yanawaserver.rating.dto.RatingRequest;
+import fashionable.simba.yanawaserver.rating.exception.NoMatchingDataException;
+import fashionable.simba.yanawaserver.rating.exception.NoParticipationDataException;
 import fashionable.simba.yanawaserver.rating.infra.RatingRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class RatingService {
@@ -27,18 +28,9 @@ public class RatingService {
     }
 
     public Rating createRating(RatingRequest request) {
-        Optional<Recruitment> recruitment = recruitmentRepository.findById(request.getRecruitmentId());
-        if (recruitment.isEmpty()) {
-            throw new IllegalArgumentException("매칭 정보가 없습니다.");
-        }
-        Optional<Participation> participation = participationRepository.findByMatchingIdAndUserId(request.getRecruitmentId(), request.getParticipantId());
-        if (participation.isEmpty()) {
-            throw new IllegalArgumentException("해당 매칭에 참여자 정보가 없습니다.");
-        }
-        Optional<Participation> user = participationRepository.findByMatchingIdAndUserId(request.getRecruitmentId(), request.getUserId());
-        if (user.isEmpty()) {
-            throw new IllegalArgumentException("해당 매칭에 리뷰 작성자 정보가 없습니다.");
-        }
+        Recruitment recruitment = recruitmentRepository.findById(request.getRecruitmentId()).orElseThrow(() -> new NoMatchingDataException("매칭 정보가 없습니다."));
+        Participation participation = participationRepository.findByMatchingIdAndUserId(request.getRecruitmentId(), request.getParticipantId()).orElseThrow( () -> new NoParticipationDataException("해당 매칭에 참여자 정보가 없습니다."));
+        Participation user = participationRepository.findByMatchingIdAndUserId(request.getRecruitmentId(), request.getUserId()).orElseThrow(() -> new NoParticipationDataException("해당 매칭에 리뷰 작성자 정보가 없습니다."));
 
         Rating savedRating = new Rating(request.getId(), request.getParticipantId(), request.getRecruitmentId(), new RatingScore(request.getRatingScore()), request.getMannerTemperatureType(), request.getUserId(), request.getDetail());
         ratingRepository.save(savedRating);

@@ -16,6 +16,8 @@ import fashionable.simba.yanawaserver.matching.fake.MemoryRecruitmentRepository;
 import fashionable.simba.yanawaserver.rating.domain.MannerTemperatureType;
 import fashionable.simba.yanawaserver.rating.domain.Rating;
 import fashionable.simba.yanawaserver.rating.dto.RatingRequest;
+import fashionable.simba.yanawaserver.rating.exception.NoMatchingDataException;
+import fashionable.simba.yanawaserver.rating.exception.NoParticipationDataException;
 import fashionable.simba.yanawaserver.rating.fake.FakeRatingRepository;
 import fashionable.simba.yanawaserver.rating.infra.RatingRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -43,7 +45,7 @@ class RatingServiceTest {
 
     @BeforeEach
     void setUp() {
-
+        recruitment = new Recruitment(1L, 1L, new Level(2.0), new Level(1.0), AgeGroupType.TWENTIES, GenderType.NONE, PreferenceType.MATCHING, 3, 2.0, AnnualType.NONE, "123", RecruitmentStatusType.CLOSED);
         participation1 = new Participation(1L, 1L, 1L, LocalDateTime.now(), ParticipationStatusType.ACCEPTED);
         participation2 = new Participation(1L, 2L, 1L, LocalDateTime.now(), ParticipationStatusType.ACCEPTED);
         participation3 = new Participation(1L, 3L, 1L, LocalDateTime.now(), ParticipationStatusType.ACCEPTED);
@@ -74,9 +76,9 @@ class RatingServiceTest {
         RatingRequest request3 = new RatingRequest(3L, 1L, 10L, BigDecimal.valueOf(3.0), MannerTemperatureType.EXCELLENT, 2L, "후기");
 
         assertAll(
-            () -> assertThrows(IllegalArgumentException.class, () -> ratingService.createRating(request1)),
-            () -> assertThrows(IllegalArgumentException.class, () -> ratingService.createRating(request2)),
-            () -> assertThrows(IllegalArgumentException.class, () -> ratingService.createRating(request3))
+            () -> assertThrows(NoParticipationDataException.class, () -> ratingService.createRating(request1)),
+            () -> assertThrows(NoParticipationDataException.class, () -> ratingService.createRating(request2)),
+            () -> assertThrows(NoMatchingDataException.class, () -> ratingService.createRating(request3))
         );
 
     }

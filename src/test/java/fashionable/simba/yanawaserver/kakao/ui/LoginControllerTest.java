@@ -1,13 +1,14 @@
 package fashionable.simba.yanawaserver.kakao.ui;
 
-import fashionable.simba.yanawaserver.kakao.service.KakaoAuthenticationService;
-import fashionable.simba.yanawaserver.kakao.infra.dto.KakaoAccessToken;
-import fashionable.simba.yanawaserver.kakao.ui.dto.Code;
 import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
 import fashionable.simba.yanawaserver.global.userdetails.User;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;
+import fashionable.simba.yanawaserver.kakao.infra.dto.KakaoAccessToken;
+import fashionable.simba.yanawaserver.kakao.service.KakaoAuthenticationService;
+import fashionable.simba.yanawaserver.kakao.ui.dto.TokenDto;
 import fashionable.simba.yanawaserver.members.domain.KakaoMember;
 import fashionable.simba.yanawaserver.members.domain.RoleType;
+import fashionable.simba.yanawaserver.token.domain.AuthenticationCode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -62,7 +63,7 @@ class LoginControllerTest {
         when(kakaoAuthenticationService.getUserInfo(accessToken)).thenReturn(kakaoMember);
         when(userDetailsService.saveKakaoMember(kakaoMember)).thenReturn(user);
 
-        ResponseEntity<Code> response = loginController.login(new Code("accessCode"));
+        ResponseEntity<TokenDto> response = loginController.login(new TokenDto("accessCode"));
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isNotNull();
     }

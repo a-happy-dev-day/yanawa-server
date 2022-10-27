@@ -1,11 +1,11 @@
 package fashionable.simba.yanawaserver.kakao.ui.dto;
 
-public class Code {
+public class TokenDto {
     private String accessCode;
 
-    private Code() {/*no-op*/}
+    private TokenDto() {/*no-op*/}
 
-    public Code(String accessCode) {
+    public TokenDto(String accessCode) {
         this.accessCode = accessCode;
     }
 

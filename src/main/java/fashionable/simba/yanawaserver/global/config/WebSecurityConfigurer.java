@@ -16,10 +16,10 @@ import fashionable.simba.yanawaserver.global.provider.AuthenticationTokenProvide
 import fashionable.simba.yanawaserver.global.provider.AuthorizationManager;
 import fashionable.simba.yanawaserver.global.provider.AuthorizationTokenProvider;
 import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
-import fashionable.simba.yanawaserver.global.token.domain.TokenDetailsService;
-import fashionable.simba.yanawaserver.global.token.domain.ValidAccessTokenStorage;
-import fashionable.simba.yanawaserver.global.token.domain.ValidRefreshTokenStorage;
-import fashionable.simba.yanawaserver.global.token.domain.TokenManager;
+import fashionable.simba.yanawaserver.token.domain.TokenDetailsService;
+import fashionable.simba.yanawaserver.token.domain.ValidAccessTokenStorage;
+import fashionable.simba.yanawaserver.token.domain.ValidRefreshTokenStorage;
+import fashionable.simba.yanawaserver.token.domain.TokenManager;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

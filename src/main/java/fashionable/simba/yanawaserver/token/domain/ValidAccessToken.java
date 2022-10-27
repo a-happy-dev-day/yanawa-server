@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.global.token.domain;
+package fashionable.simba.yanawaserver.token.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

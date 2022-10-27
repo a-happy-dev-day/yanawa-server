@@ -1,7 +1,12 @@
-package fashionable.simba.yanawaserver.global.token.domain;
+package fashionable.simba.yanawaserver.token.domain;
 
 import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
-import fashionable.simba.yanawaserver.global.token.exception.InvalidTokenException;
+import fashionable.simba.yanawaserver.token.domain.TokenManager;
+import fashionable.simba.yanawaserver.token.domain.ValidAccessToken;
+import fashionable.simba.yanawaserver.token.domain.ValidAccessTokenStorage;
+import fashionable.simba.yanawaserver.token.domain.ValidRefreshToken;
+import fashionable.simba.yanawaserver.token.domain.ValidRefreshTokenStorage;
+import fashionable.simba.yanawaserver.token.exception.InvalidTokenException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

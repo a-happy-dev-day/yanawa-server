@@ -1,7 +1,7 @@
-package fashionable.simba.yanawaserver.global.token.domain;
+package fashionable.simba.yanawaserver.token.domain;
 
 import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
-import fashionable.simba.yanawaserver.global.token.exception.InvalidTokenException;
+import fashionable.simba.yanawaserver.token.exception.InvalidTokenException;
 import org.apache.commons.lang3.StringUtils;
 
 public class TokenManager {

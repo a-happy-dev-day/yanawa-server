@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.global.token.exception;
+package fashionable.simba.yanawaserver.token.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

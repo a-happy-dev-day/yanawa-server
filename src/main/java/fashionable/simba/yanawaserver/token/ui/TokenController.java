@@ -1,12 +1,11 @@
-package fashionable.simba.yanawaserver.global.token.ui;
+package fashionable.simba.yanawaserver.token.ui;
 
 import fashionable.simba.yanawaserver.global.authorization.secured.Secured;
-import fashionable.simba.yanawaserver.global.provider.AuthenticationException;
 import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
-import fashionable.simba.yanawaserver.global.token.domain.AuthorizationAccessToken;
-import fashionable.simba.yanawaserver.global.token.domain.AuthorizationRefreshToken;
-import fashionable.simba.yanawaserver.global.token.domain.TokenDetailsService;
-import fashionable.simba.yanawaserver.global.token.domain.TokenManager;
+import fashionable.simba.yanawaserver.token.domain.AuthorizationAccessToken;
+import fashionable.simba.yanawaserver.token.domain.AuthorizationRefreshToken;
+import fashionable.simba.yanawaserver.token.domain.TokenDetailsService;
+import fashionable.simba.yanawaserver.token.domain.TokenManager;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetails;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;
 import org.springframework.http.ResponseEntity;

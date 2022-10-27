@@ -3,8 +3,8 @@ package fashionable.simba.yanawaserver.global.filter.handler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fashionable.simba.yanawaserver.global.context.Authentication;
 import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
-import fashionable.simba.yanawaserver.global.token.domain.AuthorizationToken;
-import fashionable.simba.yanawaserver.global.token.domain.TokenManager;
+import fashionable.simba.yanawaserver.token.domain.AuthorizationToken;
+import fashionable.simba.yanawaserver.token.domain.TokenManager;
 import org.springframework.http.MediaType;
 
 import javax.servlet.http.HttpServletRequest;

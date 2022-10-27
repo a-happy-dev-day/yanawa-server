@@ -1,6 +1,6 @@
 package fashionable.simba.yanawaserver.auth.serivce;
 
-import fashionable.simba.yanawaserver.global.token.domain.TokenManager;
+import fashionable.simba.yanawaserver.token.domain.TokenManager;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,5 +1,6 @@
-package fashionable.simba.yanawaserver.global.token.domain;
+package fashionable.simba.yanawaserver.token.domain;
 
+import fashionable.simba.yanawaserver.token.domain.ValidRefreshToken;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.assertj.core.api.Assertions;

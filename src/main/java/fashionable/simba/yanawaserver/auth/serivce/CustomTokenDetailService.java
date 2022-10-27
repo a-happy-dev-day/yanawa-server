@@ -1,7 +1,7 @@
 package fashionable.simba.yanawaserver.auth.serivce;
 
-import fashionable.simba.yanawaserver.global.token.domain.TokenDetailsService;
-import fashionable.simba.yanawaserver.global.token.domain.TokenManager;
+import fashionable.simba.yanawaserver.token.domain.TokenDetailsService;
+import fashionable.simba.yanawaserver.token.domain.TokenManager;
 
 public class CustomTokenDetailService implements TokenDetailsService {
     private final TokenManager tokenManager;

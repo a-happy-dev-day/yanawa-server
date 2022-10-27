@@ -1,7 +1,7 @@
-package fashionable.simba.yanawaserver.global.token.infra;
+package fashionable.simba.yanawaserver.token.infra;
 
-import fashionable.simba.yanawaserver.global.token.domain.ValidAccessToken;
-import fashionable.simba.yanawaserver.global.token.domain.ValidAccessTokenStorage;
+import fashionable.simba.yanawaserver.token.domain.ValidAccessToken;
+import fashionable.simba.yanawaserver.token.domain.ValidAccessTokenStorage;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

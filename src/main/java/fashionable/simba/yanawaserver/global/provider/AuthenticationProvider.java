@@ -5,11 +5,11 @@ import fashionable.simba.yanawaserver.global.context.Authentication;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetails;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;
 
-public class AuthenticationTokenProvider implements AuthorizationManager {
+public class AuthenticationProvider implements AuthenticationManager {
     private final JwtTokenProvider jwtTokenProvider;
     private final UserDetailsService userDetailsService;
 
-    public AuthenticationTokenProvider(JwtTokenProvider jwtTokenProvider, UserDetailsService userDetailsService) {
+    public AuthenticationProvider(JwtTokenProvider jwtTokenProvider, UserDetailsService userDetailsService) {
         this.jwtTokenProvider = jwtTokenProvider;
         this.userDetailsService = userDetailsService;
     }

@@ -5,14 +5,14 @@ import fashionable.simba.yanawaserver.global.filter.handler.AuthenticationFailur
 import fashionable.simba.yanawaserver.global.filter.handler.AuthenticationSuccessHandler;
 import fashionable.simba.yanawaserver.global.provider.AuthenticationToken;
 import fashionable.simba.yanawaserver.global.provider.AuthorizationExtractor;
-import fashionable.simba.yanawaserver.global.provider.AuthorizationManager;
+import fashionable.simba.yanawaserver.global.provider.AuthenticationManager;
 import fashionable.simba.yanawaserver.global.provider.AuthorizationType;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class JwtServerTokenAuthorizationFilter extends AbstractAuthenticationFilter {
 
-    public JwtServerTokenAuthorizationFilter(AuthenticationSuccessHandler successHandler, AuthenticationFailureHandler failureHandler, AuthorizationManager authenticationManager) {
+    public JwtServerTokenAuthorizationFilter(AuthenticationSuccessHandler successHandler, AuthenticationFailureHandler failureHandler, AuthenticationManager authenticationManager) {
         super(successHandler, failureHandler, authenticationManager);
     }
 

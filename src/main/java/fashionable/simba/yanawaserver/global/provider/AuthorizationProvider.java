@@ -6,11 +6,11 @@ import fashionable.simba.yanawaserver.token.domain.TokenManager;
 
 import java.util.List;
 
-public class AuthorizationTokenProvider implements AuthorizationManager {
+public class AuthorizationProvider implements AuthenticationManager {
     private final JwtTokenProvider jwtTokenProvider;
     private final TokenManager tokenManager;
 
-    public AuthorizationTokenProvider(JwtTokenProvider jwtTokenProvider, TokenManager tokenManager) {
+    public AuthorizationProvider(JwtTokenProvider jwtTokenProvider, TokenManager tokenManager) {
         this.jwtTokenProvider = jwtTokenProvider;
         this.tokenManager = tokenManager;
     }

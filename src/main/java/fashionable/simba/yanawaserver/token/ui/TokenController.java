@@ -31,7 +31,7 @@ public class TokenController {
         tokenManager.verifyRefreshToken(refreshToken.getRefreshToken());
         String username = jwtTokenProvider.getPrincipalByRefreshToken(refreshToken.getRefreshToken());
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        AuthorizationAccessToken accessToken = new AuthorizationAccessToken(jwtTokenProvider.createAuthorizationToken(username, userDetails.getAuthorities()));
+        AuthorizationAccessToken accessToken = new AuthorizationAccessToken(jwtTokenProvider.createAccessToken(username, userDetails.getAuthorities()));
         tokenManager.manageAccessToken(accessToken.getAccessToken());
         return ResponseEntity.ok(accessToken);
     }

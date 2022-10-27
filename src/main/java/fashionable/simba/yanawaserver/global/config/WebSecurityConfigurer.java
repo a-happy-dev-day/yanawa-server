@@ -11,9 +11,9 @@ import fashionable.simba.yanawaserver.global.filter.handler.DefaultAuthenticatio
 import fashionable.simba.yanawaserver.global.filter.handler.DefaultAuthenticationSuccessHandler;
 import fashionable.simba.yanawaserver.global.filter.handler.TokenAuthenticationFailureHandler;
 import fashionable.simba.yanawaserver.global.filter.handler.TokenAuthenticationSuccessHandler;
-import fashionable.simba.yanawaserver.global.provider.AuthenticationTokenProvider;
-import fashionable.simba.yanawaserver.global.provider.AuthorizationManager;
-import fashionable.simba.yanawaserver.global.provider.AuthorizationTokenProvider;
+import fashionable.simba.yanawaserver.global.provider.AuthenticationProvider;
+import fashionable.simba.yanawaserver.global.provider.AuthenticationManager;
+import fashionable.simba.yanawaserver.global.provider.AuthorizationProvider;
 import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;
 import fashionable.simba.yanawaserver.token.domain.TokenManager;
@@ -76,8 +76,8 @@ public class WebSecurityConfigurer implements WebMvcConfigurer {
     }
 
     @Bean
-    AuthorizationManager authenticationTokenProvider() {
-        return new AuthenticationTokenProvider(jwtTokenProvider(), userDetailsService);
+    AuthenticationManager authenticationTokenProvider() {
+        return new AuthenticationProvider(jwtTokenProvider(), userDetailsService);
     }
 
     @Bean
@@ -86,8 +86,8 @@ public class WebSecurityConfigurer implements WebMvcConfigurer {
     }
 
     @Bean
-    AuthorizationManager authorizationTokenProvider() {
-        return new AuthorizationTokenProvider(jwtTokenProvider(), tokenManager());
+    AuthenticationManager authorizationTokenProvider() {
+        return new AuthorizationProvider(jwtTokenProvider(), tokenManager());
     }
 
     @Bean

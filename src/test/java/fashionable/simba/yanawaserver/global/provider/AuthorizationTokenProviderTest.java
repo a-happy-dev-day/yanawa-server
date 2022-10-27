@@ -20,7 +20,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class AuthorizationTokenProviderTest {
-    private AuthorizationTokenProvider authorizationTokenProvider;
+    private AuthorizationProvider authorizationTokenProvider;
     @Mock
     private JwtTokenProvider jwtTokenProvider;
     @Mock
@@ -28,7 +28,7 @@ class AuthorizationTokenProviderTest {
 
     @BeforeEach
     void setUp() {
-        authorizationTokenProvider = new AuthorizationTokenProvider(jwtTokenProvider, tokenManager);
+        authorizationTokenProvider = new AuthorizationProvider(jwtTokenProvider, tokenManager);
     }
 
     @Test

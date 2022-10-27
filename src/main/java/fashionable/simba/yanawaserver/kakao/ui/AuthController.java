@@ -45,7 +45,7 @@ public class AuthController {
     public ResponseEntity<Token> login(@RequestBody Token code) {
         KakaoMember kakaoMember = kakaoAuthenticationService.getUserInfo(kakaoAuthenticationService.getAccessToken(code.getAccessCode()));
         UserDetails userDetails = userDetailsService.saveKakaoMember(kakaoMember);
-        return ResponseEntity.ok(new Token(jwtTokenProvider.createAuthenticationToken((String) userDetails.getUsername())));
+        return ResponseEntity.ok(new Token(jwtTokenProvider.createAccessCode((String) userDetails.getUsername())));
     }
 
     @PostMapping("login")
@@ -58,7 +58,7 @@ public class AuthController {
             throw new AuthenticationException();
         }
 
-        return ResponseEntity.ok(new Token(jwtTokenProvider.createAuthenticationToken(loginRequest.getUsername())));
+        return ResponseEntity.ok(new Token(jwtTokenProvider.createAccessCode(loginRequest.getUsername())));
     }
 
 }

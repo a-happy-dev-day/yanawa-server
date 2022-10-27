@@ -13,7 +13,7 @@ public class RatingRequest {
     private Long userId;
     private String detail;
 
-    public RatingRequest() {
+    private RatingRequest() {
         /*no-op*/
     }
 

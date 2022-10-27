@@ -2,12 +2,11 @@ package fashionable.simba.yanawaserver.token.ui;
 
 import fashionable.simba.yanawaserver.global.authorization.secured.Secured;
 import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
-import fashionable.simba.yanawaserver.token.domain.AuthorizationAccessToken;
-import fashionable.simba.yanawaserver.token.domain.AuthorizationRefreshToken;
-import fashionable.simba.yanawaserver.token.domain.TokenDetailsService;
-import fashionable.simba.yanawaserver.token.domain.TokenManager;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetails;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;
+import fashionable.simba.yanawaserver.token.domain.AuthorizationAccessToken;
+import fashionable.simba.yanawaserver.token.domain.AuthorizationRefreshToken;
+import fashionable.simba.yanawaserver.token.domain.TokenManager;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,20 +18,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class TokenController {
     private final JwtTokenProvider jwtTokenProvider;
     private final UserDetailsService userDetailsService;
-    private final TokenDetailsService tokenDetailsService;
     private final TokenManager tokenManager;
 
-    public TokenController(JwtTokenProvider jwtTokenProvider, UserDetailsService userDetailsService, TokenDetailsService tokenDetailsService, TokenManager tokenManager) {
+    public TokenController(JwtTokenProvider jwtTokenProvider, UserDetailsService userDetailsService, TokenManager tokenManager) {
         this.jwtTokenProvider = jwtTokenProvider;
         this.userDetailsService = userDetailsService;
-        this.tokenDetailsService = tokenDetailsService;
         this.tokenManager = tokenManager;
     }
 
     @PostMapping("refresh")
     public ResponseEntity<AuthorizationAccessToken> refreshToken(@RequestBody AuthorizationRefreshToken refreshToken) {
-        tokenDetailsService.validateRefreshToken(refreshToken.getRefreshToken());
-
+        tokenManager.verifyRefreshToken(refreshToken.getRefreshToken());
         String username = jwtTokenProvider.getPrincipalByRefreshToken(refreshToken.getRefreshToken());
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         AuthorizationAccessToken accessToken = new AuthorizationAccessToken(jwtTokenProvider.createAuthorizationToken(username, userDetails.getAuthorities()));

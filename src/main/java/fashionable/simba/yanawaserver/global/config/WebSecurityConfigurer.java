@@ -1,7 +1,6 @@
 package fashionable.simba.yanawaserver.global.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fashionable.simba.yanawaserver.token.domain.CustomTokenDetailService;
 import fashionable.simba.yanawaserver.global.authorization.AuthenticationPrincipalArgumentResolver;
 import fashionable.simba.yanawaserver.global.authorization.secured.SecuredAnnotationChecker;
 import fashionable.simba.yanawaserver.global.context.SecurityContextPersistenceFilter;
@@ -16,11 +15,10 @@ import fashionable.simba.yanawaserver.global.provider.AuthenticationTokenProvide
 import fashionable.simba.yanawaserver.global.provider.AuthorizationManager;
 import fashionable.simba.yanawaserver.global.provider.AuthorizationTokenProvider;
 import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
-import fashionable.simba.yanawaserver.token.domain.TokenDetailsService;
+import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;
+import fashionable.simba.yanawaserver.token.domain.TokenManager;
 import fashionable.simba.yanawaserver.token.domain.ValidAccessTokenStorage;
 import fashionable.simba.yanawaserver.token.domain.ValidRefreshTokenStorage;
-import fashionable.simba.yanawaserver.token.domain.TokenManager;
-import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -88,13 +86,8 @@ public class WebSecurityConfigurer implements WebMvcConfigurer {
     }
 
     @Bean
-    TokenDetailsService tokenDetailsService() {
-        return new CustomTokenDetailService(tokenManager());
-    }
-
-    @Bean
     AuthorizationManager authorizationTokenProvider() {
-        return new AuthorizationTokenProvider(jwtTokenProvider(), tokenDetailsService());
+        return new AuthorizationTokenProvider(jwtTokenProvider(), tokenManager());
     }
 
     @Bean

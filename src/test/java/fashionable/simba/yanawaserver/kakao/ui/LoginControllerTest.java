@@ -1,8 +1,8 @@
 package fashionable.simba.yanawaserver.kakao.ui;
 
-import fashionable.simba.yanawaserver.kakao.kakao.KakaoAuthenticationService;
-import fashionable.simba.yanawaserver.kakao.kakao.dto.KakaoAccessToken;
-import fashionable.simba.yanawaserver.kakao.ui.dto.Token;
+import fashionable.simba.yanawaserver.kakao.service.KakaoAuthenticationService;
+import fashionable.simba.yanawaserver.kakao.infra.dto.KakaoAccessToken;
+import fashionable.simba.yanawaserver.kakao.ui.dto.Code;
 import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
 import fashionable.simba.yanawaserver.global.userdetails.User;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;
@@ -62,7 +62,7 @@ class LoginControllerTest {
         when(kakaoAuthenticationService.getUserInfo(accessToken)).thenReturn(kakaoMember);
         when(userDetailsService.saveKakaoMember(kakaoMember)).thenReturn(user);
 
-        ResponseEntity<Token> response = loginController.login(new Token("accessCode"));
+        ResponseEntity<Code> response = loginController.login(new Code("accessCode"));
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isNotNull();
     }

@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.kakao.kakao.dto;
+package fashionable.simba.yanawaserver.kakao.infra.dto;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

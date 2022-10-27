@@ -8,7 +8,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableFeignClients
 @ConfigurationPropertiesScan(value = {
-    "fashionable.simba.yanawaserver.kakao.kakao",
+    "fashionable.simba.yanawaserver.kakao",
     "fashionable.simba.yanawaserver.global.config"
 })
 public class YanawaserverApplication {

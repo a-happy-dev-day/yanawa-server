@@ -1,8 +1,8 @@
 package fashionable.simba.yanawaserver.kakao.ui;
 
-import fashionable.simba.yanawaserver.kakao.kakao.KakaoAuthenticationService;
+import fashionable.simba.yanawaserver.kakao.service.KakaoAuthenticationService;
 import fashionable.simba.yanawaserver.kakao.ui.dto.LoginRequest;
-import fashionable.simba.yanawaserver.kakao.ui.dto.Token;
+import fashionable.simba.yanawaserver.kakao.ui.dto.Code;
 import fashionable.simba.yanawaserver.global.provider.AuthenticationException;
 import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetails;
@@ -42,14 +42,14 @@ public class AuthController {
      * @return ResponseEntity
      */
     @PostMapping("login/kakao")
-    public ResponseEntity<Token> login(@RequestBody Token code) {
+    public ResponseEntity<Code> login(@RequestBody Code code) {
         KakaoMember kakaoMember = kakaoAuthenticationService.getUserInfo(kakaoAuthenticationService.getAccessToken(code.getAccessCode()));
         UserDetails userDetails = userDetailsService.saveKakaoMember(kakaoMember);
-        return ResponseEntity.ok(new Token(jwtTokenProvider.createAccessCode((String) userDetails.getUsername())));
+        return ResponseEntity.ok(new Code(jwtTokenProvider.createAccessCode((String) userDetails.getUsername())));
     }
 
     @PostMapping("login")
-    public ResponseEntity<Token> login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<Code> login(@RequestBody LoginRequest loginRequest) {
         if (!userDetailsService.isValidUser(loginRequest.getUsername())) {
             throw new AuthenticationException();
         }
@@ -58,7 +58,7 @@ public class AuthController {
             throw new AuthenticationException();
         }
 
-        return ResponseEntity.ok(new Token(jwtTokenProvider.createAccessCode(loginRequest.getUsername())));
+        return ResponseEntity.ok(new Code(jwtTokenProvider.createAccessCode(loginRequest.getUsername())));
     }
 
 }

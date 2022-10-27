@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.kakao.kakao.dto;
+package fashionable.simba.yanawaserver.kakao.infra.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;

@@ -1,6 +1,5 @@
 package fashionable.simba.yanawaserver.rating.application;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import fashionable.simba.yanawaserver.rating.domain.MannerTemperatureType;
 import fashionable.simba.yanawaserver.rating.domain.Rating;
 import fashionable.simba.yanawaserver.rating.domain.RatingScore;
@@ -41,7 +40,7 @@ class RatingControllerTest {
     }
 
     @Test
-    void 사용자가_참여자의_능력을_평가한다() throws JsonProcessingException {
+    void 사용자가_참여자의_능력을_평가한다() {
 
         Map<String, String> param = new HashMap<>();
 

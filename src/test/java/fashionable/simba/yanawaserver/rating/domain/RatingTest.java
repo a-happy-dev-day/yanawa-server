@@ -1,26 +1,21 @@
 package fashionable.simba.yanawaserver.rating.domain;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class RatingTest {
 
-    Rating rating;
-
-    @BeforeEach
-    void setUp() {
-        rating = new Rating(1L, 1L, 1L, new RatingScore(BigDecimal.valueOf(3.0)), MannerTemperatureType.EXCELLENT, 1L, "후기");
-    }
+    Rating rating = new Rating(1L, 1L, 1L, new RatingScore(BigDecimal.valueOf(3.0)), MannerTemperatureType.EXCELLENT, 1L, "후기");
 
     @Test
     @DisplayName("평가를 생성한다.")
     void ratingTest() {
-        org.junit.jupiter.api.Assertions.assertAll(
+        assertAll(
             () -> assertThat(rating.getId()).isEqualTo(1L),
             () -> assertThat(rating.getParticipantId()).isEqualTo(1L),
             () -> assertThat(rating.getRecruitmentId()).isEqualTo(1L),

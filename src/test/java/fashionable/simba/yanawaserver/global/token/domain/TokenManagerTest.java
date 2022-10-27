@@ -2,7 +2,6 @@ package fashionable.simba.yanawaserver.global.token.domain;
 
 import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
 import fashionable.simba.yanawaserver.global.token.exception.InvalidTokenException;
-import fashionable.simba.yanawaserver.global.token.exception.InvalidTokenTypeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -77,7 +76,7 @@ class TokenManagerTest {
         // then
         assertThatThrownBy(
             () -> tokenManager.manageAccessToken(ACCESS_TOKEN)
-        ).isInstanceOf(InvalidTokenTypeException.class);
+        ).isInstanceOf(InvalidTokenException.class);
     }
 
 
@@ -119,7 +118,7 @@ class TokenManagerTest {
         // then
         assertThatThrownBy(
             () -> tokenManager.manageRefreshToken(ACCESS_TOKEN)
-        ).isInstanceOf(InvalidTokenTypeException.class);
+        ).isInstanceOf(InvalidTokenException.class);
     }
 
     @Test
@@ -144,7 +143,7 @@ class TokenManagerTest {
         // then
         assertThatThrownBy(
             () -> tokenManager.manageAccessToken(ACCESS_TOKEN)
-        ).isInstanceOf(InvalidTokenTypeException.class);
+        ).isInstanceOf(InvalidTokenException.class);
     }
 
     @Test

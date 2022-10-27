@@ -2,7 +2,6 @@ package fashionable.simba.yanawaserver.global.token.domain;
 
 import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
 import fashionable.simba.yanawaserver.global.token.exception.InvalidTokenException;
-import fashionable.simba.yanawaserver.global.token.exception.InvalidTokenTypeException;
 import org.apache.commons.lang3.StringUtils;
 
 public class TokenManager {
@@ -38,7 +37,7 @@ public class TokenManager {
         ValidAccessToken validAccessToken = getValidAccessTokenById(userId);
 
         if (!validAccessToken.getAccessToken().equals(accessToken)) {
-            throw new InvalidTokenException("유효하지 않은 엑세스 토큰입니다.");
+            throw InvalidTokenException.invalidAccessToken();
         }
     }
 
@@ -48,7 +47,7 @@ public class TokenManager {
         ValidRefreshToken validRefreshToken = getValidRefreshToken(userId);
 
         if (!validRefreshToken.getRefreshToken().equals(refreshToken)) {
-            throw new InvalidTokenException("유효하지 않은 엑세스 토큰입니다.");
+            throw InvalidTokenException.invalidRefreshToken();
         }
     }
 
@@ -74,27 +73,27 @@ public class TokenManager {
 
     private ValidRefreshToken getValidRefreshTokenByToken(String refreshToken) {
         return validRefreshTokenRepository.findByRefreshToken(refreshToken)
-            .orElseThrow(() -> new InvalidTokenException("유효하지 않은 토큰입니다."));
+            .orElseThrow(InvalidTokenException::expiresToken);
     }
 
     private ValidAccessToken getValidAccessTokenByToken(String accessToken) {
         return validAccessTokenRepository.findByAccessToken(accessToken)
-            .orElseThrow(() -> new InvalidTokenException("유효하지 않은 토큰입니다."));
+            .orElseThrow(InvalidTokenException::expiresToken);
     }
 
     private ValidRefreshToken getValidRefreshTokenById(Long userId) {
         return validRefreshTokenRepository.findById(userId)
-            .orElseThrow(() -> new InvalidTokenException("사용자 정보가 존재하지 않습니다."));
+            .orElseThrow(InvalidTokenException::invalidUser);
     }
 
     private ValidAccessToken getValidAccessTokenById(Long userId) {
         return validAccessTokenRepository.findById(userId)
-            .orElseThrow(() -> new InvalidTokenException("사용자 정보가 존재하지 않습니다."));
+            .orElseThrow(InvalidTokenException::invalidUser);
     }
 
     private ValidRefreshToken getValidRefreshToken(Long userId) {
         return validRefreshTokenRepository.findById(userId)
-            .orElseThrow(() -> new InvalidTokenException("사용자 정보가 존재하지 않습니다."));
+            .orElseThrow(InvalidTokenException::invalidUser);
     }
 
     private void expireAccessToken(ValidAccessToken accessToken) {
@@ -107,19 +106,19 @@ public class TokenManager {
 
     private void validateAccessToken(String accessToken) {
         if (!jwtTokenProvider.validateToken(accessToken)) {
-            throw new InvalidTokenException("유효하지 않은 액세스 토큰은 저장할 수 없습니다.");
+            throw InvalidTokenException.invalidAccessToken();
         }
     }
 
     private void validateRefreshToken(String refreshToken) {
         if (!jwtTokenProvider.validateRefreshToken(refreshToken)) {
-            throw new InvalidTokenException("유효하지 않은 리프레시 토큰은 저장할 수 없습니다.");
+            throw InvalidTokenException.invalidRefreshToken();
         }
     }
 
     private Long getUserId(String principal) {
         if (!StringUtils.isNumeric(principal)) {
-            throw new InvalidTokenTypeException("유효하지 않은 Principal 입니다. Principal 은 숫자 타입만 가능합니다.");
+            throw InvalidTokenException.invalidTokenType();
         }
         return Long.parseLong(principal);
     }

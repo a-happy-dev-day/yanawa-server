@@ -1,7 +1,7 @@
 package fashionable.simba.yanawaserver.global.token.domain;
 
 public interface TokenDetailsService {
-    boolean validateAccessToken(String accessToken);
+    void validateAccessToken(String accessToken);
 
-    boolean validateRefreshToken(String refreshToken);
+    void validateRefreshToken(String refreshToken);
 }

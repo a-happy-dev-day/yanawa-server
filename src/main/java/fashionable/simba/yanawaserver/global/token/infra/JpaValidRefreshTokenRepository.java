@@ -1,14 +1,24 @@
 package fashionable.simba.yanawaserver.global.token.infra;
 
 import fashionable.simba.yanawaserver.global.token.domain.ValidRefreshToken;
-import fashionable.simba.yanawaserver.global.token.domain.ValidRefreshTokenRepository;
+import fashionable.simba.yanawaserver.global.token.domain.ValidRefreshTokenStorage;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface JpaValidRefreshTokenRepository extends JpaRepository<ValidRefreshToken, String>, ValidRefreshTokenRepository {
+import java.util.Optional;
+
+@Repository
+public interface JpaValidRefreshTokenRepository extends JpaRepository<ValidRefreshToken, Long>, ValidRefreshTokenStorage {
 
     @Override
-    boolean existsById(String refreshToken);
+    <S extends ValidRefreshToken> S save(S entity);
 
     @Override
-    ValidRefreshToken save(ValidRefreshToken refreshToken);
+    Optional<ValidRefreshToken> findById(Long userId);
+
+    @Override
+    Optional<ValidRefreshToken> findByRefreshToken(String refreshToken);
+
+    @Override
+    void delete(ValidRefreshToken entity);
 }

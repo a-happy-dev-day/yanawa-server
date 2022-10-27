@@ -1,19 +1,15 @@
 package fashionable.simba.yanawaserver.auth.serivce;
 
-import fashionable.simba.yanawaserver.global.token.domain.ValidAccessTokenRepository;
-import fashionable.simba.yanawaserver.global.token.domain.ValidRefreshTokenRepository;
 import fashionable.simba.yanawaserver.global.token.domain.TokenDetailsService;
-import org.springframework.stereotype.Service;
+import fashionable.simba.yanawaserver.global.token.domain.TokenManager;
 
-@Service
 public class CustomTokenDetailService implements TokenDetailsService {
-    private final ValidAccessTokenRepository invalidAccessTokenRepository;
-    private final ValidRefreshTokenRepository invalidRefreshTokenRepository;
+    private final TokenManager tokenManager;
 
-    public CustomTokenDetailService(ValidAccessTokenRepository invalidAccessTokenRepository, ValidRefreshTokenRepository invalidRefreshTokenRepository) {
-        this.invalidAccessTokenRepository = invalidAccessTokenRepository;
-        this.invalidRefreshTokenRepository = invalidRefreshTokenRepository;
+    public CustomTokenDetailService(TokenManager tokenManager) {
+        this.tokenManager = tokenManager;
     }
+
 
     /**
      * 유효한 accessToken 이면 true를 반환한다.
@@ -22,8 +18,8 @@ public class CustomTokenDetailService implements TokenDetailsService {
      * @return
      */
     @Override
-    public boolean validateAccessToken(String accessToken) {
-        return !invalidAccessTokenRepository.existsById(accessToken);
+    public void validateAccessToken(String accessToken) {
+        tokenManager.verifyAccessToken(accessToken);
     }
 
     /**
@@ -32,7 +28,7 @@ public class CustomTokenDetailService implements TokenDetailsService {
      * @param refreshToken
      * @return
      */
-    public boolean validateRefreshToken(String refreshToken) {
-        return !invalidRefreshTokenRepository.existsById(refreshToken);
+    public void validateRefreshToken(String refreshToken) {
+        tokenManager.verifyRefreshToken(refreshToken);
     }
 }

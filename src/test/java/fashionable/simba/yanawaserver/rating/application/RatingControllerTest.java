@@ -30,11 +30,11 @@ class RatingControllerTest {
     @LocalServerPort
     private int RANDOM_PORT;
 
+    RatingRequest request = new RatingRequest(1L, 1L, 1L, BigDecimal.valueOf(3.0), MannerTemperatureType.EXCELLENT, 2L, "후기");
+    Rating rating = new Rating(1L, 1L, 1L, new RatingScore(BigDecimal.valueOf(3.0)), MannerTemperatureType.EXCELLENT, 2L, "후기");
+
     @BeforeEach
     void setUp() {
-        RatingRequest request = new RatingRequest(1L, 1L, 1L, BigDecimal.valueOf(3.0), MannerTemperatureType.EXCELLENT, 2L, "후기");
-        Rating rating = new Rating(1L, 1L, 1L, new RatingScore(BigDecimal.valueOf(3.0)), MannerTemperatureType.EXCELLENT, 2L, "후기");
-
         Mockito.when(ratingService.createRating(request)).thenReturn(rating);
         RestAssured.port = RANDOM_PORT;
     }

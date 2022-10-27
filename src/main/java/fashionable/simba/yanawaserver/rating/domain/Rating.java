@@ -2,6 +2,8 @@ package fashionable.simba.yanawaserver.rating.domain;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +17,7 @@ public class Rating {
     private Long recruitmentId;
     @Embedded
     private RatingScore ratingScore;
+    @Enumerated(EnumType.STRING)
     private MannerTemperatureType mannerTemperature;
     private Long userId;
     private String detail;

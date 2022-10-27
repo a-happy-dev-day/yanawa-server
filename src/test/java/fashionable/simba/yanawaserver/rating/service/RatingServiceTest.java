@@ -37,19 +37,15 @@ class RatingServiceTest {
     ParticipationRepository participationRepository = new MemoryParticipationRepository();
 
     RatingService ratingService;
-    Recruitment recruitment;
-    Participation participation1;
-    Participation participation2;
-    Participation participation3;
+    Recruitment recruitment = new Recruitment(1L, 1L, new Level(2.0), new Level(1.0), AgeGroupType.TWENTIES, GenderType.NONE, PreferenceType.MATCHING, 3, 2.0, AnnualType.NONE, "123", RecruitmentStatusType.CLOSED);
+
+    Participation participation1 = new Participation(1L, 1L, 1L, LocalDateTime.now(), ParticipationStatusType.ACCEPTED);
+    Participation participation2 = new Participation(1L, 2L, 1L, LocalDateTime.now(), ParticipationStatusType.ACCEPTED);
+    Participation participation3 = new Participation(1L, 3L, 1L, LocalDateTime.now(), ParticipationStatusType.ACCEPTED);
 
 
     @BeforeEach
     void setUp() {
-        recruitment = new Recruitment(1L, 1L, new Level(2.0), new Level(1.0), AgeGroupType.TWENTIES, GenderType.NONE, PreferenceType.MATCHING, 3, 2.0, AnnualType.NONE, "123", RecruitmentStatusType.CLOSED);
-        participation1 = new Participation(1L, 1L, 1L, LocalDateTime.now(), ParticipationStatusType.ACCEPTED);
-        participation2 = new Participation(1L, 2L, 1L, LocalDateTime.now(), ParticipationStatusType.ACCEPTED);
-        participation3 = new Participation(1L, 3L, 1L, LocalDateTime.now(), ParticipationStatusType.ACCEPTED);
-
         recruitmentRepository.save(recruitment);
         participationRepository.save(participation1);
         participationRepository.save(participation2);
@@ -71,14 +67,14 @@ class RatingServiceTest {
     @Test
     @DisplayName("참여자와 사용자는 해당 모집의 일원이 아닐경우, 예외가 발생한다.")
     void not_include_recruitment_test() {
-        RatingRequest request1 = new RatingRequest(1L, 1L, 1L, BigDecimal.valueOf(3.0), MannerTemperatureType.EXCELLENT, 10L, "후기");
-        RatingRequest request2 = new RatingRequest(2L, 10L, 1L, BigDecimal.valueOf(3.0), MannerTemperatureType.EXCELLENT, 2L, "후기");
-        RatingRequest request3 = new RatingRequest(3L, 1L, 10L, BigDecimal.valueOf(3.0), MannerTemperatureType.EXCELLENT, 2L, "후기");
+        RatingRequest 작성자가참여X = new RatingRequest(1L, 1L, 1L, BigDecimal.valueOf(3.0), MannerTemperatureType.EXCELLENT, 10L, "후기");
+        RatingRequest 평가자가참여X = new RatingRequest(2L, 10L, 1L, BigDecimal.valueOf(3.0), MannerTemperatureType.EXCELLENT, 2L, "후기");
+        RatingRequest 모집정보X = new RatingRequest(3L, 1L, 10L, BigDecimal.valueOf(3.0), MannerTemperatureType.EXCELLENT, 2L, "후기");
 
         assertAll(
-            () -> assertThrows(NoParticipationDataException.class, () -> ratingService.createRating(request1)),
-            () -> assertThrows(NoParticipationDataException.class, () -> ratingService.createRating(request2)),
-            () -> assertThrows(NoMatchingDataException.class, () -> ratingService.createRating(request3))
+            () -> assertThrows(NoParticipationDataException.class, () -> ratingService.createRating(작성자가참여X)),
+            () -> assertThrows(NoParticipationDataException.class, () -> ratingService.createRating(평가자가참여X)),
+            () -> assertThrows(NoMatchingDataException.class, () -> ratingService.createRating(모집정보X))
         );
 
     }
@@ -87,10 +83,10 @@ class RatingServiceTest {
     @DisplayName("상대방의 평가 점수를 조회한다.")
     void find_average_ratingScore() {
         //given
-        RatingRequest request1 = new RatingRequest(1L, 1L, 1L, BigDecimal.valueOf(3.0), MannerTemperatureType.EXCELLENT, 2L, "후기");
-        ratingService.createRating(request1);
-        RatingRequest request2 = new RatingRequest(2L, 1L, 1L, BigDecimal.valueOf(4.0), MannerTemperatureType.EXCELLENT, 3L, "후기");
-        ratingService.createRating(request2);
+        RatingRequest 평가후기3점 = new RatingRequest(1L, 1L, 1L, BigDecimal.valueOf(3.0), MannerTemperatureType.EXCELLENT, 2L, "후기");
+        ratingService.createRating(평가후기3점);
+        RatingRequest 평가후기4점 = new RatingRequest(2L, 1L, 1L, BigDecimal.valueOf(4.0), MannerTemperatureType.EXCELLENT, 3L, "후기");
+        ratingService.createRating(평가후기4점);
 
         assertThat(ratingService.findAverageRating(1L)).isEqualTo(BigDecimal.valueOf(3.5));
     }

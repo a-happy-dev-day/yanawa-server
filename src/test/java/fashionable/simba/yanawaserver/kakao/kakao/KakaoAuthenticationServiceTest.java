@@ -1,7 +1,7 @@
-package fashionable.simba.yanawaserver.auth.kakao;
+package fashionable.simba.yanawaserver.kakao.kakao;
 
-import fashionable.simba.yanawaserver.auth.kakao.dto.KakaoAccessToken;
-import fashionable.simba.yanawaserver.auth.kakao.dto.KakaoUserInfo;
+import fashionable.simba.yanawaserver.kakao.kakao.dto.KakaoAccessToken;
+import fashionable.simba.yanawaserver.kakao.kakao.dto.KakaoUserInfo;
 import fashionable.simba.yanawaserver.members.domain.KakaoMember;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

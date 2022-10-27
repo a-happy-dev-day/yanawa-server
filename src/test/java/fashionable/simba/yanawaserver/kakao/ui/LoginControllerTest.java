@@ -1,8 +1,8 @@
-package fashionable.simba.yanawaserver.auth.ui;
+package fashionable.simba.yanawaserver.kakao.ui;
 
-import fashionable.simba.yanawaserver.auth.kakao.KakaoAuthenticationService;
-import fashionable.simba.yanawaserver.auth.kakao.dto.KakaoAccessToken;
-import fashionable.simba.yanawaserver.auth.ui.dto.Token;
+import fashionable.simba.yanawaserver.kakao.kakao.KakaoAuthenticationService;
+import fashionable.simba.yanawaserver.kakao.kakao.dto.KakaoAccessToken;
+import fashionable.simba.yanawaserver.kakao.ui.dto.Token;
 import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
 import fashionable.simba.yanawaserver.global.userdetails.User;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;

@@ -1,7 +1,7 @@
 package fashionable.simba.yanawaserver.global.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fashionable.simba.yanawaserver.auth.serivce.CustomTokenDetailService;
+import fashionable.simba.yanawaserver.token.domain.CustomTokenDetailService;
 import fashionable.simba.yanawaserver.global.authorization.AuthenticationPrincipalArgumentResolver;
 import fashionable.simba.yanawaserver.global.authorization.secured.SecuredAnnotationChecker;
 import fashionable.simba.yanawaserver.global.context.SecurityContextPersistenceFilter;

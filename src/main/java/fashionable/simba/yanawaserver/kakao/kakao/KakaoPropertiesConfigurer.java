@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.auth.kakao;
+package fashionable.simba.yanawaserver.kakao.kakao;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConstructorBinding;

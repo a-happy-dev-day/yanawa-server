@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.auth.ui.dto;
+package fashionable.simba.yanawaserver.kakao.ui.dto;
 
 public class Token {
     private String accessCode;

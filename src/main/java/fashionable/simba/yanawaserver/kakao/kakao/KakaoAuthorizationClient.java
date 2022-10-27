@@ -1,6 +1,6 @@
-package fashionable.simba.yanawaserver.auth.kakao;
+package fashionable.simba.yanawaserver.kakao.kakao;
 
-import fashionable.simba.yanawaserver.auth.kakao.dto.KakaoUserInfo;
+import fashionable.simba.yanawaserver.kakao.kakao.dto.KakaoUserInfo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

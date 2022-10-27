@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.auth.domain;
+package fashionable.simba.yanawaserver.kakao.domain;
 
 import fashionable.simba.yanawaserver.token.domain.AuthenticationCode;
 import nl.jqno.equalsverifier.EqualsVerifier;

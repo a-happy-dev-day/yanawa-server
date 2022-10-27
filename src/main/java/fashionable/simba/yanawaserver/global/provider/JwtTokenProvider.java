@@ -74,8 +74,16 @@ public class JwtTokenProvider {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().get(ROLES, List.class);
     }
 
+    public Date getExpiredDate(String token) {
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getIssuedAt();
+    }
+
     public String getPrincipalByRefreshToken(String refreshToken) {
         return Jwts.parser().setSigningKey(refreshKey).parseClaimsJws(refreshToken).getBody().getSubject();
+    }
+
+    public Date getExpiredDateByRefreshToken(String refreshToken) {
+        return Jwts.parser().setSigningKey(refreshKey).parseClaimsJws(refreshToken).getBody().getIssuedAt();
     }
 
     public boolean validateToken(String token) {

@@ -16,6 +16,13 @@ public class InformationRequest {
 
     private InformationRequest() {/*no-op*/}
 
+    public InformationRequest(String nickname, LocalDate birthDate, BigDecimal level, MemberSex sex) {
+        this.nickname = nickname;
+        this.birthDate = birthDate;
+        this.level = level;
+        this.sex = sex;
+    }
+
     public String getNickname() {
         return nickname;
     }

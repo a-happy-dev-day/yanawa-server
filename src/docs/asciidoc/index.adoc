@@ -11,9 +11,10 @@
 
 === 소셜 로그인
 
-operation::login/kakao[snippets='http-request,http-response']
+operation::member/kakao[snippets='http-request']
+operation::member/login[snippets='http-response']
 
-=== 기본 사용자 로그인
+=== 로그인
 
 operation::member/login[snippets='http-request,http-response']
 

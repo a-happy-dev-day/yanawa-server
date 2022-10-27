@@ -1,8 +1,7 @@
 package fashionable.simba.yanawaserver.global.provider;
 
 import fashionable.simba.yanawaserver.global.context.Authentication;
-import fashionable.simba.yanawaserver.global.token.domain.TokenDetailsService;
-import fashionable.simba.yanawaserver.global.token.exception.InvalidTokenException;
+import fashionable.simba.yanawaserver.global.token.TokenDetailsService;
 import fashionable.simba.yanawaserver.members.domain.RoleType;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,8 +13,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -41,7 +38,7 @@ class AuthorizationTokenProviderTest {
 
         // when
         when(jwtTokenProvider.validateToken(token.getPrincipal())).thenReturn(true);
-        doNothing().when(tokenDetailsService).validateAccessToken(token.getPrincipal());
+        when(tokenDetailsService.validateAccessToken(token.getPrincipal())).thenReturn(true);
         when(jwtTokenProvider.getPrincipal(token.getPrincipal())).thenReturn(principal);
         when(jwtTokenProvider.getRoles(token.getPrincipal())).thenReturn(roles);
 
@@ -73,11 +70,11 @@ class AuthorizationTokenProviderTest {
         AuthenticationToken invalidToken = new AuthenticationToken("invalid access token");
         // when
         when(jwtTokenProvider.validateToken(invalidToken.getPrincipal())).thenReturn(true);
-        doThrow(InvalidTokenException.class).when(tokenDetailsService).validateAccessToken(invalidToken.getPrincipal());
+        when(tokenDetailsService.validateAccessToken(invalidToken.getPrincipal())).thenReturn(false);
 
         // then
         Assertions.assertThatThrownBy(
             () -> authorizationTokenProvider.authenticate(invalidToken)
-        ).isInstanceOf(InvalidTokenException.class);
+        ).isInstanceOf(AuthenticationException.class);
     }
 }

@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.global.token.domain;
+package fashionable.simba.yanawaserver.global.token;
 
 public class AuthorizationToken {
     private AuthorizationAccessToken accessToken;

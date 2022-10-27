@@ -1,7 +1,6 @@
 package fashionable.simba.yanawaserver.global.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fashionable.simba.yanawaserver.auth.serivce.CustomTokenDetailService;
 import fashionable.simba.yanawaserver.global.authorization.AuthenticationPrincipalArgumentResolver;
 import fashionable.simba.yanawaserver.global.authorization.secured.SecuredAnnotationChecker;
 import fashionable.simba.yanawaserver.global.context.SecurityContextPersistenceFilter;
@@ -16,10 +15,7 @@ import fashionable.simba.yanawaserver.global.provider.AuthenticationTokenProvide
 import fashionable.simba.yanawaserver.global.provider.AuthorizationManager;
 import fashionable.simba.yanawaserver.global.provider.AuthorizationTokenProvider;
 import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
-import fashionable.simba.yanawaserver.global.token.domain.TokenDetailsService;
-import fashionable.simba.yanawaserver.global.token.domain.ValidAccessTokenStorage;
-import fashionable.simba.yanawaserver.global.token.domain.ValidRefreshTokenStorage;
-import fashionable.simba.yanawaserver.global.token.domain.TokenManager;
+import fashionable.simba.yanawaserver.global.token.TokenDetailsService;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,15 +30,14 @@ import java.util.List;
 public class WebSecurityConfigurer implements WebMvcConfigurer {
     private final JwtPropertiesConfigurer jwtPropertiesConfigurer;
     private final UserDetailsService userDetailsService;
-    private final ValidAccessTokenStorage validAccessTokenStorage;
-    private final ValidRefreshTokenStorage validRefreshTokenStorage;
+    private final TokenDetailsService tokenDetailsService;
 
     public WebSecurityConfigurer(JwtPropertiesConfigurer jwtPropertiesConfigurer,
-                                 UserDetailsService userDetailsService, ValidAccessTokenStorage validAccessTokenStorage, ValidRefreshTokenStorage validRefreshTokenStorage) {
+                                 UserDetailsService userDetailsService,
+                                 TokenDetailsService tokenDetailsService) {
         this.jwtPropertiesConfigurer = jwtPropertiesConfigurer;
         this.userDetailsService = userDetailsService;
-        this.validAccessTokenStorage = validAccessTokenStorage;
-        this.validRefreshTokenStorage = validRefreshTokenStorage;
+        this.tokenDetailsService = tokenDetailsService;
     }
 
     @Override
@@ -83,23 +78,13 @@ public class WebSecurityConfigurer implements WebMvcConfigurer {
     }
 
     @Bean
-    TokenManager tokenManager() {
-        return new TokenManager(validAccessTokenStorage, validRefreshTokenStorage, jwtTokenProvider());
-    }
-
-    @Bean
-    TokenDetailsService tokenDetailsService() {
-        return new CustomTokenDetailService(tokenManager());
-    }
-
-    @Bean
     AuthorizationManager authorizationTokenProvider() {
-        return new AuthorizationTokenProvider(jwtTokenProvider(), tokenDetailsService());
+        return new AuthorizationTokenProvider(jwtTokenProvider(), tokenDetailsService);
     }
 
     @Bean
     TokenAuthenticationSuccessHandler tokenAuthenticationSuccessHandler() {
-        return new TokenAuthenticationSuccessHandler(objectMapper(), jwtTokenProvider(), tokenManager());
+        return new TokenAuthenticationSuccessHandler(objectMapper(), jwtTokenProvider());
     }
 
     @Bean

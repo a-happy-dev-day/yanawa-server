@@ -2,7 +2,7 @@ package fashionable.simba.yanawaserver.global.provider;
 
 
 import fashionable.simba.yanawaserver.global.context.Authentication;
-import fashionable.simba.yanawaserver.global.token.TokenDetailsService;
+import fashionable.simba.yanawaserver.global.token.domain.TokenDetailsService;
 
 import java.util.List;
 
@@ -20,9 +20,7 @@ public class AuthorizationTokenProvider implements AuthorizationManager {
             throw new AuthenticationException("토큰이 유효하지 않습니다.");
         }
 
-        if (!tokenDetailsService.validateAccessToken(authenticationToken.getPrincipal())) {
-            throw new AuthenticationException("토큰이 유효하지 않습니다. - In invalid access token storage");
-        }
+        tokenDetailsService.validateAccessToken(authenticationToken.getPrincipal());
 
         String principal = jwtTokenProvider.getPrincipal(authenticationToken.getPrincipal());
         List<String> roles = jwtTokenProvider.getRoles(authenticationToken.getPrincipal());

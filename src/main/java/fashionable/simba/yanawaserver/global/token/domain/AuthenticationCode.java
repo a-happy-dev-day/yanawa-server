@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.global.token;
+package fashionable.simba.yanawaserver.global.token.domain;
 
 import java.util.Objects;
 

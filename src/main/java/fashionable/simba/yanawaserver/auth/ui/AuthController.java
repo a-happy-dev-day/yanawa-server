@@ -8,7 +8,10 @@ import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetails;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;
 import fashionable.simba.yanawaserver.members.domain.KakaoMember;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +26,12 @@ public class AuthController {
         this.kakaoAuthenticationService = kakaoAuthenticationService;
         this.userDetailsService = userDetailsService;
         this.jwtTokenProvider = jwtTokenProvider;
+    }
+
+    @GetMapping("login/kakao")
+    public ResponseEntity<Void> loginPage() {
+        return ResponseEntity.status(HttpStatus.SEE_OTHER)
+            .header(HttpHeaders.LOCATION, kakaoAuthenticationService.getLoginUri()).build();
     }
 
     /**

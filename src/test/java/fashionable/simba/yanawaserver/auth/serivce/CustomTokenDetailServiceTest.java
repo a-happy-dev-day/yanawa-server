@@ -1,58 +1,35 @@
 package fashionable.simba.yanawaserver.auth.serivce;
 
-import fashionable.simba.yanawaserver.auth.domain.InvalidAccessTokenRepository;
-import fashionable.simba.yanawaserver.auth.domain.InvalidRefreshTokenRepository;
-import org.junit.jupiter.api.BeforeEach;
+import fashionable.simba.yanawaserver.global.token.domain.TokenManager;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.doNothing;
 
 @ExtendWith(MockitoExtension.class)
 class CustomTokenDetailServiceTest {
 
+    @InjectMocks
     CustomTokenDetailService customTokenDetailService;
 
     @Mock
-    InvalidAccessTokenRepository invalidAccessTokenRepository;
-
-    @Mock
-    InvalidRefreshTokenRepository invalidRefreshTokenRepository;
-
-    @BeforeEach
-    void setUp() {
-        customTokenDetailService = new CustomTokenDetailService(invalidAccessTokenRepository, invalidRefreshTokenRepository);
-    }
+    TokenManager tokenManager;
 
     @Test
-    @DisplayName("invalidAccessTokenRepository에 존재하는 토큰이면 false를 반환한다.")
+    @DisplayName("invalidAccessTokenRepository에 존재하는 토큰인지 확인한다.")
     void validateAccessToken() {
         // given
         String accessToken = "invalid access token";
 
         // when
-        when(invalidAccessTokenRepository.existsById(accessToken)).thenReturn(true);
+        doNothing().when(tokenManager).verifyAccessToken(accessToken);
 
         // then
-        boolean actual = customTokenDetailService.validateAccessToken(accessToken);
-        assertThat(actual).isFalse();
-    }
-
-    @Test
-    @DisplayName("invalidAccessTokenRepository에 존재하지 않는 토큰이면 false를 반환한다.")
-    void validateAccessToken_validToken() {
-        // given
-        String accessToken = "access token";
-
-        // when
-        when(invalidAccessTokenRepository.existsById(accessToken)).thenReturn(false);
-
-        // then
-        boolean actual = customTokenDetailService.validateAccessToken(accessToken);
-        assertThat(actual).isTrue();
+        customTokenDetailService.validateAccessToken(accessToken);
     }
 }

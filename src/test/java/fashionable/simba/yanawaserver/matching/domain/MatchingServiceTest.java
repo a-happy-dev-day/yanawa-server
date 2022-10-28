@@ -40,7 +40,7 @@ class MatchingServiceTest {
         recruitmentRepository = new MemoryRecruitmentRepository();
         courtRepository = new MemoryCourtRepository();
 
-        matchingService = new MatchingService(matchingRepository, recruitmentRepository);
+        matchingService = new MatchingService(matchingRepository, recruitmentRepository, timeConfig);
 
         서울_테니스장 = courtRepository.save("서울 테니스장");
     }

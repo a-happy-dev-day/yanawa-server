@@ -35,6 +35,9 @@ public class RatingService {
         Rating savedRating = new Rating(request.getId(), request.getParticipantId(), request.getRecruitmentId(), new RatingScore(request.getRatingScore()), request.getMannerTemperatureType(), request.getUserId(), request.getDetail());
         ratingRepository.save(savedRating);
 
+        //TODO: memberRepository.updateRating
+        //TODO: memberRepository.updateManner
+
         return savedRating;
     }
 

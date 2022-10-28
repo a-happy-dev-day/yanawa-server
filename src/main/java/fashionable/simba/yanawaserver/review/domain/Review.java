@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.rating.domain;
+package fashionable.simba.yanawaserver.review.domain;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Rating {
+public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,11 +22,11 @@ public class Rating {
     private Long userId;
     private String detail;
 
-    protected Rating() {
+    protected Review() {
         /*no-op*/
     }
 
-    public Rating(Long id, Long participantId, Long recruitmentId, RatingScore ratingScore, MannerTemperatureType mannerTemperature, Long userId, String detail) {
+    public Review(Long id, Long participantId, Long recruitmentId, RatingScore ratingScore, MannerTemperatureType mannerTemperature, Long userId, String detail) {
         this.id = id;
         this.participantId = participantId;
         this.recruitmentId = recruitmentId;

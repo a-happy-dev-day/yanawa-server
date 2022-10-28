@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.rating.domain;
+package fashionable.simba.yanawaserver.review.domain;
 
 public enum MannerTemperatureType {
     BAD, GOOD, EXCELLENT;

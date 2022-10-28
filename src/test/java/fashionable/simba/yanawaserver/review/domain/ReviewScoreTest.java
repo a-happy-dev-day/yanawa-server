@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.rating.domain;
+package fashionable.simba.yanawaserver.review.domain;
 
 import fashionable.simba.yanawaserver.members.exception.InvalidLevelException;
 import org.junit.jupiter.api.Assertions;
@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.math.BigDecimal;
 
-class RatingScoreTest {
+class ReviewScoreTest {
 
     @Test
     @DisplayName("평가점수 객체를 생성한다.")

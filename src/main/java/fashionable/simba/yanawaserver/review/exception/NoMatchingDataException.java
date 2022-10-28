@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.rating.exception;
+package fashionable.simba.yanawaserver.review.exception;
 
 public class NoMatchingDataException extends RuntimeException{
     public NoMatchingDataException(String message) {

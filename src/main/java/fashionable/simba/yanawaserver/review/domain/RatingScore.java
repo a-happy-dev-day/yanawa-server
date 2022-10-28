@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.rating.domain;
+package fashionable.simba.yanawaserver.review.domain;
 
 import fashionable.simba.yanawaserver.members.exception.InvalidLevelException;
 

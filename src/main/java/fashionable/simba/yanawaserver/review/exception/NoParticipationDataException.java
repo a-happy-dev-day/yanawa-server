@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.rating.exception;
+package fashionable.simba.yanawaserver.review.exception;
 
 public class NoParticipationDataException extends RuntimeException{
     public NoParticipationDataException(String message) {

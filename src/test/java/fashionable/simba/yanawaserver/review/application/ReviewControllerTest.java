@@ -1,10 +1,10 @@
-package fashionable.simba.yanawaserver.rating.application;
+package fashionable.simba.yanawaserver.review.application;
 
-import fashionable.simba.yanawaserver.rating.domain.MannerTemperatureType;
-import fashionable.simba.yanawaserver.rating.domain.Rating;
-import fashionable.simba.yanawaserver.rating.domain.RatingScore;
-import fashionable.simba.yanawaserver.rating.dto.RatingRequest;
-import fashionable.simba.yanawaserver.rating.service.RatingService;
+import fashionable.simba.yanawaserver.review.domain.MannerTemperatureType;
+import fashionable.simba.yanawaserver.review.domain.Review;
+import fashionable.simba.yanawaserver.review.domain.RatingScore;
+import fashionable.simba.yanawaserver.review.dto.ReviewRequest;
+import fashionable.simba.yanawaserver.review.service.ReviewService;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
@@ -23,19 +23,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class RatingControllerTest {
+class ReviewControllerTest {
     @MockBean
-    RatingService ratingService;
+    ReviewService reviewService;
 
     @LocalServerPort
     private int RANDOM_PORT;
 
-    RatingRequest request = new RatingRequest(1L, 1L, 1L, BigDecimal.valueOf(3.0), MannerTemperatureType.EXCELLENT, 2L, "후기");
-    Rating rating = new Rating(1L, 1L, 1L, new RatingScore(BigDecimal.valueOf(3.0)), MannerTemperatureType.EXCELLENT, 2L, "후기");
+    ReviewRequest request = new ReviewRequest(1L, 1L, 1L, BigDecimal.valueOf(3.0), MannerTemperatureType.EXCELLENT, 2L, "후기");
+    Review review = new Review(1L, 1L, 1L, new RatingScore(BigDecimal.valueOf(3.0)), MannerTemperatureType.EXCELLENT, 2L, "후기");
 
     @BeforeEach
     void setUp() {
-        Mockito.when(ratingService.createRating(request)).thenReturn(rating);
+        Mockito.when(reviewService.createReview(request)).thenReturn(review);
         RestAssured.port = RANDOM_PORT;
     }
 
@@ -57,7 +57,7 @@ class RatingControllerTest {
             .contentType(MediaType.APPLICATION_JSON_VALUE)
             .when()
             .body(param)
-            .post("rating")
+            .post("review")
             .then().log().all()
             .extract();
 

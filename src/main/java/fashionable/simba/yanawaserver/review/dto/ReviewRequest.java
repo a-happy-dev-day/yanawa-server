@@ -1,10 +1,10 @@
-package fashionable.simba.yanawaserver.rating.dto;
+package fashionable.simba.yanawaserver.review.dto;
 
-import fashionable.simba.yanawaserver.rating.domain.MannerTemperatureType;
+import fashionable.simba.yanawaserver.review.domain.MannerTemperatureType;
 
 import java.math.BigDecimal;
 
-public class RatingRequest {
+public class ReviewRequest {
     private Long id;
     private Long participantId;
     private Long recruitmentId;
@@ -13,11 +13,11 @@ public class RatingRequest {
     private Long userId;
     private String detail;
 
-    private RatingRequest() {
+    private ReviewRequest() {
         /*no-op*/
     }
 
-    public RatingRequest(Long id, Long participantId, Long recruitmentId, BigDecimal ratingScore, MannerTemperatureType mannerTemperatureType, Long userId, String detail) {
+    public ReviewRequest(Long id, Long participantId, Long recruitmentId, BigDecimal ratingScore, MannerTemperatureType mannerTemperatureType, Long userId, String detail) {
         this.id = id;
         this.participantId = participantId;
         this.recruitmentId = recruitmentId;

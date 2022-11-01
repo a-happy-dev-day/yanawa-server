@@ -1,6 +1,6 @@
 package fashionable.simba.yanawaserver.matching.application;
 
-import fashionable.simba.yanawaserver.configuration.TimeConfig;
+import fashionable.simba.yanawaserver.configuration.Clock;
 import fashionable.simba.yanawaserver.matching.application.dto.RecruitmentRequsest;
 import fashionable.simba.yanawaserver.matching.application.dto.RecruitmentResponse;
 import fashionable.simba.yanawaserver.matching.application.dto.RecruitmentResponses;
@@ -41,7 +41,7 @@ class ApplicationServiceTest {
     MatchingService matchingService;
     RecruitmentService recruitmentService;
     MatchingApplicationService applicationService;
-    TimeConfig timeConfig = new TimeConfig();
+    Clock clock = new Clock();
 
     @BeforeEach
     public void setUp() {
@@ -50,7 +50,7 @@ class ApplicationServiceTest {
         participationRepository = new MemoryParticipationRepository();
         courtRepository = new MemoryCourtRepository();
 
-        matchingService = new MatchingService(matchingRepository, recruitmentRepository, timeConfig);
+        matchingService = new MatchingService(matchingRepository, recruitmentRepository, clock);
         recruitmentService = new RecruitmentService(recruitmentRepository, participationRepository);
         applicationService = new MatchingApplicationService(matchingService, recruitmentService, courtRepository);
 

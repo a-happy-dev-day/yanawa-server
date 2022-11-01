@@ -1,6 +1,6 @@
 package fashionable.simba.yanawaserver.matching.domain.service;
 
-import fashionable.simba.yanawaserver.configuration.TimeConfig;
+import fashionable.simba.yanawaserver.configuration.Clock;
 import fashionable.simba.yanawaserver.matching.constant.MatchingStatusType;
 import fashionable.simba.yanawaserver.matching.domain.Matching;
 import fashionable.simba.yanawaserver.matching.domain.MatchingRepository;
@@ -8,18 +8,16 @@ import fashionable.simba.yanawaserver.matching.domain.Recruitment;
 import fashionable.simba.yanawaserver.matching.domain.RecruitmentRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-
 @Service
 public class MatchingService {
     private final MatchingRepository matchingRepository;
     private final RecruitmentRepository recruitmentRepository;
-    private final TimeConfig timeConfig;
+    private final Clock clock;
 
-    public MatchingService(MatchingRepository matchingRepository, RecruitmentRepository recruitmentRepository, TimeConfig timeConfig) {
+    public MatchingService(MatchingRepository matchingRepository, RecruitmentRepository recruitmentRepository, Clock clock) {
         this.matchingRepository = matchingRepository;
         this.recruitmentRepository = recruitmentRepository;
-        this.timeConfig = timeConfig;
+        this.clock = clock;
     }
 
     public Matching createMatching(Matching matching) {
@@ -46,7 +44,7 @@ public class MatchingService {
         if (matching.getStatus() != MatchingStatusType.ONGOING) {
             throw new IllegalArgumentException("매칭이 시작되지 않아 매칭을 종료할 수 없습니다.");
         }
-        if (timeConfig.dateTimeOfNow().compareTo(matching.getDate().atTime(matching.getEndTime())) <= 0) {
+        if (clock.dateTimeOfNow().compareTo(matching.getDate().atTime(matching.getEndTime())) <= 0) {
             throw new IllegalArgumentException("매칭 종료시간이 되지 않아 매칭을 종료할 수 없습니다.");
         }
         matching.changeFinished();

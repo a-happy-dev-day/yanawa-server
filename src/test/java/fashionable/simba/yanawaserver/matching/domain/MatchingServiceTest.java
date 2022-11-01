@@ -1,6 +1,6 @@
 package fashionable.simba.yanawaserver.matching.domain;
 
-import fashionable.simba.yanawaserver.configuration.TimeConfig;
+import fashionable.simba.yanawaserver.configuration.Clock;
 import fashionable.simba.yanawaserver.matching.constant.AgeGroupType;
 import fashionable.simba.yanawaserver.matching.constant.AnnualType;
 import fashionable.simba.yanawaserver.matching.constant.GenderType;
@@ -29,7 +29,7 @@ class MatchingServiceTest {
     MatchingRepository matchingRepository;
     RecruitmentRepository recruitmentRepository;
     MemoryCourtRepository courtRepository;
-    TimeConfig timeConfig = new TimeConfig();
+    Clock clock = new Clock();
 
     MatchingService matchingService;
     static Long 서울_테니스장;
@@ -40,7 +40,7 @@ class MatchingServiceTest {
         recruitmentRepository = new MemoryRecruitmentRepository();
         courtRepository = new MemoryCourtRepository();
 
-        matchingService = new MatchingService(matchingRepository, recruitmentRepository, timeConfig);
+        matchingService = new MatchingService(matchingRepository, recruitmentRepository, clock);
 
         서울_테니스장 = courtRepository.save("서울 테니스장");
     }
@@ -141,7 +141,7 @@ class MatchingServiceTest {
     @Test
     @DisplayName("매칭 종료시간이 지나지않으면 매칭을 종료시킬 수 없다.")
     void end_matching_time_check_test() {
-        timeConfig.timeFixed(LocalDateTime.of(2022, 9, 1, 19, 0));
+        clock.timeFixed(LocalDateTime.of(2022, 9, 1, 19, 0));
 
         Matching matching = getMatching(MatchingStatusType.ONGOING,
             LocalDate.of(2022,9,1), LocalTime.of(18,0), LocalTime.of(20,0));
@@ -153,7 +153,7 @@ class MatchingServiceTest {
             matchingService.endMatching(savedMatchingId);
         });
 
-        timeConfig.reset();
+        clock.reset();
     }
 
     private static Matching getMatching(MatchingStatusType statusType) {

@@ -4,6 +4,7 @@ import fashionable.simba.yanawaserver.matching.domain.Participation;
 import fashionable.simba.yanawaserver.matching.domain.ParticipationRepository;
 import fashionable.simba.yanawaserver.matching.domain.Recruitment;
 import fashionable.simba.yanawaserver.matching.domain.RecruitmentRepository;
+import fashionable.simba.yanawaserver.review.domain.MannerTemperatureType;
 import fashionable.simba.yanawaserver.review.domain.Review;
 import fashionable.simba.yanawaserver.review.domain.RatingScore;
 import fashionable.simba.yanawaserver.review.dto.ReviewRequest;
@@ -35,10 +36,33 @@ public class ReviewService {
         Review savedReview = new Review(request.getId(), request.getParticipantId(), request.getRecruitmentId(), new RatingScore(request.getRatingScore()), request.getMannerTemperatureType(), request.getUserId(), request.getDetail());
         reviewRepository.save(savedReview);
 
-        //TODO: memberRepository.updateRating
+        //search ->
+        Long participantId = savedReview.getParticipantId();
+
         //TODO: memberRepository.updateManner
 
         return savedReview;
     }
 
+    public BigDecimal calculateRating(Long userId) {
+        BigDecimal sumRatings = BigDecimal.ZERO;
+        List<Review> reviews = reviewRepository.findByParticipantId(userId);
+        for (Review review : reviews) {
+            sumRatings.add(review.getRatingScore().getScore());
+        }
+        return sumRatings.divide(BigDecimal.valueOf(reviews.size()));
+    }
+
+    public BigDecimal calculateMannerTemperature(Long userId, MannerTemperatureType mannerTemperatureType) {
+        BigDecimal currentTemperatures = BigDecimal.valueOf(36.0);
+        List<Review> reviews = reviewRepository.findByParticipantId(userId);
+        for (Review review : reviews) {
+            if (mannerTemperatureType == MannerTemperatureType.EXCELLENT) {
+                currentTemperatures.add(BigDecimal.valueOf(0.1));
+            } else if (mannerTemperatureType == MannerTemperatureType.BAD) {
+                currentTemperatures.add(BigDecimal.valueOf(-0.1));
+            }
+        }
+        return currentTemperatures;
+    }
 }

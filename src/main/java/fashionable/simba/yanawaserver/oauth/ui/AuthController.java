@@ -4,10 +4,10 @@ import fashionable.simba.yanawaserver.global.provider.AuthenticationException;
 import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetails;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;
+import fashionable.simba.yanawaserver.members.domain.KakaoMember;
 import fashionable.simba.yanawaserver.oauth.service.KakaoAuthenticationService;
 import fashionable.simba.yanawaserver.oauth.ui.dto.LoginRequest;
 import fashionable.simba.yanawaserver.oauth.ui.dto.TokenDto;
-import fashionable.simba.yanawaserver.members.domain.KakaoMember;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -49,17 +49,18 @@ public class AuthController {
     public ResponseEntity<TokenDto> login(@RequestBody TokenDto code) {
         final String accessCode = code.getAccessCode();
 
-        log.info("Request kakao social login code is {}", accessCode);
+        log.info("Request kakao social login code is {}", getString(accessCode));
         KakaoMember kakaoMember = kakaoAuthenticationService.getUserInfo(kakaoAuthenticationService.getAccessToken(accessCode));
         UserDetails userDetails = userDetailsService.saveKakaoMember(kakaoMember);
         return ResponseEntity.ok(new TokenDto(jwtTokenProvider.createAccessCode((String) userDetails.getUsername())));
     }
 
+
     @PostMapping("login")
     public ResponseEntity<TokenDto> login(@RequestBody LoginRequest loginRequest) {
         final String username = loginRequest.getUsername();
 
-        log.info("Request login server username is {}", username);
+        log.info("Request login server username is {}", getString(username));
         if (!userDetailsService.isValidUser(username)) {
             throw new AuthenticationException();
         }
@@ -69,6 +70,10 @@ public class AuthController {
         }
 
         return ResponseEntity.ok(new TokenDto(jwtTokenProvider.createAccessCode(username)));
+    }
+
+    private String getString(String accessCode) {
+        return accessCode.replaceAll("[\n\r\t]", "_");
     }
 
 }

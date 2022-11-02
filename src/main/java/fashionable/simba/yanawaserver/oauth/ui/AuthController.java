@@ -8,6 +8,8 @@ import fashionable.simba.yanawaserver.oauth.service.KakaoAuthenticationService;
 import fashionable.simba.yanawaserver.oauth.ui.dto.LoginRequest;
 import fashionable.simba.yanawaserver.oauth.ui.dto.TokenDto;
 import fashionable.simba.yanawaserver.members.domain.KakaoMember;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AuthController {
+    private static final Logger log = LoggerFactory.getLogger(AuthController.class);
     private final KakaoAuthenticationService kakaoAuthenticationService;
     private final UserDetailsService userDetailsService;
     private final JwtTokenProvider jwtTokenProvider;
@@ -30,6 +33,7 @@ public class AuthController {
 
     @GetMapping("login/kakao")
     public ResponseEntity<Void> loginPage() {
+        log.info("Request Page");
         return ResponseEntity.status(HttpStatus.SEE_OTHER)
             .header(HttpHeaders.LOCATION, kakaoAuthenticationService.getLoginUri()).build();
     }
@@ -43,14 +47,20 @@ public class AuthController {
      */
     @PostMapping("login/kakao")
     public ResponseEntity<TokenDto> login(@RequestBody TokenDto code) {
-        KakaoMember kakaoMember = kakaoAuthenticationService.getUserInfo(kakaoAuthenticationService.getAccessToken(code.getAccessCode()));
+        final String accessCode = code.getAccessCode();
+
+        log.info("Request kakao social login code is {}", accessCode);
+        KakaoMember kakaoMember = kakaoAuthenticationService.getUserInfo(kakaoAuthenticationService.getAccessToken(accessCode));
         UserDetails userDetails = userDetailsService.saveKakaoMember(kakaoMember);
         return ResponseEntity.ok(new TokenDto(jwtTokenProvider.createAccessCode((String) userDetails.getUsername())));
     }
 
     @PostMapping("login")
     public ResponseEntity<TokenDto> login(@RequestBody LoginRequest loginRequest) {
-        if (!userDetailsService.isValidUser(loginRequest.getUsername())) {
+        final String username = loginRequest.getUsername();
+
+        log.info("Request login server username is {}", username);
+        if (!userDetailsService.isValidUser(username)) {
             throw new AuthenticationException();
         }
 
@@ -58,7 +68,7 @@ public class AuthController {
             throw new AuthenticationException();
         }
 
-        return ResponseEntity.ok(new TokenDto(jwtTokenProvider.createAccessCode(loginRequest.getUsername())));
+        return ResponseEntity.ok(new TokenDto(jwtTokenProvider.createAccessCode(username)));
     }
 
 }

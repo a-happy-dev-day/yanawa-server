@@ -42,6 +42,8 @@ public class KakaoAuthenticationService {
      * @return AccessToken
      */
     public KakaoAccessToken getAccessToken(String code) {
+        log.info("Request Access Token to kakao, code is {}", code);
+
         return authenticationClient.getToken(
             MediaType.APPLICATION_FORM_URLENCODED_VALUE,
             GRANT_TYPE,
@@ -60,15 +62,20 @@ public class KakaoAuthenticationService {
      * @return KakaoMember
      */
     public KakaoMember getUserInfo(KakaoAccessToken token) {
+        final String accessToken = token.getAccessToken();
+
+        log.info("Request user information in kakao, token is {}", accessToken);
         UserInfo userInfo = authorizationClient.getUserInfo(
             MediaType.APPLICATION_FORM_URLENCODED_VALUE,
-            "Bearer" + " " + token.getAccessToken()
+            "Bearer" + " " + accessToken
         ).getBody();
 
-        log.debug("Get user information : {}", userInfo);
+        final Long kakaoId = Objects.requireNonNull(userInfo).getId();
+
+        log.info("Get User information user id is {}", kakaoId);
 
         return new KakaoMember(
-            Objects.requireNonNull(userInfo).getId(),
+            kakaoId,
             userInfo.getEmail(),
             userInfo.getNickname(),
             userInfo.getProfileImage(),

@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.kakao.ui.dto;
+package fashionable.simba.yanawaserver.oauth.ui.dto;
 
 public class LoginRequest {
     private String username;

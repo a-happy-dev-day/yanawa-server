@@ -1,14 +1,13 @@
-package fashionable.simba.yanawaserver.kakao.ui;
+package fashionable.simba.yanawaserver.oauth.ui;
 
 import fashionable.simba.yanawaserver.global.provider.AuthenticationException;
 import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetails;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;
-import fashionable.simba.yanawaserver.kakao.service.KakaoAuthenticationService;
-import fashionable.simba.yanawaserver.kakao.ui.dto.LoginRequest;
-import fashionable.simba.yanawaserver.kakao.ui.dto.TokenDto;
+import fashionable.simba.yanawaserver.oauth.service.KakaoAuthenticationService;
+import fashionable.simba.yanawaserver.oauth.ui.dto.LoginRequest;
+import fashionable.simba.yanawaserver.oauth.ui.dto.TokenDto;
 import fashionable.simba.yanawaserver.members.domain.KakaoMember;
-import fashionable.simba.yanawaserver.token.domain.AuthenticationCode;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

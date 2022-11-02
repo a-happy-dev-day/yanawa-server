@@ -1,4 +1,4 @@
-package fashionable.simba.yanawaserver.kakao.domain;
+package fashionable.simba.yanawaserver.oauth.domain;
 
 public interface UserInfo {
     Long getId();

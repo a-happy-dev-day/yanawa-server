@@ -1,9 +1,9 @@
-package fashionable.simba.yanawaserver.kakao.service;
+package fashionable.simba.yanawaserver.oauth.service;
 
-import fashionable.simba.yanawaserver.kakao.domain.UserInfo;
-import fashionable.simba.yanawaserver.kakao.infra.KakaoAuthenticationClient;
-import fashionable.simba.yanawaserver.kakao.infra.KakaoAuthorizationClient;
-import fashionable.simba.yanawaserver.kakao.infra.dto.KakaoAccessToken;
+import fashionable.simba.yanawaserver.oauth.domain.UserInfo;
+import fashionable.simba.yanawaserver.oauth.infra.KakaoAuthenticationClient;
+import fashionable.simba.yanawaserver.oauth.infra.KakaoAuthorizationClient;
+import fashionable.simba.yanawaserver.oauth.infra.dto.KakaoAccessToken;
 import fashionable.simba.yanawaserver.members.domain.KakaoMember;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

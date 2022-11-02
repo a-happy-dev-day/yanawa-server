@@ -1,8 +1,8 @@
-package fashionable.simba.yanawaserver.kakao;
+package fashionable.simba.yanawaserver.oauth;
 
-import fashionable.simba.yanawaserver.kakao.infra.KakaoAuthenticationClient;
-import fashionable.simba.yanawaserver.kakao.service.KakaoAuthenticationService;
-import fashionable.simba.yanawaserver.kakao.infra.KakaoAuthorizationClient;
+import fashionable.simba.yanawaserver.oauth.infra.KakaoAuthenticationClient;
+import fashionable.simba.yanawaserver.oauth.service.KakaoAuthenticationService;
+import fashionable.simba.yanawaserver.oauth.infra.KakaoAuthorizationClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

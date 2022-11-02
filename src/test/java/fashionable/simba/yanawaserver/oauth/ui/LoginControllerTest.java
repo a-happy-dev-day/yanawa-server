@@ -1,14 +1,13 @@
-package fashionable.simba.yanawaserver.kakao.ui;
+package fashionable.simba.yanawaserver.oauth.ui;
 
 import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
 import fashionable.simba.yanawaserver.global.userdetails.User;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;
-import fashionable.simba.yanawaserver.kakao.infra.dto.KakaoAccessToken;
-import fashionable.simba.yanawaserver.kakao.service.KakaoAuthenticationService;
-import fashionable.simba.yanawaserver.kakao.ui.dto.TokenDto;
+import fashionable.simba.yanawaserver.oauth.infra.dto.KakaoAccessToken;
+import fashionable.simba.yanawaserver.oauth.service.KakaoAuthenticationService;
+import fashionable.simba.yanawaserver.oauth.ui.dto.TokenDto;
 import fashionable.simba.yanawaserver.members.domain.KakaoMember;
 import fashionable.simba.yanawaserver.members.domain.RoleType;
-import fashionable.simba.yanawaserver.token.domain.AuthenticationCode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -13,6 +13,7 @@ import fashionable.simba.yanawaserver.matching.domain.Recruitment;
 import fashionable.simba.yanawaserver.matching.domain.RecruitmentRepository;
 import fashionable.simba.yanawaserver.matching.fake.MemoryParticipationRepository;
 import fashionable.simba.yanawaserver.matching.fake.MemoryRecruitmentRepository;
+import fashionable.simba.yanawaserver.members.domain.MemberUpdateReview;
 import fashionable.simba.yanawaserver.review.domain.MannerTemperatureType;
 import fashionable.simba.yanawaserver.review.domain.Review;
 import fashionable.simba.yanawaserver.review.dto.ReviewRequest;
@@ -35,6 +36,7 @@ class ReviewServiceTest {
     ReviewRepository reviewRepository = new FakeReviewRepository();
     RecruitmentRepository recruitmentRepository = new MemoryRecruitmentRepository();
     ParticipationRepository participationRepository = new MemoryParticipationRepository();
+    MemberUpdateReview memberUpdateReview = null;
 
     ReviewService reviewService;
     Recruitment recruitment = new Recruitment(1L, 1L, new Level(2.0), new Level(1.0), AgeGroupType.TWENTIES, GenderType.NONE, PreferenceType.MATCHING, 3, 2.0, AnnualType.NONE, "123", RecruitmentStatusType.CLOSED);
@@ -51,7 +53,7 @@ class ReviewServiceTest {
         participationRepository.save(participation2);
         participationRepository.save(participation3);
 
-        reviewService = new ReviewService(reviewRepository, recruitmentRepository, participationRepository);
+        reviewService = new ReviewService(reviewRepository, recruitmentRepository, participationRepository, memberUpdateReview);
     }
 
     @Test
@@ -78,5 +80,4 @@ class ReviewServiceTest {
         );
 
     }
-
 }

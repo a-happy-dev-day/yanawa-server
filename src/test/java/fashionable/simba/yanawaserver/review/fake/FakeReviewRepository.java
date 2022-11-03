@@ -37,7 +37,7 @@ public class FakeReviewRepository implements ReviewRepository {
     }
 
     @Override
-    public List<Review> findByUserId(Long userId) {
+    public List<Review> findByWriterId(Long userId) {
         return null;
     }
 }

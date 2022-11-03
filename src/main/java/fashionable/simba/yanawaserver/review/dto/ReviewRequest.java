@@ -10,20 +10,20 @@ public class ReviewRequest {
     private Long recruitmentId;
     private BigDecimal ratingScore;
     private MannerTemperatureType mannerTemperatureType;
-    private Long userId;
+    private Long writerId;
     private String detail;
 
     private ReviewRequest() {
         /*no-op*/
     }
 
-    public ReviewRequest(Long id, Long participantId, Long recruitmentId, BigDecimal ratingScore, MannerTemperatureType mannerTemperatureType, Long userId, String detail) {
+    public ReviewRequest(Long id, Long participantId, Long recruitmentId, BigDecimal ratingScore, MannerTemperatureType mannerTemperatureType, Long writerId, String detail) {
         this.id = id;
         this.participantId = participantId;
         this.recruitmentId = recruitmentId;
         this.ratingScore = ratingScore;
         this.mannerTemperatureType = mannerTemperatureType;
-        this.userId = userId;
+        this.writerId = writerId;
         this.detail = detail;
     }
 
@@ -47,8 +47,8 @@ public class ReviewRequest {
         return mannerTemperatureType;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getWriterId() {
+        return writerId;
     }
 
     public String getDetail() {

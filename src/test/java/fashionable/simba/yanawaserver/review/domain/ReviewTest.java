@@ -21,7 +21,7 @@ class ReviewTest {
             () -> assertThat(review.getRecruitmentId()).isEqualTo(1L),
             () -> assertThat(review.getRatingScore().getScore()).isEqualTo(BigDecimal.valueOf(3.0)),
             () -> assertThat(review.getMannerTemperature()).isEqualTo(MannerTemperatureType.EXCELLENT),
-            () -> assertThat(review.getUserId()).isEqualTo(1L),
+            () -> assertThat(review.getWriterId()).isEqualTo(1L),
             () -> assertThat(review.getDetail()).isEqualTo("후기")
         );
     }

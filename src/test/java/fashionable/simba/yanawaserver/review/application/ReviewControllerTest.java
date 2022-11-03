@@ -49,7 +49,7 @@ class ReviewControllerTest {
         param.put("recruitmentId", "1");
         param.put("ratingScore", "3.0");
         param.put("mannerTemperatureType", MannerTemperatureType.EXCELLENT.name());
-        param.put("userId", "2");
+        param.put("writerId", "2");
         param.put("detail", "후기");
 
         ExtractableResponse<Response> response = RestAssured

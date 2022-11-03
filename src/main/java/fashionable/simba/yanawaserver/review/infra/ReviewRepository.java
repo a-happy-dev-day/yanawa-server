@@ -14,5 +14,5 @@ public interface ReviewRepository {
 
     List<Review> findByRecruitmentId(Long recruitmentId);
 
-    List<Review> findByUserId(Long userId);
+    List<Review> findByWriterId(Long writerId);
 }

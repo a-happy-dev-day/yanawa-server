@@ -34,7 +34,7 @@ public class ReviewService {
     public Review createReview(ReviewRequest request) {
         Recruitment recruitment = recruitmentRepository.findById(request.getRecruitmentId()).orElseThrow(() -> new NoMatchingDataException("매칭 정보가 없습니다."));
         Participation participation = participationRepository.findByMatchingIdAndUserId(request.getRecruitmentId(), request.getParticipantId()).orElseThrow(() -> new NoParticipationDataException("해당 매칭에 참여자 정보가 없습니다."));
-        Participation writer = participationRepository.findByMatchingIdAndUserId(request.getRecruitmentId(), request.getUserId()).orElseThrow(() -> new NoParticipationDataException("해당 매칭에 리뷰 작성자 정보가 없습니다."));
+        Participation writer = participationRepository.findByMatchingIdAndUserId(request.getRecruitmentId(), request.getWriterId()).orElseThrow(() -> new NoParticipationDataException("해당 매칭에 리뷰 작성자 정보가 없습니다."));
 
         Review savedReview = new Review(request.getId(), participation.getUserId(), recruitment.getId(), new RatingScore(request.getRatingScore()), request.getMannerTemperatureType(), writer.getUserId(), request.getDetail());
         reviewRepository.save(savedReview);

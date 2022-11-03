@@ -19,20 +19,20 @@ public class Review {
     private RatingScore ratingScore;
     @Enumerated(EnumType.STRING)
     private MannerTemperatureType mannerTemperature;
-    private Long userId;
+    private Long writerId;
     private String detail;
 
     protected Review() {
         /*no-op*/
     }
 
-    public Review(Long id, Long participantId, Long recruitmentId, RatingScore ratingScore, MannerTemperatureType mannerTemperature, Long userId, String detail) {
+    public Review(Long id, Long participantId, Long recruitmentId, RatingScore ratingScore, MannerTemperatureType mannerTemperature, Long writerId, String detail) {
         this.id = id;
         this.participantId = participantId;
         this.recruitmentId = recruitmentId;
         this.ratingScore = ratingScore;
         this.mannerTemperature = mannerTemperature;
-        this.userId = userId;
+        this.writerId = writerId;
         this.detail = detail;
     }
 
@@ -56,8 +56,8 @@ public class Review {
         return mannerTemperature;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getWriterId() {
+        return writerId;
     }
 
     public String getDetail() {

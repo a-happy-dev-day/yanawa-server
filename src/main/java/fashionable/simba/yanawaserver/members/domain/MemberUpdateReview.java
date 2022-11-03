@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 @Repository
 public interface MemberUpdateReview {
     void updateRating(Long memberId, BigDecimal rating);
+
     void updateManner(Long memberId, BigDecimal mannerTemperature);
 
 }

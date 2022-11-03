@@ -5,7 +5,7 @@ import fashionable.simba.yanawaserver.global.context.SecurityContextHolder;
 import fashionable.simba.yanawaserver.global.filter.handler.AuthenticationFailureHandler;
 import fashionable.simba.yanawaserver.global.filter.handler.AuthenticationSuccessHandler;
 import fashionable.simba.yanawaserver.global.provider.AuthenticationToken;
-import fashionable.simba.yanawaserver.global.provider.AuthorizationManager;
+import fashionable.simba.yanawaserver.global.provider.AuthenticationManager;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +16,9 @@ public abstract class AbstractAuthenticationFilter implements HandlerInterceptor
 
     private final AuthenticationSuccessHandler successHandler;
     private final AuthenticationFailureHandler failureHandler;
-    private final AuthorizationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
-    protected AbstractAuthenticationFilter(AuthenticationSuccessHandler successHandler, AuthenticationFailureHandler failureHandler, AuthorizationManager authenticationManager) {
+    protected AbstractAuthenticationFilter(AuthenticationSuccessHandler successHandler, AuthenticationFailureHandler failureHandler, AuthenticationManager authenticationManager) {
         this.successHandler = successHandler;
         this.failureHandler = failureHandler;
         this.authenticationManager = authenticationManager;

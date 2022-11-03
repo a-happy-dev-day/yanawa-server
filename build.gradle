@@ -99,7 +99,7 @@ jacocoTestCoverageVerification {
                 minimum = 0.90
             }
 
-            excludes = ["*.YanawaserverApplication", "*.HealthController", "*.*Request*", "*.*Response*"]
+            excludes = ["*.YanawaserverApplication", "*.HealthController", "*.*Request*", "*.*Response*", "*.*Dto*"]
         }
     }
 }

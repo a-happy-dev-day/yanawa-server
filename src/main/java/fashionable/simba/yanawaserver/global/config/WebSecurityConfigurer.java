@@ -1,7 +1,6 @@
 package fashionable.simba.yanawaserver.global.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fashionable.simba.yanawaserver.auth.serivce.CustomTokenDetailService;
 import fashionable.simba.yanawaserver.global.authorization.AuthenticationPrincipalArgumentResolver;
 import fashionable.simba.yanawaserver.global.authorization.secured.SecuredAnnotationChecker;
 import fashionable.simba.yanawaserver.global.context.SecurityContextPersistenceFilter;
@@ -12,15 +11,14 @@ import fashionable.simba.yanawaserver.global.filter.handler.DefaultAuthenticatio
 import fashionable.simba.yanawaserver.global.filter.handler.DefaultAuthenticationSuccessHandler;
 import fashionable.simba.yanawaserver.global.filter.handler.TokenAuthenticationFailureHandler;
 import fashionable.simba.yanawaserver.global.filter.handler.TokenAuthenticationSuccessHandler;
-import fashionable.simba.yanawaserver.global.provider.AuthenticationTokenProvider;
-import fashionable.simba.yanawaserver.global.provider.AuthorizationManager;
-import fashionable.simba.yanawaserver.global.provider.AuthorizationTokenProvider;
+import fashionable.simba.yanawaserver.global.provider.AuthenticationProvider;
+import fashionable.simba.yanawaserver.global.provider.AuthenticationManager;
+import fashionable.simba.yanawaserver.global.provider.AuthorizationProvider;
 import fashionable.simba.yanawaserver.global.provider.JwtTokenProvider;
-import fashionable.simba.yanawaserver.global.token.domain.TokenDetailsService;
-import fashionable.simba.yanawaserver.global.token.domain.ValidAccessTokenStorage;
-import fashionable.simba.yanawaserver.global.token.domain.ValidRefreshTokenStorage;
-import fashionable.simba.yanawaserver.global.token.domain.TokenManager;
 import fashionable.simba.yanawaserver.global.userdetails.UserDetailsService;
+import fashionable.simba.yanawaserver.token.domain.TokenManager;
+import fashionable.simba.yanawaserver.token.domain.ValidAccessTokenStorage;
+import fashionable.simba.yanawaserver.token.domain.ValidRefreshTokenStorage;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -78,8 +76,8 @@ public class WebSecurityConfigurer implements WebMvcConfigurer {
     }
 
     @Bean
-    AuthorizationManager authenticationTokenProvider() {
-        return new AuthenticationTokenProvider(jwtTokenProvider(), userDetailsService);
+    AuthenticationManager authenticationTokenProvider() {
+        return new AuthenticationProvider(jwtTokenProvider(), userDetailsService);
     }
 
     @Bean
@@ -88,13 +86,8 @@ public class WebSecurityConfigurer implements WebMvcConfigurer {
     }
 
     @Bean
-    TokenDetailsService tokenDetailsService() {
-        return new CustomTokenDetailService(tokenManager());
-    }
-
-    @Bean
-    AuthorizationManager authorizationTokenProvider() {
-        return new AuthorizationTokenProvider(jwtTokenProvider(), tokenDetailsService());
+    AuthenticationManager authorizationTokenProvider() {
+        return new AuthorizationProvider(jwtTokenProvider(), tokenManager());
     }
 
     @Bean

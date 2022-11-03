@@ -1,7 +1,7 @@
 package fashionable.simba.yanawaserver.documentation;
 
-import fashionable.simba.yanawaserver.auth.kakao.KakaoAuthenticationService;
-import fashionable.simba.yanawaserver.auth.kakao.dto.KakaoAccessToken;
+import fashionable.simba.yanawaserver.oauth.service.KakaoAuthenticationService;
+import fashionable.simba.yanawaserver.oauth.infra.dto.KakaoAccessToken;
 import fashionable.simba.yanawaserver.members.domain.KakaoMember;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.MockBean;

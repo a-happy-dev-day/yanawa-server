@@ -20,7 +20,7 @@ class JwtTokenProviderTest {
     @DisplayName("토큰을 생성한다.")
     void createToken() {
         assertDoesNotThrow(
-            () -> provider.createAuthorizationToken("2", List.of(RoleType.ROLE_ADMIN.name()))
+            () -> provider.createAccessToken("2", List.of(RoleType.ROLE_ADMIN.name()))
         );
     }
 
@@ -29,7 +29,7 @@ class JwtTokenProviderTest {
     @DisplayName("토큰의 유효시간이 만료됐는지 확인한다.")
     void validToken() {
         // given
-        String token = provider.createAuthorizationToken("1", List.of(RoleType.ROLE_ADMIN.name()));
+        String token = provider.createAccessToken("1", List.of(RoleType.ROLE_ADMIN.name()));
 
         // then
         boolean actual = provider.validateToken(token);
@@ -42,7 +42,7 @@ class JwtTokenProviderTest {
     void validToken_expiration() {
         // given
         JwtTokenProvider expiredProvider = new JwtTokenProvider(SECRET_KEY, REFRESH_KEY, 0, 0);
-        String token = expiredProvider.createAuthorizationToken("2", List.of(RoleType.ROLE_ADMIN.name()));
+        String token = expiredProvider.createAccessToken("2", List.of(RoleType.ROLE_ADMIN.name()));
 
         // then
         boolean actual = provider.validateToken(token);

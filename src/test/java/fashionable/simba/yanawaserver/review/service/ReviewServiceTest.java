@@ -80,4 +80,19 @@ class ReviewServiceTest {
         );
 
     }
+
+    @Test
+    void calculateRating_test() {
+
+        reviewService.createReview(new ReviewRequest(1L, 1L, 1L,  BigDecimal.valueOf(3.0), MannerTemperatureType.EXCELLENT, 1L, "3점 후기"));
+        reviewService.createReview(new ReviewRequest(2L, 1L, 1L,  BigDecimal.valueOf(4.5), MannerTemperatureType.EXCELLENT, 1L, "4.5점 후기"));
+
+        assertThat(reviewService.calculateRating(1L)).isEqualTo(BigDecimal.valueOf(3.5));
+    }
+
+    @Test
+    void calculateMannerTemperature() {
+
+        assertThat(reviewService.calculateMannerTemperature(MannerTemperatureType.EXCELLENT)).isEqualTo(BigDecimal.valueOf(0.1));
+    }
 }

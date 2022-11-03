@@ -6,8 +6,8 @@ import fashionable.simba.yanawaserver.matching.domain.Recruitment;
 import fashionable.simba.yanawaserver.matching.domain.RecruitmentRepository;
 import fashionable.simba.yanawaserver.members.domain.MemberUpdateReview;
 import fashionable.simba.yanawaserver.review.domain.MannerTemperatureType;
-import fashionable.simba.yanawaserver.review.domain.Review;
 import fashionable.simba.yanawaserver.review.domain.RatingScore;
+import fashionable.simba.yanawaserver.review.domain.Review;
 import fashionable.simba.yanawaserver.review.dto.ReviewRequest;
 import fashionable.simba.yanawaserver.review.exception.NoMatchingDataException;
 import fashionable.simba.yanawaserver.review.exception.NoParticipationDataException;
@@ -48,10 +48,16 @@ public class ReviewService {
     public BigDecimal calculateRating(Long userId) {
         BigDecimal sumRatings = BigDecimal.ZERO;
         List<Review> reviews = reviewRepository.findByParticipantId(userId);
+
         for (Review review : reviews) {
-            sumRatings.add(review.getRatingScore().getScore());
+            sumRatings = sumRatings.add(review.getRatingScore().getScore());
         }
-        return sumRatings.divide(BigDecimal.valueOf(reviews.size()));
+
+        BigDecimal averageRating = sumRatings.divide(BigDecimal.valueOf(reviews.size()));
+
+        BigDecimal level = BigDecimal.valueOf((Math.floor(averageRating.doubleValue() * 2)) / 2);
+
+        return level;
     }
 
     public BigDecimal calculateMannerTemperature(MannerTemperatureType mannerTemperatureType) {
@@ -60,7 +66,7 @@ public class ReviewService {
             return BigDecimal.valueOf(0.1);
         } else if (mannerTemperatureType == MannerTemperatureType.BAD) {
             return BigDecimal.valueOf(-0.1);
-    } else {
+        } else {
             return BigDecimal.valueOf(0);
         }
     }

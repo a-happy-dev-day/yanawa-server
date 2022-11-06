@@ -1,8 +1,9 @@
 package fashionable.simba.yanawaserver.global.provider;
 
 import fashionable.simba.yanawaserver.global.context.Authentication;
-import fashionable.simba.yanawaserver.global.token.TokenDetailsService;
 import fashionable.simba.yanawaserver.members.domain.RoleType;
+import fashionable.simba.yanawaserver.token.domain.TokenManager;
+import fashionable.simba.yanawaserver.token.exception.InvalidTokenException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -13,19 +14,21 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class AuthorizationTokenProviderTest {
-    private AuthorizationTokenProvider authorizationTokenProvider;
+    private AuthorizationProvider authorizationTokenProvider;
     @Mock
     private JwtTokenProvider jwtTokenProvider;
     @Mock
-    private TokenDetailsService tokenDetailsService;
+    private TokenManager tokenManager;
 
     @BeforeEach
     void setUp() {
-        authorizationTokenProvider = new AuthorizationTokenProvider(jwtTokenProvider, tokenDetailsService);
+        authorizationTokenProvider = new AuthorizationProvider(jwtTokenProvider, tokenManager);
     }
 
     @Test
@@ -37,8 +40,7 @@ class AuthorizationTokenProviderTest {
         AuthenticationToken token = new AuthenticationToken("access token");
 
         // when
-        when(jwtTokenProvider.validateToken(token.getPrincipal())).thenReturn(true);
-        when(tokenDetailsService.validateAccessToken(token.getPrincipal())).thenReturn(true);
+        doNothing().when(tokenManager).verifyAccessToken(token.getPrincipal());
         when(jwtTokenProvider.getPrincipal(token.getPrincipal())).thenReturn(principal);
         when(jwtTokenProvider.getRoles(token.getPrincipal())).thenReturn(roles);
 
@@ -50,31 +52,15 @@ class AuthorizationTokenProviderTest {
 
     @Test
     @DisplayName("유효하지 않은 액세스 토큰이면 AuthenticationException 예외가 발생한다.")
-    void authenticate_invalidToken() {
-        // given
-        AuthenticationToken invalidToken = new AuthenticationToken("invalid access token");
-
-        // when
-        when(jwtTokenProvider.validateToken(invalidToken.getPrincipal())).thenReturn(false);
-
-        // then
-        Assertions.assertThatThrownBy(
-            () -> authorizationTokenProvider.authenticate(invalidToken)
-        ).isInstanceOf(AuthenticationException.class);
-    }
-
-    @Test
-    @DisplayName("로그아웃한 사용자의 토큰이면 AuthenticationException 예외가 발생한다.")
     void authenticate_logoutToken() {
         // given
         AuthenticationToken invalidToken = new AuthenticationToken("invalid access token");
         // when
-        when(jwtTokenProvider.validateToken(invalidToken.getPrincipal())).thenReturn(true);
-        when(tokenDetailsService.validateAccessToken(invalidToken.getPrincipal())).thenReturn(false);
+        doThrow(InvalidTokenException.class).when(tokenManager).verifyAccessToken(invalidToken.getPrincipal());
 
         // then
         Assertions.assertThatThrownBy(
             () -> authorizationTokenProvider.authenticate(invalidToken)
-        ).isInstanceOf(AuthenticationException.class);
+        ).isInstanceOf(InvalidTokenException.class);
     }
 }

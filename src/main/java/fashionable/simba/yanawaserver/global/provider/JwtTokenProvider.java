@@ -23,7 +23,7 @@ public class JwtTokenProvider {
         this.validityAccessTokenMilliseconds = validityAccessTokenMilliseconds;
     }
 
-    public String createAuthorizationToken(String principal, List<String> roles) {
+    public String createAccessToken(String principal, List<String> roles) {
         Claims claims = Jwts.claims().setSubject(principal);
         Date now = new Date();
         Date validity = new Date(now.getTime() + validityAccessTokenMilliseconds);
@@ -38,7 +38,7 @@ public class JwtTokenProvider {
     }
 
 
-    public String createAuthenticationToken(String principal) {
+    public String createAccessCode(String principal) {
         Claims claims = Jwts.claims().setSubject(principal);
         Date now = new Date();
         Date validity = new Date(now.getTime() + validityAccessTokenMilliseconds);
@@ -70,20 +70,13 @@ public class JwtTokenProvider {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
 
+    @SuppressWarnings("unchecked")
     public List<String> getRoles(String token) {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().get(ROLES, List.class);
     }
 
-    public Date getExpiredDate(String token) {
-        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getIssuedAt();
-    }
-
     public String getPrincipalByRefreshToken(String refreshToken) {
         return Jwts.parser().setSigningKey(refreshKey).parseClaimsJws(refreshToken).getBody().getSubject();
-    }
-
-    public Date getExpiredDateByRefreshToken(String refreshToken) {
-        return Jwts.parser().setSigningKey(refreshKey).parseClaimsJws(refreshToken).getBody().getIssuedAt();
     }
 
     public boolean validateToken(String token) {

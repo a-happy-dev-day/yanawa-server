@@ -1,0 +1,34 @@
+= Yanawa API Document
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+[[authentication]]
+== 인증
+
+=== 소셜 로그인
+
+operation::login/kakao[snippets='http-request,http-response']
+
+=== 기본 사용자 로그인
+
+operation::member/login[snippets='http-request,http-response']
+
+=== 토큰 발급
+
+operation::member/token[snippets='http-request,http-response']
+
+=== 토큰 갱신
+
+operation::token/refresh[snippets='http-request,http-response']
+
+=== 액세스 토큰 만료
+
+operation::expired/access[snippets='http-request,http-response']
+
+=== 리프레시 토큰 만료
+
+operation::expired/refresh[snippets='http-request,http-response']

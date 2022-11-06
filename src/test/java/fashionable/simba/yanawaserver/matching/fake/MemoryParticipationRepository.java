@@ -6,6 +6,7 @@ import fashionable.simba.yanawaserver.matching.domain.ParticipationRepository;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class MemoryParticipationRepository implements ParticipationRepository {
     private final Map<Long, Participation> participations = new HashMap<>();
@@ -38,5 +39,12 @@ public class MemoryParticipationRepository implements ParticipationRepository {
     @Override
     public Integer countParticipationsByMatchingId(Long matchingId) {
         return (int) participations.values().stream().filter(x -> x.getMatchingId().equals(matchingId)).count();
+    }
+
+    @Override
+    public Optional<Participation> findByMatchingIdAndUserId(Long recruitmentId, Long participantId) {
+        return participations.values().stream()
+            .filter(x -> x.getMatchingId().equals(recruitmentId))
+            .filter(y -> y.getUserId().equals(participantId)).findAny();
     }
 }
